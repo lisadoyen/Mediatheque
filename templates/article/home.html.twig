@@ -7,3 +7,9 @@
     consequatur culpa distinctio dolore dolores esse eveniet inventore, labore necessitatibus nobis nostrum officiis
     pariatur quas, quod suscipit velit? Aperiam excepturi laboriosam odio porro. Aliquid aperiam autem consectetur cum
     doloremque expedita hic, mollitia nulla praesentium qui reprehenderit totam.</p>
+<a href="{{ path("article") }}">index</a>
+<ul>
+    {% for article in articles %}
+        <li>{{ article.codeArticle }}</li>
+    {% endfor %}
+</ul>
