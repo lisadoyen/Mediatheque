@@ -90,5 +90,33 @@ projet tut S3/S4
              - Création, contribution à un forum
              - Chat en direct avec un autre adhérent connecté
       
+     # AJOUT DE NOUVELLES FONCTIONNALITES
+     
+     - **télécharger**
+        - Pour **adhérents** :
+           - Visualiser la liste des articles disponibles au téléchargement :
+             - Livres numériques, revues, musique, films
+           - Gestion d'un panier :
+             - Possibilité d'ajouter un article ou plusieurs (quelque soit le statut)
+             - Possibilité de télécharger un article ou plusieurs 
+             - Validation du panier avec téléchargement du ou des articles (utilisation unique via jeton)
+             - Envoi de l'information pour mise à jour du nombre de jetons disponibles pour les articles vers les bénévoles
+                
+     - **Acheter**
+        - Pour les **adhérents** :
+           - Visualiser la liste des articles disponibles à l'achat suite à une désactivation/déclassement :
+             - Description + prix à la vente
+           - Gestion d'un panier :
+             - Possibilité d'ajouter un article dans ses favoris 
+             - Possibilité d'acheter un article ou plusieurs avec dégressivité éventuelle du prix en fonction de la quantité
+             - Validation du panier avec définition de la date de retrait des articles + mode de paiement
+             - Envoi de la commande aux bénévoles par mail
+        - Pour les **bénévoles** :
+           - Gestion de la transaction financière :
+             - Accusé de réception de la commande
+             - Préparation de réception de la commande
+             - Envoi info passage pour retrait
+             - Emissiond de facture
+      
  
       
