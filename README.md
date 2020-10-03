@@ -90,7 +90,7 @@ projet tut S3/S4
              - Création, contribution à un forum
              - Chat en direct avec un autre adhérent connecté
       
-     **AJOUT DE NOUVELLES FONCTIONNALITES**
+     # AJOUT DE NOUVELLES FONCTIONNALITES
      
      - **TELECHARGER**
         - Pour **adhérents** :
