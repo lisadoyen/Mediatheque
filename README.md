@@ -92,7 +92,7 @@ projet tut S3/S4
       
      # AJOUT DE NOUVELLES FONCTIONNALITES
      
-     - **télécharger**
+     - **TELECHARGER**
         - Pour **adhérents** :
            - Visualiser la liste des articles disponibles au téléchargement :
              - Livres numériques, revues, musique, films
@@ -102,7 +102,7 @@ projet tut S3/S4
              - Validation du panier avec téléchargement du ou des articles (utilisation unique via jeton)
              - Envoi de l'information pour mise à jour du nombre de jetons disponibles pour les articles vers les bénévoles
                 
-     - **Acheter**
+     - **ACHETER**
         - Pour les **adhérents** :
            - Visualiser la liste des articles disponibles à l'achat suite à une désactivation/déclassement :
              - Description + prix à la vente
