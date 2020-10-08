@@ -2,6 +2,18 @@
 
 projet tut S3/S4
 
+# arborescence de git :
+
+**projet** : tous les dossier et fichiers symfony
+
+**docs** : 
+ - maquette 
+ - suivi
+   - evolution
+   - client
+ - rapport
+ 
+ 
 # récapitulatif (diapo)
 
 - 3 types d'utilisateurs :
