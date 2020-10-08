@@ -20,7 +20,7 @@
 
 étudiant 2 : intégration sur Heroku + intégration du fichier excel en bdd
 
-étudiant 3 : intégration bdd dans projet Symfony
+étudiant 3 : intégration bdd dans projet Symfony + intégration du fichier excel en bdd
 
 étudiant 4 : rapport
 
