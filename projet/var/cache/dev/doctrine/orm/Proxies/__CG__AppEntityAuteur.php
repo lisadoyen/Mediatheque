@@ -66,10 +66,10 @@ class Auteur extends \App\Entity\Auteur implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'idauteur', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'prenom'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'idAuteur', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'prenom'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'idauteur', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'prenom'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'idAuteur', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Auteur' . "\0" . 'prenom'];
     }
 
     /**
@@ -179,16 +179,16 @@ class Auteur extends \App\Entity\Auteur implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getIdauteur(): ?int
+    public function getIdAuteur(): ?int
     {
         if ($this->__isInitialized__ === false) {
-            return (int)  parent::getIdauteur();
+            return (int)  parent::getIdAuteur();
         }
 
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdauteur', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdAuteur', []);
 
-        return parent::getIdauteur();
+        return parent::getIdAuteur();
     }
 
     /**

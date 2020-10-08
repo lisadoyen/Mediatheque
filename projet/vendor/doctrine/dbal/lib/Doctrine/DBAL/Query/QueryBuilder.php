@@ -196,6 +196,9 @@ class QueryBuilder
     /**
      * Executes this query using the bound parameters and their types.
      *
+     * Uses {@see Connection::executeQuery} for select statements and {@see Connection::executeUpdate}
+     * for insert, update and delete statements.
+     *
      * @return ResultStatement|int
      */
     public function execute()
@@ -204,7 +207,7 @@ class QueryBuilder
             return $this->connection->executeQuery($this->getSQL(), $this->params, $this->paramTypes);
         }
 
-        return $this->connection->executeStatement($this->getSQL(), $this->params, $this->paramTypes);
+        return $this->connection->executeUpdate($this->getSQL(), $this->params, $this->paramTypes);
     }
 
     /**
@@ -454,8 +457,6 @@ class QueryBuilder
      * Specifies an item that is to be returned in the query result.
      * Replaces any previously specified selections, if any.
      *
-     * USING AN ARRAY ARGUMENT IS DEPRECATED. Pass each value as an individual argument.
-     *
      * <code>
      *     $qb = $conn->createQueryBuilder()
      *         ->select('u.id', 'p.id')
@@ -463,12 +464,11 @@ class QueryBuilder
      *         ->leftJoin('u', 'phonenumbers', 'p', 'u.id = p.user_id');
      * </code>
      *
-     * @param string|string[]|null $select The selection expression. USING AN ARRAY OR NULL IS DEPRECATED.
-     *                                     Pass each value as an individual argument.
+     * @param mixed $select The selection expressions.
      *
      * @return $this This QueryBuilder instance.
      */
-    public function select($select = null/*, string ...$selects*/)
+    public function select($select = null)
     {
         $this->type = self::SELECT;
 
@@ -503,8 +503,6 @@ class QueryBuilder
     /**
      * Adds an item that is to be returned in the query result.
      *
-     * USING AN ARRAY ARGUMENT IS DEPRECATED. Pass each value as an individual argument.
-     *
      * <code>
      *     $qb = $conn->createQueryBuilder()
      *         ->select('u.id')
@@ -513,12 +511,11 @@ class QueryBuilder
      *         ->leftJoin('u', 'phonenumbers', 'u.id = p.user_id');
      * </code>
      *
-     * @param string|string[]|null $select The selection expression. USING AN ARRAY OR NULL IS DEPRECATED.
-     *                                     Pass each value as an individual argument.
+     * @param mixed $select The selection expression.
      *
      * @return $this This QueryBuilder instance.
      */
-    public function addSelect($select = null/*, string ...$selects*/)
+    public function addSelect($select = null)
     {
         $this->type = self::SELECT;
 
@@ -802,7 +799,7 @@ class QueryBuilder
     public function where($predicates)
     {
         if (! (func_num_args() === 1 && $predicates instanceof CompositeExpression)) {
-            $predicates = CompositeExpression::and(...func_get_args());
+            $predicates = new CompositeExpression(CompositeExpression::TYPE_AND, func_get_args());
         }
 
         return $this->add('where', $predicates);
@@ -832,10 +829,10 @@ class QueryBuilder
         $where = $this->getQueryPart('where');
 
         if ($where instanceof CompositeExpression && $where->getType() === CompositeExpression::TYPE_AND) {
-            $where = $where->with(...$args);
+            $where->addMultiple($args);
         } else {
             array_unshift($args, $where);
-            $where = CompositeExpression::and(...$args);
+            $where = new CompositeExpression(CompositeExpression::TYPE_AND, $args);
         }
 
         return $this->add('where', $where, true);
@@ -865,10 +862,10 @@ class QueryBuilder
         $where = $this->getQueryPart('where');
 
         if ($where instanceof CompositeExpression && $where->getType() === CompositeExpression::TYPE_OR) {
-            $where = $where->with(...$args);
+            $where->addMultiple($args);
         } else {
             array_unshift($args, $where);
-            $where = CompositeExpression::or(...$args);
+            $where = new CompositeExpression(CompositeExpression::TYPE_OR, $args);
         }
 
         return $this->add('where', $where, true);
@@ -878,8 +875,6 @@ class QueryBuilder
      * Specifies a grouping over the results of the query.
      * Replaces any previously specified groupings, if any.
      *
-     * USING AN ARRAY ARGUMENT IS DEPRECATED. Pass each value as an individual argument.
-     *
      * <code>
      *     $qb = $conn->createQueryBuilder()
      *         ->select('u.name')
@@ -887,12 +882,11 @@ class QueryBuilder
      *         ->groupBy('u.id');
      * </code>
      *
-     * @param string|string[] $groupBy The grouping expression. USING AN ARRAY IS DEPRECATED.
-     *                                 Pass each value as an individual argument.
+     * @param mixed $groupBy The grouping expression.
      *
      * @return $this This QueryBuilder instance.
      */
-    public function groupBy($groupBy/*, string ...$groupBys*/)
+    public function groupBy($groupBy)
     {
         if (empty($groupBy)) {
             return $this;
@@ -906,8 +900,6 @@ class QueryBuilder
     /**
      * Adds a grouping expression to the query.
      *
-     * USING AN ARRAY ARGUMENT IS DEPRECATED. Pass each value as an individual argument.
-     *
      * <code>
      *     $qb = $conn->createQueryBuilder()
      *         ->select('u.name')
@@ -916,12 +908,11 @@ class QueryBuilder
      *         ->addGroupBy('u.createdAt');
      * </code>
      *
-     * @param string|string[] $groupBy The grouping expression. USING AN ARRAY IS DEPRECATED.
-     *                                 Pass each value as an individual argument.
+     * @param mixed $groupBy The grouping expression.
      *
      * @return $this This QueryBuilder instance.
      */
-    public function addGroupBy($groupBy/*, string ...$groupBys*/)
+    public function addGroupBy($groupBy)
     {
         if (empty($groupBy)) {
             return $this;
@@ -993,7 +984,7 @@ class QueryBuilder
     public function having($having)
     {
         if (! (func_num_args() === 1 && $having instanceof CompositeExpression)) {
-            $having = CompositeExpression::and(...func_get_args());
+            $having = new CompositeExpression(CompositeExpression::TYPE_AND, func_get_args());
         }
 
         return $this->add('having', $having);
@@ -1013,10 +1004,10 @@ class QueryBuilder
         $having = $this->getQueryPart('having');
 
         if ($having instanceof CompositeExpression && $having->getType() === CompositeExpression::TYPE_AND) {
-            $having = $having->with(...$args);
+            $having->addMultiple($args);
         } else {
             array_unshift($args, $having);
-            $having = CompositeExpression::and(...$args);
+            $having = new CompositeExpression(CompositeExpression::TYPE_AND, $args);
         }
 
         return $this->add('having', $having);
@@ -1036,10 +1027,10 @@ class QueryBuilder
         $having = $this->getQueryPart('having');
 
         if ($having instanceof CompositeExpression && $having->getType() === CompositeExpression::TYPE_OR) {
-            $having = $having->with(...$args);
+            $having->addMultiple($args);
         } else {
             array_unshift($args, $having);
-            $having = CompositeExpression::or(...$args);
+            $having = new CompositeExpression(CompositeExpression::TYPE_OR, $args);
         }
 
         return $this->add('having', $having);

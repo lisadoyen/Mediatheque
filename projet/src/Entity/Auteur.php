@@ -15,11 +15,11 @@ class Auteur
     /**
      * @var int
      *
-     * @ORM\Column(name="idAuteur", type="integer", nullable=false)
+     * @ORM\Column(name="id_auteur", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idauteur;
+    private $idAuteur;
 
     /**
      * @var string|null
@@ -35,9 +35,9 @@ class Auteur
      */
     private $prenom;
 
-    public function getIdauteur(): ?int
+    public function getIdAuteur(): ?int
     {
-        return $this->idauteur;
+        return $this->idAuteur;
     }
 
     public function getNom(): ?string
