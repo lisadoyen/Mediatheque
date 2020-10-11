@@ -13,19 +13,11 @@ driver: 'pdo_pgsql'
 charset: utf8
 ```
 
-Ca ressemble à ca
-
-![image-20201010193838007](/home/aduhoux/.config/Typora/typora-user-images/image-20201010193838007.png)
-
 Allez sur heroku :
 
 https://dashboard.heroku.com/apps
 
 choississez le nom de l'heroku que vous avez créez :
-
-![image-20201010194132986](/home/aduhoux/.config/Typora/typora-user-images/image-20201010194132986.png)
-
-![image-20201010194211132](/home/aduhoux/.config/Typora/typora-user-images/image-20201010194211132.png)
 
 allez sur ce lien :
 
