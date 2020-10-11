@@ -128,8 +128,8 @@ CREATE TABLE `utilisateur` (
   `mot_de_passe` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `email` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `telephone` int DEFAULT NULL,
-  `statut` enum('prestataire','salarie','retraite') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `role` enum('ROLE_ADMIN','ROLE_BENEVOLE','ROLE_ADHERENT','ROLE_UTILISATEUR') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'ROLE_NOM'
+  `statut` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '''prestataire'',''salarie'',''retraite''',
+  `role` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'ROLE_NOM'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `utilisateur` (`id_utilisateur`, `nom`, `prenom`, `identifiant`, `mot_de_passe`, `email`, `telephone`, `statut`, `role`) VALUES
@@ -153,19 +153,16 @@ CREATE TABLE `emprunt` (
 
 ALTER TABLE `emprunt`
   ADD PRIMARY KEY (`FK_id_utilisateur`,`FK_id_livre`),
-  ADD KEY `FK_bibliotheque_livre` (`FK_id_livre`) USING BTREE, 
-  ADD KEY `FK_bibliotheque_utilisateur` (`FK_id_utilisateur`) USING BTREE;;
-
+  ADD KEY `FK_bibliotheque` (`FK_id_livre`) USING BTREE;
 ALTER TABLE `emprunt`
   ADD CONSTRAINT `Emprunt_bibliotheque0_FK` FOREIGN KEY (`FK_id_livre`) REFERENCES `bibliotheque` (`id_livre`) ON DELETE CASCADE,
   ADD CONSTRAINT `Emprunt_utilisateur_FK` FOREIGN KEY (`FK_id_utilisateur`) REFERENCES `utilisateur` (`id_utilisateur`) ON DELETE CASCADE;
-COMMIT;
 
 #------------------------------------
 # autres modifications
 ALTER TABLE `bibliotheque` ADD `photo` VARCHAR(255) NULL AFTER `titre_designation`; 
 
-ALTER TABLE `bibliotheque` ADD `format` ENUM('papier','numerique') NOT NULL DEFAULT 'papier' AFTER `support_livre`;
+ALTER TABLE `bibliotheque` ADD `format` VARCHAR(10) NOT NULL DEFAULT 'papier' AFTER `support_livre`;
 
 ALTER TABLE `bibliotheque` CHANGE `ne_pas_sortir` `inactif` TINYINT(1) NULL DEFAULT '0' COMMENT '1 = Oui et 0 = Non';
 
@@ -178,7 +175,7 @@ ALTER TABLE `bibliotheque` CHANGE `disponible` `disponible` TINYINT(1) NOT NULL 
 # Support livre genre sauf article à déclasser on retrouve cette info dans inactif avec la valeur 1 (article à déclasser = 1)
 ALTER TABLE `bibliotheque` DROP `support_livre`;
 
-ALTER TABLE `bibliotheque` ADD `typologie` ENUM('Tome_seul','Serie') NOT NULL DEFAULT 'Tome_seul' AFTER `description_article`;
+ALTER TABLE `bibliotheque` ADD `typologie` VARCHAR(10) NOT NULL DEFAULT 'Tome_seul' AFTER `description_article`;
 
 UPDATE `bibliotheque` SET `typologie`="Serie" WHERE `titre_designation` LIKE "01 NET%";
 UPDATE `bibliotheque` SET `typologie`="Serie" WHERE `titre_designation` LIKE "01NET%";
