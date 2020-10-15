@@ -14,7 +14,10 @@
 #    * patienter lors de l'importation de la base.                            #
 #                                                                             #
 ## 2. Transfomation de la base :                                              #
-#                                                                             #
+# Avant exécuter le script veillez à ce que la "user" soit créé via Symfony   #
+# ou par import.                                                              #
+# php bin/console make:migration                                              #
+# php bin/console doctrine:migrations:migrate                                 #
 # Exécuter le présent script pour appliquer les modifications.                #
 # /!\ `mediatheque` doit être le nom de la BDD sinon il faut le changer.      #
 #-----------------------------------------------------------------------------#
@@ -118,31 +121,7 @@ WHERE `genre`.`libelle_genre` = `bibliotheque`.`libelle_genre`;
 
 ALTER TABLE `bibliotheque` DROP `code_genre`, DROP `code_sous_genre`, DROP `libelle_genre`;
 
-# Ajout de la table Emprunt et utilisateur
-#Utilisateur
-CREATE TABLE `utilisateur` (
-  `id_utilisateur` int NOT NULL,
-  `nom` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `prenom` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `identifiant` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `mot_de_passe` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `email` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `telephone` int DEFAULT NULL,
-  `statut` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '''prestataire'',''salarie'',''retraite''',
-  `role` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'ROLE_NOM'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-INSERT INTO `utilisateur` (`id_utilisateur`, `nom`, `prenom`, `identifiant`, `mot_de_passe`, `email`, `telephone`, `statut`, `role`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin', 'NULL', NULL, NULL, 'ROLE_ADMIN'),
-(2, 'benevole', 'benevole', 'benevole', 'benevole', 'NULL', NULL, NULL, 'ROLE_BENEVOLE');
-
-ALTER TABLE `utilisateur`
-  ADD PRIMARY KEY (`id_utilisateur`);
-
-ALTER TABLE `utilisateur`
-  MODIFY `id_utilisateur` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-COMMIT;
-
+# Ajout de la table Emprunt 
 #Emprunt
 CREATE TABLE `emprunt` (
   `FK_id_utilisateur` int NOT NULL,
@@ -156,7 +135,7 @@ ALTER TABLE `emprunt`
   ADD KEY `FK_bibliotheque` (`FK_id_livre`) USING BTREE;
 ALTER TABLE `emprunt`
   ADD CONSTRAINT `Emprunt_bibliotheque0_FK` FOREIGN KEY (`FK_id_livre`) REFERENCES `bibliotheque` (`id_livre`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Emprunt_utilisateur_FK` FOREIGN KEY (`FK_id_utilisateur`) REFERENCES `utilisateur` (`id_utilisateur`) ON DELETE CASCADE;
+  ADD CONSTRAINT `Emprunt_utilisateur_FK` FOREIGN KEY (`FK_id_utilisateur`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 #------------------------------------
 # autres modifications
