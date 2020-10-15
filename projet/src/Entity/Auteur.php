@@ -22,16 +22,16 @@ class Auteur
     private $idAuteur;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=100, nullable=true)
+     * @ORM\Column(name="nom", type="string", length=100, nullable=false)
      */
     private $nom;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=100, nullable=true)
+     * @ORM\Column(name="prenom", type="string", length=100, nullable=false)
      */
     private $prenom;
 
@@ -45,7 +45,7 @@ class Auteur
         return $this->nom;
     }
 
-    public function setNom(?string $nom): self
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -57,7 +57,7 @@ class Auteur
         return $this->prenom;
     }
 
-    public function setPrenom(?string $prenom): self
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
 

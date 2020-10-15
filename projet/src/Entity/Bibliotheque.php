@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Genre;
+use App\Entity\Auteur;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Bibliotheque
  *
- * @ORM\Table(name="bibliotheque", indexes={@ORM\Index(name="FK_GENRE", columns={"FK_id_genre"}), @ORM\Index(name="FK_AUTEUR", columns={"FK_id_auteur"})})
+ * @ORM\Table(name="bibliotheque", indexes={@ORM\Index(name="FK_auteur", columns={"FK_id_auteur"}), @ORM\Index(name="FK_id_genre", columns={"FK_id_genre"})})
  * @ORM\Entity
  */
 class Bibliotheque
@@ -47,37 +47,30 @@ class Bibliotheque
     /**
      * @var string|null
      *
-     * @ORM\Column(name="description_livre", type="string", length=100, nullable=true)
+     * @ORM\Column(name="photo", type="string", length=255, nullable=true)
      */
-    private $descriptionLivre;
+    private $photo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="format", type="string", length=10, nullable=false, options={"default"="papier"})
+     */
+    private $format = 'papier';
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="support_livre", type="string", length=25, nullable=true)
+     * @ORM\Column(name="description_article", type="string", length=255, nullable=true)
      */
-    private $supportLivre;
+    private $descriptionArticle;
 
     /**
-     * @var bool
+     * @var string
      *
-     * @ORM\Column(name="disponible", type="boolean", nullable=false, options={"comment"="1 = Oui et 0 = Non"})
+     * @ORM\Column(name="typologie", type="string", length=10, nullable=false, options={"default"="Tome_seul"})
      */
-    private $disponible;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="nombre_sorties", type="integer", nullable=true)
-     */
-    private $nombreSorties;
-
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="date_dernier_retrait", type="date", nullable=true)
-     */
-    private $dateDernierRetrait;
+    private $typologie = 'Tome_seul';
 
     /**
      * @var \DateTime|null
@@ -85,6 +78,41 @@ class Bibliotheque
      * @ORM\Column(name="date_achat", type="date", nullable=true)
      */
     private $dateAchat;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="nombre_de_sorties", type="integer", nullable=true)
+     */
+    private $nombreDeSorties;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="date_de_retrait", type="date", nullable=true)
+     */
+    private $dateDeRetrait;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="inactif", type="boolean", nullable=true, options={"comment"="1 = Oui et 0 = Non"})
+     */
+    private $inactif;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="disponible", type="boolean", nullable=false, options={"default"="1","comment"="1 = Oui et 0 = Non"})
+     */
+    private $disponible = true;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="lien", type="string", length=255, nullable=true)
+     */
+    private $lien;
 
     /**
      * @var \DateTime|null
@@ -112,21 +140,6 @@ class Bibliotheque
      * })
      */
     private $fkIdGenre;
-
-    /**
-     * @var Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Utilisateur", mappedBy="idLivre")
-     */
-    private $idUtilisateur;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->idUtilisateur = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     public function getIdLivre(): ?int
     {
@@ -169,26 +182,98 @@ class Bibliotheque
         return $this;
     }
 
-    public function getDescriptionLivre(): ?string
+    public function getPhoto(): ?string
     {
-        return $this->descriptionLivre;
+        return $this->photo;
     }
 
-    public function setDescriptionLivre(?string $descriptionLivre): self
+    public function setPhoto(?string $photo): self
     {
-        $this->descriptionLivre = $descriptionLivre;
+        $this->photo = $photo;
 
         return $this;
     }
 
-    public function getSupportLivre(): ?string
+    public function getFormat(): ?string
     {
-        return $this->supportLivre;
+        return $this->format;
     }
 
-    public function setSupportLivre(?string $supportLivre): self
+    public function setFormat(string $format): self
     {
-        $this->supportLivre = $supportLivre;
+        $this->format = $format;
+
+        return $this;
+    }
+
+    public function getDescriptionArticle(): ?string
+    {
+        return $this->descriptionArticle;
+    }
+
+    public function setDescriptionArticle(?string $descriptionArticle): self
+    {
+        $this->descriptionArticle = $descriptionArticle;
+
+        return $this;
+    }
+
+    public function getTypologie(): ?string
+    {
+        return $this->typologie;
+    }
+
+    public function setTypologie(string $typologie): self
+    {
+        $this->typologie = $typologie;
+
+        return $this;
+    }
+
+    public function getDateAchat(): ?\DateTimeInterface
+    {
+        return $this->dateAchat;
+    }
+
+    public function setDateAchat(?\DateTimeInterface $dateAchat): self
+    {
+        $this->dateAchat = $dateAchat;
+
+        return $this;
+    }
+
+    public function getNombreDeSorties(): ?int
+    {
+        return $this->nombreDeSorties;
+    }
+
+    public function setNombreDeSorties(?int $nombreDeSorties): self
+    {
+        $this->nombreDeSorties = $nombreDeSorties;
+
+        return $this;
+    }
+
+    public function getDateDeRetrait(): ?\DateTimeInterface
+    {
+        return $this->dateDeRetrait;
+    }
+
+    public function setDateDeRetrait(?\DateTimeInterface $dateDeRetrait): self
+    {
+        $this->dateDeRetrait = $dateDeRetrait;
+
+        return $this;
+    }
+
+    public function getInactif(): ?bool
+    {
+        return $this->inactif;
+    }
+
+    public function setInactif(?bool $inactif): self
+    {
+        $this->inactif = $inactif;
 
         return $this;
     }
@@ -205,38 +290,14 @@ class Bibliotheque
         return $this;
     }
 
-    public function getNombreSorties(): ?int
+    public function getLien(): ?string
     {
-        return $this->nombreSorties;
+        return $this->lien;
     }
 
-    public function setNombreSorties(?int $nombreSorties): self
+    public function setLien(?string $lien): self
     {
-        $this->nombreSorties = $nombreSorties;
-
-        return $this;
-    }
-
-    public function getDateDernierRetrait(): ?\DateTimeInterface
-    {
-        return $this->dateDernierRetrait;
-    }
-
-    public function setDateDernierRetrait(?\DateTimeInterface $dateDernierRetrait): self
-    {
-        $this->dateDernierRetrait = $dateDernierRetrait;
-
-        return $this;
-    }
-
-    public function getDateAchat(): ?\DateTimeInterface
-    {
-        return $this->dateAchat;
-    }
-
-    public function setDateAchat(?\DateTimeInterface $dateAchat): self
-    {
-        $this->dateAchat = $dateAchat;
+        $this->lien = $lien;
 
         return $this;
     }
@@ -276,33 +337,4 @@ class Bibliotheque
 
         return $this;
     }
-
-    /**
-     * @return Collection|Utilisateur[]
-     */
-    public function getIdUtilisateur(): Collection
-    {
-        return $this->idUtilisateur;
-    }
-
-    public function addIdUtilisateur(Utilisateur $idUtilisateur): self
-    {
-        if (!$this->idUtilisateur->contains($idUtilisateur)) {
-            $this->idUtilisateur[] = $idUtilisateur;
-            $idUtilisateur->addIdLivre($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdUtilisateur(Utilisateur $idUtilisateur): self
-    {
-        if ($this->idUtilisateur->contains($idUtilisateur)) {
-            $this->idUtilisateur->removeElement($idUtilisateur);
-            $idUtilisateur->removeIdLivre($this);
-        }
-
-        return $this;
-    }
-
 }

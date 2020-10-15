@@ -24,16 +24,16 @@ class Genre
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle_genre", type="string", length=25, nullable=false)
+     * @ORM\Column(name="libelle_genre", type="string", length=25, nullable=false, options={"default"="Inconnu"})
      */
-    private $libelleGenre;
+    private $libelleGenre = 'Inconnu';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="code_genre", type="string", length=8, nullable=false)
+     * @ORM\Column(name="code_genre", type="string", length=8, nullable=false, options={"default"="Inconnu"})
      */
-    private $codeGenre;
+    private $codeGenre = 'Inconnu';
 
     /**
      * @var string
@@ -43,11 +43,11 @@ class Genre
     private $codeSousGenre;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="limit_age", type="integer", nullable=false)
+     * @ORM\Column(name="limite_age", type="integer", nullable=true)
      */
-    private $limitAge;
+    private $limiteAge;
 
     public function getIdGenre(): ?int
     {
@@ -90,14 +90,14 @@ class Genre
         return $this;
     }
 
-    public function getLimitAge(): ?int
+    public function getLimiteAge(): ?int
     {
-        return $this->limitAge;
+        return $this->limiteAge;
     }
 
-    public function setLimitAge(int $limitAge): self
+    public function setLimiteAge(?int $limiteAge): self
     {
-        $this->limitAge = $limitAge;
+        $this->limiteAge = $limiteAge;
 
         return $this;
     }

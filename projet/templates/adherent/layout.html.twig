@@ -8,6 +8,12 @@
     {% endblock %}
 </head>
 <body>
+{% if is_granted('ROLE_ADMIN') %}
+    {% include "admin/_nav.html.twig" %}
+{% else %}
+    {% include "adherent/_nav.html.twig" %}
+{% endif %}
+
 {% block body %}
     <h2 style="color:blue">layout.html.twig</h2>
 {% endblock %}
