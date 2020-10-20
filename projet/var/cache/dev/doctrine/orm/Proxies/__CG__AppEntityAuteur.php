@@ -205,7 +205,7 @@ class Auteur extends \App\Entity\Auteur implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setNom(?string $nom): \App\Entity\Auteur
+    public function setNom(string $nom): \App\Entity\Auteur
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNom', [$nom]);
@@ -227,7 +227,7 @@ class Auteur extends \App\Entity\Auteur implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setPrenom(?string $prenom): \App\Entity\Auteur
+    public function setPrenom(string $prenom): \App\Entity\Auteur
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPrenom', [$prenom]);

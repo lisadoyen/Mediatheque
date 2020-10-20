@@ -5,15 +5,17 @@
     <title>Médiathèque Thales</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" >
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/nav-search.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/sub-menu.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/phone.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     {% endblock %}
 </head>
 <body>
-{% if is_granted('ROLE_ADMIN') %}
-    {% include "admin/_nav.html.twig" %}
-{% else %}
-    {% include "adherent/_nav.html.twig" %}
-{% endif %}
-
+{% include "adherent/_nav.html.twig" %}
+{% include "background_search.html.twig" %}
 {% block body %}
     <h2 style="color:blue">layout.html.twig</h2>
 {% endblock %}

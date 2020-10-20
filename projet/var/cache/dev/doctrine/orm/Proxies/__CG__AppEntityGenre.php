@@ -66,10 +66,10 @@ class Genre extends \App\Entity\Genre implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'idGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'libelleGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'codeGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'codeSousGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'limitAge'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'idGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'libelleGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'codeGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'codeSousGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'limiteAge'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'idGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'libelleGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'codeGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'codeSousGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'limitAge'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'idGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'libelleGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'codeGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'codeSousGenre', '' . "\0" . 'App\\Entity\\Genre' . "\0" . 'limiteAge'];
     }
 
     /**
@@ -260,23 +260,23 @@ class Genre extends \App\Entity\Genre implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getLimitAge(): ?int
+    public function getLimiteAge(): ?int
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLimitAge', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLimiteAge', []);
 
-        return parent::getLimitAge();
+        return parent::getLimiteAge();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setLimitAge(int $limitAge): \App\Entity\Genre
+    public function setLimiteAge(?int $limiteAge): \App\Entity\Genre
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLimitAge', [$limitAge]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLimiteAge', [$limiteAge]);
 
-        return parent::setLimitAge($limitAge);
+        return parent::setLimiteAge($limiteAge);
     }
 
 }

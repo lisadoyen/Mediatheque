@@ -55,16 +55,20 @@ class __TwigTemplate_3da4a45f492fd36a8376b745e89c20fe89f5e3376884ef74601d275d374
         echo "</head>
 <body>
 ";
-        // line 12
+        // line 11
         $this->displayBlock('body', $context, $blocks);
-        // line 15
+        // line 14
         echo "
 ";
-        // line 16
+        // line 15
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 22
+        // line 21
         echo "</body>
-</html>
+";
+        // line 22
+        $this->loadTemplate("_footer.html.twig", "base.html.twig", 22)->display($context);
+        // line 23
+        echo "</html>
 ";
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
@@ -97,7 +101,7 @@ class __TwigTemplate_3da4a45f492fd36a8376b745e89c20fe89f5e3376884ef74601d275d374
 
     }
 
-    // line 12
+    // line 11
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -107,7 +111,7 @@ class __TwigTemplate_3da4a45f492fd36a8376b745e89c20fe89f5e3376884ef74601d275d374
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 13
+        // line 12
         echo "    <h2 style=\"color:blue\">layout.html.twig</h2>
 ";
         
@@ -118,7 +122,7 @@ class __TwigTemplate_3da4a45f492fd36a8376b745e89c20fe89f5e3376884ef74601d275d374
 
     }
 
-    // line 16
+    // line 15
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -128,16 +132,16 @@ class __TwigTemplate_3da4a45f492fd36a8376b745e89c20fe89f5e3376884ef74601d275d374
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 17
+        // line 16
         echo "    <script src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/jquery-3.5.1.slim.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 18
+        // line 17
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/popper.min.js"), "html", null, true);
         echo "\" ></script>
     <script src=\"";
-        // line 19
+        // line 18
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/bootstrap.js"), "html", null, true);
         echo "\" ></script>
 
@@ -155,9 +159,14 @@ class __TwigTemplate_3da4a45f492fd36a8376b745e89c20fe89f5e3376884ef74601d275d374
         return "base.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  141 => 19,  137 => 18,  132 => 17,  122 => 16,  111 => 13,  101 => 12,  88 => 7,  78 => 6,  66 => 22,  64 => 16,  61 => 15,  59 => 12,  55 => 9,  53 => 6,  46 => 1,);
+        return array (  145 => 18,  141 => 17,  136 => 16,  126 => 15,  115 => 12,  105 => 11,  92 => 7,  82 => 6,  71 => 23,  69 => 22,  66 => 21,  64 => 15,  61 => 14,  59 => 11,  55 => 9,  53 => 6,  46 => 1,);
     }
 
     public function getSourceContext()
@@ -172,7 +181,6 @@ class __TwigTemplate_3da4a45f492fd36a8376b745e89c20fe89f5e3376884ef74601d275d374
     {% endblock %}
 </head>
 <body>
-{#{% include('admin/_nav.html.twig') %}#}
 {% block body %}
     <h2 style=\"color:blue\">layout.html.twig</h2>
 {% endblock %}
@@ -184,7 +192,8 @@ class __TwigTemplate_3da4a45f492fd36a8376b745e89c20fe89f5e3376884ef74601d275d374
 
 {% endblock %}
 </body>
+{% include \"_footer.html.twig\" %}
 </html>
-", "base.html.twig", "/home/thibault/Documents/S3/Projet Tut/mediatheque/templates/base.html.twig");
+", "base.html.twig", "/home/aduhoux/IUT/S3/Projets/mediatheque-g/projet/templates/base.html.twig");
     }
 }

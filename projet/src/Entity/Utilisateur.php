@@ -66,7 +66,7 @@ class Utilisateur
     private $role;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Bibliotheque", inversedBy="idUtilisateur")
      * @ORM\JoinTable(name="emprunt",
