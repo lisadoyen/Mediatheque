@@ -48,11 +48,6 @@ class MediathequeControllerAdherent extends AbstractController
      */
     public function showBibliothequeByType(string $genre = null,Request $request, PaginatorInterface $paginator)
     {
-        //$revue = $this->getDoctrine()->getRepository(Genre::class)->findBy(['libelleGenre' => 'REVUE']);
-        //$livreRevue = $repository -> findBy(["fkIdGenre" => $revue]);
-        //return $this->render('adherent/showBibliotheque.html.twig', ['livres' => $livreRevue, 'limit' => $limite]);
-
-        $limite = 10; // faire en sorte de le relier au input
         $repository = $this->getDoctrine()->getRepository(Bibliotheque::class);
         $genreLivre = $this->getDoctrine()->getRepository(Genre::class)->findBy(['libelleGenre' => $genre]);
         $articles = $repository -> findBy(["fkIdGenre" => $genreLivre]);
