@@ -642,6 +642,6 @@ class __TwigTemplate_d2c26fe4965eb8453f680668520a262348ab3856dd7015a90f0023b47a9
         }());
     </script>
 {% endblock %}
-", "@WebProfiler/Profiler/layout.html.twig", "/var/www/html/ptut/projet2/projet/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/layout.html.twig");
+", "@WebProfiler/Profiler/layout.html.twig", "/home/aduhoux/IUT/S3/Projets/mediatheque-g/projet/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/layout.html.twig");
     }
 }

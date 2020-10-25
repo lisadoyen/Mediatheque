@@ -21,7 +21,6 @@ return [
         '/benevole' => [[['_route' => 'benevole_accueil', '_controller' => 'App\\Controller\\Benevole\\MediathequeControllerBenevole::accueilIndex'], null, ['GET' => 0], null, false, false, null]],
         '/benevole/bibliotheque/show' => [[['_route' => 'benevole_bibliotheque_show', '_controller' => 'App\\Controller\\Benevole\\MediathequeControllerBenevole::showBibliotheque'], null, ['GET' => 0], null, false, false, null]],
         '/' => [[['_route' => 'index', '_controller' => 'App\\Controller\\IndexController::index'], null, null, null, false, false, null]],
-        '/searchbar' => [[['_route' => 'searchbar', '_controller' => 'App\\Controller\\SearchBar\\SearchBarController::accueilIndex'], null, ['GET' => 0], null, false, false, null]],
         '/inscription' => [[['_route' => 'security_registration', '_controller' => 'App\\Controller\\Security\\SecurityController::registration'], null, null, null, false, false, null]],
         '/connexion' => [[['_route' => 'security_login', '_controller' => 'App\\Controller\\Security\\SecurityController::login'], null, null, null, false, false, null]],
         '/deconnexion' => [[['_route' => 'security_logout', '_controller' => 'App\\Controller\\Security\\SecurityController::logout'], null, null, null, false, false, null]],
@@ -44,7 +43,6 @@ return [
                     .')'
                 .')'
                 .'|/adherent/bibliotheque/show/genre/([^/]++)(*:211)'
-                .'|/searchbar(?:/([^/]++))?(*:243)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -55,9 +53,8 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        211 => [[['_route' => 'adherent_bibliotheque_show_genre', '_controller' => 'App\\Controller\\Adherent\\MediathequeControllerAdherent::showBibliothequeByType'], ['id'], ['GET' => 0], null, false, true, null]],
-        243 => [
-            [['_route' => 'searchbar_mot', 'mot' => '', '_controller' => 'App\\Controller\\SearchBar\\SearchBarController::showSearchBar'], ['mot'], ['POST' => 0], null, false, true, null],
+        211 => [
+            [['_route' => 'adherent_bibliotheque_show_genre', '_controller' => 'App\\Controller\\Adherent\\MediathequeControllerAdherent::showBibliothequeByType'], ['id'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

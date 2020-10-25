@@ -58,20 +58,18 @@ class __TwigTemplate_cb1beb73af59b244981cd24fe44055e97f74dfef7fde49958c96dcb44dd
         // line 18
         $this->loadTemplate("adherent/_nav.html.twig", "adherent/layout.html.twig", 18)->display($context);
         // line 19
-        $this->loadTemplate("background_search.html.twig", "adherent/layout.html.twig", 19)->display($context);
-        // line 20
         $this->displayBlock('body', $context, $blocks);
-        // line 23
+        // line 22
         echo "
 ";
-        // line 24
+        // line 23
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 30
+        // line 29
         echo "</body>
 ";
+        // line 30
+        $this->loadTemplate("_footer.html.twig", "adherent/layout.html.twig", 30)->display($context);
         // line 31
-        $this->loadTemplate("_footer.html.twig", "adherent/layout.html.twig", 31)->display($context);
-        // line 32
         echo "</html>
 ";
         
@@ -127,7 +125,7 @@ class __TwigTemplate_cb1beb73af59b244981cd24fe44055e97f74dfef7fde49958c96dcb44dd
 
     }
 
-    // line 20
+    // line 19
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -137,7 +135,7 @@ class __TwigTemplate_cb1beb73af59b244981cd24fe44055e97f74dfef7fde49958c96dcb44dd
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 21
+        // line 20
         echo "    <h2 style=\"color:blue\">layout.html.twig</h2>
 ";
         
@@ -148,7 +146,7 @@ class __TwigTemplate_cb1beb73af59b244981cd24fe44055e97f74dfef7fde49958c96dcb44dd
 
     }
 
-    // line 24
+    // line 23
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -158,16 +156,16 @@ class __TwigTemplate_cb1beb73af59b244981cd24fe44055e97f74dfef7fde49958c96dcb44dd
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 25
+        // line 24
         echo "    <script src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/jquery-3.5.1.slim.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 26
+        // line 25
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/popper.min.js"), "html", null, true);
         echo "\" ></script>
     <script src=\"";
-        // line 27
+        // line 26
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/bootstrap.js"), "html", null, true);
         echo "\" ></script>
 
@@ -192,7 +190,7 @@ class __TwigTemplate_cb1beb73af59b244981cd24fe44055e97f74dfef7fde49958c96dcb44dd
 
     public function getDebugInfo()
     {
-        return array (  171 => 27,  167 => 26,  162 => 25,  152 => 24,  141 => 21,  131 => 20,  118 => 13,  114 => 12,  110 => 11,  106 => 10,  102 => 9,  96 => 7,  86 => 6,  75 => 32,  73 => 31,  70 => 30,  68 => 24,  65 => 23,  63 => 20,  61 => 19,  59 => 18,  55 => 16,  53 => 6,  46 => 1,);
+        return array (  169 => 26,  165 => 25,  160 => 24,  150 => 23,  139 => 20,  129 => 19,  116 => 13,  112 => 12,  108 => 11,  104 => 10,  100 => 9,  94 => 7,  84 => 6,  73 => 31,  71 => 30,  68 => 29,  66 => 23,  63 => 22,  61 => 19,  59 => 18,  55 => 16,  53 => 6,  46 => 1,);
     }
 
     public function getSourceContext()
@@ -215,7 +213,6 @@ class __TwigTemplate_cb1beb73af59b244981cd24fe44055e97f74dfef7fde49958c96dcb44dd
 </head>
 <body>
 {% include \"adherent/_nav.html.twig\" %}
-{% include \"background_search.html.twig\" %}
 {% block body %}
     <h2 style=\"color:blue\">layout.html.twig</h2>
 {% endblock %}
@@ -229,6 +226,6 @@ class __TwigTemplate_cb1beb73af59b244981cd24fe44055e97f74dfef7fde49958c96dcb44dd
 </body>
 {% include \"_footer.html.twig\" %}
 </html>
-", "adherent/layout.html.twig", "/var/www/html/ptut/projet2/projet/templates/adherent/layout.html.twig");
+", "adherent/layout.html.twig", "/home/aduhoux/IUT/S3/Projets/mediatheque-g/projet/templates/adherent/layout.html.twig");
     }
 }

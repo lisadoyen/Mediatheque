@@ -31,12 +31,12 @@
     padding-top: 3vh !important;
     padding-bottom: 3vh !important;
 }
-.test-hover:hover{
+.nav-title-hover:hover{
     color: #ffff!important;
     transition: letter-spacing linear 200ms;
     letter-spacing: 1.3vh!important;
 }
-.test-hover::after{
+.nav-title-hover::after{
     content:'';
     background-color:var(--main-color);
     position: absolute;
@@ -48,19 +48,14 @@
     transition : transform ease-out 200ms;
     opacity: 0;
 }
-.test-hover:hover::after{
+.nav-title-hover:hover::after{
     opacity: 1;
     transform:translate(0%);
 }
 
-/* TEST */
 .custom-toggler .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
-
-.custom-toggler.navbar-toggler {
-    border-color: none;
-} 
 .background-home {
     background:linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url("../images/bg.jpg");
     height: 77.5vh;
@@ -79,7 +74,6 @@
 /* BARRE RECHERCHE */
 .searchbar{
     margin-bottom: auto;
-    margin-top: 33.75vh;
     height: 12vh;
     background-color:#858991;
     border-radius: 6vh;

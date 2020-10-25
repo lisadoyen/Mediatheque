@@ -160,6 +160,6 @@ class __TwigTemplate_d6d70e8f08dccfb572492c8bcd810fe74dcdb9dae2087822e634d3d7103
 
     {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url, name: 'time', status: status_color }) }}
 {% endblock %}
-", "@WebProfiler/Collector/memory.html.twig", "/var/www/html/ptut/projet2/projet/vendor/symfony/web-profiler-bundle/Resources/views/Collector/memory.html.twig");
+", "@WebProfiler/Collector/memory.html.twig", "/home/aduhoux/IUT/S3/Projets/mediatheque-g/projet/vendor/symfony/web-profiler-bundle/Resources/views/Collector/memory.html.twig");
     }
 }

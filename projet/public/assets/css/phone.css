@@ -1,4 +1,4 @@
-/* en dessous de 768 px */
+/* en dessous de 1160 px */
 @media screen and (max-width: 1110px) {
 
     .content-desktop {display: none !important;}
@@ -6,17 +6,23 @@
     .background-home {
         height: 90vh;
     }
-    .search-width{
-        width: 50vh !important;
-    }
     .titre{
-        font-size: 3vh!important;
+        font-size: 4vh!important;
         padding-left: 1vh !important;
+    }
+   .navbar-toggler{
+        font-size: 3rem;
+    }
+    .navbar-collapse{
+        font-size: 3rem;
+        letter-spacing: 0.5vh;
+    }
+    .dropdown-menu{
+        font-size: 2.5rem;
     }
     /* BARRE RECHERCHE */
 .searchbar{
     margin-bottom: auto;
-    margin-top: 33.75vh;
     height: 6vh;
     background-color:#353b48;
     border-radius: 3vh;
@@ -38,16 +44,16 @@
     font-size: 3vh!important;
 }
 
-.searchbar:hover > .search_input{
+.searchbar > .search_input{
     padding: 0 1vh;
-    width: 45vh;
-    caret-color:red;
-    transition: width 0.4s linear;
+    width: 35vh;
+    caret-color:var(--second-color);
 }
 
-.searchbar:hover > .search_icon{
+
+.searchbar> .search_icon{
     background: white;
-    color: #e74c3c;
+    color: var(--second-color);
 }
 
 .search_icon{

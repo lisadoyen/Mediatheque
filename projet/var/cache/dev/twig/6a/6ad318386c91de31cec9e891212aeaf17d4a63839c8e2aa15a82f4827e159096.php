@@ -42,8 +42,20 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
         // line 1
         echo "<nav class=\"navbar navbar-dark\">
     <a class=\"navbar-brand titre letter-spacing\" href=\"#\">MEDIATHEQUE</a>
-    <a class=\"navbar-brand ml-auto profil content-desktop letter-spacing\" href=\"";
+    ";
         // line 3
+        if ((0 !== twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 3, $this->source); })()), "request", [], "any", false, false, false, 3), "pathInfo", [], "any", false, false, false, 3), "/adherent"))) {
+            // line 4
+            echo "        <form id=\"search\" action=\"POST\">
+            <div class=\"searchbar\">
+                <input class=\"search_input\" type=\"text\" name=\"\" placeholder=\"Search...\">
+                <a href=\"#\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\"><i class=\"fas fa-search\"></i></a>
+            </div>
+        </form>
+    ";
+        }
+        // line 11
+        echo "    <a class=\"navbar-brand ml-auto profil content-desktop letter-spacing\" href=\"";
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("security_logout");
         echo "\">DECONNEXION</a>
 
@@ -63,6 +75,10 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
                         LIVRE
                     </a>
                     <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">
+                        <a class=\"dropdown-item\" href=\"";
+        // line 29
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 28]);
+        echo "\">Revue</a>
                         <a class=\"dropdown-item\" href=\"#\">Action</a>
                         <a class=\"dropdown-item\" href=\"#\">Another action</a>
                         <div class=\"dropdown-divider\"></div>
@@ -111,8 +127,8 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
 <!--DEUXIEME NAVBAR-->
 <nav class=\"navbar navbar-light nav-space content-desktop\">
     <div class=\"dropdown\" style=\"margin-left: 30vh;\">
-        <a class=\"navbar-brand nav-cat letter-spacing dropdown test-hover\" href=\"";
-        // line 69
+        <a class=\"navbar-brand nav-cat letter-spacing dropdown nav-title-hover\" href=\"";
+        // line 78
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show");
         echo "\">LIVRE</a>
         <div class=\"dropdown-content\" id=\"a\">
@@ -121,81 +137,81 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
                     <div class=\"col-sm-6\">
                         <ul class=\"multi-column-dropdown\">
                             <li><a href=\"";
-        // line 75
+        // line 84
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 28]);
         echo "\">Revue</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
-        // line 77
+        // line 86
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 30]);
         echo "\">Enfant</a></li>
                                 <li><a href=\"";
-        // line 78
+        // line 87
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 29]);
         echo "\">Adulte</a></li>
                             </div>
                             <li><a href=\"";
-        // line 80
+        // line 89
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 34]);
         echo "\">Science fiction</a></li>
                             <li><a href=\"";
-        // line 81
+        // line 90
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 11]);
         echo "\">Biographie</a></li>
                             <li><a href=\"";
-        // line 82
+        // line 91
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 31]);
         echo "\">Roman</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
-        // line 84
+        // line 93
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 32]);
         echo "\">Enfant</a></li>
                                 <li><a href=\"";
-        // line 85
+        // line 94
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 33]);
         echo "\">Policier</a></li>
                             </div>
                             <li><a href=\"";
-        // line 87
+        // line 96
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 18]);
         echo "\">Famille</a></li>
                             <li><a href=\"";
-        // line 88
+        // line 97
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 23]);
         echo "\">Jeune adulte</a></li>
                             <li><a href=\"";
-        // line 89
+        // line 98
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 6]);
         echo "\">Adolescent</a></li>
                             <li><a href=\"";
-        // line 90
+        // line 99
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 16]);
         echo "\">Document</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
-        // line 92
+        // line 101
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 17]);
         echo "\">Document enfant</a></li>
                                 <div class=\"sub-3-menu\">
                                     <li><a href=\"";
-        // line 94
+        // line 103
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 2]);
         echo "\">10/13 ans</a></li>
                                     <li><a href=\"";
-        // line 95
+        // line 104
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 5]);
         echo "\">8/10 ans</a></li>
                                     <li><a href=\"";
-        // line 96
+        // line 105
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 4]);
         echo "\">6/8 ans</a></li>
                                     <li><a href=\"";
-        // line 97
+        // line 106
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 3]);
         echo "\">3/6 ans</a></li>
                                     <li><a href=\"";
-        // line 98
+        // line 107
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 1]);
         echo "\">0/3 ans</a></li>
                                 </div>
@@ -205,75 +221,75 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
                     <div class=\"col-sm-6\">
                         <ul class=\"multi-column-dropdown\">
                             <li><a href=\"";
-        // line 105
+        // line 114
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 8]);
         echo "\">Bande Dessinée</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
-        // line 107
+        // line 116
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 10]);
         echo "\">Enfant</a></li>
                                 <li><a href=\"";
-        // line 108
+        // line 117
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 9]);
         echo "\">Adulte</a></li>
                             </div>
                             <li><a href=\"";
-        // line 110
+        // line 119
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 26]);
         echo "\" >Maison jardin</a></li>
                             <li><a href=\"";
-        // line 111
+        // line 120
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 24]);
         echo "\">Loisir manuel</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
-        // line 113
+        // line 122
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 25]);
         echo "\">Adulte</a></li>
                             </div>
                             <li><a href=\"";
-        // line 115
+        // line 124
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 36]);
         echo "\">Sport</a></li>
                             <li><a href=\"";
-        // line 116
+        // line 125
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 20]);
         echo "\">Géographie</a></li>
                             <li><a href=\"";
-        // line 117
+        // line 126
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 21]);
         echo "\">Histoire</a></li>
                             <li><a href=\"";
-        // line 118
+        // line 127
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 35]);
         echo "\">Société</a></li>
                             <li><a href=\"";
-        // line 119
+        // line 128
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 7]);
         echo "\">Art</a></li>
                             <li><a href=\"";
-        // line 120
+        // line 129
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 19]);
         echo "\">Fond breton</a></li>
                             <li><a href=\"";
-        // line 121
+        // line 130
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 14]);
         echo "\">Cours préparatoire</a></li>
                             <li><a href=\"";
-        // line 122
+        // line 131
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 13]);
         echo "\">Classique</a></li>
                             <li><a href=\"";
-        // line 123
+        // line 132
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 12]);
         echo "\">Cassette</a></li>
                             <li><a href=\"";
-        // line 124
+        // line 133
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 15]);
         echo "\">Divertissement</a></li>
                             <li><a href=\"";
-        // line 125
+        // line 134
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 22]);
         echo "\">Autres</a></li>
                         </ul>
@@ -283,7 +299,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
         </div>
     </div>
     <div class=\"dropdown\">
-        <a class=\"navbar-brand nav-cat letter-spacing dropdown test-hover\" href=\"#\">FILM</a>
+        <a class=\"navbar-brand nav-cat letter-spacing dropdown nav-title-hover\" href=\"#\">FILM</a>
         <div class=\"dropdown-content\">
             <ul class=\"multi-column columns-2\">
                 <div class=\"row\">
@@ -310,7 +326,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
         </div>
     </div>
     <div class=\"dropdown\">
-        <a class=\"navbar-brand nav-cat letter-spacing dropdown test-hover\" href=\"#\">MUSIQUE</a>
+        <a class=\"navbar-brand nav-cat letter-spacing dropdown nav-title-hover\" href=\"#\">MUSIQUE</a>
         <div class=\"dropdown-content\">
             <ul class=\"multi-column columns-2\">
                 <div class=\"row\">
@@ -337,7 +353,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
         </div>
     </div>
     <div class=\"dropdown\" style=\"margin-right: 30vh;\">
-        <a class=\"navbar-brand nav-cat letter-spacing dropdown test-hover\" href=\"#\">JEUX</a>
+        <a class=\"navbar-brand nav-cat letter-spacing dropdown nav-title-hover\" href=\"#\">JEUX</a>
         <div class=\"dropdown-content\">
             <ul class=\"multi-column columns-2\">
                 <div class=\"row\">
@@ -384,13 +400,21 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
 
     public function getDebugInfo()
     {
-        return array (  277 => 125,  273 => 124,  269 => 123,  265 => 122,  261 => 121,  257 => 120,  253 => 119,  249 => 118,  245 => 117,  241 => 116,  237 => 115,  232 => 113,  227 => 111,  223 => 110,  218 => 108,  214 => 107,  209 => 105,  199 => 98,  195 => 97,  191 => 96,  187 => 95,  183 => 94,  178 => 92,  173 => 90,  169 => 89,  165 => 88,  161 => 87,  156 => 85,  152 => 84,  147 => 82,  143 => 81,  139 => 80,  134 => 78,  130 => 77,  125 => 75,  116 => 69,  47 => 3,  43 => 1,);
+        return array (  293 => 134,  289 => 133,  285 => 132,  281 => 131,  277 => 130,  273 => 129,  269 => 128,  265 => 127,  261 => 126,  257 => 125,  253 => 124,  248 => 122,  243 => 120,  239 => 119,  234 => 117,  230 => 116,  225 => 114,  215 => 107,  211 => 106,  207 => 105,  203 => 104,  199 => 103,  194 => 101,  189 => 99,  185 => 98,  181 => 97,  177 => 96,  172 => 94,  168 => 93,  163 => 91,  159 => 90,  155 => 89,  150 => 87,  146 => 86,  141 => 84,  132 => 78,  80 => 29,  58 => 11,  49 => 4,  47 => 3,  43 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("<nav class=\"navbar navbar-dark\">
     <a class=\"navbar-brand titre letter-spacing\" href=\"#\">MEDIATHEQUE</a>
+    {% if app.request.pathInfo != '/adherent' %}
+        <form id=\"search\" action=\"POST\">
+            <div class=\"searchbar\">
+                <input class=\"search_input\" type=\"text\" name=\"\" placeholder=\"Search...\">
+                <a href=\"#\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\"><i class=\"fas fa-search\"></i></a>
+            </div>
+        </form>
+    {% endif %}
     <a class=\"navbar-brand ml-auto profil content-desktop letter-spacing\" href=\"{{ path('security_logout') }}\">DECONNEXION</a>
 
 
@@ -409,6 +433,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
                         LIVRE
                     </a>
                     <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">
+                        <a class=\"dropdown-item\" href=\"{{ path('adherent_bibliotheque_show_genre', {id : 28}) }}\">Revue</a>
                         <a class=\"dropdown-item\" href=\"#\">Action</a>
                         <a class=\"dropdown-item\" href=\"#\">Another action</a>
                         <div class=\"dropdown-divider\"></div>
@@ -457,7 +482,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
 <!--DEUXIEME NAVBAR-->
 <nav class=\"navbar navbar-light nav-space content-desktop\">
     <div class=\"dropdown\" style=\"margin-left: 30vh;\">
-        <a class=\"navbar-brand nav-cat letter-spacing dropdown test-hover\" href=\"{{ path('adherent_bibliotheque_show') }}\">LIVRE</a>
+        <a class=\"navbar-brand nav-cat letter-spacing dropdown nav-title-hover\" href=\"{{ path('adherent_bibliotheque_show') }}\">LIVRE</a>
         <div class=\"dropdown-content\" id=\"a\">
             <ul class=\"multi-column columns-2\">
                 <div class=\"row\">
@@ -521,7 +546,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
         </div>
     </div>
     <div class=\"dropdown\">
-        <a class=\"navbar-brand nav-cat letter-spacing dropdown test-hover\" href=\"#\">FILM</a>
+        <a class=\"navbar-brand nav-cat letter-spacing dropdown nav-title-hover\" href=\"#\">FILM</a>
         <div class=\"dropdown-content\">
             <ul class=\"multi-column columns-2\">
                 <div class=\"row\">
@@ -548,7 +573,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
         </div>
     </div>
     <div class=\"dropdown\">
-        <a class=\"navbar-brand nav-cat letter-spacing dropdown test-hover\" href=\"#\">MUSIQUE</a>
+        <a class=\"navbar-brand nav-cat letter-spacing dropdown nav-title-hover\" href=\"#\">MUSIQUE</a>
         <div class=\"dropdown-content\">
             <ul class=\"multi-column columns-2\">
                 <div class=\"row\">
@@ -575,7 +600,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
         </div>
     </div>
     <div class=\"dropdown\" style=\"margin-right: 30vh;\">
-        <a class=\"navbar-brand nav-cat letter-spacing dropdown test-hover\" href=\"#\">JEUX</a>
+        <a class=\"navbar-brand nav-cat letter-spacing dropdown nav-title-hover\" href=\"#\">JEUX</a>
         <div class=\"dropdown-content\">
             <ul class=\"multi-column columns-2\">
                 <div class=\"row\">
@@ -601,6 +626,6 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
             </ul>
         </div>
     </div>
-</nav>", "adherent/_nav.html.twig", "/var/www/html/ptut/projet2/projet/templates/adherent/_nav.html.twig");
+</nav>", "adherent/_nav.html.twig", "/home/aduhoux/IUT/S3/Projets/mediatheque-g/projet/templates/adherent/_nav.html.twig");
     }
 }

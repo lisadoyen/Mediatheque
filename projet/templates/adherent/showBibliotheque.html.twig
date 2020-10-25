@@ -1,5 +1,11 @@
 {% extends "adherent/layout.html.twig" %}
 {% block body %}
+    <form id="search" action="POST" class="content-mobile">
+        <div class="searchbar" style="margin-top: 2rem">
+            <input class="search_input" type="text" name="" placeholder="Search...">
+            <a href="#" class="search_icon" onclick="this.closest('form').submit();return false;"><i class="fas fa-search"></i></a>
+        </div>
+    </form>
     <div class="">
         <h1 style="text-align: center">Récapitulatifs des livres</h1><br>
         <br>
@@ -19,6 +25,7 @@
                     <th>Inactif</th>
                     <th>Nb sortie</th>
                     <th>Lien</th>
+                    <!--
                     <th>Date de retrait</th>
                     <th>Date achat</th>
                     <th>Date de création</th>
@@ -26,6 +33,7 @@
                     <th>Prenom auteur</th>
                     <th>Libelle genre</th>
                     <th>Opérations</th>
+                    -->
 
                 </tr>
                 </thead>
@@ -56,6 +64,7 @@
                             </td>
                             <td>{{livre.nombreDeSorties}}</td>
                             <td>{{livre.Lien}}</td>
+                            <!--
                             <td>{{livre.dateDeRetrait | date('d/m/Y')}}</td>
                             <td>{{livre.dateAchat | date('d/m/Y')}}</td>
                             <td>{{livre.dateCreation | date('d/m/Y')}}</td>
@@ -65,6 +74,7 @@
                             <td>
                                 <a href="{#{ path('livre_reverve', {id: livre.id}) }#}" class="btn btn-primary">Réserver</a>
                             </td>
+                            -->
                         </tr>
                     {% endfor %}
                 {% else %}

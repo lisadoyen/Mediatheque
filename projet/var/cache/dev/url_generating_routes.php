@@ -24,8 +24,6 @@ return [
     'benevole_accueil' => [[], ['_controller' => 'App\\Controller\\Benevole\\MediathequeControllerBenevole::accueilIndex'], [], [['text', '/benevole']], [], []],
     'benevole_bibliotheque_show' => [[], ['_controller' => 'App\\Controller\\Benevole\\MediathequeControllerBenevole::showBibliotheque'], [], [['text', '/benevole/bibliotheque/show']], [], []],
     'index' => [[], ['_controller' => 'App\\Controller\\IndexController::index'], [], [['text', '/']], [], []],
-    'searchbar' => [[], ['_controller' => 'App\\Controller\\SearchBar\\SearchBarController::accueilIndex'], [], [['text', '/searchbar']], [], []],
-    'searchbar_mot' => [['mot'], ['mot' => '', '_controller' => 'App\\Controller\\SearchBar\\SearchBarController::showSearchBar'], [], [['variable', '/', '[^/]++', 'mot', true], ['text', '/searchbar']], [], []],
     'security_registration' => [[], ['_controller' => 'App\\Controller\\Security\\SecurityController::registration'], [], [['text', '/inscription']], [], []],
     'security_login' => [[], ['_controller' => 'App\\Controller\\Security\\SecurityController::login'], [], [['text', '/connexion']], [], []],
     'security_logout' => [[], ['_controller' => 'App\\Controller\\Security\\SecurityController::logout'], [], [['text', '/deconnexion']], [], []],

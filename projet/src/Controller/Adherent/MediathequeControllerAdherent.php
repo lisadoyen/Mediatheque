@@ -26,6 +26,9 @@ class MediathequeControllerAdherent extends AbstractController
 
     /**
      * @Route("/adherent/bibliotheque/show", name="adherent_bibliotheque_show",methods={"GET"})
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
     public function showBibliotheque(Request $request, PaginatorInterface $paginator)
     {
