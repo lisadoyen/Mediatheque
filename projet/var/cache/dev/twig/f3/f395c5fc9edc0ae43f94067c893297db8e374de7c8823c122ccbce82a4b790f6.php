@@ -118,6 +118,6 @@ class __TwigTemplate_826ac0b33d66d6af5226e449e99e05da3b12caa3956a92f7868e2b5da6f
         </div>
     </div>
 </div>
-", "@EasyAdmin/crud/includes/_batch_action_modal.html.twig", "/var/www/html/ptut/projet/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/includes/_batch_action_modal.html.twig");
+", "@EasyAdmin/crud/includes/_batch_action_modal.html.twig", "/var/www/html/ptut/projet2/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/includes/_batch_action_modal.html.twig");
     }
 }

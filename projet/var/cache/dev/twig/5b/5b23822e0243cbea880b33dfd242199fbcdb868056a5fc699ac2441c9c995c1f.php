@@ -91,6 +91,6 @@ class __TwigTemplate_9015ec1f3f8be013784d39a52e98582c44c8ed03c5922fd0a60303227bc
 {% if field.customOptions.get('showName') %}
     {{ field.formattedValue ?? '' }}
 {% endif %}
-", "@EasyAdmin/crud/field/language.html.twig", "/var/www/html/ptut/projet/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/field/language.html.twig");
+", "@EasyAdmin/crud/field/language.html.twig", "/var/www/html/ptut/projet2/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/field/language.html.twig");
     }
 }

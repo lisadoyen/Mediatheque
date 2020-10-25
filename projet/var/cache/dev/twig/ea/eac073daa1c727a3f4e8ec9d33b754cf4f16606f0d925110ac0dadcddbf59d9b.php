@@ -95,6 +95,6 @@ class __TwigTemplate_29ea74f24d63179962dcd0cb2988821a88de3014388dfb0994066d4e6f1
 {% if ea_select2_locale != 'en' %}
     <script src=\"{{ asset('bundles/easyadmin/select2/i18n/' ~ ea_select2_locale ~ '.js') }}\"></script>
 {% endif %}
-", "@EasyAdmin/crud/includes/_select2_widget.html.twig", "/var/www/html/ptut/projet/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/includes/_select2_widget.html.twig");
+", "@EasyAdmin/crud/includes/_select2_widget.html.twig", "/var/www/html/ptut/projet2/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/includes/_select2_widget.html.twig");
     }
 }

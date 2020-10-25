@@ -69,6 +69,6 @@ class __TwigTemplate_eb80c6d13373e49e8a3bbdd16773531be5a3c5500481f1b326c93a27555
 <footer class=\"page-footer font-small blue pt-4\">
   <div class=\"footer-copyright text-center py-3\">© 2020 Copyright : <a href=\"\">unSite.com</a>
   </div>
-</footer>", "_footer.html.twig", "/var/www/html/ptut/projet/projet/templates/_footer.html.twig");
+</footer>", "_footer.html.twig", "/var/www/html/ptut/projet2/projet/templates/_footer.html.twig");
     }
 }

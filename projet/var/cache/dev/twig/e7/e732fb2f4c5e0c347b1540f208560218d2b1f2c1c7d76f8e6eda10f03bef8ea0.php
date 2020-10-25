@@ -47,7 +47,10 @@ class __TwigTemplate_50526968cf1c7eb0e2f92409e1ab5bdae7251c1b447068f7df2ed1d7afb
         <form id=\"search\" action=\"POST\">
             <div class=\"searchbar\">
                 <input class=\"search_input\" type=\"text\" name=\"\" placeholder=\"Search...\">
-                <a href=\"#\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\"><i class=\"fas fa-search\"></i></a>
+                <a href=\"";
+        // line 6
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("searchbar_mot", ["mot" => "test"]);
+        echo "\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\"><i class=\"fas fa-search\"></i></a>
             </div>
         </form>
     </div>
@@ -72,7 +75,7 @@ class __TwigTemplate_50526968cf1c7eb0e2f92409e1ab5bdae7251c1b447068f7df2ed1d7afb
 
     public function getDebugInfo()
     {
-        return array (  43 => 1,);
+        return array (  52 => 6,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -82,10 +85,10 @@ class __TwigTemplate_50526968cf1c7eb0e2f92409e1ab5bdae7251c1b447068f7df2ed1d7afb
         <form id=\"search\" action=\"POST\">
             <div class=\"searchbar\">
                 <input class=\"search_input\" type=\"text\" name=\"\" placeholder=\"Search...\">
-                <a href=\"#\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\"><i class=\"fas fa-search\"></i></a>
+                <a href=\"{{ path('searchbar_mot', {mot : \"test\"}) }}\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\"><i class=\"fas fa-search\"></i></a>
             </div>
         </form>
     </div>
-</div>", "background_search.html.twig", "/var/www/html/ptut/projet/projet/templates/background_search.html.twig");
+</div>", "background_search.html.twig", "/var/www/html/ptut/projet2/projet/templates/background_search.html.twig");
     }
 }

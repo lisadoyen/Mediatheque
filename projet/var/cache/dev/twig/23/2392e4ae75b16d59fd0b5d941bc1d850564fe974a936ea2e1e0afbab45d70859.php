@@ -123,6 +123,6 @@ class __TwigTemplate_21e9538610916cb31181e8ae06229ecc74c85836e822c34ef53c375edec
     </span>
     {{ title }}
 </a>
-", "@KnpPaginator/Pagination/semantic_ui_sortable_link.html.twig", "/var/www/html/ptut/projet/projet/vendor/knplabs/knp-paginator-bundle/templates/Pagination/semantic_ui_sortable_link.html.twig");
+", "@KnpPaginator/Pagination/semantic_ui_sortable_link.html.twig", "/var/www/html/ptut/projet2/projet/vendor/knplabs/knp-paginator-bundle/templates/Pagination/semantic_ui_sortable_link.html.twig");
     }
 }

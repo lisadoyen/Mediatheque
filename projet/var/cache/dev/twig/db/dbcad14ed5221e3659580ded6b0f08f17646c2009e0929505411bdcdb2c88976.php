@@ -96,6 +96,6 @@ class __TwigTemplate_7226fea4344f31dd38c3f092eee8f18c9bb0e9cad8a927126c168c46fa2
 
 {% block body %}
     <h1>Médiathèque Thales Accueil adherent</h1>
-{% endblock %}", "adherent/accueil.html.twig", "/var/www/html/ptut/projet/projet/templates/adherent/accueil.html.twig");
+{% endblock %}", "adherent/accueil.html.twig", "/var/www/html/ptut/projet2/projet/templates/adherent/accueil.html.twig");
     }
 }

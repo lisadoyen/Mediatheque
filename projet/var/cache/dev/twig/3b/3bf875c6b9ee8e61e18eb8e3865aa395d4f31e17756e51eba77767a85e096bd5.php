@@ -285,6 +285,6 @@ class __TwigTemplate_eab9e6ce2d1e79c1f5a1272970d7490cbb3c580e615429c145b2d01f800
         {% endif %}
     </ul>
 {% endif %}
-", "@KnpPaginator/Pagination/materialize_pagination.html.twig", "/var/www/html/ptut/projet/projet/vendor/knplabs/knp-paginator-bundle/templates/Pagination/materialize_pagination.html.twig");
+", "@KnpPaginator/Pagination/materialize_pagination.html.twig", "/var/www/html/ptut/projet2/projet/vendor/knplabs/knp-paginator-bundle/templates/Pagination/materialize_pagination.html.twig");
     }
 }

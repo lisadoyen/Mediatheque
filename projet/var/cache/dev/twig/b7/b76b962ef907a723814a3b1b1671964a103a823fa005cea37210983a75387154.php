@@ -104,6 +104,6 @@ class __TwigTemplate_a5370c7d1f606f7a7af52052cb97ccfb7b6db514c4950ec8ed293d5259a
 {% else %}
     {{ field.formattedValue }}
 {% endif %}
-", "@EasyAdmin/crud/field/array.html.twig", "/var/www/html/ptut/projet/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/field/array.html.twig");
+", "@EasyAdmin/crud/field/array.html.twig", "/var/www/html/ptut/projet2/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/field/array.html.twig");
     }
 }

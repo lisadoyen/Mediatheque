@@ -139,6 +139,6 @@ class __TwigTemplate_24b9b5d450bb1388cdc8b18637f2faed464293bdd6fa73813ac388f996f
         </ul>
     </nav>
 </div>
-", "@EasyAdmin/crud/paginator.html.twig", "/var/www/html/ptut/projet/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/paginator.html.twig");
+", "@EasyAdmin/crud/paginator.html.twig", "/var/www/html/ptut/projet2/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/paginator.html.twig");
     }
 }

@@ -197,6 +197,6 @@ class __TwigTemplate_c0c66b2c3b04d187b52a8f815e7e1671e9f35b3fcdebc26e7e19f390f8d
 </body>
 {% include \"_footer.html.twig\" %}
 </html>
-", "admin/layout.html.twig", "/var/www/html/ptut/projet/projet/templates/admin/layout.html.twig");
+", "admin/layout.html.twig", "/var/www/html/ptut/projet2/projet/templates/admin/layout.html.twig");
     }
 }

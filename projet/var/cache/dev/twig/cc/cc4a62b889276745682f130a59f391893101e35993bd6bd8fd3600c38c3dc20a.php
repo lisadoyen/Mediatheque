@@ -72,6 +72,6 @@ class __TwigTemplate_613dc586331e3fb3ac4fb961bde78794082de9072e9942150b24bc70aa3
 {# @var field \\EasyCorp\\Bundle\\EasyAdminBundle\\Dto\\FieldDto #}
 {# @var entity \\EasyCorp\\Bundle\\EasyAdminBundle\\Dto\\EntityDto #}
 {{ field.formattedValue }}
-", "@EasyAdmin/crud/field/percent.html.twig", "/var/www/html/ptut/projet/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/field/percent.html.twig");
+", "@EasyAdmin/crud/field/percent.html.twig", "/var/www/html/ptut/projet2/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/field/percent.html.twig");
     }
 }

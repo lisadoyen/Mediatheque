@@ -209,6 +209,6 @@ class __TwigTemplate_179342d2c792ecfde5391de90f8e42442647ac93cc72efeba8c2b57021a
 </body>
 {% include \"_footer.html.twig\" %}
 </html>
-", "benevole/layout.html.twig", "/var/www/html/ptut/projet/projet/templates/benevole/layout.html.twig");
+", "benevole/layout.html.twig", "/var/www/html/ptut/projet2/projet/templates/benevole/layout.html.twig");
     }
 }

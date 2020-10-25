@@ -92,6 +92,6 @@ class __TwigTemplate_df3fe27c838a4ff8f62caa66c7f9e94c808a1efed178d67fd689ef91549
 {% else %}
     <a target=\"_blank\" rel=\"noopener\" href=\"{{ field.value }}\">{{ field.formattedValue }}</a>
 {% endif %}
-", "@EasyAdmin/crud/field/url.html.twig", "/var/www/html/ptut/projet/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/field/url.html.twig");
+", "@EasyAdmin/crud/field/url.html.twig", "/var/www/html/ptut/projet2/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/field/url.html.twig");
     }
 }

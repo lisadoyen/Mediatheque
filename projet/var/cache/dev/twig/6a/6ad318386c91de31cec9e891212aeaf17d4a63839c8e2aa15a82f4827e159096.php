@@ -122,81 +122,81 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
                         <ul class=\"multi-column-dropdown\">
                             <li><a href=\"";
         // line 75
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "REVUE"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 28]);
         echo "\">Revue</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
         // line 77
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "REVUE ENFANT"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 30]);
         echo "\">Enfant</a></li>
                                 <li><a href=\"";
         // line 78
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "REVUE ADULTE"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 29]);
         echo "\">Adulte</a></li>
                             </div>
                             <li><a href=\"";
         // line 80
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "SIENCE FICTION"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 34]);
         echo "\">Science fiction</a></li>
                             <li><a href=\"";
         // line 81
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "BIO"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 11]);
         echo "\">Biographie</a></li>
                             <li><a href=\"";
         // line 82
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "ROMAN"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 31]);
         echo "\">Roman</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
         // line 84
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "ROMAN ENFANT"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 32]);
         echo "\">Enfant</a></li>
                                 <li><a href=\"";
         // line 85
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "ROMAN POLICIER"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 33]);
         echo "\">Policier</a></li>
                             </div>
                             <li><a href=\"";
         // line 87
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "FAMILLE"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 18]);
         echo "\">Famille</a></li>
                             <li><a href=\"";
         // line 88
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "JEUNES ADULTES"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 23]);
         echo "\">Jeune adulte</a></li>
                             <li><a href=\"";
         // line 89
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "Adolescents"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 6]);
         echo "\">Adolescent</a></li>
                             <li><a href=\"";
         // line 90
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "DOC"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 16]);
         echo "\">Document</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
         // line 92
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "DUCUMENT ENFANT"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 17]);
         echo "\">Document enfant</a></li>
                                 <div class=\"sub-3-menu\">
                                     <li><a href=\"";
         // line 94
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "10/13 ans"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 2]);
         echo "\">10/13 ans</a></li>
                                     <li><a href=\"";
         // line 95
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "8/10 ans"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 5]);
         echo "\">8/10 ans</a></li>
                                     <li><a href=\"";
         // line 96
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "6/8 ans"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 4]);
         echo "\">6/8 ans</a></li>
                                     <li><a href=\"";
         // line 97
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "3/6 ans"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 3]);
         echo "\">3/6 ans</a></li>
                                     <li><a href=\"";
         // line 98
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "0/3 ans"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 1]);
         echo "\">0/3 ans</a></li>
                                 </div>
                             </div>
@@ -206,75 +206,75 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
                         <ul class=\"multi-column-dropdown\">
                             <li><a href=\"";
         // line 105
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "BD"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 8]);
         echo "\">Bande Dessinée</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
         // line 107
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "BDE"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 10]);
         echo "\">Enfant</a></li>
                                 <li><a href=\"";
         // line 108
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "BDA"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 9]);
         echo "\">Adulte</a></li>
                             </div>
                             <li><a href=\"";
         // line 110
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "MAISON JARDIN"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 26]);
         echo "\" >Maison jardin</a></li>
                             <li><a href=\"";
         // line 111
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "LOISIR MANUEL"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 24]);
         echo "\">Loisir manuel</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
         // line 113
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "LOISIRS MANUEL ADULTE"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 25]);
         echo "\">Adulte</a></li>
                             </div>
                             <li><a href=\"";
         // line 115
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "SPORT"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 36]);
         echo "\">Sport</a></li>
                             <li><a href=\"";
         // line 116
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "GEO"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 20]);
         echo "\">Géographie</a></li>
                             <li><a href=\"";
         // line 117
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "HISTOIRE"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 21]);
         echo "\">Histoire</a></li>
                             <li><a href=\"";
         // line 118
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "SOCIETE"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 35]);
         echo "\">Société</a></li>
                             <li><a href=\"";
         // line 119
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "ART"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 7]);
         echo "\">Art</a></li>
                             <li><a href=\"";
         // line 120
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "FOND BRETON"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 19]);
         echo "\">Fond breton</a></li>
                             <li><a href=\"";
         // line 121
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "COURS PREPARATOIRE"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 14]);
         echo "\">Cours préparatoire</a></li>
                             <li><a href=\"";
         // line 122
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "CLASSIQUE"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 13]);
         echo "\">Classique</a></li>
                             <li><a href=\"";
         // line 123
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "CASSETTE"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 12]);
         echo "\">Cassette</a></li>
                             <li><a href=\"";
         // line 124
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "DIV"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 15]);
         echo "\">Divertissement</a></li>
                             <li><a href=\"";
         // line 125
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["genre" => "Inconnu"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 22]);
         echo "\">Autres</a></li>
                         </ul>
                     </div>
@@ -463,57 +463,57 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
                 <div class=\"row\">
                     <div class=\"col-sm-6\">
                         <ul class=\"multi-column-dropdown\">
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre : 'REVUE'}) }}\">Revue</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id : 28}) }}\">Revue</a></li>
                             <div class=\"sub-2-menu\">
-                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"REVUE ENFANT\"}) }}\">Enfant</a></li>
-                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"REVUE ADULTE\"}) }}\">Adulte</a></li>
+                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 30}) }}\">Enfant</a></li>
+                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 29}) }}\">Adulte</a></li>
                             </div>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"SIENCE FICTION\"}) }}\">Science fiction</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"BIO\"}) }}\">Biographie</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"ROMAN\"}) }}\">Roman</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 34}) }}\">Science fiction</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 11}) }}\">Biographie</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 31}) }}\">Roman</a></li>
                             <div class=\"sub-2-menu\">
-                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"ROMAN ENFANT\"}) }}\">Enfant</a></li>
-                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"ROMAN POLICIER\"}) }}\">Policier</a></li>
+                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 32}) }}\">Enfant</a></li>
+                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 33}) }}\">Policier</a></li>
                             </div>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"FAMILLE\"}) }}\">Famille</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"JEUNES ADULTES\"}) }}\">Jeune adulte</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"Adolescents\"}) }}\">Adolescent</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"DOC\"}) }}\">Document</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 18}) }}\">Famille</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 23}) }}\">Jeune adulte</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 6}) }}\">Adolescent</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 16}) }}\">Document</a></li>
                             <div class=\"sub-2-menu\">
-                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"DUCUMENT ENFANT\"}) }}\">Document enfant</a></li>
+                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 17}) }}\">Document enfant</a></li>
                                 <div class=\"sub-3-menu\">
-                                    <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"10/13 ans\"}) }}\">10/13 ans</a></li>
-                                    <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"8/10 ans\"}) }}\">8/10 ans</a></li>
-                                    <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"6/8 ans\"}) }}\">6/8 ans</a></li>
-                                    <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"3/6 ans\"}) }}\">3/6 ans</a></li>
-                                    <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"0/3 ans\"}) }}\">0/3 ans</a></li>
+                                    <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 2}) }}\">10/13 ans</a></li>
+                                    <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 5}) }}\">8/10 ans</a></li>
+                                    <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 4}) }}\">6/8 ans</a></li>
+                                    <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 3}) }}\">3/6 ans</a></li>
+                                    <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 1}) }}\">0/3 ans</a></li>
                                 </div>
                             </div>
                         </ul>
                     </div>
                     <div class=\"col-sm-6\">
                         <ul class=\"multi-column-dropdown\">
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"BD\"}) }}\">Bande Dessinée</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 8}) }}\">Bande Dessinée</a></li>
                             <div class=\"sub-2-menu\">
-                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"BDE\"}) }}\">Enfant</a></li>
-                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"BDA\"}) }}\">Adulte</a></li>
+                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 10}) }}\">Enfant</a></li>
+                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 9}) }}\">Adulte</a></li>
                             </div>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"MAISON JARDIN\"}) }}\" >Maison jardin</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"LOISIR MANUEL\"}) }}\">Loisir manuel</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 26}) }}\" >Maison jardin</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 24}) }}\">Loisir manuel</a></li>
                             <div class=\"sub-2-menu\">
-                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"LOISIRS MANUEL ADULTE\"}) }}\">Adulte</a></li>
+                                <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 25}) }}\">Adulte</a></li>
                             </div>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"SPORT\"}) }}\">Sport</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"GEO\"}) }}\">Géographie</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"HISTOIRE\"}) }}\">Histoire</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"SOCIETE\"}) }}\">Société</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"ART\"}) }}\">Art</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"FOND BRETON\"}) }}\">Fond breton</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"COURS PREPARATOIRE\"}) }}\">Cours préparatoire</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"CLASSIQUE\"}) }}\">Classique</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"CASSETTE\"}) }}\">Cassette</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"DIV\"}) }}\">Divertissement</a></li>
-                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {genre: \"Inconnu\"}) }}\">Autres</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 36}) }}\">Sport</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 20}) }}\">Géographie</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 21}) }}\">Histoire</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 35}) }}\">Société</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 7}) }}\">Art</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 19}) }}\">Fond breton</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 14}) }}\">Cours préparatoire</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 13}) }}\">Classique</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 12}) }}\">Cassette</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 15}) }}\">Divertissement</a></li>
+                            <li><a href=\"{{ path('adherent_bibliotheque_show_genre', {id: 22}) }}\">Autres</a></li>
                         </ul>
                     </div>
                 </div>
@@ -601,6 +601,6 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
             </ul>
         </div>
     </div>
-</nav>", "adherent/_nav.html.twig", "/var/www/html/ptut/projet/projet/templates/adherent/_nav.html.twig");
+</nav>", "adherent/_nav.html.twig", "/var/www/html/ptut/projet2/projet/templates/adherent/_nav.html.twig");
     }
 }

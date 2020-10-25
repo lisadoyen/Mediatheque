@@ -325,6 +325,6 @@ class __TwigTemplate_24f5fde5cff9be121726240bd034944ababd18cdd44cf96c0c382baf262
     </ul>
 </div>
 {% endif %}
-", "@KnpPaginator/Pagination/twitter_bootstrap_pagination.html.twig", "/var/www/html/ptut/projet/projet/vendor/knplabs/knp-paginator-bundle/templates/Pagination/twitter_bootstrap_pagination.html.twig");
+", "@KnpPaginator/Pagination/twitter_bootstrap_pagination.html.twig", "/var/www/html/ptut/projet2/projet/vendor/knplabs/knp-paginator-bundle/templates/Pagination/twitter_bootstrap_pagination.html.twig");
     }
 }

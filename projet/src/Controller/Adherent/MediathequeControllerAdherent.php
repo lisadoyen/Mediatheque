@@ -44,14 +44,11 @@ class MediathequeControllerAdherent extends AbstractController
     }
 
     /**
-     * @Route("/adherent/bibliotheque/show/{genre}", name="adherent_bibliotheque_show_genre",methods={"GET"}, requirements={"genre"=".+"})
+     * @Route("/adherent/bibliotheque/show/genre/{id}", name="adherent_bibliotheque_show_genre",methods={"GET"})
      */
-    public function showBibliothequeByType(string $genre = null,Request $request, PaginatorInterface $paginator)
+    public function showBibliothequeByType(Request $request, PaginatorInterface $paginator, $id)
     {
-        $repository = $this->getDoctrine()->getRepository(Bibliotheque::class);
-        $genreLivre = $this->getDoctrine()->getRepository(Genre::class)->findBy(['libelleGenre' => $genre]);
-        $articles = $repository -> findBy(["fkIdGenre" => $genreLivre]);
-
+        $articles = $this->getDoctrine()->getRepository(Bibliotheque::class)->findBy(["fkIdGenre" => $id]);
         $livres = $paginator ->paginate(
             $articles,
             $request->query->getInt('page',1),

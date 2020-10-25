@@ -332,6 +332,6 @@ class __TwigTemplate_42d9c7936655292ed1359dce05010f8864cdc0c0136e413fdba0e2e5dcf
             </table>
         </div>
     </div>
-{% endblock %}", "admin/showBibliotheque.html.twig", "/var/www/html/ptut/projet/projet/templates/admin/showBibliotheque.html.twig");
+{% endblock %}", "admin/showBibliotheque.html.twig", "/var/www/html/ptut/projet2/projet/templates/admin/showBibliotheque.html.twig");
     }
 }

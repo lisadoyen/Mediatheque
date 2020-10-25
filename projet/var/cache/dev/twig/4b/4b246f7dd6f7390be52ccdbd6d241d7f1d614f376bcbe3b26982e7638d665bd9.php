@@ -176,6 +176,6 @@ class __TwigTemplate_7c32191e02240c43180600924a1150cdd3bc50da148aba37896202d1dc2
     <button class=\"btn btn-outline-primary\" type=\"submit\" >Inscription</button>
 
     {{ form_end(form) }}
-{% endblock %}", "security/registration.html.twig", "/var/www/html/ptut/projet/projet/templates/security/registration.html.twig");
+{% endblock %}", "security/registration.html.twig", "/var/www/html/ptut/projet2/projet/templates/security/registration.html.twig");
     }
 }

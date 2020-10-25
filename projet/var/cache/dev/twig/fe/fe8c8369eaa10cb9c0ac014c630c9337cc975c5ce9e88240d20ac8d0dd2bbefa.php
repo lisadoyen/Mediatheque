@@ -409,6 +409,6 @@ class __TwigTemplate_c5161db0f921b542d23d908e9190c3ad45cc48488a7050ddcff33497a49
 </ul>
 
 {% block main_menu_after %}{% endblock %}
-", "@EasyAdmin/menu.html.twig", "/var/www/html/ptut/projet/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/menu.html.twig");
+", "@EasyAdmin/menu.html.twig", "/var/www/html/ptut/projet2/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/menu.html.twig");
     }
 }

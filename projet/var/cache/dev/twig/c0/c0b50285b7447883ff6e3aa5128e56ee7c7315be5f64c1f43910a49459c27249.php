@@ -203,6 +203,6 @@ class __TwigTemplate_5dba4d27f9954bd564691677a90e594cb438f637d02c95bce067d11c077
     </div>
 </nav>
 
-", "admin/_nav.html.twig", "/var/www/html/ptut/projet/projet/templates/admin/_nav.html.twig");
+", "admin/_nav.html.twig", "/var/www/html/ptut/projet2/projet/templates/admin/_nav.html.twig");
     }
 }

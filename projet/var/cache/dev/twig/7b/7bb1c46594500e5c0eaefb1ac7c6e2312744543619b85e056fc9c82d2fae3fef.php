@@ -96,6 +96,6 @@ class __TwigTemplate_2065a61b47e0df68c9d6fe17c5ba8a7eb31742c5bb881135bc15e98047d
 
 {% block body %}
     <h1>Médiathèque Thales Accueil benevole</h1>
-{% endblock %}", "benevole/accueil.html.twig", "/var/www/html/ptut/projet/projet/templates/benevole/accueil.html.twig");
+{% endblock %}", "benevole/accueil.html.twig", "/var/www/html/ptut/projet2/projet/templates/benevole/accueil.html.twig");
     }
 }

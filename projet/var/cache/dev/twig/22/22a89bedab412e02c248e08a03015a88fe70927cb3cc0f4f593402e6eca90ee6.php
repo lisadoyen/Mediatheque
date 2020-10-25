@@ -97,6 +97,6 @@ class __TwigTemplate_38c559b0b0d13e5f79b333a4aad0da1dd0699fef8c094361dc99b34864f
 <div id=\"{{ html_id }}\" class=\"ea-lightbox\">
     <img src=\"{{ asset(field.formattedValue) }}\">
 </div>
-", "@EasyAdmin/crud/field/image.html.twig", "/var/www/html/ptut/projet/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/field/image.html.twig");
+", "@EasyAdmin/crud/field/image.html.twig", "/var/www/html/ptut/projet2/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/field/image.html.twig");
     }
 }

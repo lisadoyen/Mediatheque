@@ -131,6 +131,6 @@ class __TwigTemplate_6626f0e7aeb4d8ee6a4791c2208d89752167a0440decd86127fb636338d
     </span>
     {{ title }}
 </a>
-", "@KnpPaginator/Pagination/twitter_bootstrap_v3_sortable_link.html.twig", "/var/www/html/ptut/projet/projet/vendor/knplabs/knp-paginator-bundle/templates/Pagination/twitter_bootstrap_v3_sortable_link.html.twig");
+", "@KnpPaginator/Pagination/twitter_bootstrap_v3_sortable_link.html.twig", "/var/www/html/ptut/projet2/projet/vendor/knplabs/knp-paginator-bundle/templates/Pagination/twitter_bootstrap_v3_sortable_link.html.twig");
     }
 }

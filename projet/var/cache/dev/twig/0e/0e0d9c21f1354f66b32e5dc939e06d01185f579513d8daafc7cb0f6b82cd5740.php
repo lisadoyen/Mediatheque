@@ -155,6 +155,6 @@ class __TwigTemplate_18a7a5acd75c1eef0a2d7ec78044fa07b94052d65f46961a6f2082a694d
         </span>
     </button>
 {% endif %}
-", "@EasyAdmin/crud/action.html.twig", "/var/www/html/ptut/projet/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/action.html.twig");
+", "@EasyAdmin/crud/action.html.twig", "/var/www/html/ptut/projet2/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/crud/action.html.twig");
     }
 }
