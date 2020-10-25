@@ -3,7 +3,6 @@
     <a class="navbar-brand ml-auto profil content-desktop letter-spacing" href="{{ path('security_logout') }}">DECONNEXION</a>
 
 
-
     <button class="navbar-toggler custom-toggler burger" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -15,7 +14,7 @@
             </li>
             <div class="content-mobile">
                 <li class="nav-item active dropdown">
-                    <a class="nav-link letter-spacing dropdown-toggle" href="{{ path('adherent_mediatheque_show') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link letter-spacing dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         LIVRE
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -67,26 +66,63 @@
 <!--DEUXIEME NAVBAR-->
 <nav class="navbar navbar-light nav-space content-desktop">
     <div class="dropdown" style="margin-left: 30vh;">
-        <a class="navbar-brand nav-cat letter-spacing dropdown test-hover" href="{{ path('adherent_mediatheque_show') }}">LIVRE</a>
+        <a class="navbar-brand nav-cat letter-spacing dropdown test-hover" href="{{ path('adherent_bibliotheque_show') }}">LIVRE</a>
         <div class="dropdown-content" id="a">
             <ul class="multi-column columns-2">
                 <div class="row">
                     <div class="col-sm-6">
                         <ul class="multi-column-dropdown">
-                            <li><a href="#" >Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here that's extra long so we can see how it looks</a></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre : 'REVUE'}) }}">Revue</a></li>
+                            <div class="sub-2-menu">
+                                <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "REVUE ENFANT"}) }}">Enfant</a></li>
+                                <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "REVUE ADULTE"}) }}">Adulte</a></li>
+                            </div>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "SIENCE FICTION"}) }}">Science fiction</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "BIO"}) }}">Biographie</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "ROMAN"}) }}">Roman</a></li>
+                            <div class="sub-2-menu">
+                                <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "ROMAN ENFANT"}) }}">Enfant</a></li>
+                                <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "ROMAN POLICIER"}) }}">Policier</a></li>
+                            </div>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "FAMILLE"}) }}">Famille</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "JEUNES ADULTES"}) }}">Jeune adulte</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "Adolescents"}) }}">Adolescent</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "DOC"}) }}">Document</a></li>
+                            <div class="sub-2-menu">
+                                <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "DUCUMENT ENFANT"}) }}">Document enfant</a></li>
+                                <div class="sub-3-menu">
+                                    <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "10/13 ans"}) }}">10/13 ans</a></li>
+                                    <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "8/10 ans"}) }}">8/10 ans</a></li>
+                                    <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "6/8 ans"}) }}">6/8 ans</a></li>
+                                    <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "3/6 ans"}) }}">3/6 ans</a></li>
+                                    <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "0/3 ans"}) }}">0/3 ans</a></li>
+                                </div>
+                            </div>
                         </ul>
                     </div>
                     <div class="col-sm-6">
                         <ul class="multi-column-dropdown">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "BD"}) }}">Bande Dessinée</a></li>
+                            <div class="sub-2-menu">
+                                <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "BDE"}) }}">Enfant</a></li>
+                                <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "BDA"}) }}">Adulte</a></li>
+                            </div>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "MAISON JARDIN"}) }}" >Maison jardin</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "LOISIR MANUEL"}) }}">Loisir manuel</a></li>
+                            <div class="sub-2-menu">
+                                <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "LOISIRS MANUEL ADULTE"}) }}">Adulte</a></li>
+                            </div>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "SPORT"}) }}">Sport</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "GEO"}) }}">Géographie</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "HISTOIRE"}) }}">Histoire</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "SOCIETE"}) }}">Société</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "ART"}) }}">Art</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "FOND BRETON"}) }}">Fond breton</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "COURS PREPARATOIRE"}) }}">Cours préparatoire</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "CLASSIQUE"}) }}">Classique</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "CASSETTE"}) }}">Cassette</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "DIV"}) }}">Divertissement</a></li>
+                            <li><a href="{{ path('adherent_bibliotheque_show_genre', {genre: "Inconnu"}) }}">Autres</a></li>
                         </ul>
                     </div>
                 </div>

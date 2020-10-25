@@ -52,6 +52,8 @@ final class Versions
   'doctrine/sql-formatter' => '1.1.1@56070bebac6e77230ed7d306ad13528e60732871',
   'easycorp/easyadmin-bundle' => 'v3.1.4@0aa01dc03f1938bc2f249d3fe686f040fa86b747',
   'egulias/email-validator' => '2.1.20@f46887bc48db66c7f38f668eb7d6ae54583617ff',
+  'knplabs/knp-components' => 'v2.4.2@8486446af9591c9c3decaae6c234739288c80a5f',
+  'knplabs/knp-paginator-bundle' => 'v5.3.0@87ca999b6ac886e3f20a1e3abc07523140509ca4',
   'laminas/laminas-code' => '3.4.1@1cb8f203389ab1482bf89c0e70a04849bacd7766',
   'laminas/laminas-eventmanager' => '3.3.0@1940ccf30e058b2fd66f5a9d696f1b5e0027b082',
   'laminas/laminas-zendframework-bridge' => '1.1.1@6ede70583e101030bcace4dcddd648f760ddf642',

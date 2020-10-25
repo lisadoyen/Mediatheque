@@ -1,0 +1,13 @@
+.pagination{
+    color : #fcaf64;
+    font-weight: bold;
+    position: center;
+}
+.pagination a {
+    color: black;
+    text-decoration: none;
+    padding: 2vh 2vh;
+}
+.pagination a:hover {
+    background-color: #fcaf64;
+}

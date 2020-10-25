@@ -31,7 +31,7 @@
                 </thead>
                 <tbody>
                 {% if livres is not empty %}
-                    {% for livre in livres | slice(0, 10) %}
+                    {% for livre in livres %}
                         <tr>
                             <td>{{livre.codeLivre}}</td>
                             <td>{{livre.codeISBN}}</td>
@@ -72,6 +72,9 @@
                 {% endif %}
                 </tbody>
             </table>
+            <div class="pagination">
+                 {{ knp_pagination_render(livres)}}
+            </div>
         </div>
     </div>
 {% endblock %}

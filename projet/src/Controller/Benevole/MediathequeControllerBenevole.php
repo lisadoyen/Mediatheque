@@ -23,7 +23,7 @@ class MediathequeControllerBenevole extends AbstractController
     }
 
     /**
-    * @Route("/benevole/mediatheque/show", name="benevole_mediatheque_show",methods={"GET"})
+    * @Route("/benevole/bibliotheque/show", name="benevole_bibliotheque_show",methods={"GET"})
     */
     public function showBibliotheque()
     {

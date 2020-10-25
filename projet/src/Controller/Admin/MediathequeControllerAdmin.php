@@ -22,7 +22,7 @@ class MediathequeControllerAdmin extends AbstractController
         return $this->render('admin/accueil.html.twig');
     }
     /**
-    * @Route("/admin/mediatheque/show", name="admin_mediatheque_show",methods={"GET"})
+    * @Route("/admin/bibliotheque/show", name="admin_bibliotheque_show",methods={"GET"})
     */
     public function showBibliotheque()
     {
