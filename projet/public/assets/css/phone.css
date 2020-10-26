@@ -22,6 +22,7 @@
     }
     /* BARRE RECHERCHE */
 .searchbar{
+    pointer-events: auto;
     margin-bottom: auto;
     height: 6vh;
     background-color:#353b48;
@@ -45,6 +46,11 @@
 }
 
 .searchbar > .search_input{
+    padding: 0 1vh;
+    width: 35vh;
+    caret-color:var(--second-color);
+}
+.searchbar:hover > .search_input{
     padding: 0 1vh;
     width: 35vh;
     caret-color:var(--second-color);

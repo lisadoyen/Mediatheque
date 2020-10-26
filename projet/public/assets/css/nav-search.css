@@ -31,27 +31,6 @@
     padding-top: 3vh !important;
     padding-bottom: 3vh !important;
 }
-.nav-title-hover:hover{
-    color: #ffff!important;
-    transition: letter-spacing linear 200ms;
-    letter-spacing: 1.3vh!important;
-}
-.nav-title-hover::after{
-    content:'';
-    background-color:var(--main-color);
-    position: absolute;
-    width:40vh;
-    height: 10px;
-    bottom:0;
-    left :0;
-    transform: translate(-15%);
-    transition : transform ease-out 200ms;
-    opacity: 0;
-}
-.nav-title-hover:hover::after{
-    opacity: 1;
-    transform:translate(0%);
-}
 
 .custom-toggler .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
@@ -96,22 +75,6 @@
 }
 
 
-.searchbar:hover > .search_input{
-    padding: 0 2vh;
-    width: 90vh;
-    caret-color:white;
-    transition: width 0.4s linear;
-}
-
-.searchbar:hover > .search_icon{
-    background: white;
-    color: #fcaf64;
-    text-decoration: none;
-}
-
-.searchbar > a:hover{
-    color: red!important;
-}
 
 .search_icon{
     height: 8vh;
