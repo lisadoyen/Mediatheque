@@ -58,18 +58,6 @@
 }
 
 
-.searchbar:hover > .search_input{
-    padding: 0 1vh;
-    width: 35vh;
-    caret-color:var(--second-color);
-}
-
-
-.searchbar:hover> .search_icon{
-    background: white;
-    color: var(--second-color);
-}
-
 .search_icon{
     height: 4vh;
     width: 4vh;

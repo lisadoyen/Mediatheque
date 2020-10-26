@@ -96,9 +96,8 @@
     transform:translate(0%);
 }
 .searchbar:hover > .search_input{
-    cursor: pointer;
     padding: 0 2vh;
-    width: 90vh;
+    width: 90rem;
     caret-color:white;
     transition: width 0.4s linear;
 }

@@ -358,3 +358,7 @@ e239c0,127.0.0.1,GET,https://127.0.0.1:8000/assets/css/bootstrap.css.map,1603746
 00f5a1,127.0.0.1,GET,https://127.0.0.1:8000/adherent,1603746448,,200
 d1c827,127.0.0.1,GET,https://127.0.0.1:8000/assets/css/bootstrap.css.map,1603746449,767b6d,404
 767b6d,127.0.0.1,GET,https://127.0.0.1:8000/assets/css/bootstrap.css.map,1603746449,,404
+39e142,127.0.0.1,GET,https://127.0.0.1:8000/adherent,1603746637,,200
+44e393,127.0.0.1,GET,https://127.0.0.1:8000/adherent,1603747193,,200
+223e4c,127.0.0.1,GET,https://127.0.0.1:8000/assets/css/bootstrap.css.map,1603747199,298b2e,404
+298b2e,127.0.0.1,GET,https://127.0.0.1:8000/assets/css/bootstrap.css.map,1603747199,,404
