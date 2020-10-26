@@ -74,7 +74,45 @@
     font-size: 6vh!important;
 }
 
+.nav-title-hover:hover{
+    color: #ffff!important;
+    transition: letter-spacing linear 200ms;
+    letter-spacing: 1.3vh!important;
+}
+.nav-title-hover::after{
+    content:'';
+    background-color:var(--main-color);
+    position: absolute;
+    width:40vh;
+    height: 10px;
+    bottom:0;
+    left :0;
+    transform: translate(-15%);
+    transition : transform ease-out 200ms;
+    opacity: 0;
+}
+.nav-title-hover:hover::after{
+    opacity: 1;
+    transform:translate(0%);
+}
+.searchbar:hover > .search_input{
+    cursor: pointer;
+    padding: 0 2vh;
+    width: 90vh;
+    caret-color:white;
+    transition: width 0.4s linear;
+}
 
+.searchbar:hover > .search_icon{
+    cursor: pointer;
+    background: white;
+    color: #fcaf64;
+    text-decoration: none;
+}
+
+.searchbar > a:hover{
+    color: red!important;
+}
 
 .search_icon{
     height: 8vh;

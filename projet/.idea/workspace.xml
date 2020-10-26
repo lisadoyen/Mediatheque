@@ -20,16 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9321de73-1233-449e-b727-de0097a57c1d" name="Default Changelist" comment="Modification du design de connexion et ajout du design développé plus tot pour adhérent">
-      <change afterPath="$PROJECT_DIR$/public/assets/css/hover.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/var/cache/dev/profiler/17/b0/57b017" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/var/cache/dev/profiler/52/9f/639f52" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/var/cache/dev/profiler/7d/16/6f167d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/var/cache/dev/profiler/b0/db/d6dbb0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/var/cache/dev/profiler/f0/7a/5f7af0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/hover.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/css/nav-search.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/nav-search.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/css/phone.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/phone.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/adherent/_nav.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adherent/_nav.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/82/820aa09f5aa42f407895fe61d065b049b9f3e80d74ca0bb7ccf4e5be217451cc.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/82/820aa09f5aa42f407895fe61d065b049b9f3e80d74ca0bb7ccf4e5be217451cc.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/log/dev.log" beforeDir="false" afterPath="$PROJECT_DIR$/var/log/dev.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -197,7 +194,7 @@
       <workItem from="1603624429335" duration="1282000" />
       <workItem from="1603625985290" duration="6669000" />
       <workItem from="1603661395120" duration="6568000" />
-      <workItem from="1603737086529" duration="2952000" />
+      <workItem from="1603737086529" duration="4581000" />
     </task>
     <servers />
   </component>
