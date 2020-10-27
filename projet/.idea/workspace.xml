@@ -1,29 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="9321de73-1233-449e-b727-de0097a57c1d" name="Default Changelist" comment="Modification du design de connexion et ajout du design développé plus tot pour adhérent">
-      <change afterPath="$PROJECT_DIR$/var/cache/dev/profiler/42/e1/39e142" afterDir="false" />
+    <list default="true" id="524abd2e-e099-4f32-a2d5-23e749efccfd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/projet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projet.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/symfony2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/css/nav-search.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/nav-search.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/css/phone.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/phone.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/App_KernelDevDebugContainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/App_KernelDevDebugContainer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/0/1/rUbkxgEQwR0XhV3bfiLg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/0/3/mTtMp5RrFpesikbKjxIw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/3/L/PmLgSDtmSi5CLJHYmQEg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/4/4/efstjBrn3nKnq5vfYKdQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/4/Q/KPXYdqeRzua0EOrNDqFA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/7/4/I3XWLlUX0hgEcZpZHf-w" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/7/E/JAVvxMVokZGBZ6Ddzp3A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/7/S/KEv7tiejRT6A4OhnRV2A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/9/B/b4-Ha88EMmb+KMXyb1lQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/9/C/CaI13IcPZyTFdag+2s4A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/9/G/Vb9rG-OHtwgIsNtKQ3SQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/A/A/l4InR3-dOmYY8i7x-LGA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/A/S/iESPuFsTo905jDdxK3WQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/B/-/haRd17jklj7vHK4vnjmQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/B/G/GDm1XvMjw1954wdpgwBg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/B/L/dCGFUr6WBpjcligYtryw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/B/S/y94VeazHlW9hdPjn-BgA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/C/D/1CMKw3NZ6bIAcmWEwXdQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/D/I/nSmBIBnNIkH3mGsuVeJA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/D/K/UJ1mfHRrJB61+JvVSKLA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/D/V/oklPeV0+bbTnTyCTdtDw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/D/W/yTvHASd9DbzX8Kbe83Bw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/E/I/3DJueZTkoMUTYyLMPhyw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/E/U/F5Y97mv1dODtTjRdEFag" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/E/U/F5Y97mv1dODtTjRdEFag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/F/A/ReLNw-ls+LpQaqFK0r+Q" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/F/C/qtFS6PcyBmQjZ0J4XCGw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/F/J/cNWMP5qgAmFnPKTDQYuQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/F/P/Bf-UiPh1VBF5OIGb7qSg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/G/0/iHlH2NQFu2+eciTE0qvg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/G/9/9PIzhU1YEhQT6bjQw6Wg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/H/H/oT0JGlZMuYHDzhWQRnag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/I/C/AooVMnihfMDXwMxFAp2Q" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/I/H/jlZwGyf2KIOe45KtnYig" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/I/H/jlZwGyf2KIOe45KtnYig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/I/N/r7ZcprxTODtFauZSTf8g" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/I/Z/2ziJWGpg3rLC70czhiIg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/J/D/SkTVd+BDclxVYoMmEK1w" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/J/P/SABWKXw0vZ8E6d5-Wkiw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/K/C/PUL2b02QkePBwiUAfmFA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/K/E/KBx3nYJZcBgCuF8j5dVg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/K/R/XJPvn8NQc3rOnh24BAGA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/K/S/qQX8TowCtQ7LB1bwNrBw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/L/5/Hpc7hklRFpl1i1bLuE6Q" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/L/A/Yb93OXS-wRDYydzinX9A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/L/B/-AXI9VQlKzgODPyY3+MA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/L/E/lbcGwZJrqPf6JqX9rTkw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/L/O/YKTtBgDMW6P71R2XClig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/L/O/eQB+UkqV4Jv9fqSUbwvA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/L/W/bw+XT+Vs0Et5hIULVV-w" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/L/Y/IwmqGHi2b1fy7n6N-dlg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/M/E/Y7JRmPM9hhe5CFfBQHow" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/M/T/FJXtn6FpNn1y-xLD7gbg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/N/N/xg2YeMP5JzC3-i9DCgdA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/N/Z/pI+8icK7XJU53xXO-d7A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/O/7/Dx7r9JlImXb43X8Zbarg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/O/R/iYEU2L7pyl0yNuCguQ7A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/O/S/bzw3Feb0iAddPXueBuSA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/P/C/fyh435ccbUNVwTXU-DJw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/P/L/BEWjj-PN2ptxWpJQrCzw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/Q/B/xBw5NSBSErkze1-8oo0A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/Q/D/V8YnrcVsRu9kpLJtv+bQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/Q/O/2aFhU9anQhjPVVLOTEIg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/Q/W/LULYADYuy5DdkqKf2Rxw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/T/3/wPBTBrRq1y2MfAdB0Utg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/T/F/1uCLH0esNzbIY4MDnjFQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/T/H/W78D+XMA7pT5OydQGbLw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/T/K/e-bqu8kM4cDHQpJOeJdQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/T/M/IvbrS6okUU95NiTEn8-Q" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/T/T/HG6jwC0cILqC8t1OGl3g" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/T/T/p5CrwWHcLQwWFvmzne1Q" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/U/8/nbHc4NsiN3Yt9q3C1lQA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/U/R/e+yngEjCJ42rBR-5sO0w" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/U/T/K9ptn+cjf6+3cd1ufGig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/V/9/PTZJm7vJXxGPSM3lrHXQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/V/B/zT42h-Mv10hMmpqw1zQg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/V/C/pzdwdXajJ77E7ptef1yA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/V/I/1GS0Z5eN5jWHiDGkPKEQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/V/K/Hsv8+ga5rt7Y7v0P7VSQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/V/M/dx-DhZ1B2lS0e3l6trsQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/W/J/R9wtZh40NX8Tf8geAVBA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/X/E/Q9LAnxGvGJuJq+1LqP6w" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/X/L/jXrENiQOBbZDHL9DbUDw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/X/M/m4intxo+gpgc925Xcnpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/Y/B/STCCz6UwPlOGelnHS8EA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/pools/KDAHCPI2f+/Y/L/8s5sFJrxkVnR1s1fEjqA" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/log/dev.log" beforeDir="false" afterPath="$PROJECT_DIR$/var/log/dev.log" afterDir="false" />
     </list>
@@ -32,7 +103,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -43,196 +114,150 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/symfony/notifier" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
-      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
-      <path value="$PROJECT_DIR$/vendor/webimpress/safe-writer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/doctrine-bridge" />
-      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
-      <path value="$PROJECT_DIR$/vendor/psr/link" />
-      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/psr/cache" />
-      <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
-      <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/web-link" />
-      <path value="$PROJECT_DIR$/vendor/symfony/debug-bundle" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
-      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
-      <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/apache-pack" />
-      <path value="$PROJECT_DIR$/vendor/symfony/uid" />
-      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-uuid" />
-      <path value="$PROJECT_DIR$/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/notifier" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/config" />
-      <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/migrations" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/cache" />
-      <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
-      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
-      <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
       <path value="$PROJECT_DIR$/vendor/symfony/intl" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/framework-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/vendor/symfony/flex" />
+      <path value="$PROJECT_DIR$/vendor/symfony/form" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/expression-language" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dotenv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/vendor/symfony/apache-pack" />
+      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
       <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/link" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/collections" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
-      <path value="$PROJECT_DIR$/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
-      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/serializer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/reflection" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-guard" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-csrf" />
       <path value="$PROJECT_DIR$/vendor/ocramius/proxy-manager" />
-      <path value="$PROJECT_DIR$/vendor/symfony/framework-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-zendframework-bridge" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-eventmanager" />
-      <path value="$PROJECT_DIR$/vendor/symfony/form" />
-      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
-      <path value="$PROJECT_DIR$/vendor/symfony/flex" />
-      <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
-      <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
-      <path value="$PROJECT_DIR$/vendor/symfony/process" />
-      <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/vendor/twig/twig" />
-      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
-      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
-      <path value="$PROJECT_DIR$/vendor/symfony/expression-language" />
-      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
-      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
-      <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
-      <path value="$PROJECT_DIR$/vendor/symfony/dotenv" />
-      <path value="$PROJECT_DIR$/vendor/easycorp/easyadmin-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
-      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-eventmanager" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-components" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/easycorp/easyadmin-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/reflection" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/webimpress/safe-writer" />
+      <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/web-link" />
+      <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
+      <path value="$PROJECT_DIR$/vendor/symfony/serializer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-csrf" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-guard" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
     </include_path>
   </component>
-  <component name="ProjectId" id="1j18HTV3gF1264MvSslLqntjnwa" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="1jQv3KWj41FkBTZ8dY0YfkY8ob0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
-    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9321de73-1233-449e-b727-de0097a57c1d" name="Default Changelist" comment="" />
-      <created>1602960151315</created>
+      <changelist id="524abd2e-e099-4f32-a2d5-23e749efccfd" name="Default Changelist" comment="" />
+      <created>1603748929750</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1602960151315</updated>
-      <workItem from="1602960154315" duration="1461000" />
-      <workItem from="1602964176980" duration="9746000" />
-      <workItem from="1603018461285" duration="1198000" />
-      <workItem from="1603194087112" duration="366000" />
-      <workItem from="1603624232671" duration="173000" />
-      <workItem from="1603624429335" duration="1282000" />
-      <workItem from="1603625985290" duration="6669000" />
-      <workItem from="1603661395120" duration="6568000" />
-      <workItem from="1603737086529" duration="5500000" />
+      <updated>1603748929750</updated>
+      <workItem from="1603748933963" duration="2081000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Modification du design de connexion et ajout du design développé plus tot pour adhérent" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modification du design de connexion et ajout du design développé plus tot pour adhérent" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="1030" y="185" width="812" height="719" key="#Plugins" timestamp="1603624500419">
-      <screen x="0" y="28" width="1920" height="1027" />
+    <state x="2576" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1603748938509">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="1030" y="185" width="812" height="719" key="#Plugins/0.28.1920.1027@0.28.1920.1027" timestamp="1603624500419" />
-    <state x="2626" y="311" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602974987879">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2626" y="311" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1035/1920.0.1920.1080@1920.0.1920.1080" timestamp="1602974987879" />
-    <state x="2016" y="96" width="1728" height="849" key="DiffContextDialog" timestamp="1602975355277">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2016" y="96" width="1728" height="849" key="DiffContextDialog/0.0.1920.1035/1920.0.1920.1080@1920.0.1920.1080" timestamp="1602975355277" />
-    <state x="898" y="176" width="1022" height="737" key="SettingsEditor" timestamp="1603626000233">
-      <screen x="0" y="28" width="1920" height="1027" />
-    </state>
-    <state x="898" y="176" width="1022" height="737" key="SettingsEditor/0.28.1920.1027@0.28.1920.1027" timestamp="1603626000233" />
+    <state x="2576" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1603748938509" />
   </component>
 </project>

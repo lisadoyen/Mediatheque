@@ -95,11 +95,13 @@
     opacity: 1;
     transform:translate(0%);
 }
-.searchbar:hover > .search_input{
-    padding: 0 2vh;
-    width: 90rem;
-    caret-color:white;
-    transition: width 0.4s linear;
+@media (hover:hover){
+    .searchbar:hover > .search_input{
+        padding: 0 2vh;
+        width: 90vh;
+        caret-color:white;
+        transition: width 0.4s linear;
+    }
 }
 
 .searchbar:hover > .search_icon{
