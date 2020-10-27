@@ -41,12 +41,28 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
 
         // line 1
         echo "<nav class=\"navbar navbar-dark\">
-    <a class=\"navbar-brand titre letter-spacing\" href=\"#\">MEDIATHEQUE</a>
-    ";
+    <a href=\"";
+        // line 2
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("index");
+        echo "\" class=\"logo\">
+        <img src=\"";
         // line 3
-        if ((0 !== twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 3, $this->source); })()), "request", [], "any", false, false, false, 3), "pathInfo", [], "any", false, false, false, 3), "/adherent"))) {
-            // line 4
-            echo "        <form id=\"search\" action=\"POST\">
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/white-logo.png"), "html", null, true);
+        echo "\" style=\"height: 12vh;\" alt=\"logo\">
+        <img src=\"";
+        // line 4
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/logo.png"), "html", null, true);
+        echo "\" style=\"height: 12vh;\" alt=\"logo\" class=\"img-top\">
+    </a>
+    <a class=\"navbar-brand titre letter-spacing content-desktop\" href=\"";
+        // line 6
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("index");
+        echo "\">MEDIATECA</a>
+    ";
+        // line 7
+        if ((0 !== twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 7, $this->source); })()), "request", [], "any", false, false, false, 7), "pathInfo", [], "any", false, false, false, 7), "/adherent"))) {
+            // line 8
+            echo "        <form id=\"search\" action=\"POST\" class=\"content-desktop\">
             <div class=\"searchbar\">
                 <input class=\"search_input\" type=\"text\" name=\"\" placeholder=\"Search...\">
                 <a href=\"#\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\"><i class=\"fas fa-search\"></i></a>
@@ -54,7 +70,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
         </form>
     ";
         }
-        // line 11
+        // line 15
         echo "    <a class=\"navbar-brand ml-auto profil content-desktop letter-spacing\" href=\"";
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("security_logout");
         echo "\">DECONNEXION</a>
@@ -76,7 +92,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
                     </a>
                     <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">
                         <a class=\"dropdown-item\" href=\"";
-        // line 29
+        // line 33
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 28]);
         echo "\">Revue</a>
                         <a class=\"dropdown-item\" href=\"#\">Action</a>
@@ -128,7 +144,7 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
 <nav class=\"navbar navbar-light nav-space content-desktop\">
     <div class=\"dropdown\" style=\"margin-left: 30vh;\">
         <a class=\"navbar-brand nav-cat letter-spacing dropdown nav-title-hover\" href=\"";
-        // line 78
+        // line 82
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show");
         echo "\">LIVRE</a>
         <div class=\"dropdown-content\" id=\"a\">
@@ -137,81 +153,81 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
                     <div class=\"col-sm-6\">
                         <ul class=\"multi-column-dropdown\">
                             <li><a href=\"";
-        // line 84
+        // line 88
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 28]);
         echo "\">Revue</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
-        // line 86
+        // line 90
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 30]);
         echo "\">Enfant</a></li>
                                 <li><a href=\"";
-        // line 87
+        // line 91
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 29]);
         echo "\">Adulte</a></li>
                             </div>
                             <li><a href=\"";
-        // line 89
+        // line 93
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 34]);
         echo "\">Science fiction</a></li>
                             <li><a href=\"";
-        // line 90
+        // line 94
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 11]);
         echo "\">Biographie</a></li>
                             <li><a href=\"";
-        // line 91
+        // line 95
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 31]);
         echo "\">Roman</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
-        // line 93
+        // line 97
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 32]);
         echo "\">Enfant</a></li>
                                 <li><a href=\"";
-        // line 94
+        // line 98
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 33]);
         echo "\">Policier</a></li>
                             </div>
                             <li><a href=\"";
-        // line 96
+        // line 100
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 18]);
         echo "\">Famille</a></li>
                             <li><a href=\"";
-        // line 97
+        // line 101
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 23]);
         echo "\">Jeune adulte</a></li>
                             <li><a href=\"";
-        // line 98
+        // line 102
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 6]);
         echo "\">Adolescent</a></li>
                             <li><a href=\"";
-        // line 99
+        // line 103
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 16]);
         echo "\">Document</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
-        // line 101
+        // line 105
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 17]);
         echo "\">Document enfant</a></li>
                                 <div class=\"sub-3-menu\">
                                     <li><a href=\"";
-        // line 103
+        // line 107
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 2]);
         echo "\">10/13 ans</a></li>
                                     <li><a href=\"";
-        // line 104
+        // line 108
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 5]);
         echo "\">8/10 ans</a></li>
                                     <li><a href=\"";
-        // line 105
+        // line 109
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 4]);
         echo "\">6/8 ans</a></li>
                                     <li><a href=\"";
-        // line 106
+        // line 110
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 3]);
         echo "\">3/6 ans</a></li>
                                     <li><a href=\"";
-        // line 107
+        // line 111
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 1]);
         echo "\">0/3 ans</a></li>
                                 </div>
@@ -221,75 +237,75 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
                     <div class=\"col-sm-6\">
                         <ul class=\"multi-column-dropdown\">
                             <li><a href=\"";
-        // line 114
+        // line 118
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 8]);
         echo "\">Bande Dessinée</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
-        // line 116
+        // line 120
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 10]);
         echo "\">Enfant</a></li>
                                 <li><a href=\"";
-        // line 117
+        // line 121
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 9]);
         echo "\">Adulte</a></li>
                             </div>
                             <li><a href=\"";
-        // line 119
+        // line 123
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 26]);
         echo "\" >Maison jardin</a></li>
                             <li><a href=\"";
-        // line 120
+        // line 124
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 24]);
         echo "\">Loisir manuel</a></li>
                             <div class=\"sub-2-menu\">
                                 <li><a href=\"";
-        // line 122
+        // line 126
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 25]);
         echo "\">Adulte</a></li>
                             </div>
                             <li><a href=\"";
-        // line 124
+        // line 128
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 36]);
         echo "\">Sport</a></li>
                             <li><a href=\"";
-        // line 125
+        // line 129
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 20]);
         echo "\">Géographie</a></li>
                             <li><a href=\"";
-        // line 126
+        // line 130
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 21]);
         echo "\">Histoire</a></li>
                             <li><a href=\"";
-        // line 127
+        // line 131
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 35]);
         echo "\">Société</a></li>
                             <li><a href=\"";
-        // line 128
+        // line 132
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 7]);
         echo "\">Art</a></li>
                             <li><a href=\"";
-        // line 129
+        // line 133
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 19]);
         echo "\">Fond breton</a></li>
                             <li><a href=\"";
-        // line 130
+        // line 134
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 14]);
         echo "\">Cours préparatoire</a></li>
                             <li><a href=\"";
-        // line 131
+        // line 135
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 13]);
         echo "\">Classique</a></li>
                             <li><a href=\"";
-        // line 132
+        // line 136
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 12]);
         echo "\">Cassette</a></li>
                             <li><a href=\"";
-        // line 133
+        // line 137
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 15]);
         echo "\">Divertissement</a></li>
                             <li><a href=\"";
-        // line 134
+        // line 138
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("adherent_bibliotheque_show_genre", ["id" => 22]);
         echo "\">Autres</a></li>
                         </ul>
@@ -400,15 +416,19 @@ class __TwigTemplate_ed7df4c7c4a176f1ac6105242ac1bfa2564161694d7b072e58f5717e2dc
 
     public function getDebugInfo()
     {
-        return array (  293 => 134,  289 => 133,  285 => 132,  281 => 131,  277 => 130,  273 => 129,  269 => 128,  265 => 127,  261 => 126,  257 => 125,  253 => 124,  248 => 122,  243 => 120,  239 => 119,  234 => 117,  230 => 116,  225 => 114,  215 => 107,  211 => 106,  207 => 105,  203 => 104,  199 => 103,  194 => 101,  189 => 99,  185 => 98,  181 => 97,  177 => 96,  172 => 94,  168 => 93,  163 => 91,  159 => 90,  155 => 89,  150 => 87,  146 => 86,  141 => 84,  132 => 78,  80 => 29,  58 => 11,  49 => 4,  47 => 3,  43 => 1,);
+        return array (  309 => 138,  305 => 137,  301 => 136,  297 => 135,  293 => 134,  289 => 133,  285 => 132,  281 => 131,  277 => 130,  273 => 129,  269 => 128,  264 => 126,  259 => 124,  255 => 123,  250 => 121,  246 => 120,  241 => 118,  231 => 111,  227 => 110,  223 => 109,  219 => 108,  215 => 107,  210 => 105,  205 => 103,  201 => 102,  197 => 101,  193 => 100,  188 => 98,  184 => 97,  179 => 95,  175 => 94,  171 => 93,  166 => 91,  162 => 90,  157 => 88,  148 => 82,  96 => 33,  74 => 15,  65 => 8,  63 => 7,  59 => 6,  54 => 4,  50 => 3,  46 => 2,  43 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("<nav class=\"navbar navbar-dark\">
-    <a class=\"navbar-brand titre letter-spacing\" href=\"#\">MEDIATHEQUE</a>
+    <a href=\"{{ path(\"index\") }}\" class=\"logo\">
+        <img src=\"{{asset('assets/images/white-logo.png')}}\" style=\"height: 12vh;\" alt=\"logo\">
+        <img src=\"{{asset('assets/images/logo.png')}}\" style=\"height: 12vh;\" alt=\"logo\" class=\"img-top\">
+    </a>
+    <a class=\"navbar-brand titre letter-spacing content-desktop\" href=\"{{ path(\"index\") }}\">MEDIATECA</a>
     {% if app.request.pathInfo != '/adherent' %}
-        <form id=\"search\" action=\"POST\">
+        <form id=\"search\" action=\"POST\" class=\"content-desktop\">
             <div class=\"searchbar\">
                 <input class=\"search_input\" type=\"text\" name=\"\" placeholder=\"Search...\">
                 <a href=\"#\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\"><i class=\"fas fa-search\"></i></a>

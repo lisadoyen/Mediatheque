@@ -71,7 +71,8 @@ class __TwigTemplate_6d466167c1edb690ee255a61a017df46dceefa5a7603409684cd23fa7c5
             <a href=\"#\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\"><i class=\"fas fa-search\"></i></a>
         </div>
     </form>
-    <div class=\"\">
+    <img src=\"https://upload.wikimedia.org/wikipedia/commons/5/50/Closed_Book_Icon.svg\" alt=\"\" width=\"200\" height=\"200\">
+    <div class=\"container-fluid\">
         <h1 style=\"text-align: center\">Récapitulatifs des livres</h1><br>
         <br>
         <div>
@@ -104,107 +105,107 @@ class __TwigTemplate_6d466167c1edb690ee255a61a017df46dceefa5a7603409684cd23fa7c5
                 </thead>
                 <tbody>
                 ";
-        // line 41
-        if ( !twig_test_empty((isset($context["livres"]) || array_key_exists("livres", $context) ? $context["livres"] : (function () { throw new RuntimeError('Variable "livres" does not exist.', 41, $this->source); })()))) {
-            // line 42
+        // line 42
+        if ( !twig_test_empty((isset($context["livres"]) || array_key_exists("livres", $context) ? $context["livres"] : (function () { throw new RuntimeError('Variable "livres" does not exist.', 42, $this->source); })()))) {
+            // line 43
             echo "                    ";
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable((isset($context["livres"]) || array_key_exists("livres", $context) ? $context["livres"] : (function () { throw new RuntimeError('Variable "livres" does not exist.', 42, $this->source); })()));
+            $context['_seq'] = twig_ensure_traversable((isset($context["livres"]) || array_key_exists("livres", $context) ? $context["livres"] : (function () { throw new RuntimeError('Variable "livres" does not exist.', 43, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["livre"]) {
-                // line 43
+                // line 44
                 echo "                        <tr>
                             <td>";
-                // line 44
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "codeLivre", [], "any", false, false, false, 44), "html", null, true);
-                echo "</td>
-                            <td>";
                 // line 45
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "codeISBN", [], "any", false, false, false, 45), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "codeLivre", [], "any", false, false, false, 45), "html", null, true);
                 echo "</td>
                             <td>";
                 // line 46
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "titreDesignation", [], "any", false, false, false, 46), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "codeISBN", [], "any", false, false, false, 46), "html", null, true);
                 echo "</td>
                             <td>";
                 // line 47
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "descriptionArticle", [], "any", false, false, false, 47), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "titreDesignation", [], "any", false, false, false, 47), "html", null, true);
                 echo "</td>
                             <td>";
                 // line 48
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "photo", [], "any", false, false, false, 48), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "descriptionArticle", [], "any", false, false, false, 48), "html", null, true);
                 echo "</td>
                             <td>";
                 // line 49
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "format", [], "any", false, false, false, 49), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "photo", [], "any", false, false, false, 49), "html", null, true);
                 echo "</td>
                             <td>";
                 // line 50
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "typologie", [], "any", false, false, false, 50), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "format", [], "any", false, false, false, 50), "html", null, true);
                 echo "</td>
-                            <td>
-                                ";
-                // line 52
-                if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, $context["livre"], "disponible", [], "any", false, false, false, 52), 0))) {
-                    // line 53
-                    echo "                                    <span style=\"color:red\">Non</span>
-                                ";
-                } else {
-                    // line 55
-                    echo "                                    <span style=\"color:green\">Oui</span>
-                                ";
-                }
-                // line 57
-                echo "                            </td>
-                            <td>
-                                ";
-                // line 59
-                if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, $context["livre"], "inactif", [], "any", false, false, false, 59), 0))) {
-                    // line 60
-                    echo "                                    <span style=\"color:red\">Non</span>
-                                ";
-                } else {
-                    // line 62
-                    echo "                                    <span style=\"color:green\">Oui</span>
-                                ";
-                }
-                // line 64
-                echo "                            </td>
                             <td>";
-                // line 65
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "nombreDeSorties", [], "any", false, false, false, 65), "html", null, true);
+                // line 51
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "typologie", [], "any", false, false, false, 51), "html", null, true);
                 echo "</td>
+                            <td>
+                                ";
+                // line 53
+                if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, $context["livre"], "disponible", [], "any", false, false, false, 53), 0))) {
+                    // line 54
+                    echo "                                    <span style=\"color:red\">Non</span>
+                                ";
+                } else {
+                    // line 56
+                    echo "                                    <span style=\"color:green\">Oui</span>
+                                ";
+                }
+                // line 58
+                echo "                            </td>
+                            <td>
+                                ";
+                // line 60
+                if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, $context["livre"], "inactif", [], "any", false, false, false, 60), 0))) {
+                    // line 61
+                    echo "                                    <span style=\"color:red\">Non</span>
+                                ";
+                } else {
+                    // line 63
+                    echo "                                    <span style=\"color:green\">Oui</span>
+                                ";
+                }
+                // line 65
+                echo "                            </td>
                             <td>";
                 // line 66
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "Lien", [], "any", false, false, false, 66), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "nombreDeSorties", [], "any", false, false, false, 66), "html", null, true);
+                echo "</td>
+                            <td>";
+                // line 67
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "Lien", [], "any", false, false, false, 67), "html", null, true);
                 echo "</td>
                             <!--
                             <td>";
-                // line 68
-                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "dateDeRetrait", [], "any", false, false, false, 68), "d/m/Y"), "html", null, true);
-                echo "</td>
-                            <td>";
                 // line 69
-                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "dateAchat", [], "any", false, false, false, 69), "d/m/Y"), "html", null, true);
+                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "dateDeRetrait", [], "any", false, false, false, 69), "d/m/Y"), "html", null, true);
                 echo "</td>
                             <td>";
                 // line 70
-                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "dateCreation", [], "any", false, false, false, 70), "d/m/Y"), "html", null, true);
+                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "dateAchat", [], "any", false, false, false, 70), "d/m/Y"), "html", null, true);
                 echo "</td>
                             <td>";
                 // line 71
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["livre"], "fkIdAuteur", [], "any", false, false, false, 71), "nom", [], "any", false, false, false, 71), "html", null, true);
+                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["livre"], "dateCreation", [], "any", false, false, false, 71), "d/m/Y"), "html", null, true);
                 echo "</td>
                             <td>";
                 // line 72
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["livre"], "fkIdAuteur", [], "any", false, false, false, 72), "prenom", [], "any", false, false, false, 72), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["livre"], "fkIdAuteur", [], "any", false, false, false, 72), "nom", [], "any", false, false, false, 72), "html", null, true);
                 echo "</td>
                             <td>";
                 // line 73
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["livre"], "fkIdGenre", [], "any", false, false, false, 73), "libelleGenre", [], "any", false, false, false, 73), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["livre"], "fkIdAuteur", [], "any", false, false, false, 73), "prenom", [], "any", false, false, false, 73), "html", null, true);
+                echo "</td>
+                            <td>";
+                // line 74
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["livre"], "fkIdGenre", [], "any", false, false, false, 74), "libelleGenre", [], "any", false, false, false, 74), "html", null, true);
                 echo "</td>
                             <td>
                                 <a href=\"";
-                // line 75
+                // line 76
                 echo "\" class=\"btn btn-primary\">Réserver</a>
                             </td>
                             -->
@@ -214,20 +215,20 @@ class __TwigTemplate_6d466167c1edb690ee255a61a017df46dceefa5a7603409684cd23fa7c5
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['livre'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 80
+            // line 81
             echo "                ";
         } else {
-            // line 81
+            // line 82
             echo "                    <tr class=\"table-warning\"><td>Pas de livre</td></tr>
                 ";
         }
-        // line 83
+        // line 84
         echo "                </tbody>
             </table>
             <div class=\"pagination\">
                  ";
-        // line 86
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["livres"]) || array_key_exists("livres", $context) ? $context["livres"] : (function () { throw new RuntimeError('Variable "livres" does not exist.', 86, $this->source); })()));
+        // line 87
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["livres"]) || array_key_exists("livres", $context) ? $context["livres"] : (function () { throw new RuntimeError('Variable "livres" does not exist.', 87, $this->source); })()));
         echo "
             </div>
         </div>
@@ -253,7 +254,7 @@ class __TwigTemplate_6d466167c1edb690ee255a61a017df46dceefa5a7603409684cd23fa7c5
 
     public function getDebugInfo()
     {
-        return array (  230 => 86,  225 => 83,  221 => 81,  218 => 80,  208 => 75,  203 => 73,  199 => 72,  195 => 71,  191 => 70,  187 => 69,  183 => 68,  178 => 66,  174 => 65,  171 => 64,  167 => 62,  163 => 60,  161 => 59,  157 => 57,  153 => 55,  149 => 53,  147 => 52,  142 => 50,  138 => 49,  134 => 48,  130 => 47,  126 => 46,  122 => 45,  118 => 44,  115 => 43,  110 => 42,  108 => 41,  68 => 3,  58 => 2,  35 => 1,);
+        return array (  231 => 87,  226 => 84,  222 => 82,  219 => 81,  209 => 76,  204 => 74,  200 => 73,  196 => 72,  192 => 71,  188 => 70,  184 => 69,  179 => 67,  175 => 66,  172 => 65,  168 => 63,  164 => 61,  162 => 60,  158 => 58,  154 => 56,  150 => 54,  148 => 53,  143 => 51,  139 => 50,  135 => 49,  131 => 48,  127 => 47,  123 => 46,  119 => 45,  116 => 44,  111 => 43,  109 => 42,  68 => 3,  58 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -266,7 +267,8 @@ class __TwigTemplate_6d466167c1edb690ee255a61a017df46dceefa5a7603409684cd23fa7c5
             <a href=\"#\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\"><i class=\"fas fa-search\"></i></a>
         </div>
     </form>
-    <div class=\"\">
+    <img src=\"https://upload.wikimedia.org/wikipedia/commons/5/50/Closed_Book_Icon.svg\" alt=\"\" width=\"200\" height=\"200\">
+    <div class=\"container-fluid\">
         <h1 style=\"text-align: center\">Récapitulatifs des livres</h1><br>
         <br>
         <div>

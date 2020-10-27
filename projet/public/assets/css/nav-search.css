@@ -22,9 +22,27 @@
     min-height:0vh!important;
     padding: 0 0 !important;
 }
+.logo {
+    height: 12vh;
+    position: relative;
+    display: inline-block;
+}
+.logo .img-top {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+.logo:hover .img-top {
+    display: inline;
+}
 .titre{
     font-size: 4vh;
     padding-left: 5vh !important;
+}
+.navbar-brand:hover{
+    color: var(--second-color)!important;
 }
 .nav-cat{
     font-size: 3vh;
@@ -95,11 +113,13 @@
     opacity: 1;
     transform:translate(0%);
 }
-.searchbar:hover > .search_input{
-    padding: 0 2vh;
-    width: 90rem;
-    caret-color:white;
-    transition: width 0.4s linear;
+@media (hover:hover){
+    .searchbar:hover > .search_input{
+        padding: 0 2vh;
+        width: 90vh;
+        caret-color:white;
+        transition: width 0.4s linear;
+    }
 }
 
 .searchbar:hover > .search_icon{

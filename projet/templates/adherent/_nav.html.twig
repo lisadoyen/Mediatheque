@@ -1,5 +1,9 @@
 <nav class="navbar navbar-dark">
-    <a class="navbar-brand titre letter-spacing" href="#">MEDIATHEQUE</a>
+    <a href="{{ path("index") }}" class="logo">
+        <img src="{{asset('assets/images/white-logo.png')}}" style="height: 12vh;" alt="logo">
+        <img src="{{asset('assets/images/logo.png')}}" style="height: 12vh;" alt="logo" class="img-top">
+    </a>
+    <a class="navbar-brand titre letter-spacing content-desktop" href="{{ path("index") }}">MEDIATECA</a>
     {% if app.request.pathInfo != '/adherent' %}
         <form id="search" action="POST" class="content-desktop">
             <div class="searchbar">
