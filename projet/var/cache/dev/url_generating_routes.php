@@ -23,6 +23,8 @@ return [
     'admin_user' => [[], ['_controller' => 'App\\Controller\\Admin\\UserController::accueilIndex'], [], [['text', '/admin/user']], [], []],
     'benevole_accueil' => [[], ['_controller' => 'App\\Controller\\Benevole\\MediathequeControllerBenevole::accueilIndex'], [], [['text', '/benevole']], [], []],
     'benevole_bibliotheque_show' => [[], ['_controller' => 'App\\Controller\\Benevole\\MediathequeControllerBenevole::showBibliotheque'], [], [['text', '/benevole/bibliotheque/show']], [], []],
+    'benevole_bibliotheque_addLivre' => [[], ['_controller' => 'App\\Controller\\Benevole\\MediathequeControllerBenevole::addLivre'], [], [['text', '/benevole/bibliotheque/addLivre']], [], []],
+    'benevole_bibliotheque_addLivre_isbn' => [['isbn'], ['_controller' => 'App\\Controller\\Benevole\\MediathequeControllerBenevole::getDataFromIsbn'], [], [['variable', '/', '[^/]++', 'isbn', true], ['text', '/benevole/bibliotheque/addLivre']], [], []],
     'index' => [[], ['_controller' => 'App\\Controller\\IndexController::index'], [], [['text', '/']], [], []],
     'security_registration' => [[], ['_controller' => 'App\\Controller\\Security\\SecurityController::registration'], [], [['text', '/inscription']], [], []],
     'security_login' => [[], ['_controller' => 'App\\Controller\\Security\\SecurityController::login'], [], [['text', '/connexion']], [], []],

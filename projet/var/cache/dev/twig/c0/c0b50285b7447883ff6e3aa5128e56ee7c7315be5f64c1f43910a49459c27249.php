@@ -54,9 +54,12 @@ class __TwigTemplate_5dba4d27f9954bd564691677a90e594cb438f637d02c95bce067d11c077
                 <div class=\"dropdown-menu\" aria-labelledby=\"DropdownEvenements\">
                     <a class=\"dropdown-item\" href=\"";
         // line 13
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_mediatheque_show");
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_bibliotheque_show");
         echo "\">Afficher les livres</a>
-                    <a class=\"dropdown-item\" href=\"\">Ajouter un livre</a>
+                    <a class=\"dropdown-item\" href=\"";
+        // line 14
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("benevole_bibliotheque_addLivre");
+        echo "\">Ajouter un livre</a>
                 </div>
             </li>
             <li class=\"nav-item dropdown\">
@@ -141,7 +144,7 @@ class __TwigTemplate_5dba4d27f9954bd564691677a90e594cb438f637d02c95bce067d11c077
 
     public function getDebugInfo()
     {
-        return array (  119 => 54,  113 => 52,  107 => 50,  105 => 49,  101 => 48,  95 => 45,  91 => 44,  57 => 13,  43 => 1,);
+        return array (  122 => 54,  116 => 52,  110 => 50,  108 => 49,  104 => 48,  98 => 45,  94 => 44,  61 => 14,  57 => 13,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -158,8 +161,8 @@ class __TwigTemplate_5dba4d27f9954bd564691677a90e594cb438f637d02c95bce067d11c077
                     Biblothèque
                 </a>
                 <div class=\"dropdown-menu\" aria-labelledby=\"DropdownEvenements\">
-                    <a class=\"dropdown-item\" href=\"{{ path('admin_mediatheque_show') }}\">Afficher les livres</a>
-                    <a class=\"dropdown-item\" href=\"\">Ajouter un livre</a>
+                    <a class=\"dropdown-item\" href=\"{{ path('admin_bibliotheque_show') }}\">Afficher les livres</a>
+                    <a class=\"dropdown-item\" href=\"{{ path('benevole_bibliotheque_addLivre') }}\">Ajouter un livre</a>
                 </div>
             </li>
             <li class=\"nav-item dropdown\">
@@ -203,6 +206,6 @@ class __TwigTemplate_5dba4d27f9954bd564691677a90e594cb438f637d02c95bce067d11c077
     </div>
 </nav>
 
-", "admin/_nav.html.twig", "/var/www/html/ptut/projet2/projet/templates/admin/_nav.html.twig");
+", "admin/_nav.html.twig", "/home/aduhoux/IUT/S3/Projets/mediatheque-g/projet/templates/admin/_nav.html.twig");
     }
 }

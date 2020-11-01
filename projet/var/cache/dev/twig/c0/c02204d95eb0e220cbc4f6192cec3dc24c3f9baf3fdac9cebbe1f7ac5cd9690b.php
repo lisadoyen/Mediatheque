@@ -96,6 +96,6 @@ class __TwigTemplate_6db9931d4c1e4cc0967101deba6f4fcbe112deba66fd512311eee82ec05
 
 {% block body %}
     <h1>Médiathèque Thales Accueil admin</h1>
-{% endblock %}", "admin/accueil.html.twig", "/var/www/html/ptut/projet2/projet/templates/admin/accueil.html.twig");
+{% endblock %}", "admin/accueil.html.twig", "/home/aduhoux/IUT/S3/Projets/mediatheque-g/projet/templates/admin/accueil.html.twig");
     }
 }
