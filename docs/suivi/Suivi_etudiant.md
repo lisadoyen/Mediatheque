@@ -39,3 +39,48 @@
 étudiant 3 : modification de la base de données selon les besoins du client + intégration dans projet Symfony
 
 étudiant 4 : rapport + schéma ERD des tables après modification de la base de données
+
+
+
+**Semaine 3 (du 09/10 au 16/10) :**
+
+étudiant 1 : recherche sur la barre de recherche + préparation à la présentation
+
+étudiant 2 : maquette de la page connexion + préparation à la présentation
+
+étudiant 3 : mise ne place d'un script pour pouvoir importer facilement les nouvelles bases de données
+
+étudiant 4 : diaporama + préparation à la présentation
+
+
+**pas de rdv avec le client (car partiels)**
+
+
+**Semaine 4 (du 16/10 au 23/10) :**
+
+étudiant 1 : rapport + diagramme de Gantt + création et organisation du Github + recherche sur comment mettre en fonctionnement une barre de recherche (tests perso)
+
+étudiant 2 : réalisation d'une documentation technique sur Heroku et Symfony + mise en page graphique de la page connexion
+
+étudiant 3 : mise en place de la page connexion
+
+étudiant 4 : logigramme détaillé des pages du site (demandé par le client)
+
+
+
+**le 23/10 :** réception des bases de données : vidéothèque, ludothèque, musicothèque et la base des utilisateurs
+
+<u>rdv 2 avec client : le 27/10</u>
+
+
+
+**Semaine 5 (du 23/10 au 30/10) :**
+
+étudiant 1 : pagination + ajout des pages des livres en fonction des genres choisi dans le menu + réorganisation des nouvelles bases de données
+
+étudiant 2 : maquette de deux pages: liste des articles et visualisation d'un article en détail + réorganisation des nouvelles bases de données
+
+étudiant 3 : intégration de la nouvelle base de donnée + réorganisation des nouvelles bases de données
+
+étudiant 4 : évolution du schéma ERD des tables + réorganisation des nouvelles bases de données
+
