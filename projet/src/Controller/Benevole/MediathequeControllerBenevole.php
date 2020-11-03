@@ -56,13 +56,21 @@ class MediathequeControllerBenevole extends AbstractController
             if($livre["totalItems"] > 0){
                 $livre = $livre["items"][0]["volumeInfo"];
                 $infos['titre'] = $livre['title'];
-                $infos['sous_titre'] = $livre['subtitle'];
+                if(empty($livre['subtitle'])){
+                    $infos['sous_titre'] = "";
+                } else{
+                    $infos['sous_titre'] = $livre['subtitle'];
+                }
                 if(empty($livre["authors"])){
                     $infos['auteur'] = "Auteur Inconnu";
                 }else{
                     $infos['auteur'] = $livre["authors"][0];
                 }
-                $infos['editeur'] = $livre['publisher'];
+                if(empty($livre['publisher'])){
+                    $infos['editeur']  = "Editeur Inconnu";
+                }else{
+                    $infos['editeur'] = $livre['publisher'];
+                }
                 $infos['dateDePublication'] = $livre['publishedDate'];
                 $infos['description'] = $livre['description'];
                 $infos['isbn'] = $livre['industryIdentifiers'][0]["identifier"];
