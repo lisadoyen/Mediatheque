@@ -2,6 +2,10 @@
 
 projet tut S3/S4
 
+lien google drive : questions/réponses avec client :
+
+https://docs.google.com/spreadsheets/d/1mCXFkkcIji4ub9BHxO_cpTuq0yIuAuBhP5DMrDMG8zA/edit?usp=sharing
+
 # arborescence de git :
 
 **projet** : tous les dossier et fichiers symfony
