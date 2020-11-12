@@ -106,7 +106,7 @@
 
 étudiant 2 : recherche code ISBN avec une API Amazon
 
-étudiant 3 : modification du schéma ERD en fonction de l'avis du client
+étudiant 3 : codage de la page d'accueil en fonction de la maquette définitive
 
-étudiant 4 : codage de la page d'accueil en fonction de la maquette définitive
+étudiant 4 : modification du schéma ERD en fonction de l'avis du client
 
