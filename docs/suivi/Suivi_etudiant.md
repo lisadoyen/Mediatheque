@@ -10,7 +10,7 @@
 
 
 
-<u>rdv 1 avec client : le 18/09</u>
+<u>rdv avec client : le 18/09</u>
 
 
 
@@ -26,7 +26,7 @@
 
 
 
-<u>rdv 2 avec client : le 25/09</u>
+<u>rdv avec client : le 25/09</u>
 
 
 
@@ -70,7 +70,7 @@
 
 **le 23/10 :** réception des bases de données : vidéothèque, ludothèque, musicothèque et la base des utilisateurs
 
-<u>rdv 2 avec client : le 27/10</u>
+<u>rdv avec client : le 27/10</u>
 
 
 
@@ -83,4 +83,19 @@
 étudiant 3 : intégration de la nouvelle base de donnée + réorganisation des nouvelles bases de données
 
 étudiant 4 : évolution du schéma ERD des tables + réorganisation des nouvelles bases de données
+
+
+
+<u>rdv avec client : le 11/11</u>
+
+
+**Semaine 6 (du 30/10 au 07/11) :**
+
+étudiant 1 : logigramme + maquette page accueil définitive + mise en place d'un drive excel questions/réponses avec client
+
+étudiant 2 : code ISBN
+
+étudiant 3 : intégration bdd des autres médias
+
+étudiant 4 : évolution du schéma ERD des tables
 
