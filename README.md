@@ -2,9 +2,10 @@
 
 projet tut S3/S4
 
-lien google drive : questions/réponses avec client :
+lien google drive : questions/réponses avec client (modification lien):
 
-https://docs.google.com/spreadsheets/d/1mCXFkkcIji4ub9BHxO_cpTuq0yIuAuBhP5DMrDMG8zA/edit?usp=sharing
+https://drive.google.com/drive/folders/1JL4eJVPuv8dHCAw8VdNH74qs19-GNOXR?usp=sharing
+
 
 # arborescence de git :
 
