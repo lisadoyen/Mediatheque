@@ -98,7 +98,7 @@ form{
     bottom: -2px;
     width: 0%;
     height: 2px;
-    background-color: #fcaf64;
+    background-color: var(--second-color);
     transition: .4s;
 }
 
@@ -120,7 +120,7 @@ form{
 }
 
 .input-div.focus > .i > i{
-    color: #fcaf64;
+    color: var(--second-color);
 }
 
 .input-div > div > input{
@@ -152,7 +152,7 @@ a{
 }
 
 a:hover{
-    color: #fcaf64;
+    color: var(--second-color);
 }
 
 .btn{
@@ -162,7 +162,7 @@ a:hover{
     border-radius: 25px;
     outline: none;
     border: none;
-    background-image: linear-gradient(to right, #fcaf64, #fcaf64, #fcaf64);
+    background-color:#fcaf64;
     background-size: 200%;
     font-size: 1.2rem;
     color: #fff;
@@ -173,7 +173,7 @@ a:hover{
     transition: .5s;
 }
 .btn:hover{
-    background-position: right;
+    opacity: 70%;
 }
 
 
@@ -200,6 +200,10 @@ a:hover{
     .container{
         margin: 0;
     }
+}
+
+.error {
+    color:rgb(204, 0, 0);
 }
 
 @media screen and (max-width: 900px){

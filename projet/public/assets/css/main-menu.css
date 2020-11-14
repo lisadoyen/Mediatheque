@@ -1,0 +1,210 @@
+* {font-family: "Avenir Next", "Avenir", sans-serif;}
+
+body{
+	margin: 0;
+    padding: 0;
+}
+nav.main-menu{
+	position: sticky;
+	top: 0;
+	height: 65px;
+    display: flex;
+    z-index: 1000;
+    background-color:var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.25px 1.25px 2.6px;
+}
+img.icon{
+	height: 25px;
+	width: 25px;
+	position: absolute;
+	top :20px;
+    transition: 0.3s;
+    filter: brightness(10%);
+}
+img.icon:hover{
+    transition: 0.3s;
+    filter: brightness(100%);
+    
+}
+h1#main-title {
+    color:var(--second-color);
+    text-decoration: none;
+    left: 65px;
+	top :10px;
+    position: absolute;
+}
+img.home{left: 20px;}
+img.shopCar{right: 185px;}
+img.fav{right: 145px;}
+img.account{right: 105px;}
+img.logout{right: 65px;}
+
+nav.sub-menu{
+    position: sticky;
+	top: 65px;
+	height: auto;
+    display: flex;
+    z-index: 999;
+    background-color: var(--second-color);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.25px 1.25px 2.6px;
+    color:white;
+    text-align: center;
+    vertical-align: middle;
+}
+nav.sub-menu > .container > .row > div.col-sm{
+    padding: 6px;
+}
+a.media-item{
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+ a.media-item:hover {
+    transition: 0.4s;
+    color: #232323;
+}
+
+input#burger{
+    visibility: hidden;
+    display: contents;
+	-webkit-touch-callout: none; /* iOS Safari */
+  	-webkit-user-select: none; /* Safari */
+  	-khtml-user-select: none; /* Konqueror HTML */
+  	-moz-user-select: none; /* Old versions of Firefox */
+  	-ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+input#burger + label {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    height: 30px;
+    width: 30px;
+    z-index: 1001;
+    margin: 0;
+}
+
+input#burger + label span.barre:first-child {top: 0%;}
+input#burger + label span.barre {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    top: 33.33333%;
+    display: block;
+    border-radius: 5px;
+    background: var(--second-color);
+    filter: brightness(10%);
+    transition: 0.3s;
+}
+input#burger + label span.barre:last-child { top:66.66666%; }
+
+body label:hover { 
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input#burger:hover + label span.barre {
+    background-color: var(--second-color);
+    opacity: 80%;
+    filter: brightness(100%);
+}
+
+input#burger:checked + label span.barre {
+    opacity: 0;
+    top: 10px;
+}
+
+input#burger:checked + label span.barre:first-child {
+    opacity: 1;
+    transform: rotate(45deg);
+}
+
+input#burger:checked + label span.barre:last-child {
+    opacity: 1;
+    transform: rotate(-45deg);
+}
+
+input#burger ~ nav#lateral-menu{
+    box-shadow: rgba(0, 0, 0, 0.15) -1.25px 1.95px 2.6px;
+    color: var(--second-color);
+    background-color: var(--main-color);
+    position: fixed;
+    top: 65px;
+    right: -405px;
+    width: 400px;
+    height: 100%;
+    overflow: hidden;
+    -webkit-transition: right 0.4s ease-in-out;;
+    transition: right 0.4 ease-in-out;
+    z-index: 1000;
+}
+
+input#burger:checked ~ nav#lateral-menu {
+    right: 0px;
+}
+
+
+input#burger ~ nav#lateral-menu > ul#lateral-menu {
+    visibility: hidden;
+}
+
+input#burger:checked ~ nav#lateral-menu > ul#lateral-menu {
+    position: absolute;
+    list-style: none;
+    text-decoration: none;
+    top: 8%;
+    left: 8%;
+    right: 8%;
+    bottom: 8%;
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+    transition: 0.4s;
+}
+
+input#burger:checked ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu{
+	text-align:right;
+    visibility: visible;
+    transition: 0.4s;
+}
+
+input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-menu {
+    color: var(--second-color);
+    filter: brightness(10%);
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 1.25em;
+    display: block;
+}
+
+input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-menu:hover {
+    transition: 0.4s;
+    filter: brightness(100%);
+}
+
+@media (max-width: 800px){
+	input#burger:checked ~ nav#lateral-menu {
+		width: 100%;
+    	height: 100%;
+    }
+    
+    input#burger:checked ~ nav#lateral-menu > ul#lateral-menu{
+        top: 3%;
+        left: 3%;
+        right: 3%;
+        bottom: 3%;
+    }
+
+	input#burger:checked ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu{
+        text-align: center;
+
+	}
+
+	input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-menu {
+    	padding: 1em;
+	}
+}
