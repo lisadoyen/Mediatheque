@@ -46,3 +46,4 @@ security:
         - { path: ^/benevole, roles: ROLE_BENEVOLE }
     role_hierarchy:
         ROLE_ADMIN: [ROLE_ADHERENT, ROLE_BENEVOLE, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_BENEVOLE: [ROLE_ADHERENT, ROLE_BENEVOLE]
