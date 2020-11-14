@@ -1,0 +1,55 @@
+<nav class="main-menu">
+    <h1 id="main-title">Médiathèque</h1>
+    {% if is_granted('ROLE_ADHERENT') %}
+        <a href="{{ path('adherent_accueil') }}"><img src="{{asset('assets/images/yellow/home.png')}}" class="icon home" alt="Accueil"></a>{% endif %}
+    {% if is_granted('ROLE_BENEVOLE') %}
+         <a href="{{ path('benevole_accueil') }}"><img src="{{asset('assets/images/yellow/home.png')}}" class="icon home" alt="Accueil"></a>{% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+         <a href="{{ path('admin_accueil') }}"><img src="{{asset('assets/images/yellow/home.png')}}" class="icon home" alt="Accueil"></a>{% endif %}
+    <a href=""><img src="{{asset('assets/images/yellow/shopping-cart.png')}}" class="icon  shopCar" alt="Panier"></a>
+    <a href=""><img src="{{asset('assets/images/yellow/star.png')}}" class="icon  fav" alt="Favories"></a>
+    <a href=""><img src="{{asset('assets/images/yellow/user.png')}}" class="icon  account" alt="Profile"></a>
+    <a href="{{ path('security_logout') }}"><img src="{{asset('assets/images/yellow/logout.png')}}" class="icon  logout" alt="Déconnexion"></a>
+</nav>
+<nav class="sub-menu">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <a href="{{path('adherent_bibliotheque_show')}}" class="media-item">Livres</a>
+            </div>
+            <div class="col-sm">
+                <a href="#" class="media-item">Films</a>
+            </div>
+            <div class="col-sm">
+                <a href="#" class="media-item">Musiques</a>
+            </div>
+            <div class="col-sm">
+                <a href="#" class="media-item">Jeux</a>
+            </div>
+        </div>
+    </div>
+</nav>
+{% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
+    <input id="burger" type="checkbox"/>
+    <label for="burger">
+        <span class="barre"></span>
+        <span class="barre"></span>
+        <span class="barre"></span> 
+    </label>
+
+    <nav id="lateral-menu">
+        <ul id="lateral-menu">
+            {% if is_granted('ROLE_BENEVOLE') or is_granted('ROLE_ADMIN') %}
+                <li class="lateral-menu"><a class="lateral-menu" href="#">Éditer les statistiques</a></li>{% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="lateral-menu"><a class="lateral-menu" href="#">Paramètres et règles d'emprunts</a></li>
+                <li class="lateral-menu"><a class="lateral-menu" href="#">Maintenance du site</a></li>{% endif %}
+            {% if is_granted('ROLE_BENEVOLE') or is_granted('ROLE_ADMIN') %}
+                <li class="lateral-menu"><a class="lateral-menu" href="#">Gérer les articles</a></li>
+                <li class="lateral-menu"><a class="lateral-menu" href="#">Gérer la base de données des articles</a></li>{% endif %}
+            {% if is_granted('ROLE_ADMIN')  %}
+                <li class="lateral-menu"><a class="lateral-menu" href="#">Gérer les adhérents</a></li>
+                <li class="lateral-menu"><a class="lateral-menu" href="#">Gérer la base de donnée des adhérents</a></li>{% endif %}		
+        </ul>
+    </nav>
+{% endif %}
