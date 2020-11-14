@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Animated Login Form</title>
+    <title>Connexion</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/login.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
@@ -13,7 +13,7 @@
             <form action="{{ path('security_login') }}" method="post">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
                 {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
                 <h2 class="title">Bienvenue</h2>
                 <div class="input-div one">
