@@ -44,6 +44,7 @@ security:
         - { path: '^/admin', roles: ROLE_ADMIN }
         - { path: ^/adherent, roles: ROLE_ADHERENT }
         - { path: ^/benevole, roles: ROLE_BENEVOLE }
+        - { path: ^/profil, roles: ROLE_ADHERENT }
     role_hierarchy:
         ROLE_ADMIN: [ROLE_ADHERENT, ROLE_BENEVOLE, ROLE_ALLOWED_TO_SWITCH]
         ROLE_BENEVOLE: [ROLE_ADHERENT, ROLE_BENEVOLE]
