@@ -9,20 +9,29 @@
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/main-menu.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/nav-search.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/sub-menu.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/phone.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/pagination.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/page.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     {% endblock %}
 </head>
 <body>
 {% include "_nav.html.twig" %}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+{% for message in app.flashes('danger') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
 {% block body %}{% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('assets/js/jquery-3.5.1.slim.min.js') }}"></script>
-    <script src="{{ asset('assets/js/scriptMenu.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}" ></script>
     <script src="{{ asset('assets/js/bootstrap.js') }}" ></script>
 

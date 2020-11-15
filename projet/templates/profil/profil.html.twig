@@ -1,0 +1,67 @@
+{% extends "layout.html.twig" %}
+{% block body %}
+
+    <div class="container cadre">
+        <h1 class="title">Votre profil</h1><hr>
+        <div class="row">
+            <div class="col-sm">
+                Identifiant :
+            </div>
+            <div class="col-sm">
+                {{  app.user.username  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Prenom :
+            </div>
+            <div class="col-sm">
+                {{  app.user.firstname  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Nom :
+            </div>
+            <div class="col-sm">
+                {{  app.user.name  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Email :
+            </div>
+            <div class="col-sm">
+                {{  app.user.email  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Téléphone :
+            </div>
+            <div class="col-sm">
+                {{  app.user.phone  }}
+            </div>
+        </div><hr>
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <a href="{{path('edit_profil')}}" class="edit-btn">Modifier le profil</a>
+            </div>
+        </div><hr>
+        <div class="row">
+            <div class="col-sm">
+                Mot de passe :
+            </div>
+            <div class="col-sm">
+                <a href="{{path('edit_password_profil')}}" class="edit-btn">Modifier le mot de passe</a>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
