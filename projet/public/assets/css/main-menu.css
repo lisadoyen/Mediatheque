@@ -27,7 +27,7 @@ img.icon:hover{
     
 }
 h1#main-title {
-    color:var(--second-color);
+    color:black;
     text-decoration: none;
     left: 65px;
 	top :10px;

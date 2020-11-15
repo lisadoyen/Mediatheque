@@ -161,19 +161,20 @@ a:hover{
     height: 50px;
     border-radius: 25px;
     outline: none;
-    border: none;
-    background-color:#fcaf64;
+    border: 2px solid #fcaf64;
     background-size: 200%;
     font-size: 1.2rem;
-    color: #fff;
+    background-color:white;
+    color:#fcaf64;
     font-family: 'Poppins', sans-serif;
     text-transform: uppercase;
     margin: 1rem 0;
     cursor: pointer;
-    transition: .5s;
+    transition: 0.4s;
 }
 .btn:hover{
-    opacity: 70%;
+    background-color:#fcaf64;;
+    color:white;
 }
 
 

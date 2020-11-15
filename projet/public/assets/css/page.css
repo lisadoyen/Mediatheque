@@ -1,0 +1,47 @@
+h1.title{
+    text-align: center;
+    color : var(--second-color);
+    text-transform: uppercase;
+}
+
+.container.cadre{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border:1px #e5e5e5 solid;
+    padding: auto;
+}
+
+div.low-container{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: auto;
+}
+
+button, a.edit-btn{
+    margin: 2%;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    padding: 8px;
+    width: 300px;
+    height: auto;
+    border-radius: 25px;
+    border: 2px solid var(--second-color);
+    font-size: 1.2rem;
+    background-color:transparent;
+    color:var(--second-color);
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+button.edit-btn:hover {
+    background-color:var(--second-color);
+    color:white;
+}
+a.edit-btn:hover {
+    background-color:var(--second-color);
+    color:white;
+}

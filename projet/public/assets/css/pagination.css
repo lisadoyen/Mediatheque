@@ -1,5 +1,5 @@
 .pagination{
-    color : #fcaf64;
+    color : var(--second-color);
     font-weight: bold;
     position: center;
 }
@@ -9,5 +9,6 @@
     padding: 2vh 2vh;
 }
 .pagination a:hover {
-    background-color: #fcaf64;
+    background-color:var(--second-color);
+    border-radius:50%;
 }
