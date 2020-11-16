@@ -2,9 +2,11 @@
     <h1 id="main-title">Médiathèque</h1>
     {% if is_granted('ROLE_ADHERENT') %}
         <a href="{{ path('adherent_accueil') }}"><img src="{{asset('assets/images/yellow/home.png')}}" class="icon home" alt="Accueil"></a>
-    {% elseif is_granted('ROLE_BENEVOLE') %}
+    {% endif %}
+    {% if is_granted('ROLE_BENEVOLE') %}
         <a href="{{ path('benevole_accueil') }}"><img src="{{asset('assets/images/yellow/home.png')}}" class="icon home" alt="Accueil"></a>
-    {% elseif is_granted('ROLE_ADMIN') %}
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('admin_accueil') }}"><img src="{{asset('assets/images/yellow/home.png')}}" class="icon home" alt="Accueil"></a>
     {% endif %}
     <a href=""><img src="{{asset('assets/images/yellow/shopping-cart.png')}}" class="icon  shopCar" alt="Panier"></a>
@@ -16,7 +18,13 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <a href="{{ path('livres') }}" class="media-item">Livres</a>
+                {% if is_granted('ROLE_ADHERENT') %}
+                    <a href="{{ path('adherent_bibliotheque_show') }}" class="media-item">Livres</a>            
+                {% elseif is_granted('ROLE_BENEVOLE') %}
+                   <a href="{{ path('benevole_bibliotheque_show') }}" class="media-item">Livres</a>   
+                {% elseif is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('admin_bibliotheque_show') }}" class="media-item">Livres</a>   
+                {% endif %}
             </div>
             <div class="col-sm">
                 <a href="#" class="media-item">Films</a>
