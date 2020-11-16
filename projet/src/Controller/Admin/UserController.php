@@ -6,6 +6,7 @@ use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,13 +28,17 @@ class UserController extends AbstractController
     /**
      * @Route("/admin/users/add", name="admin_users_add", methods={"GET","POST"})
      */
-    public function  addUser(Request $request, EntityManagerInterface $manager)
+    public function  addUser(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setpassword($hash);
+            $user->setRoles(["ROLE_ADHERENT"]);
+
             $manager->persist($user);
             $manager->flush();
             $this->addFlash(

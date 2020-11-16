@@ -52,11 +52,12 @@ class MediathequeControllerAdherent extends AbstractController
     public function showBibliothequeByType(Request $request, PaginatorInterface $paginator, $id)
     {
         $articles = $this->getDoctrine()->getRepository(Bibliotheque::class)->findBy(["fkIdGenre" => $id]);
+        $genre = $this->getDoctrine()->getRepository(Genre::class)->find($id);
         $livres = $paginator ->paginate(
             $articles,
             $request->query->getInt('page',1),
             10
         );
-        return $this->render('adherent/showBibliotheque.html.twig', ['livres' => $livres]);
+        return $this->render('adherent/showBibliotheque.html.twig', ['livres' => $livres, 'genre' => $genre]);
     }
 }

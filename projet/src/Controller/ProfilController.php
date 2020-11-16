@@ -67,4 +67,20 @@ class ProfilController extends AbstractController
         }
     	return $this->render('profil/_profil_form_reset_password.html.twig');
     }
+
+    /**
+     * @Route("/favoris", name="favoris")
+     */
+    public function favoris()
+    {
+        return $this->render('profil/favoris.html.twig');
+    }
+
+    /**
+     * @Route("/panier", name="panier")
+     */
+    public function panier()
+    {
+        return $this->render('profil/panier.html.twig');
+    }
 }
