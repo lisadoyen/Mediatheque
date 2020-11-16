@@ -40,7 +40,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $firt_name;
+    private $first_name;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -110,14 +110,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFirtName(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->firt_name;
+        return $this->first_name;
     }
 
-    public function setFirtName(?string $firt_name): self
+    public function setFirstName(?string $first_name): self
     {
-        $this->firt_name = $firt_name;
+        $this->first_name = $first_name;
 
         return $this;
     }
@@ -182,7 +182,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
+            $roles[] = 'ROLE_ADHERENT';
         }
 
         return array_unique($roles);

@@ -14,17 +14,36 @@ class IndexController extends AbstractController
      */
     public function index(Request $request)
     {
+
         if($this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin_accueil');
-        }
-        if($this->isGranted('ROLE_ADHERENT')) {
+        } else if($this->isGranted('ROLE_ADHERENT')) {
             return $this->redirectToRoute('adherent_accueil');
-        }
-        if($this->isGranted('ROLE_BENEVOLE')) {
+        }else if($this->isGranted('ROLE_BENEVOLE')) {
             return $this->redirectToRoute('benevole_accueil');
         }
         else {
             return $this->redirectToRoute('security_login');
         }
     }
+
+    /**
+     * @Route("/livres", name="livres")
+     */
+    public function livres(Request $request)
+    {
+
+        if($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin_bibliotheque_show');
+        } else if($this->isGranted('ROLE_ADHERENT')) {
+            return $this->redirectToRoute('adherent_bibliotheque_show');
+        }else if($this->isGranted('ROLE_BENEVOLE')) {
+            return $this->redirectToRoute('benevole_bibliotheque_show');
+        }
+        else {
+            return $this->redirectToRoute('security_login');
+        }
+    }
+
+
 }
