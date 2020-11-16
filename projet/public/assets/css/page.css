@@ -45,3 +45,15 @@ a.edit-btn:hover {
     background-color:var(--second-color);
     color:white;
 }
+
+a.card-second-color{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+a.card-second-color:hover{
+    background-color: var(--second-color);
+    transition: 0.3s;
+    color: white;
+}
