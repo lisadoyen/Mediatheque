@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-0 col-md-2 col-lg-3"></div>
+            <div class="col-sm-12 col-md-8 col-lg-6">
+                <h1>Barre de recherche</h1>
+                <div class="form-group">
+                    <input class="form-control" type="text" id="search-isbn" value="" placeholder="Rechercher un isbn"/>
+                </div>
+                <div id="result-isbn" style="margin-top: 5em;"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{asset('assets/js/bootstrap.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#search-isbn').keyup(function(){
+                $("#result-isbn").html('');
+                let isbn = $(this).val();
+                if(isbn !== ""){
+                    console.log(isbn);
+                    axios.get('/livres/add/'+isbn)
+                        .then(function (response) {
+                            let livre = response.data;
+                            console.log(livre.titre)
+                            ligne = 'Titre : ' + livre.titre +'<br>';
+                            ligne += 'Sous Titre : ' + livre.sous_titre +'<br>';
+                            ligne += 'Auteur : ' + livre.auteur +'<br>';
+                            ligne += 'Editeur : ' + livre.editeur +'<br>';
+                            ligne += 'Date de publication : ' + livre.dateDePublication +'<br>';
+                            ligne += 'Description : ' + livre.description +'<br>';
+                            ligne += 'ISBN : ' + livre.isbn +'<br>';
+                            ligne += 'Image  : ' +'<img src="'+livre.image+'" alt="image isbn">' +'<br>';
+                            document.getElementById("result-isbn").innerHTML=ligne;
+                        })
+                        .catch(function (error) {
+                            console.log("YOLOOO");
+                        });
+                }
+            });
+        });
+    </script>
+{% endblock %}

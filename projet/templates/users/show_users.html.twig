@@ -1,0 +1,48 @@
+{% extends "layout.html.twig" %}
+{% block body %}
+    <div class="low-container">
+        <h1>Récapitulatifs des utilisateurs</h1><br>
+        <div class="row">
+            <a href="{{ path('users_add') }}" class="edit-btn">Ajouter un utilisateur</a>
+        </div>
+        <div>
+            <table class="table table-striped table-bordered">
+                <caption>Récapitulatifs des utilisateurs</caption>
+                <thead class="thead-dark">
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Statut</th>
+                    <th>Role</th>
+                    <th>Opérations</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if users is not empty %}
+                    {% for utilisateur in users %}
+                        <tr>
+                            <td>{{utilisateur.username}}</td>
+                            <td>{{utilisateur.firstname}}</td>
+                            <td>{{utilisateur.name}}</td>
+                            <td>{{utilisateur.email}}</td>
+                            <td>{{utilisateur.phone}}</td>
+                            <td>{{utilisateur.status}}</td>
+                            <td>{{utilisateur.getRoles[0]}}</td>
+                            <td>
+                                <a href="" class="edit-btn">Détails</a>
+                                <a href="" class="edit-btn">Modifier</a>
+                                <a href="" class="edit-btn danger">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr class="table-warning"><td>Pas de utilisateur</td></tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
