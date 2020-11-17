@@ -40,9 +40,17 @@ class __TwigTemplate_54c5e1ae01482c2fc4d6be7a1aa5183871e038374cd9a2e12eb2d2071c9
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "_footer.html.twig"));
 
         // line 1
-        echo "
-<footer class=\"page-footer font-small blue pt-4\">
-  <div class=\"footer-copyright text-center py-3\">© 2020 Copyright : <a href=\"\">unSite.com</a>
+        echo "<footer>
+  <div class=\"container\">
+    <div class=\"row\">
+        <div class=\"col-sm\">
+            <a href=\"#\" class=\"lien\">Mention Légales</a>
+        </div>
+        <div class=\"col-sm\">
+            <a href=\"#\" class=\"lien\">Nous contacter</a>
+        </div>
+    </div>
+    <small><i>© 2020 Copyright | Médiathèque Thales - Brest</i></small>
   </div>
 </footer>";
         
@@ -65,10 +73,18 @@ class __TwigTemplate_54c5e1ae01482c2fc4d6be7a1aa5183871e038374cd9a2e12eb2d2071c9
 
     public function getSourceContext()
     {
-        return new Source("
-<footer class=\"page-footer font-small blue pt-4\">
-  <div class=\"footer-copyright text-center py-3\">© 2020 Copyright : <a href=\"\">unSite.com</a>
+        return new Source("<footer>
+  <div class=\"container\">
+    <div class=\"row\">
+        <div class=\"col-sm\">
+            <a href=\"#\" class=\"lien\">Mention Légales</a>
+        </div>
+        <div class=\"col-sm\">
+            <a href=\"#\" class=\"lien\">Nous contacter</a>
+        </div>
+    </div>
+    <small><i>© 2020 Copyright | Médiathèque Thales - Brest</i></small>
   </div>
-</footer>", "_footer.html.twig", "C:\\Users\\arthu\\Desktop\\design\\projet\\projet\\templates\\_footer.html.twig");
+</footer>", "_footer.html.twig", "D:\\Utilisateurs\\Thibault\\Documents\\Etudes\\Superieur\\DutInfo\\Cours\\S3\\ProjetTut\\Mediatheque\\projet\\templates\\_footer.html.twig");
     }
 }

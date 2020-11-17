@@ -43,7 +43,7 @@ class __TwigTemplate_9085ad4c51d80839e41829e148d345e1277414eb241ecb071d0bf20f583
         echo "<!DOCTYPE html>
 <html>
 <head>
-    <title>Animated Login Form</title>
+    <title>Connexion</title>
     <link rel=\"stylesheet\" type=\"text/css\" href=\"";
         // line 5
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/login.css"), "html", null, true);
@@ -67,7 +67,7 @@ class __TwigTemplate_9085ad4c51d80839e41829e148d345e1277414eb241ecb071d0bf20f583
         // line 15
         if ((isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 15, $this->source); })())) {
             // line 16
-            echo "                    <div class=\"alert alert-danger\">";
+            echo "                    <div class=\"error\">";
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(twig_get_attribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 16, $this->source); })()), "messageKey", [], "any", false, false, false, 16), twig_get_attribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 16, $this->source); })()), "messageData", [], "any", false, false, false, 16), "security"), "html", null, true);
             echo "</div>
                 ";
@@ -135,7 +135,7 @@ class __TwigTemplate_9085ad4c51d80839e41829e148d345e1277414eb241ecb071d0bf20f583
         return new Source("<!DOCTYPE html>
 <html>
 <head>
-    <title>Animated Login Form</title>
+    <title>Connexion</title>
     <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('assets/css/login.css') }}\">
     <link href=\"https://fonts.googleapis.com/css?family=Poppins:600&display=swap\" rel=\"stylesheet\">
     <script src=\"https://kit.fontawesome.com/a81368914c.js\"></script>
@@ -147,7 +147,7 @@ class __TwigTemplate_9085ad4c51d80839e41829e148d345e1277414eb241ecb071d0bf20f583
             <form action=\"{{ path('security_login') }}\" method=\"post\">
                 <img src=\"{{ asset('assets/images/logo.png') }}\" alt=\"logo\">
                 {% if error %}
-                    <div class=\"alert alert-danger\">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    <div class=\"error\">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
                 <h2 class=\"title\">Bienvenue</h2>
                 <div class=\"input-div one\">
@@ -176,6 +176,6 @@ class __TwigTemplate_9085ad4c51d80839e41829e148d345e1277414eb241ecb071d0bf20f583
     </div>
     <script type=\"text/javascript\" src=\"{{ asset('assets/js/login.js') }}\"></script>
 </body>
-</html>", "security/login_2.html.twig", "C:\\Users\\arthu\\Desktop\\design\\projet\\projet\\templates\\security\\login_2.html.twig");
+</html>", "security/login_2.html.twig", "D:\\Utilisateurs\\Thibault\\Documents\\Etudes\\Superieur\\DutInfo\\Cours\\S3\\ProjetTut\\Mediatheque\\projet\\templates\\security\\login_2.html.twig");
     }
 }

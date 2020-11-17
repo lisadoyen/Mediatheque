@@ -14,36 +14,18 @@ class IndexController extends AbstractController
      */
     public function index(Request $request)
     {
-
-        if($this->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('admin_accueil');
-        } else if($this->isGranted('ROLE_ADHERENT')) {
-            return $this->redirectToRoute('adherent_accueil');
-        }else if($this->isGranted('ROLE_BENEVOLE')) {
-            return $this->redirectToRoute('benevole_accueil');
-        }
-        else {
+        if($this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('accueil');
+        } else {
             return $this->redirectToRoute('security_login');
         }
     }
 
     /**
-     * @Route("/livres", name="livres")
+     * @Route("/accueil", name="accueil")
      */
-    public function livres(Request $request)
+    public function accueil()
     {
-
-        if($this->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('admin_bibliotheque_show');
-        } else if($this->isGranted('ROLE_ADHERENT')) {
-            return $this->redirectToRoute('adherent_bibliotheque_show');
-        }else if($this->isGranted('ROLE_BENEVOLE')) {
-            return $this->redirectToRoute('benevole_bibliotheque_show');
-        }
-        else {
-            return $this->redirectToRoute('security_login');
-        }
+        return $this->render('accueil.html.twig');
     }
-
-
 }
