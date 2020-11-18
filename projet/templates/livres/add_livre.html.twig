@@ -34,7 +34,7 @@
                             ligne += 'Date de publication : ' + livre.dateDePublication +'<br>';
                             ligne += 'Description : ' + livre.description +'<br>';
                             ligne += 'ISBN : ' + livre.isbn +'<br>';
-                            ligne += 'Image  : ' +'<img src="'+livre.image+'" alt="image isbn">' +'<br>';
+                            ligne += 'Image  : ' +'<img src="'+livre.image+'">' +'<br>';
                             document.getElementById("result-isbn").innerHTML=ligne;
                         })
                         .catch(function (error) {
