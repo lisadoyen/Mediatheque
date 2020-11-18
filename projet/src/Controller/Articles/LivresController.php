@@ -45,40 +45,30 @@ class LivresController extends AbstractController
     /**
      * @Route("/livres/add/{isbn}", name="livres_add_isbn", methods={"GET","POST"})
      * @param $isbn
-     * @param Request $request
      * @param SerializerInterface $serializer
      * @return Response
      * @IsGranted("ROLE_BENEVOLE")
      */
-    public function getDataFromIsbn($isbn,Request $request,SerializerInterface $serializer){
+    public function getDataFromIsbn($isbn,SerializerInterface $serializer){
 
         $response = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:' . $isbn);
-        $livre = $serializer->decode($response,'json');
-        if($livre["totalItems"] > 0){
-            $livre = $livre["items"][0]["volumeInfo"];
-            $infos['titre'] = $livre['title'];
-            if(empty($livre['subtitle'])){
-                $infos['sous_titre'] = "";
-            } else{
-                $infos['sous_titre'] = $livre['subtitle'];
-            }
-            if(empty($livre["authors"])){
-                $infos['auteur'] = "Auteur Inconnu";
-            }else{
-                $infos['auteur'] = $livre["authors"][0];
-            }
-            if(empty($livre['publisher'])){
-                $infos['editeur']  = "Editeur Inconnu";
-            }else{
-                $infos['editeur'] = $livre['publisher'];
-            }
-            $infos['dateDePublication'] = $livre['publishedDate'];
-            $infos['description'] = $livre['description'];
-            $infos['isbn'] = $livre['industryIdentifiers'][0]["identifier"];
-            $infos['image'] = $livre['imageLinks']["thumbnail"];
-            return $this->json($infos,200, []);
+        $article = $serializer->decode($response,'json');
+        if($article["totalItems"] > 0){
+            return $this->json($this->verifyGoogleResponseIsbn($article["items"][0]["volumeInfo"]),200, []);
         }
         $errors['erreur'] = "livre introuvable";
         return $this->json($errors,400);
+    }
+
+    public function verifyGoogleResponseIsbn($article){
+        $infos['titre'] = $article['title'] ?? '';
+        $infos['sous_titre'] = $article['subtitle'] ?? '';
+        $infos['auteur'] = $article["authors"][0] ?? '';
+        $infos['editeur'] = $article['publisher'] ?? '';
+        $infos['dateDePublication'] = $article['publishedDate'] ?? '';
+        $infos['description'] = $article['description'] ?? '';
+        $infos['isbn'] = $article['industryIdentifiers'][0]["identifier"] ?? '';
+        $infos['image'] = $article['imageLinks']["thumbnail"] ?? '';
+        return $infos;
     }
 }
