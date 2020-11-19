@@ -23,7 +23,7 @@
                 let isbn = $(this).val();
                 if(isbn !== ""){
                     console.log(isbn);
-                    axios.get('/livres/add/'+isbn)
+                    axios.get('/livres/get/'+isbn)
                         .then(function (response) {
                             let livre = response.data;
                             console.log(livre.titre)

@@ -10,7 +10,7 @@
         <h1 style="text-align: center">Récapitulatifs des livres {{ genre.libelleGenre }}</h1><br>
         {% if is_granted('ROLE_BENEVOLE') %}
             <div class="row">
-                <a href="{{ path('livres_add') }}" class="edit-btn">Ajouter un livre</a>
+                <a href="{{ path('get_ISBN') }}" class="edit-btn">Ajouter un livre</a>
             </div>
         {% endif %}
         <div>

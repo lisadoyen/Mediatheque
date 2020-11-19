@@ -34,16 +34,16 @@ class LivresController extends AbstractController
 
 
     /**
-     * @Route("/livres/add", name="livres_add", methods={"GET","POST"})
+     * @Route("/livres/getISBN", name="get_ISBN", methods={"GET","POST"})
      * @return Response
      * @IsGranted("ROLE_BENEVOLE")
      */
     public function addLivre(){
-        return $this->render('livres/add_livre.html.twig');
+        return $this->render('livres/get_ISBN.html.twig');
     }
 
     /**
-     * @Route("/livres/add/{isbn}", name="livres_add_isbn", methods={"GET","POST"})
+     * @Route("/livres/get/{isbn}", name="livres_search_isbn", methods={"GET","POST"})
      * @param $isbn
      * @param SerializerInterface $serializer
      * @return Response
