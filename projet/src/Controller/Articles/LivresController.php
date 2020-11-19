@@ -55,7 +55,9 @@ class LivresController extends AbstractController
 
         $articleGoogle = $this->getGoogleIsbn($isbn,$serializer);
         $articleEbay = $this->getEbayIsbn($isbn,$serializer);
-        return $this->json($this->verifyResponseIsbn($articleGoogle,$articleEbay),200, []);
+        $articleOl = $this->getOlIsbn($isbn,$serializer);
+        $articleSurf = $this->getSurfIsbn($isbn,$serializer);
+        return $this->json($this->verifyResponseIsbn($articleGoogle,$articleEbay,$articleOl,$articleSurf),200, []);
     }
     public function getGoogleIsbn($isbn,$serializer){
         $response = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:' . $isbn);
@@ -70,15 +72,31 @@ class LivresController extends AbstractController
         return $articleEbay['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][0];
     }
 
-    public function verifyResponseIsbn($articleGoogle,$articleEbay){
-        $infos['titre'] = $articleGoogle['title'] ?? $articleEbay['title'] ?? '';
+    public function getSurfIsbn($isbn,$serializer){
+        // bibliosurf
+        $response = file_get_contents('https://www.bibliosurf.com/?page=api_isbn&isbn='.$isbn);
+        $articleSurf = $serializer->decode($response,'json');
+        return $articleSurf;
+    }
+    public function getOlIsbn($isbn,$serializer){
+        // Open Library
+        $response = file_get_contents('https://openlibrary.org/api/books?bibkeys=ISBN:'.$isbn.'&jscmd=data&format=json');
+        $article = $serializer->decode($response,'json');
+        $articleOl = array_shift($article) ?? null;
+        return $articleOl;
+    }
+
+    public function verifyResponseIsbn($articleGoogle,$articleEbay,$articleOl,$articleSurf){
+        $infos['titre'] = $articleGoogle['title'] ?? $articleOl['title'] ?? $articleSurf['name'] ?? $articleEbay['title'] ??'';
         $infos['sous_titre'] = $articleGoogle['subtitle'] ?? '';
-        $infos['auteur'] = $articleGoogle["authors"][0] ?? '';
-        $infos['editeur'] = $articleGoogle['publisher'] ?? '';
-        $infos['dateDePublication'] = $articleGoogle['publishedDate'] ?? '';
+        $infos['auteur'] = $articleGoogle["authors"][0] ?? $articleOl['authors'][0]['name'] ?? $articleSurf['author']['name'] ?? '';
+        $infos['editeur'] = $articleGoogle['publisher'] ?? $articleOl['publishers'][0]['name'] ?? '';
+        $infos['dateDePublication'] = $articleGoogle['publishedDate'] ?? $articleOl['publish_date'] ??'';
         $infos['description'] = $articleGoogle['description'] ?? '';
-        $infos['isbn'] = $articleGoogle['industryIdentifiers'][0]["identifier"] ?? '';
-        $infos['image'] = $articleGoogle['imageLinks']['thumbnail'] ?? $articleEbay['galleryURL'] ?? '';
+        $infos['isbn'] = $articleGoogle['industryIdentifiers'][0]["identifier"] ?? $articleOl['identifiers']['isbn_13'] ?? '';
+        $infos['image'] = $articleGoogle['imageLinks']['thumbnail'] ??
+            $articleOl['cover']['large'] ?? $articleOl['cover']['medium'] ?? $articleOl['cover']['small']??
+             $articleSurf['image'] ?? $articleEbay['galleryURL'] ?? '';
         return $infos;
     }
 }
