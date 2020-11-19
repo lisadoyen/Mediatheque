@@ -3,6 +3,7 @@
 namespace App\Controller\Articles;
 
 use App\Entity\Bibliotheque;
+use App\Form\BibliothequeType;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -109,10 +110,17 @@ class LivresController extends AbstractController
      * @IsGranted("ROLE_BENEVOLE")
      */
     public function addLivre(){
+
+        $article = new Bibliotheque();
         if(!empty($_POST)){
             $data = $_POST;
+            $article->setTitreDesignation($data['titre']);
+            $article->setPhoto($data['image']);
         }
+        $form = $this->createForm(BibliothequeType::class,$article);
+
         return $this->render('livres/add.html.twig',[
+            'form' => $form->createView(),
             'data' => $data ?? null
         ]);
     }

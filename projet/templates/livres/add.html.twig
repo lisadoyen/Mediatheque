@@ -1,8 +1,6 @@
 {% extends 'layout.html.twig' %}
 {% block body %}
     <div class="container">
-        {% if data is not empty %}
-        {{ data.titre }}
-        {% endif %}
+        {{ form(form) }}
     </div>
 {% endblock %}
