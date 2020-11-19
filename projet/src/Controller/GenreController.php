@@ -21,6 +21,12 @@ class GenreController extends AbstractController
         return $this->render('genres/show_genres_livres.html.twig', ['genres' => $genres]);
     }
 
+    public function getAllGenres()
+    {
+        $genres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
+        return $this->render('genres/_genre_submenu.html.twig', ['genres' => $genres]);
+    }
+
     /**
      * @Route("/genres/{id}/livres", name="genres_id_livres_show",methods={"GET"})
      */

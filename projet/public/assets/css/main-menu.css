@@ -35,9 +35,9 @@ h1#main-title {
     position: absolute;
 }
 img.home{left: 2vh;}
-img.shopCar{right: 23.5vh;top: 2.6vh;}
-img.fav{right: 18vh;}
-img.account{right: 13vh;}
+img.shopCar{right: 33.5vh;top: 2.6vh;}
+img.fav{right: 28vh;}
+img.account{right: 23vh;}
 img.logout{right: 8vh;}
 
 nav.sub-menu{
@@ -67,6 +67,42 @@ a.media-item{
     transition: 0.4s;
     color: #232323;
 }
+
+.sub-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.sub-dropdown-content {
+    margin-top:1vh;
+    display: none;
+    left: 0;
+    columns : 5;
+    position: absolute;
+    background-color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.25px 1.25px 2.6px;
+    z-index: 998;
+}
+
+.sub-dropdown-content a {
+    color: #232323;
+    padding: 2vh;
+    text-decoration: none;
+    display: block;
+    min-width: 20vh;
+    text-align: left;
+    border-bottom: 0.5vh solid var(--main-color);
+}
+
+.sub-dropdown-content a:hover {
+    color: var(--second-color);
+    border-bottom: 0.5vh solid var(--second-color);
+    transition:0.3s;}
+
+.sub-dropdown:hover .sub-dropdown-content {
+    display: block;
+}
+
 
 input#burger{
     visibility: hidden;
@@ -137,7 +173,7 @@ input#burger ~ nav#lateral-menu{
     top: 8.5vh;
     right: -50.2vh;
     width: 50vh;
-    font-size:2vh ;
+    font-size:2.15vh ;
     height: 100%;
     overflow: hidden;
     -webkit-transition: right 0.4s ease-in-out;;
@@ -192,6 +228,7 @@ input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-me
 	input#burger:checked ~ nav#lateral-menu {
 		width: 100%;
     	height: 100%;
+        font-size:2.5vh ;
     }
     
     input#burger:checked ~ nav#lateral-menu > ul#lateral-menu{
@@ -208,4 +245,15 @@ input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-me
 	input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-menu {
         padding: 3vh;
 	}
+
+    .sub-dropdown-content {
+        columns : 3;
+        width: 100%;
+        padding-left: 5vh;
+    }
+
+    .sub-dropdown-content a {
+        padding: 1vh;
+        min-width:auto;
+    }
 }
