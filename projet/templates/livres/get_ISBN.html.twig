@@ -25,9 +25,9 @@
                     console.log(isbn);
                     axios.get('/livres/get/'+isbn)
                         .then(function (response) {
-                            let livre = response.data;
+                            var livre = response.data;
                             console.log(livre.titre)
-                            ligne = 'Titre : ' + livre.titre +'<br>';
+                            let ligne = 'Titre : ' + livre.titre +'<br>';
                             ligne += 'Sous Titre : ' + livre.sous_titre +'<br>';
                             ligne += 'Auteur : ' + livre.auteur +'<br>';
                             ligne += 'Editeur : ' + livre.editeur +'<br>';
@@ -35,6 +35,19 @@
                             ligne += 'Description : ' + livre.description +'<br>';
                             ligne += 'ISBN : ' + livre.isbn +'<br>';
                             ligne += 'Image  : ' +'<img src="'+livre.image+'">' +'<br>';
+                            let data = [livre.titre,livre.sous_titre,livre.auteur,livre.editeur,livre.dateDePublication,livre.description,livre.isbn,livre.image];
+                            let url = "{{ path('add_livre') }}"
+                            ligne += '<form class="d-lg-inline-block" action="'+url+'" method="POST">';
+                            ligne += '<input type="hidden" name="titre" value="'+data[0]+'">';
+                            ligne += '<input type="hidden" name="sous_titre" value="'+data[1]+'">';
+                            ligne += '<input type="hidden" name="auteur" value="'+data[2]+'">';
+                            ligne += '<input type="hidden" name="editeur" value="'+data[3]+'">';
+                            ligne += '<input type="hidden" name="dateDePublication" value="'+data[4]+'">';
+                            ligne += '<input type="hidden" name="description" value="'+data[5]+'">';
+                            ligne += '<input type="hidden" name="isbn" value="'+data[6]+'">';
+                            ligne += '<input type="hidden" name="image" value="'+data[7]+'">';
+                            ligne += '<button type="submit" class="btn btn-success btn-sm"</i>Créer un livre</button>'
+                            ligne += '</form>';
                             document.getElementById("result-isbn").innerHTML=ligne;
                         })
                         .catch(function (error) {

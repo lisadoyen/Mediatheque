@@ -38,7 +38,7 @@ class LivresController extends AbstractController
      * @return Response
      * @IsGranted("ROLE_BENEVOLE")
      */
-    public function addLivre(){
+    public function getISBN(){
         return $this->render('livres/get_ISBN.html.twig');
     }
 
@@ -101,5 +101,19 @@ class LivresController extends AbstractController
             $articleOl['cover']['large'] ?? $articleOl['cover']['medium'] ?? $articleOl['cover']['small']??
              $articleSurf['image'] ?? $articleEbay['galleryURL'] ?? '';
         return $infos;
+    }
+
+    /**
+     * @Route("/livres/add", name="add_livre", methods={"GET","POST"}, options={"expose" = true})
+     * @return Response
+     * @IsGranted("ROLE_BENEVOLE")
+     */
+    public function addLivre(){
+        if(!empty($_POST)){
+            $data = $_POST;
+        }
+        return $this->render('livres/add.html.twig',[
+            'data' => $data ?? null
+        ]);
     }
 }
