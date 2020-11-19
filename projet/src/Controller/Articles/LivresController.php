@@ -69,14 +69,17 @@ class LivresController extends AbstractController
         $lastEbay = '&paginationInput.entriesPerPage=6&GLOBAL-ID=EBAY-FR&siteid=71&Content-Type=application/json';
         $response = file_get_contents($firstEbay.$isbn.$lastEbay);
         $articleEbay = $serializer->decode($response,'json');
-        return $articleEbay['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][0];
+        return $articleEbay['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][0] ?? null;
     }
 
     public function getSurfIsbn($isbn,$serializer){
         // bibliosurf
         $response = file_get_contents('https://www.bibliosurf.com/?page=api_isbn&isbn='.$isbn);
-        $articleSurf = $serializer->decode($response,'json');
-        return $articleSurf;
+        if($response != " \n"){
+            $articleSurf = $serializer->decode($response,'json');
+            return $articleSurf ?? null;
+        }
+        return null;
     }
     public function getOlIsbn($isbn,$serializer){
         // Open Library
