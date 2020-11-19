@@ -19,8 +19,9 @@
 <nav class="sub-menu">
     <div class="container">
         <div class="row">
-            <div class="col-sm">
-                <a href="{{ path('genres_livres_show') }}" class="media-item">Livres</a>
+            <div class="col-sm sub-dropdown container">
+                <a href="{{ path('genres_livres_show') }}" class="media-item dropbtn">Livres</a>
+                {{ render(controller('App\\Controller\\GenreController::getAllGenres')) }}
             </div>
             <div class="col-sm">
                 <a href="#" class="media-item">Films</a>
