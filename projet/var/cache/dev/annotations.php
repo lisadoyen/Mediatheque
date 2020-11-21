@@ -87,6 +87,8 @@ return [[
 '%5B%5BC%5DApp%5CEntity%5CAuteur%23getPrenom%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CAuteur%23setPrenom%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CEntity%5CAuteur%23setPrenom%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CAuteur%23__toString%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CAuteur%23__toString%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CAuteur%24idAuteur%5D%5B1%5D' => 9,
 '%5B%5BC%5DApp%5CEntity%5CAuteur%24idAuteur%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CAuteur%24nom%5D%5B1%5D' => 10,
@@ -215,6 +217,8 @@ return [[
 '%5B%5BC%5DApp%5CEntity%5CGenre%23getLimiteAge%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CGenre%23setLimiteAge%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CEntity%5CGenre%23setLimiteAge%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CGenre%23__toString%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CGenre%23__toString%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CGenre%24idGenre%5D%5B1%5D' => 31,
 '%5B%5BC%5DApp%5CEntity%5CGenre%24idGenre%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CGenre%24libelleGenre%5D%5B1%5D' => 32,
@@ -1024,7 +1028,7 @@ return [[
 
 0 => 'N;',
 1 => [],
-2 => 1605786587,
+2 => 1605963714,
 3 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [

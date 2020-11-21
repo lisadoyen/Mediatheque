@@ -1,6 +1,6 @@
 .background-home {
     background:linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url("../images/bg.jpg");
-    height: 77.5vh;
+    height: 90.5vh;
 }
 .search{
     display: flex;

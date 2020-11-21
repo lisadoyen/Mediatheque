@@ -40,7 +40,7 @@ class __TwigTemplate_b18465cdddd089cf581bdde0c4fa30facd5748e9adcc060112dc7d9b21c
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "_search.html.twig"));
 
         // line 1
-        echo "<div style=\"height: 77.5vh;padding-top:0px; background:linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url('";
+        echo "<div style=\"height: 90.5vh;padding-top:0px; background:linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url('";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/bg.jpg"), "html", null, true);
         echo "')\">
     <div class=\"d-flex justify-content-center h-100\">
@@ -82,7 +82,7 @@ class __TwigTemplate_b18465cdddd089cf581bdde0c4fa30facd5748e9adcc060112dc7d9b21c
 
     public function getSourceContext()
     {
-        return new Source("<div style=\"height: 77.5vh;padding-top:0px; background:linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('assets/images/bg.jpg') }}')\">
+        return new Source("<div style=\"height: 90.5vh;padding-top:0px; background:linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('assets/images/bg.jpg') }}')\">
     <div class=\"d-flex justify-content-center h-100\">
         <form id=\"search\" action=\"POST\" style=\"margin-top: 33.75vh;\">
             <div class=\"searchbar\">

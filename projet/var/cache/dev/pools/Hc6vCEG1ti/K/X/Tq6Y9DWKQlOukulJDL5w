@@ -9,10 +9,10 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
     [
         'Symfony\\Component\\Routing\\Annotation\\Route' => [
             'path' => [
-                '/livres/add/{isbn}',
+                '/livres/get/{isbn}',
             ],
             'name' => [
-                'livres_add_isbn',
+                'livres_search_isbn',
             ],
             'methods' => [
                 [

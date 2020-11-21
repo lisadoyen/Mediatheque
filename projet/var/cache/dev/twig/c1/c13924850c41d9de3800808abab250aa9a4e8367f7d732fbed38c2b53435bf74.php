@@ -74,7 +74,7 @@ class __TwigTemplate_f6739e3810d521da59abe0dab472ae38395ca8009f98aa86e1dd60934f0
             echo "            <div class=\"row\">
                 <a href=\"";
             // line 7
-            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("livres_add");
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("get_ISBN");
             echo "\" class=\"edit-btn\">Ajouter un livre</a>
             </div>
         ";
@@ -269,7 +269,7 @@ class __TwigTemplate_f6739e3810d521da59abe0dab472ae38395ca8009f98aa86e1dd60934f0
         <h1 class=\"center\">Récapitulatifs des livres</h1><br>
         {% if is_granted('ROLE_BENEVOLE') %}
             <div class=\"row\">
-                <a href=\"{{ path('livres_add') }}\" class=\"edit-btn\">Ajouter un livre</a>
+                <a href=\"{{ path('get_ISBN') }}\" class=\"edit-btn\">Ajouter un livre</a>
             </div>
         {% endif %}
         <div>

@@ -12,7 +12,12 @@ return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\
                 '/livres/add',
             ],
             'name' => [
-                'livres_add',
+                'add_livre',
+            ],
+            'options' => [
+                [
+                    'expose' => true,
+                ],
             ],
             'methods' => [
                 [

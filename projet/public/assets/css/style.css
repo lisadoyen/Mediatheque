@@ -4,3 +4,7 @@
     --second-color:#fcaf64;
     --placeholder: #FAFAFA;
 }
+
+body {
+    background: #FAFAFA;
+}

@@ -256,4 +256,8 @@ input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-me
         padding: 1vh;
         min-width:auto;
     }
+
+    img.shopCar{right: 23.5vh;top: 2.6vh;}
+    img.fav{right: 18vh;}
+    img.account{right: 13vh;}
 }
