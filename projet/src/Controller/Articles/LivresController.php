@@ -2,37 +2,118 @@
 
 namespace App\Controller\Articles;
 
+use App\Data\SearchData;
 use App\Entity\Bibliotheque;
+use App\Entity\Genre;
 use App\Form\BibliothequeType;
+use App\Repository\BibliothequeRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class LivresController extends AbstractController
 {
     /**
-     * @Route("/livres/show", name="livres_show",methods={"GET"})
+     * @Route("/livres/show", name="livres_show",methods={"GET", "POST"})
+     * @Route("/livres/genres/{id}/show", name="genres_id_livres_show",methods={"GET", "POST"})
+     * @param $id
+     * @param SessionInterface $session
+     * @param BibliothequeRepository $br
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function showAll(Request $request, PaginatorInterface $paginator)
+    public function showAll($id = null, SessionInterface $session,BibliothequeRepository $br, Request $request, PaginatorInterface $paginator)
     {
-        $repository = $this->getDoctrine()->getRepository(Bibliotheque::class);
-        $articles = $repository ->findAll();
+        // Menu genre
+        if($id != null) {
+            $data = new SearchData();
+            $categories = [];
+            $categories[$id] = $this->getDoctrine()->getRepository(Genre::class)->find($id);
+            $data->genre = $categories;
+            $donnees['genres'] = $categories;
+            $session->set('donnees', null);
+            $session->set('donnees', $donnees);
+            if (!empty($donnees)) {
+                $donnees = $session->get('donnees');
+                $data->genre = $donnees['genres'];
+            }
 
-        $livres = $paginator ->paginate(
-            $articles,
-            $request->query->getInt('page',1),
-            10
-        );
-        return $this->render('livres/show_all_livres.html.twig', ['livres' => $livres]);
+            $articles = $br->findSearch($data);
+            $livres = $paginator ->paginate(
+                $articles,
+                $request->query->getInt('page',1),
+                10
+            );
+            return $this->render('livres/show_all_livres.html.twig', [
+                'session' => $session,
+                'livres' => $livres,
+                'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
+                'donnees' => $donnees
+            ]);
+        }
+        // filtre
+        else {
+            $data = new SearchData();
+            if ($request->getMethod() == 'POST') {
+
+                $donnees['search'] = $_POST['search'];
+
+                $data->q = $donnees['search'];
+                if (!empty($_POST['genres'])) {
+                    $donnees['genres'] = $_POST['genres'];
+                    $categories = [];
+                    foreach ($donnees['genres'] as $id) {
+                        $categories[$id] = $this->getDoctrine()->getRepository(Genre::class)->find($id);
+                    }
+                    $data->genre = $categories;
+                    $donnees['genres'] = $categories;
+                }
+                if(isset($donnees))
+                $session->set('donnees', $donnees);
+                else
+                    $donnees=null;
+            } else {
+                // on remplie le filtre avec la session
+                $donnees = $session->get('donnees');
+                if (!empty($donnees)) {
+                    if(isset($donnees['search']))
+                        $data->q = $donnees['search'];
+                    if (!empty($donnees['genres'])) {
+                        $data->genre = $donnees['genres'];
+                    }
+                }
+            }
+            $articles = $br->findSearch($data);
+
+            $livres = $paginator->paginate(
+                $articles,
+                $request->query->getInt('page', 1),
+                10
+            );
+            return $this->render('livres/show_all_livres.html.twig', [
+                'livres' => $livres,
+                'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
+                'donnees' => $donnees
+            ]);
+        }
     }
 
+    /**
+     * @Route("/livre/filtre/clear", name="filter_clear", methods={"GET", "POST"})
+     * @param SessionInterface $session
+     * @return Response
+     */
+    public function clearFiltrer(SessionInterface $session){
+        $session->set('donnees', null);
+        return $this->redirectToRoute('livres_show');
+    }
 
     /**
      * @Route("/livres/getISBN", name="get_ISBN", methods={"GET","POST"})

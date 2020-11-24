@@ -1028,7 +1028,7 @@ return [[
 
 0 => 'N;',
 1 => [],
-2 => 1605963714,
+2 => 1606156276,
 3 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
@@ -1243,27 +1243,31 @@ return [[
 12 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Table'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Table')),
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+            clone ($p['Doctrine\\ORM\\Mapping\\Table'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Table')),
             clone ($p['Doctrine\\ORM\\Mapping\\Index'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Index')),
             clone $p['Doctrine\\ORM\\Mapping\\Index'],
-            clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+            clone $p['Doctrine\\ORM\\Mapping\\Entity'],
         ],
         null,
         [
             'stdClass' => [
+                'repositoryClass' => [
+                    'App\\Repository\\BibliothequeRepository',
+                ],
                 'name' => [
-                    'bibliotheque',
+                    1 => 'bibliotheque',
                     'FK_auteur',
                     'FK_id_genre',
                 ],
                 'indexes' => [
-                    [
-                        $o[1],
+                    1 => [
                         $o[2],
+                        $o[3],
                     ],
                 ],
                 'columns' => [
-                    1 => [
+                    2 => [
                         'FK_id_auteur',
                     ],
                     [
@@ -1274,7 +1278,8 @@ return [[
         ],
         [
             $o[0],
-            $o[3],
+            $o[1],
+            $o[4],
         ],
         []
     );

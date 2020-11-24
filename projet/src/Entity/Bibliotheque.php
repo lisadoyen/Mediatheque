@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Entity\Genre;
 use App\Entity\Auteur;
+use App\Repository\BibliothequeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Bibliotheque
  *
+ * @ORM\Entity(repositoryClass=BibliothequeRepository::class)
  * @ORM\Table(name="bibliotheque", indexes={@ORM\Index(name="FK_auteur", columns={"FK_id_auteur"}), @ORM\Index(name="FK_id_genre", columns={"FK_id_genre"})})
  * @ORM\Entity
  */

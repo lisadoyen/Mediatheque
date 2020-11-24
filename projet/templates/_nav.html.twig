@@ -2,10 +2,10 @@
     <h1 id="main-title">Médiathèque</h1>
     <a href="{{ path('accueil') }}"><img src="{{asset('assets/images/yellow/home.png')}}" class="icon home" alt="Accueil"></a>
     {% if app.request.pathInfo != '/accueil' %}
-        <form id="search" action="POST" class="search-in-nav">
+        <form action="{{ path('livres_show') }}" id="search" method="post" class="search-in-nav">
             <div class="searchbar">
-                <input class="search_input" type="text" name="" placeholder="Search...">
-                <a href="#" class="search_icon" onclick="this.closest('form').submit();return false;">
+                <input class="search_input" type="text" name="search" placeholder="Search...">
+                <a type="submit" href="{{ path('livres_show') }}" class="search_icon" onclick="this.closest('form').submit();return false;">
                     <img src="{{asset('assets/images/yellow/search.png')}}" class="search-icon">
                 </a>
             </div>
@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm sub-dropdown container">
-                <a href="{{ path('genres_livres_show') }}" class="media-item dropbtn">Livres</a>
+                <a href="{{ path('livres_show') }}" class="media-item dropbtn">Livres</a>
                 {{ render(controller('App\\Controller\\GenreController::getAllGenres')) }}
             </div>
             <div class="col-sm">

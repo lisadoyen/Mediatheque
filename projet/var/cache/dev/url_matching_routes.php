@@ -13,10 +13,10 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
-        '/livres/show' => [[['_route' => 'livres_show', '_controller' => 'App\\Controller\\Articles\\LivresController::showAll'], null, ['GET' => 0], null, false, false, null]],
+        '/livres/show' => [[['_route' => 'livres_show', '_controller' => 'App\\Controller\\Articles\\LivresController::showAll'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/livre/filtre/clear' => [[['_route' => 'filter_clear', '_controller' => 'App\\Controller\\Articles\\LivresController::clearFiltrer'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/livres/getISBN' => [[['_route' => 'get_ISBN', '_controller' => 'App\\Controller\\Articles\\LivresController::getISBN'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/livres/add' => [[['_route' => 'add_livre', '_controller' => 'App\\Controller\\Articles\\LivresController::addLivre'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        '/genres/livres' => [[['_route' => 'genres_livres_show', '_controller' => 'App\\Controller\\GenreController::showAllGenre'], null, ['GET' => 0], null, false, false, null]],
         '/' => [[['_route' => 'index', '_controller' => 'App\\Controller\\IndexController::index'], null, null, null, false, false, null]],
         '/accueil' => [[['_route' => 'accueil', '_controller' => 'App\\Controller\\IndexController::accueil'], null, null, null, false, false, null]],
         '/inscription' => [[['_route' => 'security_registration', '_controller' => 'App\\Controller\\Security\\SecurityController::registration'], null, null, null, false, false, null]],
@@ -48,8 +48,10 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/livres/get/([^/]++)(*:189)'
-                .'|/genres/([^/]++)/livres(*:220)'
+                .'|/livres/ge(?'
+                    .'|nres/([^/]++)/show(*:200)'
+                    .'|t/([^/]++)(*:218)'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -60,9 +62,9 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        189 => [[['_route' => 'livres_search_isbn', '_controller' => 'App\\Controller\\Articles\\LivresController::getDataFromIsbn'], ['isbn'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        220 => [
-            [['_route' => 'genres_id_livres_show', '_controller' => 'App\\Controller\\GenreController::showOneByGenre'], ['id'], ['GET' => 0], null, false, false, null],
+        200 => [[['_route' => 'genres_id_livres_show', 'id' => null, '_controller' => 'App\\Controller\\Articles\\LivresController::showAll'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        218 => [
+            [['_route' => 'livres_search_isbn', '_controller' => 'App\\Controller\\Articles\\LivresController::getDataFromIsbn'], ['isbn'], ['GET' => 0, 'POST' => 1], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],
