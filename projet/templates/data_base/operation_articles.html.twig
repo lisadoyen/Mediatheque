@@ -1,0 +1,38 @@
+{% extends "layout.html.twig" %}
+{% block body %}
+    <div class="container cadre">
+        <h1>Opérations sur les articles</h1><hr>
+        <div class="row">
+            <div class="col-sm">
+                Livres
+            </div>
+            <div class="col-sm">
+                <a href="{{ path('get_ISBN') }}" class="edit-btn">Ajouter un livre</a>
+            </div>
+        </div><hr>
+        <div class="row">
+            <div class="col-sm">
+                Films
+            </div>
+            <div class="col-sm">
+                <a href="" class="edit-btn">Ajouter un film</a>
+            </div>
+        </div><hr>
+        <div class="row">
+            <div class="col-sm">
+                Films
+            </div>
+            <div class="col-sm">
+                <a href="" class="edit-btn">Ajouter une musique</a>
+            </div>
+        </div><hr>
+        <div class="row">
+            <div class="col-sm">
+                Jeux
+            </div>
+            <div class="col-sm">
+                <a href="" class="edit-btn">Ajouter un jeu</a>
+            </div>
+        </div><hr>
+    </div>
+{% endblock %}
