@@ -1,0 +1,6 @@
+<div class="searchbar form-group">
+    <input value="{{donnees.search|default('')}}" class="search_input" type="text" name="search" placeholder="Search...">
+    <a type="submit" value="{{donnees.search|default('')}}" href="{{ path('livres_show') }}" class="search_icon" onclick="this.closest('form').submit();return false;">
+        <img src="{{asset('assets/images/yellow/search.png')}}" class="search-icon">
+    </a>
+</div>

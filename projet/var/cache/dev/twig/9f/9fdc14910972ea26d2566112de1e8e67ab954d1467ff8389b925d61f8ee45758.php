@@ -51,20 +51,20 @@ class __TwigTemplate_e8e7a0b82f9c136b092f853bb0546579d6ee719000edfe4cb5dd6c3c849
     ";
         // line 6
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 22
+        // line 21
         echo "</head>
 <body>
 ";
+        // line 23
+        $this->loadTemplate("_nav.html.twig", "layout.html.twig", 23)->display($context);
         // line 24
-        $this->loadTemplate("_nav.html.twig", "layout.html.twig", 24)->display($context);
-        // line 25
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 25, $this->source); })()), "flashes", [0 => "success"], "method", false, false, false, 25));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 24, $this->source); })()), "flashes", [0 => "success"], "method", false, false, false, 24));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 26
+            // line 25
             echo "    <div class=\"alert alert-success\">
         ";
-            // line 27
+            // line 26
             echo twig_escape_filter($this->env, $context["message"], "html", null, true);
             echo "
     </div>
@@ -73,14 +73,14 @@ class __TwigTemplate_e8e7a0b82f9c136b092f853bb0546579d6ee719000edfe4cb5dd6c3c849
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 30
+        // line 29
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 30, $this->source); })()), "flashes", [0 => "danger"], "method", false, false, false, 30));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 29, $this->source); })()), "flashes", [0 => "danger"], "method", false, false, false, 29));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 31
+            // line 30
             echo "    <div class=\"alert alert-danger\">
         ";
-            // line 32
+            // line 31
             echo twig_escape_filter($this->env, $context["message"], "html", null, true);
             echo "
     </div>
@@ -89,19 +89,19 @@ class __TwigTemplate_e8e7a0b82f9c136b092f853bb0546579d6ee719000edfe4cb5dd6c3c849
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 35
+        // line 34
         $this->displayBlock('body', $context, $blocks);
-        // line 36
+        // line 35
         echo "
 ";
-        // line 37
+        // line 36
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 44
+        // line 43
         echo "</body>
 ";
+        // line 44
+        $this->loadTemplate("_footer.html.twig", "layout.html.twig", 44)->display($context);
         // line 45
-        $this->loadTemplate("_footer.html.twig", "layout.html.twig", 45)->display($context);
-        // line 46
         echo "
 
 </html>
@@ -168,7 +168,6 @@ class __TwigTemplate_e8e7a0b82f9c136b092f853bb0546579d6ee719000edfe4cb5dd6c3c849
         echo "\">
         <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.5.0/css/all.css\">
         <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">
-
     ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -178,7 +177,7 @@ class __TwigTemplate_e8e7a0b82f9c136b092f853bb0546579d6ee719000edfe4cb5dd6c3c849
 
     }
 
-    // line 35
+    // line 34
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -196,7 +195,7 @@ class __TwigTemplate_e8e7a0b82f9c136b092f853bb0546579d6ee719000edfe4cb5dd6c3c849
 
     }
 
-    // line 37
+    // line 36
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -206,20 +205,20 @@ class __TwigTemplate_e8e7a0b82f9c136b092f853bb0546579d6ee719000edfe4cb5dd6c3c849
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 38
+        // line 37
         echo "    <script src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/jquery-3.5.1.slim.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 39
+        // line 38
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/popper.min.js"), "html", null, true);
         echo "\" ></script>
     <script src=\"";
-        // line 40
+        // line 39
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/bootstrap.js"), "html", null, true);
         echo "\" ></script>
     <script src=\"";
-        // line 41
+        // line 40
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/visibility.js"), "html", null, true);
         echo "\" ></script>
 
@@ -244,7 +243,7 @@ class __TwigTemplate_e8e7a0b82f9c136b092f853bb0546579d6ee719000edfe4cb5dd6c3c849
 
     public function getDebugInfo()
     {
-        return array (  223 => 41,  219 => 40,  215 => 39,  210 => 38,  200 => 37,  182 => 35,  167 => 17,  163 => 16,  159 => 15,  155 => 14,  151 => 13,  147 => 12,  143 => 11,  139 => 10,  135 => 9,  129 => 7,  119 => 6,  105 => 46,  103 => 45,  100 => 44,  98 => 37,  95 => 36,  93 => 35,  84 => 32,  81 => 31,  77 => 30,  68 => 27,  65 => 26,  61 => 25,  59 => 24,  55 => 22,  53 => 6,  46 => 1,);
+        return array (  222 => 40,  218 => 39,  214 => 38,  209 => 37,  199 => 36,  181 => 34,  167 => 17,  163 => 16,  159 => 15,  155 => 14,  151 => 13,  147 => 12,  143 => 11,  139 => 10,  135 => 9,  129 => 7,  119 => 6,  105 => 45,  103 => 44,  100 => 43,  98 => 36,  95 => 35,  93 => 34,  84 => 31,  81 => 30,  77 => 29,  68 => 26,  65 => 25,  61 => 24,  59 => 23,  55 => 21,  53 => 6,  46 => 1,);
     }
 
     public function getSourceContext()
@@ -268,7 +267,6 @@ class __TwigTemplate_e8e7a0b82f9c136b092f853bb0546579d6ee719000edfe4cb5dd6c3c849
         <link rel=\"stylesheet\" href=\"{{ asset('assets/css/filtre.css') }}\">
         <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.5.0/css/all.css\">
         <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">
-
     {% endblock %}
 </head>
 <body>
@@ -298,6 +296,6 @@ class __TwigTemplate_e8e7a0b82f9c136b092f853bb0546579d6ee719000edfe4cb5dd6c3c849
 
 </html>
 
-", "layout.html.twig", "/var/www/html/ptut/projet_actu/projet/templates/layout.html.twig");
+", "layout.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/templates/layout.html.twig");
     }
 }

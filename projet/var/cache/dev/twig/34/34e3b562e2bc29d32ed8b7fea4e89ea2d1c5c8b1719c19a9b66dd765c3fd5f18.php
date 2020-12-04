@@ -42,23 +42,77 @@ class __TwigTemplate_6d1bdd054c65769ef6be0a3b8ee3b7c8f6f67befb2b1c208a1e430b1061
         // line 1
         echo "
 <div id=\"1\" style=\"visibility: visible\">
-<form method=\"post\" action=\"";
+    <form action=\"";
         // line 3
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("filter_clear");
+        echo "\" method=\"post\">
+        <input type=\"hidden\" name=\"_method\" value=\"GET\">
+        <button type=\"submit\" class=\"edit-btn float-left\" onclick=\"return confirm('Voulez-vous vraiment vider le filtre ?')\">Vider</button>
+    </form>
+
+<form method=\"post\" action=\"";
+        // line 8
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("livres_show");
         echo "\" >
 
+    <input type=\"hidden\" name=\"token\" value=\"";
+        // line 10
+        echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("form_articles"), "html", null, true);
+        echo "\">
+    <button type=\"submit\" class=\"edit-btn \">Filtrer</button>
+    <hr>
+    <div class=\"container\" style=\"color: grey\">
+        <u style=\"text-decoration: none\">
+            ";
+        // line 15
+        if (twig_get_attribute($this->env, $this->source, ($context["donnees"] ?? null), "search", [], "any", true, true, false, 15)) {
+            // line 16
+            echo "                ";
+            if ( !twig_test_empty(twig_get_attribute($this->env, $this->source, (isset($context["donnees"]) || array_key_exists("donnees", $context) ? $context["donnees"] : (function () { throw new RuntimeError('Variable "donnees" does not exist.', 16, $this->source); })()), "search", [], "any", false, false, false, 16))) {
+                // line 17
+                echo "                <li> recherche : <strong>";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["donnees"]) || array_key_exists("donnees", $context) ? $context["donnees"] : (function () { throw new RuntimeError('Variable "donnees" does not exist.', 17, $this->source); })()), "search", [], "any", false, false, false, 17), "html", null, true);
+                echo "</strong></li>
+            ";
+            }
+        }
+        // line 19
+        echo "            ";
+        if ( !twig_test_empty((isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 19, $this->source); })()))) {
+            // line 20
+            echo "                ";
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable((isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 20, $this->source); })()));
+            foreach ($context['_seq'] as $context["_key"] => $context["genre"]) {
+                // line 21
+                echo "                    ";
+                if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["donnees"] ?? null), "genres", [], "any", false, true, false, 21), twig_get_attribute($this->env, $this->source, $context["genre"], "idGenre", [], "any", false, false, false, 21), [], "array", true, true, false, 21)) {
+                    // line 22
+                    echo "                        <li> genre : <strong>";
+                    echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "libelleGenre", [], "any", false, false, false, 22)), "html", null, true);
+                    echo "</strong></li>
+                    ";
+                }
+                // line 24
+                echo "                ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genre'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 25
+            echo "            ";
+        }
+        // line 26
+        echo "        </u>
+   </div>
 
-    <div class=\"form-group\">
-        la recherche est : <input name=\"search\" placeholder=\"Recherchez\" size=\"18\" value=\"";
-        // line 7
-        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, ($context["donnees"] ?? null), "search", [], "any", true, true, false, 7)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, ($context["donnees"] ?? null), "search", [], "any", false, false, false, 7), "")) : ("")), "html", null, true);
+    <div class=\"form-group p-3\">
+       <input name=\"search\" placeholder=\"Recherchez\" size=\"18\" value=\"";
+        // line 30
+        echo twig_escape_filter($this->env, ((twig_get_attribute($this->env, $this->source, ($context["donnees"] ?? null), "search", [], "any", true, true, false, 30)) ? (_twig_default_filter(twig_get_attribute($this->env, $this->source, ($context["donnees"] ?? null), "search", [], "any", false, false, false, 30), "")) : ("")), "html", null, true);
         echo "\" class=\"form-control\" >
     </div>
 
-    <i style=\"color: grey\">
-        filtre activé : ...
-    </i>
-    <hr>
     <div class=\"form-group\">
         <div class=\"sub-menu-filtre\">
             <a href=\"#mon-bloc-1\" data-js=\"hide\"><h5>Catégories</h5></a>
@@ -77,21 +131,21 @@ class __TwigTemplate_6d1bdd054c65769ef6be0a3b8ee3b7c8f6f67befb2b1c208a1e430b1061
         <div id=\"mon-bloc-2\" class=\"hide-box p-2\">
             <div class=\"filtre\">
             ";
-        // line 31
+        // line 50
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_slice($this->env, (isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 31, $this->source); })()), 0, (twig_length_filter($this->env, (isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 31, $this->source); })())) / 2)));
+        $context['_seq'] = twig_ensure_traversable(twig_slice($this->env, (isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 50, $this->source); })()), 0, (twig_length_filter($this->env, (isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 50, $this->source); })())) / 2)));
         foreach ($context['_seq'] as $context["_key"] => $context["genre"]) {
-            // line 32
+            // line 51
             echo "                <input  type=\"checkbox\" name=\"genres[]\" value=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "idGenre", [], "any", false, false, false, 32), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "idGenre", [], "any", false, false, false, 51), "html", null, true);
             echo "\"";
-            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["donnees"] ?? null), "genres", [], "any", false, true, false, 32), twig_get_attribute($this->env, $this->source, $context["genre"], "idGenre", [], "any", false, false, false, 32), [], "array", true, true, false, 32)) {
+            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["donnees"] ?? null), "genres", [], "any", false, true, false, 51), twig_get_attribute($this->env, $this->source, $context["genre"], "idGenre", [], "any", false, false, false, 51), [], "array", true, true, false, 51)) {
                 echo " checked ";
             }
             echo ">
                 ";
-            // line 33
-            echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "libelleGenre", [], "any", false, false, false, 33)), "html", null, true);
+            // line 52
+            echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "libelleGenre", [], "any", false, false, false, 52)), "html", null, true);
             echo "
                 <br/>
             ";
@@ -99,24 +153,24 @@ class __TwigTemplate_6d1bdd054c65769ef6be0a3b8ee3b7c8f6f67befb2b1c208a1e430b1061
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genre'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 36
+        // line 55
         echo "            </div>
             ";
-        // line 37
+        // line 56
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_slice($this->env, (isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 37, $this->source); })()), (twig_length_filter($this->env, (isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 37, $this->source); })())) / 2), twig_length_filter($this->env, (isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 37, $this->source); })()))));
+        $context['_seq'] = twig_ensure_traversable(twig_slice($this->env, (isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 56, $this->source); })()), (twig_length_filter($this->env, (isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 56, $this->source); })())) / 2), twig_length_filter($this->env, (isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 56, $this->source); })()))));
         foreach ($context['_seq'] as $context["_key"] => $context["genre"]) {
-            // line 38
+            // line 57
             echo "                <input type=\"checkbox\" name=\"genres[]\" value=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "idGenre", [], "any", false, false, false, 38), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "idGenre", [], "any", false, false, false, 57), "html", null, true);
             echo "\"";
-            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["donnees"] ?? null), "genres", [], "any", false, true, false, 38), twig_get_attribute($this->env, $this->source, $context["genre"], "idGenre", [], "any", false, false, false, 38), [], "array", true, true, false, 38)) {
+            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["donnees"] ?? null), "genres", [], "any", false, true, false, 57), twig_get_attribute($this->env, $this->source, $context["genre"], "idGenre", [], "any", false, false, false, 57), [], "array", true, true, false, 57)) {
                 echo " checked ";
             }
             echo ">
                 ";
-            // line 39
-            echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "libelleGenre", [], "any", false, false, false, 39)), "html", null, true);
+            // line 58
+            echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "libelleGenre", [], "any", false, false, false, 58)), "html", null, true);
             echo "
                 <br/>
             ";
@@ -124,7 +178,7 @@ class __TwigTemplate_6d1bdd054c65769ef6be0a3b8ee3b7c8f6f67befb2b1c208a1e430b1061
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genre'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 42
+        // line 61
         echo "        </div>
     </div>
 
@@ -181,20 +235,8 @@ class __TwigTemplate_6d1bdd054c65769ef6be0a3b8ee3b7c8f6f67befb2b1c208a1e430b1061
         </div>
     </div>
     <hr>
-    <input type=\"hidden\" name=\"token\" value=\"";
-        // line 98
-        echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("form_articles"), "html", null, true);
-        echo "\">
-    <button type=\"submit\" class=\"edit-btn float-left\">Filtrer</button>
 </form>
 
-    <form action=\"";
-        // line 102
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("filter_clear");
-        echo "\" method=\"post\">
-        <input type=\"hidden\" name=\"_method\" value=\"GET\">
-        <button type=\"submit\" class=\"edit-btn\" onclick=\"return confirm('Voulez-vous vraiment vider le filtre ?')\">Vider</button>
-    </form>
 </div>
 
 ";
@@ -218,24 +260,43 @@ class __TwigTemplate_6d1bdd054c65769ef6be0a3b8ee3b7c8f6f67befb2b1c208a1e430b1061
 
     public function getDebugInfo()
     {
-        return array (  193 => 102,  186 => 98,  128 => 42,  119 => 39,  110 => 38,  106 => 37,  103 => 36,  94 => 33,  85 => 32,  81 => 31,  54 => 7,  47 => 3,  43 => 1,);
+        return array (  182 => 61,  173 => 58,  164 => 57,  160 => 56,  157 => 55,  148 => 52,  139 => 51,  135 => 50,  112 => 30,  106 => 26,  103 => 25,  97 => 24,  91 => 22,  88 => 21,  83 => 20,  80 => 19,  73 => 17,  70 => 16,  68 => 15,  60 => 10,  55 => 8,  47 => 3,  43 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("
 <div id=\"1\" style=\"visibility: visible\">
+    <form action=\"{{ path('filter_clear') }}\" method=\"post\">
+        <input type=\"hidden\" name=\"_method\" value=\"GET\">
+        <button type=\"submit\" class=\"edit-btn float-left\" onclick=\"return confirm('Voulez-vous vraiment vider le filtre ?')\">Vider</button>
+    </form>
+
 <form method=\"post\" action=\"{{ path('livres_show') }}\" >
 
+    <input type=\"hidden\" name=\"token\" value=\"{{ csrf_token('form_articles') }}\">
+    <button type=\"submit\" class=\"edit-btn \">Filtrer</button>
+    <hr>
+    <div class=\"container\" style=\"color: grey\">
+        <u style=\"text-decoration: none\">
+            {% if donnees.search is defined %}
+                {% if donnees.search is not empty %}
+                <li> recherche : <strong>{{ donnees.search }}</strong></li>
+            {% endif %}{% endif %}
+            {% if genres is not empty %}
+                {% for genre in genres %}
+                    {% if donnees.genres[genre.idGenre] is defined %}
+                        <li> genre : <strong>{{ genre.libelleGenre|capitalize }}</strong></li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </u>
+   </div>
 
-    <div class=\"form-group\">
-        la recherche est : <input name=\"search\" placeholder=\"Recherchez\" size=\"18\" value=\"{{donnees.search|default('')}}\" class=\"form-control\" >
+    <div class=\"form-group p-3\">
+       <input name=\"search\" placeholder=\"Recherchez\" size=\"18\" value=\"{{donnees.search|default('')}}\" class=\"form-control\" >
     </div>
 
-    <i style=\"color: grey\">
-        filtre activé : ...
-    </i>
-    <hr>
     <div class=\"form-group\">
         <div class=\"sub-menu-filtre\">
             <a href=\"#mon-bloc-1\" data-js=\"hide\"><h5>Catégories</h5></a>
@@ -320,16 +381,10 @@ class __TwigTemplate_6d1bdd054c65769ef6be0a3b8ee3b7c8f6f67befb2b1c208a1e430b1061
         </div>
     </div>
     <hr>
-    <input type=\"hidden\" name=\"token\" value=\"{{ csrf_token('form_articles') }}\">
-    <button type=\"submit\" class=\"edit-btn float-left\">Filtrer</button>
 </form>
 
-    <form action=\"{{ path('filter_clear') }}\" method=\"post\">
-        <input type=\"hidden\" name=\"_method\" value=\"GET\">
-        <button type=\"submit\" class=\"edit-btn\" onclick=\"return confirm('Voulez-vous vraiment vider le filtre ?')\">Vider</button>
-    </form>
 </div>
 
-", "data/_filtre_articles.html.twig", "/var/www/html/ptut/projet_actu/projet/templates/data/_filtre_articles.html.twig");
+", "data/_filtre_articles.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/templates/data/_filtre_articles.html.twig");
     }
 }

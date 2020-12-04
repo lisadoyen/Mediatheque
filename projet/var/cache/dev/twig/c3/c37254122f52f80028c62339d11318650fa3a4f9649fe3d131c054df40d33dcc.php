@@ -248,6 +248,6 @@ class __TwigTemplate_cc312dd4331b0715b28c60924676eb3845a800e629090fdee6be10feb1f
         <li><a href=\"https://github.com/EasyCorp/EasyAdminBundle\">Project homepage</a></li>
     </ul>
 {% endblock %}
-", "@EasyAdmin/inspector/data_collector.html.twig", "/var/www/html/ptut/projet_actu/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/inspector/data_collector.html.twig");
+", "@EasyAdmin/inspector/data_collector.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/vendor/easycorp/easyadmin-bundle/src/Resources/views/inspector/data_collector.html.twig");
     }
 }

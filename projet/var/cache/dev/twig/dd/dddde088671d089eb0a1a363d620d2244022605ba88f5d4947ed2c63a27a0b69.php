@@ -66,7 +66,7 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
 
         // line 3
         echo "    ";
-        $this->loadTemplate("_search.html.twig", "accueil.html.twig", 3)->display($context);
+        $this->loadTemplate("_search_home.html.twig", "accueil.html.twig", 3)->display($context);
         // line 4
         echo "    <div class=\"container-carousel\">
 
@@ -160,7 +160,7 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                         <div class=\"carousel-item active\">
                             <div class=\"row\">
                                 <div class=\"col-sm\">
-                                    <div class=\"img-box h-100 w-100 d-inline-block\">
+                                    <div class=\"img-box h-100 w-100\">
                                         <a href=\"#\"><img src=\"";
         // line 91
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP1.jpg"), "html", null, true);
@@ -176,23 +176,10 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class=\"carousel-item\">
                             <div class=\"row\">
                                 <div class=\"col-sm\">
-                                    <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"";
-        // line 105
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP3.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
-                                    </div>
-                                </div>
-                                <div class=\"col-sm\">
-                                    <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"";
-        // line 110
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP4.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +189,34 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"";
-        // line 119
+        // line 112
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP3.jpg"), "html", null, true);
+        echo "\" class=\"img-fluid\" alt=\"\"></a>
+                                    </div>
+                                </div>
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100 d-inline-block\">
+                                        <a href=\"#\"><img src=\"";
+        // line 117
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP4.jpg"), "html", null, true);
+        echo "\" class=\"img-fluid\" alt=\"\"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=\"carousel-item\">
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100 d-inline-block\">
+                                        <a href=\"#\"><img src=\"";
+        // line 133
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP5.jpg"), "html", null, true);
         echo "\" class=\"img-fluid\" alt=\"\"></a>
 
@@ -211,9 +225,16 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"";
-        // line 125
+        // line 139
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP7.jpg"), "html", null, true);
         echo "\" class=\"img-fluid\" alt=\"\"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +293,7 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"";
-        // line 183
+        // line 204
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP1.jpg"), "html", null, true);
         echo "\" class=\"img-fluid\" alt=\"\"></a>
                                     </div>
@@ -280,9 +301,16 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"";
-        // line 188
+        // line 209
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP2.jpg"), "html", null, true);
         echo "\" class=\"img-fluid\" alt=\"\"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>
@@ -292,7 +320,7 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"";
-        // line 197
+        // line 225
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP3.jpg"), "html", null, true);
         echo "\" class=\"img-fluid\" alt=\"\"></a>
                                     </div>
@@ -300,9 +328,16 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"";
-        // line 202
+        // line 230
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP4.jpg"), "html", null, true);
         echo "\" class=\"img-fluid\" alt=\"\"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +347,7 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"";
-        // line 211
+        // line 246
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP5.jpg"), "html", null, true);
         echo "\" class=\"img-fluid\" alt=\"\"></a>
 
@@ -321,9 +356,16 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"";
-        // line 217
+        // line 252
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP7.jpg"), "html", null, true);
         echo "\" class=\"img-fluid\" alt=\"\"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>
@@ -364,14 +406,14 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
 
     public function getDebugInfo()
     {
-        return array (  325 => 217,  316 => 211,  304 => 202,  296 => 197,  284 => 188,  276 => 183,  215 => 125,  206 => 119,  194 => 110,  186 => 105,  174 => 96,  166 => 91,  119 => 47,  107 => 38,  71 => 4,  68 => 3,  58 => 2,  35 => 1,);
+        return array (  360 => 252,  351 => 246,  332 => 230,  324 => 225,  305 => 209,  297 => 204,  229 => 139,  220 => 133,  201 => 117,  193 => 112,  174 => 96,  166 => 91,  119 => 47,  107 => 38,  71 => 4,  68 => 3,  58 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends \"layout.html.twig\" %}
 {% block body %}
-    {% include \"_search.html.twig\" %}
+    {% include \"_search_home.html.twig\" %}
     <div class=\"container-carousel\">
 
         <div class=\"row\">
@@ -458,13 +500,20 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                         <div class=\"carousel-item active\">
                             <div class=\"row\">
                                 <div class=\"col-sm\">
-                                    <div class=\"img-box h-100 w-100 d-inline-block\">
+                                    <div class=\"img-box h-100 w-100\">
                                         <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP1.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP2.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>
@@ -482,6 +531,13 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                     </div>
                                 </div>
                             </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class=\"carousel-item\">
                             <div class=\"row\">
@@ -494,6 +550,13 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP7.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>
@@ -560,6 +623,13 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                     </div>
                                 </div>
                             </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class=\"carousel-item\">
                             <div class=\"row\">
@@ -571,6 +641,13 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP4.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>
@@ -586,6 +663,13 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
                                         <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP7.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"row\">
+                                <div class=\"col-sm\">
+                                    <div class=\"img-box h-100 w-100\">
+                                        <button class=\"edit-btn\" style=\"float: right\">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>
@@ -605,6 +689,6 @@ class __TwigTemplate_37419c500994f9452385c3bdaeda0f081a70c9e4fe68ac0419fb500d8fb
             </div>
         </div>
     </div>
-{% endblock %}", "accueil.html.twig", "/var/www/html/ptut/projet_actu/projet/templates/accueil.html.twig");
+{% endblock %}", "accueil.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/templates/accueil.html.twig");
     }
 }

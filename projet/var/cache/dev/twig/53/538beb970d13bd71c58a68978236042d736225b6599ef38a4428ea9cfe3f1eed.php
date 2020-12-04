@@ -104,6 +104,6 @@ class __TwigTemplate_d12e11db134bd02581c94e30d32ae78c1794f3460a96a136a6c2129cde1
 
     </div>
 {% endblock %}
-", "users/profil/favoris.html.twig", "/var/www/html/ptut/projet_actu/projet/templates/users/profil/favoris.html.twig");
+", "users/profil/favoris.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/templates/users/profil/favoris.html.twig");
     }
 }

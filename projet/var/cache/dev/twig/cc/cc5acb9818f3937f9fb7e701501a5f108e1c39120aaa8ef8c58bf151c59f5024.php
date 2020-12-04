@@ -1882,6 +1882,6 @@ class __TwigTemplate_8c6bee3046e08948e15ef19cbafb7295148e13f787ec3a785a81d5212b4
         </tbody>
     </table>
 {% endmacro %}
-", "@Doctrine/Collector/db.html.twig", "/var/www/html/ptut/projet_actu/projet/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
+", "@Doctrine/Collector/db.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
     }
 }

@@ -213,6 +213,6 @@ class __TwigTemplate_d9851f28f01a286e586c9f772543215c8ffb93b4f67b76506ee3ebf1fbf
             });
         });
     </script>
-{% endblock %}", "livres/get_ISBN.html.twig", "/var/www/html/ptut/projet_actu/projet/templates/livres/get_ISBN.html.twig");
+{% endblock %}", "livres/get_ISBN.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/templates/livres/get_ISBN.html.twig");
     }
 }

@@ -1,13 +1,13 @@
 .background-home {
-    background:linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url("../images/bg.jpg");
-    height: 90.5vh;
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url("../images/bg_mediatheque.jpg");
+    height: 60.5vh;
 }
 .search{
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
-    padding-top: 25vh;
+    padding-top: 20vh;
 }
 .search-width{
     width: 60vh !important;

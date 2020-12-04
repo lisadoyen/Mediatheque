@@ -11,9 +11,11 @@
                     <button type="submit" class="edit-btn">Exporter les livres</button>
                 </form>
             </div>
-            <div class="col-sm">
-                <a href="" class="edit-btn">Importer les livres</a>
-            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="col-sm">
+                    <a href="" class="edit-btn">Importer les livres</a>
+                </div>
+            {% endif %}
         </div><hr>
         <div class="row">
             <div class="col-sm">
@@ -24,9 +26,11 @@
                     <button type="submit" class="edit-btn">Exporter les Films</button>
                 </form>
             </div>
-            <div class="col-sm">
-                <a href="" class="edit-btn">Importer les films</a>
-            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="col-sm">
+                    <a href="" class="edit-btn">Importer les films</a>
+                </div>
+            {% endif %}
         </div><hr>
         <div class="row">
             <div class="col-sm">
@@ -37,9 +41,11 @@
                     <button type="submit" class="edit-btn">Exporter les Musiques</button>
                 </form>
             </div>
-            <div class="col-sm">
-                <a href="" class="edit-btn">Importer les musiques</a>
-            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="col-sm">
+                    <a href="" class="edit-btn">Importer les musiques</a>
+                </div>
+            {% endif %}
         </div><hr>
         <div class="row">
             <div class="col-sm">
@@ -50,9 +56,11 @@
                     <button type="submit" class="edit-btn">Exporter les Jeux</button>
                 </form>
             </div>
-            <div class="col-sm">
-                <a href="" class="edit-btn">Importer les jeux</a>
-            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="col-sm">
+                    <a href="" class="edit-btn">Importer les jeux</a>
+                </div>
+            {% endif %}
         </div><hr>
     </div>
 {% endblock %}

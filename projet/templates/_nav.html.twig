@@ -2,14 +2,9 @@
     <h1 id="main-title">Médiathèque</h1>
     <a href="{{ path('accueil') }}"><img src="{{asset('assets/images/yellow/home.png')}}" class="icon home" alt="Accueil"></a>
     {% if app.request.pathInfo != '/accueil' %}
-        <form action="{{ path('livres_show') }}" id="search" method="post" class="search-in-nav">
-            <div class="searchbar">
-                <input class="search_input" type="text" name="search" placeholder="Search...">
-                <a type="submit" href="{{ path('livres_show') }}" class="search_icon" onclick="this.closest('form').submit();return false;">
-                    <img src="{{asset('assets/images/yellow/search.png')}}" class="search-icon">
-                </a>
-            </div>
-        </form>
+    <form action="{{ path('livres_show') }}" id="search" method="post" class="search-in-nav">
+        {% include '_search_bar.html.twig' %}
+    </form>
     {% endif %}
     <a href="{{ path('panier') }}"><img src="{{asset('assets/images/yellow/shopping-cart.png')}}" class="icon  shopCar" alt="Panier"></a>
     <a href="{{ path('favoris') }}"><img src="{{asset('assets/images/yellow/star.png')}}" class="icon  fav" alt="Favories"></a>
@@ -42,20 +37,20 @@
         <span class="barre"></span>
         <span class="barre"></span> 
     </label>
-
     <nav id="lateral-menu">
         <ul id="lateral-menu">
-            {% if is_granted('ROLE_BENEVOLE') %}
-                <li class="lateral-menu"><a class="lateral-menu" href="#">Éditer les statistiques</a></li>{% endif %}
+                <li class="lateral-menu"><a class="lateral-menu" href="#">Éditer les statistiques</a></li>
+                <li class="lateral-menu"><a class="lateral-menu" href="#">Gestion des emprunts/retours</a></li>
+                <li class="lateral-menu"><a class="lateral-menu" href="#">Gestion des annonces</a></li>
+                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('operations_articles') }}">Opérations sur les articles</a></li>
+            {% if is_granted('ROLE_BENEVOLE') and not is_granted('ROLE_ADMIN')%}
+                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('data_base_articles') }}">Export de la base de données des articles</a></li>{% endif %}
             {% if is_granted('ROLE_ADMIN') %}
+                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('data_base_articles') }}">Import/Export de la base de données des articles</a></li>
+                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('users_accueil') }}">Opérations sur les adhérents</a></li>
+                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('data_base_users') }}">Import/Export de la base de donnée des adhérents</a></li>
                 <li class="lateral-menu"><a class="lateral-menu" href="#">Définir les paramètres et les règles d'emprunts</a></li>
                 <li class="lateral-menu"><a class="lateral-menu" href="#">Maintenance du site</a></li>{% endif %}
-            {% if is_granted('ROLE_BENEVOLE') %}
-                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('operations_articles') }}">Opérations sur les articles</a></li>
-                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('data_base_articles') }}">Import/Export de la base de données des articles</a></li>{% endif %}
-            {% if is_granted('ROLE_ADMIN')  %}
-                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('users_accueil') }}">Opérations sur les adhérents</a></li>
-                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('data_base_users') }}">Import/Export de la base de donnée des adhérents</a></li>{% endif %}
         </ul>
     </nav>
 {% endif %}

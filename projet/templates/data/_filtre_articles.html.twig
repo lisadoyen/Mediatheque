@@ -1,16 +1,35 @@
 
 <div id="1" style="visibility: visible">
+    <form action="{{ path('filter_clear') }}" method="post">
+        <input type="hidden" name="_method" value="GET">
+        <button type="submit" class="edit-btn float-left" onclick="return confirm('Voulez-vous vraiment vider le filtre ?')">Vider</button>
+    </form>
+
 <form method="post" action="{{ path('livres_show') }}" >
 
+    <input type="hidden" name="token" value="{{ csrf_token('form_articles') }}">
+    <button type="submit" class="edit-btn ">Filtrer</button>
+    <hr>
+    <div class="container" style="color: grey">
+        <u style="text-decoration: none">
+            {% if donnees.search is defined %}
+                {% if donnees.search is not empty %}
+                <li> recherche : <strong>{{ donnees.search }}</strong></li>
+            {% endif %}{% endif %}
+            {% if genres is not empty %}
+                {% for genre in genres %}
+                    {% if donnees.genres[genre.idGenre] is defined %}
+                        <li> genre : <strong>{{ genre.libelleGenre|capitalize }}</strong></li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </u>
+   </div>
 
-    <div class="form-group">
-        la recherche est : <input name="search" placeholder="Recherchez" size="18" value="{{donnees.search|default('')}}" class="form-control" >
+    <div class="form-group p-3">
+       <input name="search" placeholder="Recherchez" size="18" value="{{donnees.search|default('')}}" class="form-control" >
     </div>
 
-    <i style="color: grey">
-        filtre activé : ...
-    </i>
-    <hr>
     <div class="form-group">
         <div class="sub-menu-filtre">
             <a href="#mon-bloc-1" data-js="hide"><h5>Catégories</h5></a>
@@ -95,13 +114,7 @@
         </div>
     </div>
     <hr>
-    <input type="hidden" name="token" value="{{ csrf_token('form_articles') }}">
-    <button type="submit" class="edit-btn float-left">Filtrer</button>
 </form>
 
-    <form action="{{ path('filter_clear') }}" method="post">
-        <input type="hidden" name="_method" value="GET">
-        <button type="submit" class="edit-btn" onclick="return confirm('Voulez-vous vraiment vider le filtre ?')">Vider</button>
-    </form>
 </div>
 

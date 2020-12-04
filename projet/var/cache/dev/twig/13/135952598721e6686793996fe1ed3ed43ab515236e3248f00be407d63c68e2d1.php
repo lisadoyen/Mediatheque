@@ -243,6 +243,6 @@ class __TwigTemplate_8071a90f7a8b775dd6f1682ecbdff83ca22702186f44f87e929e0d537ae
     </div>
 
 {% endblock %}
-", "users/profil/profil.html.twig", "/var/www/html/ptut/projet_actu/projet/templates/users/profil/profil.html.twig");
+", "users/profil/profil.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/templates/users/profil/profil.html.twig");
     }
 }

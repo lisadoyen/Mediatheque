@@ -66,7 +66,7 @@ class __TwigTemplate_9dde0313644eb06f6f4bdeeee04d8881045a1dae193df3f1884d93c5924
 
         // line 3
         echo "    ";
-        $this->loadTemplate("_search.html.twig", "accueil.html.twig", 3)->display($context);
+        $this->loadTemplate("_search_home.html.twig", "accueil.html.twig", 3)->display($context);
         // line 4
         echo "    <div class=\"container-carousel\">
 
@@ -371,7 +371,7 @@ class __TwigTemplate_9dde0313644eb06f6f4bdeeee04d8881045a1dae193df3f1884d93c5924
     {
         return new Source("{% extends \"layout.html.twig\" %}
 {% block body %}
-    {% include \"_search.html.twig\" %}
+    {% include \"_search_home.html.twig\" %}
     <div class=\"container-carousel\">
 
         <div class=\"row\">

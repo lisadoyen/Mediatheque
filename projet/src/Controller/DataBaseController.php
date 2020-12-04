@@ -42,7 +42,7 @@ class DataBaseController extends AbstractController
 
     /**
      * @Route("/database/{table}/file", name="data_base_file")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_BENEVOLE")
      */
     public function backupDataBase(Request $request, $table=null) :BinaryFileResponse
     {

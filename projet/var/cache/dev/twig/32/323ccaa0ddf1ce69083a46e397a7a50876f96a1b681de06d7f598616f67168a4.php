@@ -413,6 +413,6 @@ class __TwigTemplate_b4186e243b65c836166d19c9249d554087caa7af5364daf2ff8004b65a1
         </div>
     {% endfor %}
 {% endblock %}
-", "@Debug/Profiler/dump.html.twig", "/var/www/html/ptut/projet_actu/projet/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
+", "@Debug/Profiler/dump.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
     }
 }

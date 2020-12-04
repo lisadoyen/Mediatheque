@@ -114,3 +114,7 @@ h3 {
     box-shadow: rgba(0, 0, 0, 0.15) 1.25px 1.25px 2.6px;
     position: relative;
 }
+
+.btn-detail-carrousel{
+    z-index: 1000;
+}

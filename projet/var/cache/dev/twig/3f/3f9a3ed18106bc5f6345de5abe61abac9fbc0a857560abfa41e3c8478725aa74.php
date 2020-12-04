@@ -104,6 +104,6 @@ class __TwigTemplate_09bf32c1f66ae4d6f96b01481eea3a82865f5ec3cbce275ceead753600a
 
     </div>
 {% endblock %}
-", "users/profil/panier.html.twig", "/var/www/html/ptut/projet_actu/projet/templates/users/profil/panier.html.twig");
+", "users/profil/panier.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/templates/users/profil/panier.html.twig");
     }
 }

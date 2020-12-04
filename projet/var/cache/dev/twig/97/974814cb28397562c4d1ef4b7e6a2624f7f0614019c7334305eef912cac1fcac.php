@@ -119,6 +119,6 @@ class __TwigTemplate_0dcec742d212d43d972776ab9b6a90ba3db0b3f4883c77e3f3f1b70b54b
             <a href=\"{{ path('users_add') }}\" class=\"edit-btn\">Ajouter un utilisateur</a>
         </div>
     </div>
-{% endblock %}", "users/accueil_users.html.twig", "/var/www/html/ptut/projet_actu/projet/templates/users/accueil_users.html.twig");
+{% endblock %}", "users/accueil_users.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/templates/users/accueil_users.html.twig");
     }
 }

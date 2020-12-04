@@ -898,6 +898,6 @@ class __TwigTemplate_c5ced441942c5a6f6b05dd751d876d1c1d61b59d0ef4e6636abb4b6972e
         </tbody>
     </table>
 {% endmacro %}
-", "@WebProfiler/Collector/translation.html.twig", "/var/www/html/ptut/projet_actu/projet/vendor/symfony/web-profiler-bundle/Resources/views/Collector/translation.html.twig");
+", "@WebProfiler/Collector/translation.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/vendor/symfony/web-profiler-bundle/Resources/views/Collector/translation.html.twig");
     }
 }

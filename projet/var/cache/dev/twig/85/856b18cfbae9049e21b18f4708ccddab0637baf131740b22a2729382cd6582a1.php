@@ -105,6 +105,6 @@ class __TwigTemplate_f738664aab38527d34ca53f892d36d3ab67bcaf15a3f7e6b88a4b92e1c9
     {% endfor %}
 </div>
 
-", "genres/_genre_submenu.html.twig", "/var/www/html/ptut/projet_actu/projet/templates/genres/_genre_submenu.html.twig");
+", "genres/_genre_submenu.html.twig", "/var/www/html/localhost/ptut/projet_actu/projet/templates/genres/_genre_submenu.html.twig");
     }
 }

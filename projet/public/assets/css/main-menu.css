@@ -170,10 +170,10 @@ input#burger ~ nav#lateral-menu{
     color: var(--second-color);
     background-color: var(--main-color);
     position: fixed;
-    top: 8.5vh;
+    top: 8.2vh;
     right: -50.2vh;
     width: 50vh;
-    font-size:2.15vh ;
+    font-size:1.8vh ;
     height: 100%;
     overflow: hidden;
     -webkit-transition: right 0.4s ease-in-out;;
@@ -194,10 +194,10 @@ input#burger:checked ~ nav#lateral-menu > ul#lateral-menu {
     position: absolute;
     list-style: none;
     text-decoration: none;
-    top: 8%;
-    left: 8%;
-    right: 8%;
-    bottom: 8%;
+    top: 3%;
+    left: 3%;
+    right: 3%;
+    bottom: 3%;
     margin: 0;
     padding: 0;
     opacity: 1;
@@ -215,7 +215,7 @@ input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-me
     filter: brightness(10%);
     text-decoration: none;
     text-transform: uppercase;
-    padding: 3vh;
+    padding: 2vh;
     display: block;
 }
 
@@ -243,7 +243,7 @@ input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-me
 	}
 
 	input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-menu {
-        padding: 3vh;
+        padding: 2vh;
 	}
 
     .sub-dropdown-content {
