@@ -454,29 +454,6 @@ class Article
         return $this->favoris;
     }
 
-    public function addFavoris(Favoris $favoris): self
-    {
-        if (!$this->favoris->contains($favoris)) {
-            $this->favoris[] = $favoris;
-            $favoris->setArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFavoris(Favoris $favoris): self
-    {
-        if ($this->favoris->contains($favoris)) {
-            $this->favoris->removeElement($favoris);
-            // set the owning side to null (unless already changed)
-            if ($favoris->getArticle() === $this) {
-                $favoris->setArticle(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getAction(): ?Action
     {
         return $this->action;
@@ -576,6 +553,29 @@ class Article
             // set the owning side to null (unless already changed)
             if ($enregistrement->getArticle() === $this) {
                 $enregistrement->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function addFavori(Favoris $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris[] = $favori;
+            $favori->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Favoris $favori): self
+    {
+        if ($this->favoris->contains($favori)) {
+            $this->favoris->removeElement($favori);
+            // set the owning side to null (unless already changed)
+            if ($favori->getArticle() === $this) {
+                $favori->setArticle(null);
             }
         }
 
