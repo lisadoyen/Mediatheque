@@ -205,4 +205,16 @@ class LivresController extends AbstractController
             'data' => $data ?? null
         ]);
     }
+
+    /**
+     * transfert bdd
+     * @Route("/bdd/transfert", name="modifVideold", methods={"GET","POST"}, options={"expose" = true})
+     * @return Response
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function transfertBDD(){
+
+
+        return $this->redirectToRoute("index");
+    }
 }
