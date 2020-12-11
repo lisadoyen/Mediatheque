@@ -3,12 +3,28 @@
 namespace App\Controller\Articles;
 
 use App\Data\SearchData;
+use App\Entity\Action;
+use App\Entity\Article;
 use App\Entity\Bibliotheque;
+use App\Entity\Entite;
 use App\Entity\Genre;
+use App\Entity\StatutEnregistrement;
+use App\Entity\TypeEntite;
 use App\Form\BibliothequeType;
+use App\Repository\ActionRepository;
 use App\Repository\BibliothequeRepository;
+use App\Repository\CategorieRepository;
+use App\Repository\EntiteRepository;
+use App\Repository\GenreRepository;
+use App\Repository\StatutRepository;
+use App\Repository\TrancheAgeRepository;
+use App\Repository\TypeActionRepository;
+use App\Repository\TypeEntiteRepository;
+use App\Repository\UserRepository;
+use App\Repository\VideoldRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +32,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Constraints\Date;
 
 class LivresController extends AbstractController
 {
@@ -76,7 +93,7 @@ class LivresController extends AbstractController
                     $donnees['genres'] = $categories;
                 }
                 if(isset($donnees))
-                $session->set('donnees', $donnees);
+                    $session->set('donnees', $donnees);
                 else
                     $donnees=null;
             } else {
@@ -181,7 +198,7 @@ class LivresController extends AbstractController
         $infos['isbn'] = $articleGoogle['industryIdentifiers'][0]["identifier"] ?? $articleOl['identifiers']['isbn_13'] ?? '';
         $infos['image'] = $articleGoogle['imageLinks']['thumbnail'] ??
             $articleOl['cover']['large'] ?? $articleOl['cover']['medium'] ?? $articleOl['cover']['small']??
-             $articleSurf['image'] ?? $articleEbay['galleryURL'] ?? '';
+            $articleSurf['image'] ?? $articleEbay['galleryURL'] ?? '';
         return $infos;
     }
 
@@ -212,8 +229,76 @@ class LivresController extends AbstractController
      * @return Response
      * @IsGranted("ROLE_ADMIN")
      */
-    public function transfertBDD(){
+    public function transfertBDD(VideoldRepository $videoldRepository,
+                                 EntiteRepository $entiteRepository,
+                                 CategorieRepository $categorieRepository,
+                                 TrancheAgeRepository $trancheAgeRepository,
+                                 StatutRepository $statutRepository,
+                                 GenreRepository $genreRepository,
+                                 UserRepository $userRepository,
+                                 TypeActionRepository $typeActionRepository,
+                                 TypeEntiteRepository $typeEntiteRepository)
+    {
+        $admin = $userRepository->find(1);
+        $videos = $videoldRepository->findAll();
+        $entites = $entiteRepository->findAll();
 
+        foreach ($videos as $video) {
+            $nom = $video->getNomAuteur();
+            $prenom = $video->getPrenomAuteur();
+
+            $auteurExiste = false;
+            foreach ($entites as $entite) {
+                if ($entite->getNom() === $nom) $auteurExiste = true;
+            }
+            if (!$auteurExiste) {
+                $auteur = new Entite();
+                $auteur->setTypeEntite($typeEntiteRepository->find(1));
+                $auteur->setNom($nom);
+                $auteur->setPrenom($prenom);
+            }
+
+            $article = new Article();
+            $article->setCategorie($categorieRepository->find(2));
+            $article->setTrancheAge($trancheAgeRepository->find(1));
+
+
+            $article->setStatut($statutRepository->find(7));
+
+            $action = new Action();
+            $dateModif = $video->getDateCreation();
+            if ($dateModif != NULL) $action->setDate($dateModif);
+            else $action->setDate(new Date());
+            $action->setStaff($admin);
+            $action->setTypeAction($typeActionRepository->find(2));
+            $article->addAction($action);
+
+            $action = new Action();
+            $dateModif = $video->getDateAchat();
+            if ($dateModif != NULL) $action->setDate($dateModif);
+            else $action->setDate(new Date());
+            $action->setStaff($admin);
+            $action->setTypeAction($typeActionRepository->find(1));
+            $article->addAction($action);
+
+            $action = new Action();
+            $dateModif = $video->getDateRetrait();
+            if ($dateModif != NULL) {
+                $action->setDate($dateModif);
+                $action->setStaff($admin);
+                $action->setTypeAction($typeActionRepository->find(3));
+                $article->addAction($action);
+            }
+
+            $article->setGenre($genreRepository->find(1));
+            $article->setGencode($video->getGencode());
+            $article->setCodeArticle($video->getCodeArticle());
+            $article->setTitre($video->getTitre());
+            $article->setMontantObtention($video->getPrixAchat());
+            $article->setMontantCaution(5.30);
+            $article->setMontantVente(5.40);
+            $article->setNumerique(false);
+        }
 
         return $this->redirectToRoute("index");
     }

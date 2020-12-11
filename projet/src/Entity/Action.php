@@ -37,7 +37,8 @@ class Action
     private $staff;
 
     /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="action", orphanRemoval=true)
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="actions")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $article;
 
@@ -56,7 +57,7 @@ class Action
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate($date): self
     {
         $this->date = $date;
 
@@ -87,33 +88,14 @@ class Action
         return $this;
     }
 
-    /**
-     * @return Collection|Article[]
-     */
-    public function getArticle(): Collection
+    public function getArticle(): ?Article
     {
         return $this->article;
     }
 
-    public function addArticle(Article $article): self
+    public function setArticle(?Article $article): self
     {
-        if (!$this->article->contains($article)) {
-            $this->article[] = $article;
-            $article->setAction($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): self
-    {
-        if ($this->article->contains($article)) {
-            $this->article->removeElement($article);
-            // set the owning side to null (unless already changed)
-            if ($article->getAction() === $this) {
-                $article->setAction(null);
-            }
-        }
+        $this->article = $article;
 
         return $this;
     }

@@ -120,12 +120,6 @@ class Article
     private $favoris;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Action::class, inversedBy="article")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $action;
-
-    /**
      * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="article", orphanRemoval=true)
      */
     private $paniers;
@@ -140,6 +134,11 @@ class Article
      */
     private $enregistrements;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Action::class, mappedBy="article", orphanRemoval=true)
+     */
+    private $actions;
+
     public function __construct()
     {
         $this->liens = new ArrayCollection();
@@ -150,6 +149,7 @@ class Article
         $this->paniers = new ArrayCollection();
         $this->avis = new ArrayCollection();
         $this->enregistrements = new ArrayCollection();
+        $this->actions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -454,18 +454,6 @@ class Article
         return $this->favoris;
     }
 
-    public function getAction(): ?Action
-    {
-        return $this->action;
-    }
-
-    public function setAction(?Action $action): self
-    {
-        $this->action = $action;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Panier[]
      */
@@ -576,6 +564,37 @@ class Article
             // set the owning side to null (unless already changed)
             if ($favori->getArticle() === $this) {
                 $favori->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Action[]
+     */
+    public function getActions(): Collection
+    {
+        return $this->actions;
+    }
+
+    public function addAction(Action $action): self
+    {
+        if (!$this->actions->contains($action)) {
+            $this->actions[] = $action;
+            $action->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAction(Action $action): self
+    {
+        if ($this->actions->contains($action)) {
+            $this->actions->removeElement($action);
+            // set the owning side to null (unless already changed)
+            if ($action->getArticle() === $this) {
+                $action->setArticle(null);
             }
         }
 
