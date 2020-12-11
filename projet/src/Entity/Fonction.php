@@ -34,6 +34,13 @@ class Fonction
         $this->users = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return $this->getLibelle();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

@@ -34,6 +34,13 @@ class Entreprise
         $this->users = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return $this->getNom();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

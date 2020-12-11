@@ -11,7 +11,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields = {"email"},message ="Cette email est déjà utilisé")
  * @UniqueEntity(fields = {"username"},message ="Cette identifiant est déjà utilisé")
  */
 class User implements UserInterface
@@ -36,7 +35,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $identifiant;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -235,14 +234,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getIdentifiant(): ?string
+    public function getUsername(): ?string
     {
-        return $this->identifiant;
+        return $this->username;
     }
 
-    public function setIdentifiant(string $identifiant): self
+    public function setUsername(string $username): self
     {
-        $this->identifiant = $identifiant;
+        $this->username = $username;
 
         return $this;
     }

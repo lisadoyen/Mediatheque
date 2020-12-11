@@ -37,7 +37,7 @@ class UserController extends AbstractController
     /**
      * @Route("/users/add", name="users_add", methods={"GET","POST"})
      */
-    public function  addUser(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    public function addUser(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
@@ -52,7 +52,7 @@ class UserController extends AbstractController
             $manager->flush();
             $this->addFlash(
                 'sucess',
-                'L\'utilisateur '.$user->getIdentifiant().' à bien été ajouté !'
+                'L\'utilisateur '.$user->getUsername().' à bien été ajouté !'
             );
             return $this->redirectToRoute('users_show');
         }
