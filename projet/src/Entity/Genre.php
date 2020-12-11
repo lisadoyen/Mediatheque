@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,96 +15,159 @@ use Doctrine\ORM\Mapping as ORM;
 class Genre
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_genre", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $idGenre;
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="libelle_genre", type="string", length=25, nullable=false, options={"default"="Inconnu"})
+     * @ORM\Column(type="string", length=20)
      */
-    private $libelleGenre = 'Inconnu';
+    private $libelle;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="code_genre", type="string", length=8, nullable=false, options={"default"="Inconnu"})
+     * @ORM\OneToMany(targetEntity=Rubrique::class, mappedBy="genre", orphanRemoval=true)
      */
-    private $codeGenre = 'Inconnu';
+    private $rurbiques;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="code_sous_genre", type="string", length=10, nullable=false)
+     * @ORM\ManyToMany(targetEntity=Categorie::class, mappedBy="genres")
      */
-    private $codeSousGenre;
+    private $categories;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="limite_age", type="integer", nullable=true)
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="genre")
      */
-    private $limiteAge;
+    private $articles;
 
-    public function getIdGenre(): ?int
+    public function __construct()
     {
-        return $this->idGenre;
+        $this->rurbiques = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
-    public function getLibelleGenre(): ?string
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
-        return $this->libelleGenre;
+        return $this->id;
     }
 
-    public function setLibelleGenre(string $libelleGenre): self
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
-        $this->libelleGenre = $libelleGenre;
-
-        return $this;
+        $this->id = $id;
     }
 
-    public function getCodeGenre(): ?string
-    {
-        return $this->codeGenre;
-    }
-
-    public function setCodeGenre(string $codeGenre): self
-    {
-        $this->codeGenre = $codeGenre;
-
-        return $this;
-    }
-
-    public function getCodeSousGenre(): ?string
-    {
-        return $this->codeSousGenre;
-    }
-
-    public function setCodeSousGenre(string $codeSousGenre): self
-    {
-        $this->codeSousGenre = $codeSousGenre;
-
-        return $this;
-    }
-
-    public function getLimiteAge(): ?int
-    {
-        return $this->limiteAge;
-    }
-
-    public function setLimiteAge(?int $limiteAge): self
-    {
-        $this->limiteAge = $limiteAge;
-
-        return $this;
-    }
     public function __toString(){
-        return $this->getLibelleGenre();
+        return $this->getLibelle();
+    }
+
+    public function getLibelle(): ?string
+    {
+        return $this->libelle;
+    }
+
+    public function setLibelle(string $libelle): self
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rubrique[]
+     */
+    public function getRurbiques(): Collection
+    {
+        return $this->rurbiques;
+    }
+
+    public function addRurbique(Rubrique $rurbique): self
+    {
+        if (!$this->rurbiques->contains($rurbique)) {
+            $this->rurbiques[] = $rurbique;
+            $rurbique->setGenre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRurbique(Rubrique $rurbique): self
+    {
+        if ($this->rurbiques->contains($rurbique)) {
+            $this->rurbiques->removeElement($rurbique);
+            // set the owning side to null (unless already changed)
+            if ($rurbique->getGenre() === $this) {
+                $rurbique->setGenre(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categorie $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addGenre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            $category->removeGenre($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setGenre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getGenre() === $this) {
+                $article->setGenre(null);
+            }
+        }
+
+        return $this;
     }
 
 

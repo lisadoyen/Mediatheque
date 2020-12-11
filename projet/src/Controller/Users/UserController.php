@@ -52,7 +52,7 @@ class UserController extends AbstractController
             $manager->flush();
             $this->addFlash(
                 'sucess',
-                'L\'utilisateur '.$user->getUsername().' à bien été ajouté !'
+                'L\'utilisateur '.$user->getIdentifiant().' à bien été ajouté !'
             );
             return $this->redirectToRoute('users_show');
         }
