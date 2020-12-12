@@ -105,7 +105,7 @@ class Enregistrement
         return $this->datePreparationFini;
     }
 
-    public function setDatePreparationFini(?\DateTimeInterface $datePreparationFini): self
+    public function setDatePreparationFini($datePreparationFini): self
     {
         $this->datePreparationFini = $datePreparationFini;
 
@@ -117,7 +117,7 @@ class Enregistrement
         return $this->dateEnregistrement;
     }
 
-    public function setDateEnregistrement(\DateTimeInterface $dateEnregistrement): self
+    public function setDateEnregistrement($dateEnregistrement): self
     {
         $this->dateEnregistrement = $dateEnregistrement;
 
@@ -129,7 +129,7 @@ class Enregistrement
         return $this->dateRendu;
     }
 
-    public function setDateRendu(?\DateTimeInterface $dateRendu): self
+    public function setDateRendu($dateRendu): self
     {
         $this->dateRendu = $dateRendu;
 
@@ -141,7 +141,7 @@ class Enregistrement
         return $this->dateRenduTheorique;
     }
 
-    public function setDateRenduTheorique(\DateTimeInterface $dateRenduTheorique): self
+    public function setDateRenduTheorique($dateRenduTheorique): self
     {
         $this->dateRenduTheorique = $dateRenduTheorique;
 

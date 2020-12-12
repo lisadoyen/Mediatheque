@@ -6,22 +6,29 @@ use App\Data\SearchData;
 use App\Entity\Action;
 use App\Entity\Article;
 use App\Entity\Bibliotheque;
+use App\Entity\Enregistrement;
 use App\Entity\Entite;
 use App\Entity\Genre;
 use App\Entity\StatutEnregistrement;
 use App\Entity\TypeEntite;
 use App\Form\BibliothequeType;
 use App\Repository\ActionRepository;
+use App\Repository\ArticleRepository;
 use App\Repository\BibliothequeRepository;
 use App\Repository\CategorieRepository;
+use App\Repository\EnregistrementRepository;
 use App\Repository\EntiteRepository;
 use App\Repository\GenreRepository;
+use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
 use App\Repository\TrancheAgeRepository;
 use App\Repository\TypeActionRepository;
+use App\Repository\TypeEnregistrementRepository;
 use App\Repository\TypeEntiteRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoldRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -228,6 +235,7 @@ class LivresController extends AbstractController
      * @Route("/bdd/transfert", name="modifVideold", methods={"GET","POST"}, options={"expose" = true})
      * @return Response
      * @IsGranted("ROLE_ADMIN")
+     * @throws Exception
      */
     public function transfertBDD(VideoldRepository $videoldRepository,
                                  EntiteRepository $entiteRepository,
@@ -237,60 +245,123 @@ class LivresController extends AbstractController
                                  GenreRepository $genreRepository,
                                  UserRepository $userRepository,
                                  TypeActionRepository $typeActionRepository,
+                                 TypeEnregistrementRepository $typeEnregistrementRepository,
+                                 StatutEnregistrementRepository $statutEnregistrementRepository,
+                                 EnregistrementRepository $enregistrementRepository,
+                                 EntityManagerInterface $em,
                                  TypeEntiteRepository $typeEntiteRepository)
     {
-        $admin = $userRepository->find(1);
+        $admin = $userRepository->find(2);
+        $typeEmprunt = $typeEnregistrementRepository->find(2);
         $videos = $videoldRepository->findAll();
-        $entites = $entiteRepository->findAll();
+        $typeAuteur = $typeEntiteRepository->find(1);
+        $categorieVideo = $categorieRepository->find(2);
+        $tranche = $trancheAgeRepository->find(1);
+        $statutEmprunte = $statutEnregistrementRepository->find(5);
+        $statutRendu = $statutEnregistrementRepository->find(7);
+        $empruntable = $statutRepository->find(1);
+        $vendable = $statutRepository->find(2);
+        $emprunte = $statutRepository->find(6);
+        $perdu = $statutRepository->find(3);
+        $vendu = $statutRepository->find(5);
+
+        $obtention = $typeActionRepository->find(1);
+        $creation = $typeActionRepository->find(2);
+        $modification = $typeActionRepository->find(3);
+
+        $comedie = $genreRepository->find(1);
+
+        $em->getConnection()->getConfiguration()->setSQLLogger(null);
 
         foreach ($videos as $video) {
             $nom = $video->getNomAuteur();
             $prenom = $video->getPrenomAuteur();
-
-            $auteurExiste = false;
-            foreach ($entites as $entite) {
-                if ($entite->getNom() === $nom) $auteurExiste = true;
-            }
-            if (!$auteurExiste) {
+            if(!$entiteRepository->findBy(['nom' => $nom])){
                 $auteur = new Entite();
-                $auteur->setTypeEntite($typeEntiteRepository->find(1));
+                $auteur->setTypeEntite($typeAuteur);
                 $auteur->setNom($nom);
                 $auteur->setPrenom($prenom);
+                $em->persist($auteur);
+                $em->flush();
             }
 
             $article = new Article();
-            $article->setCategorie($categorieRepository->find(2));
-            $article->setTrancheAge($trancheAgeRepository->find(1));
+            $article->setCategorie($categorieVideo);
+            $article->setTrancheAge($tranche);
 
-
-            $article->setStatut($statutRepository->find(7));
+            if($video->getCodeEtat() === 'AC'){
+                $article->setStatut($empruntable);
+                if($video->getSortie() === 'S'){
+                    $article->setStatut($emprunte);
+                    $enregistrement = new Enregistrement();
+                    $enregistrement->setArticle($article);
+                    $enregistrement->setDateEnregistrement(new \DateTime());
+                    $enregistrement->setTypeEnregistrement($typeEmprunt); // type Emprunt
+                    $enregistrement->setStatutEnregistrement($statutEmprunte); // statut emprunte
+                    $enregistrement->addStaff($admin);
+                    $enregistrement->setUtilisateur($admin);
+                    $date = new \DateTime();
+                    $date->add(new \DateInterval('P'.$categorieVideo->getDureeEmpruntMax().'D'));
+                    $enregistrement->setDateRenduTheorique($date);
+                    $enregistrement->setNoCommande(1);
+                    $em->persist($enregistrement);
+                }
+                $dateRendu = new \DateTime();
+                $dateRendu->add(new \DateInterval('P10D'));
+                $datePrepFini = new \DateTime();
+                $datePrepFini->add(new \DateInterval('P5D'));
+                $date = new \DateTime();
+                for($i = 0; $i < $video->getNbSortie() ; $i++){
+                    $enregistrement = new Enregistrement();
+                    $enregistrement->setArticle($article);
+                    $enregistrement->setDateEnregistrement($date);
+                    $enregistrement->setDateRenduTheorique( $dateRendu);
+                    $enregistrement->setDateRendu($dateRendu);
+                    $enregistrement->setDatePreparationFini($datePrepFini);
+                    $enregistrement->setTypeEnregistrement($typeEmprunt); // type Emprunt
+                    $enregistrement->setStatutEnregistrement($statutRendu); // statut rendu
+                    $enregistrement->addStaff($admin);
+                    $enregistrement->setUtilisateur($admin);
+                    $enregistrement->setNoCommande(1);
+                    $em->persist($enregistrement);
+                }
+            }else if ($video->getCodeEtat() === 'PERDU'){
+                $article->setStatut($perdu);
+            }else if ($video->getCodeEtat() === 'VENTE'){
+                $article->setStatut($vendable);
+            }else{
+                $article->setStatut($vendu);
+            }
 
             $action = new Action();
             $dateModif = $video->getDateCreation();
             if ($dateModif != NULL) $action->setDate($dateModif);
-            else $action->setDate(new Date());
+            else $action->setDate(new \DateTime());
             $action->setStaff($admin);
-            $action->setTypeAction($typeActionRepository->find(2));
+            $action->setTypeAction($creation);
             $article->addAction($action);
+            $em->persist($action);
 
             $action = new Action();
             $dateModif = $video->getDateAchat();
             if ($dateModif != NULL) $action->setDate($dateModif);
-            else $action->setDate(new Date());
+            else $action->setDate(new \DateTime());
             $action->setStaff($admin);
-            $action->setTypeAction($typeActionRepository->find(1));
+            $action->setTypeAction($obtention);
             $article->addAction($action);
+            $em->persist($action);
 
             $action = new Action();
             $dateModif = $video->getDateRetrait();
             if ($dateModif != NULL) {
                 $action->setDate($dateModif);
                 $action->setStaff($admin);
-                $action->setTypeAction($typeActionRepository->find(3));
+                $action->setTypeAction($modification);
                 $article->addAction($action);
+                $em->persist($action);
             }
 
-            $article->setGenre($genreRepository->find(1));
+            $article->setGenre($comedie);
             $article->setGencode($video->getGencode());
             $article->setCodeArticle($video->getCodeArticle());
             $article->setTitre($video->getTitre());
@@ -298,6 +369,34 @@ class LivresController extends AbstractController
             $article->setMontantCaution(5.30);
             $article->setMontantVente(5.40);
             $article->setNumerique(false);
+            $em->persist($article);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute("index");
+    }
+    /**
+     * transfert bdd
+     * @Route("/bdd/transfert/entite", name="modifEntite", methods={"GET","POST"}, options={"expose" = true})
+     * @return Response
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function transfertEntite(VideoldRepository $videoldRepository,
+                                 EntiteRepository $entiteRepository,
+                                 EntityManagerInterface $em,
+                                 ArticleRepository $articleRepository)
+    {
+
+
+        foreach ($videoldRepository->findAll() as $video){
+            $code = $video->getCodeArticle();
+            $article = $articleRepository->findOneBy(['codeArticle' => $code]);
+            $entite = $entiteRepository->findOneBy(['nom' => $video->getNomAuteur()]);
+            if($article && $entite){
+                $article->addEntite($entite);
+                $em->persist($article);
+                $em->flush();
+            }
         }
 
         return $this->redirectToRoute("index");
