@@ -13,11 +13,21 @@ class EditProfilFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('avatar')
             ->add('username')
-            ->add('firstname')
-            ->add('name')
-            ->add('email')
-            ->add('phone')
+            ->add('prenom')
+            ->add('nom')
+            ->add('email_perso')
+            ->add('email_pro')
+            ->add('email_recup')
+            ->add('tel_perso')
+            ->add('tel_perso2')
+            ->add('tel_pro')
+            ->add('tel_pro2')
+            ->add('ville')
+            ->add('adresse_rue')
+            ->add('adresse_rue_complement')
+            ->add('code_postal')
         ;
     }
 

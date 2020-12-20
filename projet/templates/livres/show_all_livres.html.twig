@@ -7,6 +7,9 @@
                 <button class="edit-btn" onclick="toggle_visibility(1)"><i onclick="btn_icone(this)" class="fas fa-arrow-up"></i></button></h2>
                 {% include 'data/_filtre_articles.html.twig' %}
             </div>
+            <!--
+                Récup les infos dans entite via article_entite
+            -->
             <div class="col-md-9">
                 <h1 class="center p-3">Récapitulatifs des articles</h1><br>
                 <div>
@@ -16,20 +19,11 @@
                         <tr>
                             <th>Code Livre</th>
                             <th>Code ISBN</th>
-                            <th>Titre / Designation</th>
+                            <th>Titre</th>
                             <th>Description</th>
                             <th>Photo</th>
-                            <th>Format</th>
-                            <th>Typologie</th>
-                            <th>Disponible</th>
-                            <!--<th>Inactif</th>
-                            <th>Nb sortie</th>
-                            <th>Lien</th>
-                            <th>Date de retrait</th>
-                            <th>Date achat</th>-->
-                            <th>Date de création</th>
-                            <th>Nom auteur</th>
-                            <th>Prenom auteur</th>
+                            <th>Numérique</th>
+                            <th>Date de publication</th>
                             <th>Libelle genre</th>
                             <th>Opérations</th>
                         </tr>
@@ -38,38 +32,23 @@
                         {% if livres is not empty %}
                             {% for livre in livres | slice(0, 10) %}
                                 <tr>
-                                    <td>{{livre.codeLivre}}</td>
-                                    <td>{{livre.codeISBN}}</td>
-                                    <td>{{livre.titreDesignation}}</td>
-                                    <td>{{livre.descriptionArticle}}</td>
-                                    <td>{{livre.photo}}</td>
-                                    <td>{{livre.format}}</td>
-                                    <td>{{livre.typologie}}</td>
+                                    <td>{{livre.codeArticle}}</td>
+                                    <td>{{livre.gencode}}</td>
+                                    <td>{{livre.titre}}</td>
+                                    <td>{{livre.description}}</td>
+                                    <td>{{livre.vignette}}</td>
                                     <td>
-                                        {% if livre.disponible == 0 %}
+                                        {% if livre.numerique == 0 %}
                                             <span style="color:red">Non</span>
                                         {% else %}
                                             <span style="color:green">Oui</span>
                                         {% endif %}
                                     </td>
-                                    <!--<td>
-                                        {% if livre.inactif == 0 %}
-                                            <span style="color:red">Non</span>
-                                        {% else %}
-                                            <span style="color:green">Oui</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>{{livre.nombreDeSorties}}</td>
-                                    <td>{{livre.Lien}}</td>
-                                    <td>{{livre.dateDeRetrait | date('d/m/Y')}}</td>
-                                    <td>{{livre.dateAchat | date('d/m/Y')}}</td>-->
-                                    <td>{{livre.dateCreation | date('d/m/Y')}}</td>
-                                    <td>{{livre.fkIdAuteur.nom}}</td>
-                                    <td>{{livre.fkIdAuteur.prenom}}</td>
-                                    <td>{{livre.fkIdGenre.libelleGenre}}</td>
+                                    <td>{{livre.datePublication | date('d/m/Y')}}</td>
+                                    <td>{{livre.genre.libelle}}</td>
                                     <td>
-                                        <a href="{#{ path('livre_edit', {id: livre.id}) }#}" class="btn btn-primary">Réserver</a>
-                                        <a href="{#{ path('livre_edit', {id: livre.id}) }#}" class="btn btn-danger">Voir plus de détail</a>
+                                        <a href="{#{ path('livre_edit', {id: livre.id}) }#}" class="btn btn-primary mb-2">Réserver</a>
+                                        <a href="{#{ path('livre_edit', {id: livre.id}) }#}" class="btn btn-primary mb-2">Voir plus de détail</a>
                                     </td>
                                 </tr>
                             {% endfor %}

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +18,36 @@ class ArticleRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Article::class);
+    }
+
+    /**
+     * @param SearchData $search
+     */
+    public function findSearch(SearchData $search){
+        return $this->getSearchQuery($search)->getQuery()->getResult();
+    }
+
+    public function getSearchQuery(SearchData $search, $ignorePrice = false): \Doctrine\ORM\QueryBuilder
+    {
+        $query = $this
+            ->createQueryBuilder('b')
+            ->select('t', 'b')
+            ->join('b.genre', 't');
+
+
+        if(!empty($search->q)){
+            $query = $query
+                ->andWhere('b.titre LIKE :q')
+                ->setParameter('q', "%{$search->q}");
+        }
+
+        if(!empty($search->genre)) {
+            $query = $query
+                ->andWhere('t.id IN (:genre)')
+                ->setParameter('genre', $search->genre);
+        }
+
+        return $query;
     }
 
     // /**

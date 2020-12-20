@@ -7,7 +7,7 @@
     </form>
     {% endif %}
     {# Transfert ancienne BDD dans la notre #}
-    <a href="{{ path('modifVideold') }}">modif bdd video</a>
+    <!--<a href="{#{ path('modifVideold') }#}">modif bdd video</a>-->
 
     <a href="{{ path('panier') }}"><img src="{{asset('assets/images/yellow/shopping-cart.png')}}" class="icon  shopCar" alt="Panier"></a>
     <a href="{{ path('favoris') }}"><img src="{{asset('assets/images/yellow/star.png')}}" class="icon  fav" alt="Favories"></a>
@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-sm sub-dropdown container">
                 <a href="{{ path('livres_show') }}" class="media-item dropbtn">Livres</a>
-{#                {{ render(controller('App\\Controller\\GenreController::getAllGenres')) }}#}
+                {{ render(controller('App\\Controller\\GenreController::getAllGenres')) }}
             </div>
             <div class="col-sm">
                 <a href="#" class="media-item">Films</a>

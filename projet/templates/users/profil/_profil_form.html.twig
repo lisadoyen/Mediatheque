@@ -1,13 +1,24 @@
 {% extends "layout.html.twig" %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
 <div class="container cadre">
     <h1>Modification du profil</h1><hr>
         {{ form_start(form) }}
+            {{ form_row(form.avatar, {'label' : 'Avatar '}) }}<br>
             {{ form_row(form.username, {'label' : 'Identifiant '}) }}<br>
-            {{ form_row(form.firstname, {'label' : 'Prenom '}) }}<br>
-            {{ form_row(form.name, {'label' : 'Nom '}) }}<br>
-            {{ form_row(form.email, {'label' : 'Email '}) }}<br>
-            {{form_row(form.phone, {'label' : 'Numéro de téléphone '}) }}<br>
+            {{ form_row(form.prenom, {'label' : 'Prenom '}) }}<br>
+            {{ form_row(form.nom, {'label' : 'Nom '}) }}<br>
+            {{ form_row(form.email_perso, {'label' : 'Email perso '}) }}<br>
+            {{ form_row(form.email_pro, {'label' : 'Email pro '}) }}<br>
+            {{ form_row(form.email_recup, {'label' : 'Email de récupération '}) }}<br>
+            {{ form_row(form.tel_perso, {'label' : 'Téléphone perso '}) }}<br>
+            {{ form_row(form.tel_perso2, {'label' : 'Téléphone perso 2 '}) }}<br>
+            {{ form_row(form.tel_pro, {'label' : 'Téléphone pro '}) }}<br>
+            {{ form_row(form.tel_pro2, {'label' : 'Téléphone pro 2'}) }}<br>
+            {{form_row(form.ville, {'label' : 'Ville'}) }}<br>
+            {{form_row(form.adresse_rue, {'label' : 'Rue'}) }}<br>
+            {{form_row(form.adresse_rue_complement, {'label' : 'Compléments'}) }}<br>
+            {{form_row(form.code_postal, {'label' : 'Code postale'}) }}<br>
             <hr>
             <div class="row">
                 <div class="col-sm">

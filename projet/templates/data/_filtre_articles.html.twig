@@ -18,8 +18,8 @@
             {% endif %}{% endif %}
             {% if genres is not empty %}
                 {% for genre in genres %}
-                    {% if donnees.genres[genre.idGenre] is defined %}
-                        <li> genre : <strong>{{ genre.libelleGenre|capitalize }}</strong></li>
+                    {% if donnees.genres[genre.id] is defined %}
+                        <li> genre : <strong>{{ genre.libelle|capitalize }}</strong></li>
                     {% endif %}
                 {% endfor %}
             {% endif %}
@@ -48,14 +48,14 @@
         <div id="mon-bloc-2" class="hide-box p-2">
             <div class="filtre">
             {% for genre in genres|slice(0, genres|length/2) %}
-                <input  type="checkbox" name="genres[]" value="{{ genre.idGenre }}"{% if donnees.genres[genre.idGenre] is defined %} checked {% endif %}>
-                {{ genre.libelleGenre|capitalize }}
+                <input  type="checkbox" name="genres[]" value="{{ genre.id }}"{% if donnees.genres[genre.id] is defined %} checked {% endif %}>
+                {{ genre.libelle|capitalize }}
                 <br/>
             {% endfor %}
             </div>
             {% for genre in genres|slice(genres|length/2, genres|length) %}
-                <input type="checkbox" name="genres[]" value="{{ genre.idGenre }}"{% if donnees.genres[genre.idGenre] is defined %} checked {% endif %}>
-                {{ genre.libelleGenre|capitalize }}
+                <input type="checkbox" name="genres[]" value="{{ genre.id}}"{% if donnees.genres[genre.id] is defined %} checked {% endif %}>
+                {{ genre.libelle|capitalize }}
                 <br/>
             {% endfor %}
         </div>

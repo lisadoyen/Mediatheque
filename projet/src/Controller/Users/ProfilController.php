@@ -2,7 +2,11 @@
 
 namespace App\Controller\Users;
 
+use App\Entity\Favoris;
 use App\Form\EditProfilFormType;
+use App\Repository\ArticleRepository;
+use App\Repository\FavorisRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -72,9 +76,10 @@ class ProfilController extends AbstractController
     /**
      * @Route("/favoris", name="favoris")
      */
-    public function favoris()
+    public function favoris(FavorisRepository $favorisRepository, ArticleRepository $articleRepository)
     {
-        return $this->render('users/profil/favoris.html.twig');
+        $favoris = $favorisRepository->findBy(['utilisateur' => $this->getUser()]);
+        return $this->render('users/profil/favoris.html.twig', ['favoris' => $favoris]);
     }
 
     /**

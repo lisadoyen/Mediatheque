@@ -2,7 +2,15 @@
 {% block body %}
 
     <div class="container cadre">
-        <h1>Votre profil</h1><hr>
+        <div class="row">
+            <div class="col-sm">
+                <h1>Votre profil</h1>
+            </div>
+            <div class="col-sm">
+                <img style="width:100px;height:100px" src="{{asset('images/')}}{{app.user.avatar}}" alt="Aucun avatar" >
+            </div>
+        </div><hr>
+
         <div class="row">
             <div class="col-sm">
                 Identifiant :
@@ -17,7 +25,7 @@
                 Prenom :
             </div>
             <div class="col-sm">
-                {{  app.user.firstname  }}
+                {{  app.user.prenom  }}
             </div>
         </div><hr>
 
@@ -26,27 +34,127 @@
                 Nom :
             </div>
             <div class="col-sm">
-                {{  app.user.name  }}
+                {{  app.user.nom  }}
             </div>
         </div><hr>
 
         <div class="row">
             <div class="col-sm">
-                Email :
+                Email Perso:
             </div>
             <div class="col-sm">
-                {{  app.user.email  }}
+                {{  app.user.emailPerso   }}
             </div>
         </div><hr>
 
         <div class="row">
             <div class="col-sm">
-                Téléphone :
+                Email Pro:
             </div>
             <div class="col-sm">
-                {{  app.user.phone  }}
+                {{  app.user.emailPro  }}
             </div>
         </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Email de récupération:
+            </div>
+            <div class="col-sm">
+                {{  app.user.emailRecup  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Téléphone Perso 1:
+            </div>
+            <div class="col-sm">
+                {{  app.user.telPerso  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Téléphone Perso 2:
+            </div>
+            <div class="col-sm">
+                {{  app.user.telPerso2  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Téléphone Pro 1:
+            </div>
+            <div class="col-sm">
+                {{  app.user.telPro  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Téléphone Pro 2:
+            </div>
+            <div class="col-sm">
+                {{  app.user.telPro2  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Ville:
+            </div>
+            <div class="col-sm">
+                {{  app.user.ville  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Rue :
+            </div>
+            <div class="col-sm">
+                {{  app.user.adresseRue  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Complement :
+            </div>
+            <div class="col-sm">
+                {{  app.user.adresseRueComplement  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Code Postal :
+            </div>
+            <div class="col-sm">
+                {{  app.user.codePostal  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Date de création :
+            </div>
+            <div class="col-sm">
+                {{  app.user.dateCreation | date('d/m/Y')}}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Date de modification :
+            </div>
+            <div class="col-sm">
+                {{  app.user.dateModification | date('d/m/Y')}}
+            </div>
+        </div><hr>
+
         <div class="row">
             <div class="col-sm"></div>
             <div class="col-sm">

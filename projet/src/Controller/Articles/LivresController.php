@@ -8,6 +8,7 @@ use App\Entity\Article;
 use App\Entity\Bibliotheque;
 use App\Entity\Enregistrement;
 use App\Entity\Entite;
+use App\Entity\Favoris;
 use App\Entity\Genre;
 use App\Entity\StatutEnregistrement;
 use App\Entity\TypeEntite;
@@ -48,12 +49,12 @@ class LivresController extends AbstractController
      * @Route("/livres/genres/{id}/show", name="genres_id_livres_show",methods={"GET", "POST"})
      * @param $id
      * @param SessionInterface $session
-     * @param BibliothequeRepository $br
+     * @param ArticleRepository $br
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function showAll($id = null, SessionInterface $session,BibliothequeRepository $br, Request $request, PaginatorInterface $paginator)
+    public function showAll($id = null, SessionInterface $session,ArticleRepository $br, Request $request, PaginatorInterface $paginator)
     {
         // Menu genre
         if($id != null) {
@@ -79,6 +80,7 @@ class LivresController extends AbstractController
                 'session' => $session,
                 'livres' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
+                'favoris' => $this->getDoctrine()->getRepository(Favoris::class)->findBy(['utilisateur'=>$this->getUser()]),
                 'donnees' => $donnees
             ]);
         }
@@ -124,6 +126,7 @@ class LivresController extends AbstractController
             return $this->render('livres/show_all_livres.html.twig', [
                 'livres' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
+                'favoris' => $this->getDoctrine()->getRepository(Favoris::class)->findBy(['utilisateur'=>$this->getUser()]),
                 'donnees' => $donnees
             ]);
         }
