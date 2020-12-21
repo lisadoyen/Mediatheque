@@ -52,39 +52,42 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
         // line 4
         if ((0 !== twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 4, $this->source); })()), "request", [], "any", false, false, false, 4), "pathInfo", [], "any", false, false, false, 4), "/accueil"))) {
             // line 5
-            echo "        <form id=\"search\" action=\"POST\" class=\"search-in-nav\">
-            <div class=\"searchbar\">
-                <input class=\"search_input\" type=\"text\" name=\"\" placeholder=\"Search...\">
-                <a href=\"#\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\">
-                    <img src=\"";
-            // line 9
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/yellow/search.png"), "html", null, true);
-            echo "\" class=\"search-icon\">
-                </a>
-            </div>
-        </form>
+            echo "    <form action=\"";
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("livres_show");
+            echo "\" id=\"search\" method=\"post\" class=\"search-in-nav\">
+        ";
+            // line 6
+            $this->loadTemplate("_search_bar.html.twig", "_nav.html.twig", 6)->display($context);
+            // line 7
+            echo "    </form>
     ";
         }
-        // line 14
-        echo "    <a href=\"";
+        // line 9
+        echo "    ";
+        // line 10
+        echo "    <!--<a href=\"";
+        echo "\">modif bdd video</a>-->
+
+    <a href=\"";
+        // line 12
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier");
         echo "\"><img src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/yellow/shopping-cart.png"), "html", null, true);
         echo "\" class=\"icon  shopCar\" alt=\"Panier\"></a>
     <a href=\"";
-        // line 15
+        // line 13
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("favoris");
         echo "\"><img src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/yellow/star.png"), "html", null, true);
         echo "\" class=\"icon  fav\" alt=\"Favories\"></a>
     <a href=\"";
-        // line 16
+        // line 14
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("profil");
         echo "\"><img src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/yellow/user.png"), "html", null, true);
         echo "\" class=\"icon  account\" alt=\"Profile\"></a>
     <a href=\"";
-        // line 17
+        // line 15
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("security_logout");
         echo "\"><img src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/yellow/logout.png"), "html", null, true);
@@ -95,11 +98,11 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
         <div class=\"row\">
             <div class=\"col-sm sub-dropdown container\">
                 <a href=\"";
-        // line 23
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("genres_livres_show");
+        // line 21
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("livres_show");
         echo "\" class=\"media-item dropbtn\">Livres</a>
                 ";
-        // line 24
+        // line 22
         echo $this->env->getRuntime('Symfony\Bridge\Twig\Extension\HttpKernelRuntime')->renderFragment(Symfony\Bridge\Twig\Extension\HttpKernelExtension::controller("App\\Controller\\GenreController::getAllGenres"));
         echo "
             </div>
@@ -116,48 +119,51 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
     </div>
 </nav>
 ";
-        // line 38
+        // line 36
         if (($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN") || $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_BENEVOLE"))) {
-            // line 39
+            // line 37
             echo "    <input id=\"burger\" type=\"checkbox\"/>
     <label for=\"burger\">
         <span class=\"barre\"></span>
         <span class=\"barre\"></span>
         <span class=\"barre\"></span> 
     </label>
-
     <nav id=\"lateral-menu\">
         <ul id=\"lateral-menu\">
-            ";
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Éditer les statistiques</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Gestion des emprunts/retours</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Gestion des annonces</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"";
             // line 48
-            if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_BENEVOLE")) {
-                // line 49
-                echo "                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Éditer les statistiques</a></li>";
-            }
-            // line 50
-            echo "            ";
-            if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-                // line 51
-                echo "                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Définir les paramètres et les règles d'emprunts</a></li>
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Maintenance du site</a></li>";
-            }
-            // line 53
-            echo "            ";
-            if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_BENEVOLE")) {
-                // line 54
-                echo "                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Opérations sur les articles</a></li>
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Import/Export de la base de données des articles</a></li>";
-            }
-            // line 56
-            echo "            ";
-            if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-                // line 57
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("operations_articles");
+            echo "\">Opérations sur les articles</a></li>
+            ";
+            // line 49
+            if (($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_BENEVOLE") &&  !$this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN"))) {
+                // line 50
                 echo "                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"";
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("data_base_articles");
+                echo "\">Export de la base de données des articles</a></li>";
+            }
+            // line 51
+            echo "            ";
+            if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
+                // line 52
+                echo "                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"";
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("data_base_articles");
+                echo "\">Import/Export de la base de données des articles</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"";
+                // line 53
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("users_accueil");
                 echo "\">Opérations sur les adhérents</a></li>
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Import/Export de la base de donnée des adhérents</a></li>";
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"";
+                // line 54
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("data_base_users");
+                echo "\">Import/Export de la base de donnée des adhérents</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Définir les paramètres et les règles d'emprunts</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Maintenance du site</a></li>";
             }
-            // line 59
+            // line 57
             echo "        </ul>
     </nav>
 ";
@@ -182,7 +188,7 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
 
     public function getDebugInfo()
     {
-        return array (  161 => 59,  155 => 57,  152 => 56,  148 => 54,  145 => 53,  141 => 51,  138 => 50,  135 => 49,  133 => 48,  122 => 39,  120 => 38,  103 => 24,  99 => 23,  88 => 17,  82 => 16,  76 => 15,  69 => 14,  61 => 9,  55 => 5,  53 => 4,  47 => 3,  43 => 1,);
+        return array (  167 => 57,  161 => 54,  157 => 53,  152 => 52,  149 => 51,  144 => 50,  142 => 49,  138 => 48,  125 => 37,  123 => 36,  106 => 22,  102 => 21,  91 => 15,  85 => 14,  79 => 13,  73 => 12,  68 => 10,  66 => 9,  62 => 7,  60 => 6,  55 => 5,  53 => 4,  47 => 3,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -191,15 +197,13 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
     <h1 id=\"main-title\">Médiathèque</h1>
     <a href=\"{{ path('accueil') }}\"><img src=\"{{asset('assets/images/yellow/home.png')}}\" class=\"icon home\" alt=\"Accueil\"></a>
     {% if app.request.pathInfo != '/accueil' %}
-        <form id=\"search\" action=\"POST\" class=\"search-in-nav\">
-            <div class=\"searchbar\">
-                <input class=\"search_input\" type=\"text\" name=\"\" placeholder=\"Search...\">
-                <a href=\"#\" class=\"search_icon\" onclick=\"this.closest('form').submit();return false;\">
-                    <img src=\"{{asset('assets/images/yellow/search.png')}}\" class=\"search-icon\">
-                </a>
-            </div>
-        </form>
+    <form action=\"{{ path('livres_show') }}\" id=\"search\" method=\"post\" class=\"search-in-nav\">
+        {% include '_search_bar.html.twig' %}
+    </form>
     {% endif %}
+    {# Transfert ancienne BDD dans la notre #}
+    <!--<a href=\"{#{ path('modifVideold') }#}\">modif bdd video</a>-->
+
     <a href=\"{{ path('panier') }}\"><img src=\"{{asset('assets/images/yellow/shopping-cart.png')}}\" class=\"icon  shopCar\" alt=\"Panier\"></a>
     <a href=\"{{ path('favoris') }}\"><img src=\"{{asset('assets/images/yellow/star.png')}}\" class=\"icon  fav\" alt=\"Favories\"></a>
     <a href=\"{{ path('profil') }}\"><img src=\"{{asset('assets/images/yellow/user.png')}}\" class=\"icon  account\" alt=\"Profile\"></a>
@@ -209,7 +213,7 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
     <div class=\"container\">
         <div class=\"row\">
             <div class=\"col-sm sub-dropdown container\">
-                <a href=\"{{ path('genres_livres_show') }}\" class=\"media-item dropbtn\">Livres</a>
+                <a href=\"{{ path('livres_show') }}\" class=\"media-item dropbtn\">Livres</a>
                 {{ render(controller('App\\\\Controller\\\\GenreController::getAllGenres')) }}
             </div>
             <div class=\"col-sm\">
@@ -231,20 +235,20 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
         <span class=\"barre\"></span>
         <span class=\"barre\"></span> 
     </label>
-
     <nav id=\"lateral-menu\">
         <ul id=\"lateral-menu\">
-            {% if is_granted('ROLE_BENEVOLE') %}
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Éditer les statistiques</a></li>{% endif %}
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Éditer les statistiques</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Gestion des emprunts/retours</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Gestion des annonces</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('operations_articles') }}\">Opérations sur les articles</a></li>
+            {% if is_granted('ROLE_BENEVOLE') and not is_granted('ROLE_ADMIN')%}
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('data_base_articles') }}\">Export de la base de données des articles</a></li>{% endif %}
             {% if is_granted('ROLE_ADMIN') %}
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('data_base_articles') }}\">Import/Export de la base de données des articles</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('users_accueil') }}\">Opérations sur les adhérents</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('data_base_users') }}\">Import/Export de la base de donnée des adhérents</a></li>
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Définir les paramètres et les règles d'emprunts</a></li>
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Maintenance du site</a></li>{% endif %}
-            {% if is_granted('ROLE_BENEVOLE') %}
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Opérations sur les articles</a></li>
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Import/Export de la base de données des articles</a></li>{% endif %}
-            {% if is_granted('ROLE_ADMIN')  %}
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('users_accueil') }}\">Opérations sur les adhérents</a></li>
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Import/Export de la base de donnée des adhérents</a></li>{% endif %}
         </ul>
     </nav>
 {% endif %}", "_nav.html.twig", "D:\\Utilisateurs\\Thibault\\Documents\\Etudes\\Superieur\\DutInfo\\Cours\\S3\\ProjetTut\\Mediatheque\\projet\\templates\\_nav.html.twig");

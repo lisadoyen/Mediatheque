@@ -47,8 +47,9 @@
                                     <td>{{livre.datePublication | date('d/m/Y')}}</td>
                                     <td>{{livre.genre.libelle}}</td>
                                     <td>
+                                        <input type="hidden" name="id" value="{{ livre.id }}">
                                         <a href="{#{ path('livre_edit', {id: livre.id}) }#}" class="btn btn-primary mb-2">Réserver</a>
-                                        <a href="{#{ path('livre_edit', {id: livre.id}) }#}" class="btn btn-primary mb-2">Voir plus de détail</a>
+                                        <a href="{{ path('livre_details', {id: livre.id}) }}" class="btn btn-primary mb-2">Voir plus de détail</a>
                                     </td>
                                 </tr>
                             {% endfor %}

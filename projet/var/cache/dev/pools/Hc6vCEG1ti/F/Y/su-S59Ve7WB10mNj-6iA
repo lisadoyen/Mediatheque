@@ -2,26 +2,35 @@
 
 return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
     $o = [
-        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Symfony\\Component\\Routing\\Annotation\\Route'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Routing\\Annotation\\Route')),
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Routing\\Annotation\\Route'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Routing\\Annotation\\Route')),
+        clone $p['Symfony\\Component\\Routing\\Annotation\\Route'],
     ],
     null,
     [
         'Symfony\\Component\\Routing\\Annotation\\Route' => [
             'path' => [
                 '/livres/show',
+                '/livres/genres/{id}/show',
             ],
             'name' => [
                 'livres_show',
+                'genres_id_livres_show',
             ],
             'methods' => [
                 [
                     'GET',
+                    'POST',
+                ],
+                [
+                    'GET',
+                    'POST',
                 ],
             ],
         ],
     ],
     [
         $o[0],
+        $o[1],
     ],
     []
 ); }];

@@ -17,6 +17,8 @@ return [
         '/livre/filtre/clear' => [[['_route' => 'filter_clear', '_controller' => 'App\\Controller\\Articles\\LivresController::clearFiltrer'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/livres/getISBN' => [[['_route' => 'get_ISBN', '_controller' => 'App\\Controller\\Articles\\LivresController::getISBN'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/livres/add' => [[['_route' => 'add_livre', '_controller' => 'App\\Controller\\Articles\\LivresController::addLivre'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/bdd/transfert' => [[['_route' => 'modifVideold', '_controller' => 'App\\Controller\\Articles\\LivresController::transfertBDD'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/bdd/transfert/entite' => [[['_route' => 'modifEntite', '_controller' => 'App\\Controller\\Articles\\LivresController::transfertEntite'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/articles' => [[['_route' => 'operations_articles', '_controller' => 'App\\Controller\\DataBaseController::index'], null, null, null, false, false, null]],
         '/database/articles' => [[['_route' => 'data_base_articles', '_controller' => 'App\\Controller\\DataBaseController::DataBaseArticle'], null, null, null, true, false, null]],
         '/database/users' => [[['_route' => 'data_base_users', '_controller' => 'App\\Controller\\DataBaseController::DataBaseUsers'], null, null, null, true, false, null]],
@@ -51,11 +53,20 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/livres/ge(?'
-                    .'|nres/([^/]++)/show(*:200)'
-                    .'|t/([^/]++)(*:218)'
+                .'|/livres(?'
+                    .'|/ge(?'
+                        .'|nres/([^/]++)/show(*:203)'
+                        .'|t/([^/]++)(*:221)'
+                    .')'
+                    .'|(?:/([^/]++))?(*:244)'
                 .')'
-                .'|/database/([^/]++)/file(*:250)'
+                .'|/database/([^/]++)/file(*:276)'
+                .'|/favoris/(?'
+                    .'|add(?:/([^/]++))?(*:313)'
+                    .'|remove(?:/([^/]++))?(?'
+                        .'|(*:344)'
+                    .')'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -66,10 +77,14 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        200 => [[['_route' => 'genres_id_livres_show', 'id' => null, '_controller' => 'App\\Controller\\Articles\\LivresController::showAll'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        218 => [[['_route' => 'livres_search_isbn', '_controller' => 'App\\Controller\\Articles\\LivresController::getDataFromIsbn'], ['isbn'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        250 => [
-            [['_route' => 'data_base_file', 'table' => null, '_controller' => 'App\\Controller\\DataBaseController::backupDataBase'], ['table'], null, null, false, false, null],
+        203 => [[['_route' => 'genres_id_livres_show', 'id' => null, '_controller' => 'App\\Controller\\Articles\\LivresController::showAll'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        221 => [[['_route' => 'livres_search_isbn', '_controller' => 'App\\Controller\\Articles\\LivresController::getDataFromIsbn'], ['isbn'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        244 => [[['_route' => 'livre_details', 'id' => 1, '_controller' => 'App\\Controller\\Articles\\LivresController::livreDetails'], ['id'], null, null, false, true, null]],
+        276 => [[['_route' => 'data_base_file', 'table' => null, '_controller' => 'App\\Controller\\DataBaseController::backupDataBase'], ['table'], null, null, false, false, null]],
+        313 => [[['_route' => 'add_article_favoris', 'id' => 1, '_controller' => 'App\\Controller\\Users\\ProfilController::addFavoris'], ['id'], null, null, false, true, null]],
+        344 => [
+            [['_route' => 'remove_article_favoris', 'id' => 1, '_controller' => 'App\\Controller\\Users\\ProfilController::removeFavoris'], ['id'], null, null, false, true, null],
+            [['_route' => 'remove_favoris', 'id' => 1, '_controller' => 'App\\Controller\\Users\\ProfilController::removeFavoris2'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

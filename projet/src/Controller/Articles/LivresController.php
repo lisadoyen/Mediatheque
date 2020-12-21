@@ -19,6 +19,7 @@ use App\Repository\BibliothequeRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\EnregistrementRepository;
 use App\Repository\EntiteRepository;
+use App\Repository\FavorisRepository;
 use App\Repository\GenreRepository;
 use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
@@ -80,7 +81,6 @@ class LivresController extends AbstractController
                 'session' => $session,
                 'livres' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
-                'favoris' => $this->getDoctrine()->getRepository(Favoris::class)->findBy(['utilisateur'=>$this->getUser()]),
                 'donnees' => $donnees
             ]);
         }
@@ -126,7 +126,6 @@ class LivresController extends AbstractController
             return $this->render('livres/show_all_livres.html.twig', [
                 'livres' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
-                'favoris' => $this->getDoctrine()->getRepository(Favoris::class)->findBy(['utilisateur'=>$this->getUser()]),
                 'donnees' => $donnees
             ]);
         }
@@ -230,6 +229,18 @@ class LivresController extends AbstractController
         return $this->render('livres/add.html.twig',[
             'form' => $form->createView(),
             'data' => $data ?? null
+        ]);
+    }
+
+    /**
+     * @Route("/livres/{id}", name="livre_details")
+     */
+    public function livreDetails(ArticleRepository $articleRepository, FavorisRepository $favorisRepository, $id=1){
+        $livre = $articleRepository->findOneBy(['id' => $id]);
+        $fav = $favorisRepository->findOneBy(['utilisateur'=>$this->getUser(), 'article'=>$livre]);
+        return $this->render('livres/show_livre_details.html.twig', [
+            'livre' => $livre,
+            'favoris' => $fav,
         ]);
     }
 

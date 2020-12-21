@@ -48,14 +48,14 @@ class __TwigTemplate_566ab03321ba7c0da3e19fd5e3784f1ce6d0d118c02a878c37c9ae34f90
         foreach ($context['_seq'] as $context["_key"] => $context["genre"]) {
             // line 3
             echo "        ";
-            if (((0 !== twig_compare(twig_get_attribute($this->env, $this->source, $context["genre"], "libelleGenre", [], "any", false, false, false, 3), "POUBELLE")) && (0 !== twig_compare(twig_get_attribute($this->env, $this->source, $context["genre"], "libelleGenre", [], "any", false, false, false, 3), "Inconnu")))) {
+            if (((0 !== twig_compare(twig_get_attribute($this->env, $this->source, $context["genre"], "libelle", [], "any", false, false, false, 3), "POUBELLE")) && (0 !== twig_compare(twig_get_attribute($this->env, $this->source, $context["genre"], "libelle", [], "any", false, false, false, 3), "Inconnu")))) {
                 // line 4
                 echo "        <a href=\"";
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("genres_id_livres_show", ["id" => twig_get_attribute($this->env, $this->source, $context["genre"], "idGenre", [], "any", false, false, false, 4)]), "html", null, true);
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("genres_id_livres_show", ["id" => twig_get_attribute($this->env, $this->source, $context["genre"], "id", [], "any", false, false, false, 4)]), "html", null, true);
                 echo "\">
             ";
                 // line 5
-                echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "libelleGenre", [], "any", false, false, false, 5)), "html", null, true);
+                echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "libelle", [], "any", false, false, false, 5)), "html", null, true);
                 echo "
         </a>
         ";
@@ -97,9 +97,9 @@ class __TwigTemplate_566ab03321ba7c0da3e19fd5e3784f1ce6d0d118c02a878c37c9ae34f90
     {
         return new Source("<div class=\"sub-dropdown-content\">
     {% for genre in genres %}
-        {% if genre.libelleGenre != 'POUBELLE' and genre.libelleGenre != 'Inconnu' %}
-        <a href=\"{{ path('genres_id_livres_show', {id : genre.idGenre}) }}\">
-            {{ genre.libelleGenre|capitalize }}
+        {% if genre.libelle != 'POUBELLE' and genre.libelle != 'Inconnu' %}
+        <a href=\"{{ path('genres_id_livres_show', {id : genre.id}) }}\">
+            {{ genre.libelle|capitalize }}
         </a>
         {% endif %}
     {% endfor %}

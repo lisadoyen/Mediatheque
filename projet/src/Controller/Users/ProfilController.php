@@ -3,6 +3,7 @@
 namespace App\Controller\Users;
 
 use App\Entity\Favoris;
+use App\Entity\User;
 use App\Form\EditProfilFormType;
 use App\Repository\ArticleRepository;
 use App\Repository\FavorisRepository;
@@ -79,7 +80,54 @@ class ProfilController extends AbstractController
     public function favoris(FavorisRepository $favorisRepository, ArticleRepository $articleRepository)
     {
         $favoris = $favorisRepository->findBy(['utilisateur' => $this->getUser()]);
+
         return $this->render('users/profil/favoris.html.twig', ['favoris' => $favoris]);
+    }
+
+    /**
+     * @Route("/favoris/add/{id}", name="add_article_favoris")
+     */
+    public function addFavoris(ArticleRepository $articleRepository, $id=1){
+        $user = $this->getUser();
+
+        $favoris = new Favoris();
+        $favoris->setArticle($articleRepository->find($id));
+        $favoris->setUtilisateur($user);
+        $this->getDoctrine()->getManager()->persist($favoris);
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->addFlash('success', 'L\'article  : ' . $articleRepository->find($id)->getTitre() . ' à été ajouté à vos favoris');
+
+        return $this->redirectToRoute('livre_details',['id'=>$id]);
+    }
+
+    /**
+     * @Route("/favoris/remove/{id}", name="remove_article_favoris")
+     */
+    public function removeFavoris(ArticleRepository $articleRepository,FavorisRepository $favorisRepository, $id=1){
+        $user = $this->getUser();
+        $fav = $favorisRepository->findOneBy(['article' => $id, 'utilisateur'=>$user]);
+
+        $this->getDoctrine()->getManager()->remove($fav);
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->addFlash('success', 'L\'article  : ' . $articleRepository->find($id)->getTitre() . ' à été supprimé à vos favoris');
+
+        return $this->redirectToRoute('livre_details',['id'=>$id]);
+    }
+    /**
+     * @Route("/favoris/remove/{id}", name="remove_favoris")
+     */
+    public function removeFavoris2(ArticleRepository $articleRepository,FavorisRepository $favorisRepository, $id=1){
+        $user = $this->getUser();
+        $fav = $favorisRepository->findOneBy(['article' => $id, 'utilisateur'=>$user]);
+
+        $this->getDoctrine()->getManager()->remove($fav);
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->addFlash('success', 'L\'article  : ' . $articleRepository->find($id)->getTitre() . ' à été supprimé à vos favoris');
+
+        return $this->redirectToRoute('favoris');
     }
 
     /**

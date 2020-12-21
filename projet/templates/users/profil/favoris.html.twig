@@ -11,6 +11,7 @@
                 <th>Titre</th>
                 <th>Genre</th>
                 <th>Statut</th>
+                <th>Opération</th>
             </tr>
             </thead>
             <tbody>
@@ -21,6 +22,11 @@
                         <td> {{ fav.article.titre }}</td>
                         <td>{{ fav.article.genre.libelle }}</td>
                         <td> {{ fav.article.statut.libelle }}</td>
+                        <td>
+                            <a href="{{ path('remove_favoris', {id: fav.article.id}) }}" class="close" aria-label="Close" onclick="return confirm('Voulez vous vraiment supprimer cette article de vos favoris ?')">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             {% else %}
