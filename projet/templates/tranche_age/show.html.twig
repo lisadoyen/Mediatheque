@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<title>TrancheAge</title>
+
+{% block body %}
+    <h1>TrancheAge</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tranche_age.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ tranche_age.libelle }}</td>
+            </tr>
+            <tr>
+                <th>AgeMin</th>
+                <td>{{ tranche_age.ageMin }}</td>
+            </tr>
+            <tr>
+                <th>AgeMax</th>
+                <td>{{ tranche_age.ageMax }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tranche_age_index') }}">back to list</a>
+
+    <a href="{{ path('tranche_age_edit', {'id': tranche_age.id}) }}">edit</a>
+
+    {{ include('tranche_age/_delete_form.html.twig') }}
+{% endblock %}

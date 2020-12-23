@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit TrancheAge</title>
+
+{% block body %}
+    <h1>Edit TrancheAge</h1>
+
+    {{ include('tranche_age/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('tranche_age_index') }}">back to list</a>
+
+    {{ include('tranche_age/_delete_form.html.twig') }}
+{% endblock %}
