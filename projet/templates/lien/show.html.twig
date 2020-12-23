@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<title>Lien</title>
+
+{% block body %}
+    <h1>Lien</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lien.id }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ lien.adresse }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('lien_index') }}">back to list</a>
+
+    <a href="{{ path('lien_edit', {'id': lien.id}) }}">edit</a>
+
+    {{ include('lien/_delete_form.html.twig') }}
+{% endblock %}

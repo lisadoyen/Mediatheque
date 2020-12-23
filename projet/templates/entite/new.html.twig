@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<title>New Entite</title>
+
+{% block body %}
+    <h1>Create new Entite</h1>
+
+    {{ include('entite/_form.html.twig') }}
+
+    <a href="{{ path('entite_index') }}">back to list</a>
+{% endblock %}

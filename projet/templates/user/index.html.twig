@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<title>User index</title>
+
+{% block body %}
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Username</th>
+                <th>EmailPerso</th>
+                <th>Password</th>
+                <th>TelPerso</th>
+                <th>Roles</th>
+                <th>Matricule</th>
+                <th>Sexe</th>
+                <th>Avatar</th>
+                <th>TelPerso2</th>
+                <th>NotificationPerso</th>
+                <th>TelPro</th>
+                <th>TelPro2</th>
+                <th>EmailPro</th>
+                <th>NotificationPro</th>
+                <th>EmailRecup</th>
+                <th>AdresseRue</th>
+                <th>AdresseRueComplement</th>
+                <th>Ville</th>
+                <th>CodePostal</th>
+                <th>DroitEmprunt</th>
+                <th>DroitAchat</th>
+                <th>CommentaireUtilisateur</th>
+                <th>CommentaireStaff</th>
+                <th>DateCreation</th>
+                <th>DateModification</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.emailPerso }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.telPerso }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.matricule }}</td>
+                <td>{{ user.sexe }}</td>
+                <td>{{ user.avatar }}</td>
+                <td>{{ user.telPerso2 }}</td>
+                <td>{{ user.notificationPerso ? 'Yes' : 'No' }}</td>
+                <td>{{ user.telPro }}</td>
+                <td>{{ user.telPro2 }}</td>
+                <td>{{ user.emailPro }}</td>
+                <td>{{ user.notificationPro ? 'Yes' : 'No' }}</td>
+                <td>{{ user.emailRecup }}</td>
+                <td>{{ user.adresseRue }}</td>
+                <td>{{ user.adresseRueComplement }}</td>
+                <td>{{ user.ville }}</td>
+                <td>{{ user.codePostal }}</td>
+                <td>{{ user.droitEmprunt ? 'Yes' : 'No' }}</td>
+                <td>{{ user.droitAchat ? 'Yes' : 'No' }}</td>
+                <td>{{ user.commentaireUtilisateur }}</td>
+                <td>{{ user.commentaireStaff }}</td>
+                <td>{{ user.dateCreation ? user.dateCreation|date('Y-m-d') : '' }}</td>
+                <td>{{ user.dateModification ? user.dateModification|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="29">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_new') }}">Create new</a>
+{% endblock %}

@@ -53,7 +53,7 @@
                 <li class="lateral-menu"><a class="lateral-menu" href="{{ path('users_accueil') }}">Opérations sur les adhérents</a></li>
                 <li class="lateral-menu"><a class="lateral-menu" href="{{ path('data_base_users') }}">Import/Export de la base de donnée des adhérents</a></li>
                 <li class="lateral-menu"><a class="lateral-menu" href="#">Définir les paramètres et les règles d'emprunts</a></li>
-                <li class="lateral-menu"><a class="lateral-menu" href="#">Maintenance du site</a></li>{% endif %}
+                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('crud_list') }}">Maintenance du site</a></li>{% endif %}
         </ul>
     </nav>
 {% endif %}
