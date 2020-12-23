@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\EditProfilFormType;
 use App\Repository\ArticleRepository;
 use App\Repository\FavorisRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 class ProfilController extends AbstractController
 {
@@ -24,17 +26,29 @@ class ProfilController extends AbstractController
     {
         return $this->render('users/profil/profil.html.twig');
     }
+    /**
+     * @Route("/profil/MesDonnees", name="mes_donnees")
+     */
+    public function donneePerso()
+    {
+        return $this->render('users/profil/rgpd_data.html.twig');
+    }
 
     /**
      * @Route("/profil/edit", name="edit_profil")
      */
-    public function editProfil(Request $request, EntityManagerInterface $manager)
+    public function editProfil(Request $request, EntityManagerInterface $manager, FileUploader $fileUploader)
     {
         $user = $this->getUser();
         $form = $this->createForm(EditProfilFormType::class,$user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $avatar = $form->get('avatar')->getData();
+            if ($avatar){
+                $photoName = $fileUploader->upload($avatar);
+                $user->setAvatar($photoName);
+            }
             $manager->persist($user);
             $manager->flush();
             $this->addFlash(
@@ -102,7 +116,27 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/favoris/remove/{id}", name="remove_article_favoris")
+     * @Route("/favoris/remove", name="remove_all_favoris", methods={"DELETE"})
+     */
+    public function removeAllFavoris(FavorisRepository $favorisRepository, Request $request){
+        if(!$this->isCsrfTokenValid('favoris_delete', $request->get('token'))) {
+            throw new  InvalidCsrfTokenException('Invalid CSRF token delete favoris');
+        }
+        $user = $this->getUser();
+        $favoris = $favorisRepository->findBy(['utilisateur'=>$user]);
+
+        foreach ($favoris as $fav){
+            $this->getDoctrine()->getManager()->remove($fav);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        $this->addFlash('success', 'Tous les articles ont été supprimé de vos favoris');
+
+        return $this->redirectToRoute('favoris');
+    }
+
+    /**
+     * @Route("/livres/{id}/remove/favoris", name="remove_article_favoris")
      */
     public function removeFavoris(ArticleRepository $articleRepository,FavorisRepository $favorisRepository, $id=1){
         $user = $this->getUser();
@@ -115,6 +149,7 @@ class ProfilController extends AbstractController
 
         return $this->redirectToRoute('livre_details',['id'=>$id]);
     }
+
     /**
      * @Route("/favoris/remove/{id}", name="remove_favoris")
      */

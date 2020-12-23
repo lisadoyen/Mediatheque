@@ -23,32 +23,30 @@
                         </thead>
                         <tbody>
                         {% if livre is not empty %}
-
-                                <tr>
-                                    <td>{{livre.codeArticle}}</td>
-                                    <td>{{livre.gencode}}</td>
-                                    <td>{{livre.titre}}</td>
-                                    <td>{{livre.description}}</td>
-                                    <td>{{livre.vignette}}</td>
-                                    <td>
-                                        {% if livre.numerique == 0 %}
-                                            <span style="color:red">Non</span>
-                                        {% else %}
-                                            <span style="color:green">Oui</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>{{livre.datePublication | date('d/m/Y')}}</td>
-                                    <td>{{livre.genre.libelle}}</td>
-                                    <td>
-                                        <a href="{#{ path('livre_edit', {id: livre.id}) }#}" class="btn btn-primary mb-2">Réserver</a>
-                                        {% if favoris is empty %}
-                                            <a href="{{ path('add_article_favoris', {id: livre.id}) }}"><i class="far fa-heart"></i></a>
-                                        {% else %}
-                                            <a href="{{ path('remove_favoris', {id: livre.id}) }}"><i class="fas fa-heart"></i></a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-
+                            <tr>
+                                <td>{{livre.codeArticle}}</td>
+                                <td>{{livre.gencode}}</td>
+                                <td>{{livre.titre}}</td>
+                                <td>{{livre.description}}</td>
+                                <td>{{livre.vignette}}</td>
+                                <td>
+                                    {% if livre.numerique == 0 %}
+                                        <span style="color:red">Non</span>
+                                    {% else %}
+                                        <span style="color:green">Oui</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{livre.datePublication | date('d/m/Y')}}</td>
+                                <td>{{livre.genre.libelle}}</td>
+                                <td>
+                                    <a href="{#{ path('livre_edit', {id: livre.id}) }#}" class="btn btn-primary mb-2">Réserver</a>
+                                    {% if favoris is empty %}
+                                        <a href="{{ path('add_article_favoris', {id: livre.id}) }}"><i class="far fa-heart text-danger"></i></a>
+                                    {% else %}
+                                        <a href="{{ path('remove_article_favoris', {id: livre.id}) }}"><i class="fas fa-heart text-danger"></i></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
                         {% else %}
                             <tr class="table-warning"><td>Pas de livre</td></tr>
                         {% endif %}
