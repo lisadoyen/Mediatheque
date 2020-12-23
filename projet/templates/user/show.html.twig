@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<title>User</title>
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>EmailPerso</th>
+                <td>{{ user.emailPerso }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>TelPerso</th>
+                <td>{{ user.telPerso }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ user.matricule }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ user.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Avatar</th>
+                <td>{{ user.avatar }}</td>
+            </tr>
+            <tr>
+                <th>TelPerso2</th>
+                <td>{{ user.telPerso2 }}</td>
+            </tr>
+            <tr>
+                <th>NotificationPerso</th>
+                <td>{{ user.notificationPerso ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TelPro</th>
+                <td>{{ user.telPro }}</td>
+            </tr>
+            <tr>
+                <th>TelPro2</th>
+                <td>{{ user.telPro2 }}</td>
+            </tr>
+            <tr>
+                <th>EmailPro</th>
+                <td>{{ user.emailPro }}</td>
+            </tr>
+            <tr>
+                <th>NotificationPro</th>
+                <td>{{ user.notificationPro ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>EmailRecup</th>
+                <td>{{ user.emailRecup }}</td>
+            </tr>
+            <tr>
+                <th>AdresseRue</th>
+                <td>{{ user.adresseRue }}</td>
+            </tr>
+            <tr>
+                <th>AdresseRueComplement</th>
+                <td>{{ user.adresseRueComplement }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ user.ville }}</td>
+            </tr>
+            <tr>
+                <th>CodePostal</th>
+                <td>{{ user.codePostal }}</td>
+            </tr>
+            <tr>
+                <th>DroitEmprunt</th>
+                <td>{{ user.droitEmprunt ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DroitAchat</th>
+                <td>{{ user.droitAchat ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CommentaireUtilisateur</th>
+                <td>{{ user.commentaireUtilisateur }}</td>
+            </tr>
+            <tr>
+                <th>CommentaireStaff</th>
+                <td>{{ user.commentaireStaff }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ user.dateCreation ? user.dateCreation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateModification</th>
+                <td>{{ user.dateModification ? user.dateModification|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_index') }}">back to list</a>
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}

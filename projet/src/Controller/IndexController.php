@@ -28,4 +28,11 @@ class IndexController extends AbstractController
     {
         return $this->render('accueil.html.twig');
     }
+
+    /**
+     * @Route("/crud_list", name="crud_list")
+     */
+    public function crudlist() {
+        return $this->render('crud_list.html.twig');
+    }
 }
