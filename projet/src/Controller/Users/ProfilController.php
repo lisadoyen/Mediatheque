@@ -11,7 +11,9 @@ use App\Service\FileUploader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -65,11 +67,18 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/edit/password", name="edit_password_profil")
      */
-    public function editPassword(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder){
+    public function editPassword(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, MailerInterface $mailer){
         if($request->isMethod('POST')){
             $user = $this->getUser();
             if($request->request->get('password') == $request->request->get('password_confirm')){
                 $user->setPassword($encoder->encodePassword($user,$request->request->get('password')));
+                $email = (new TemplatedEmail())
+                    //TODO identifiant, email, récup et lien avec l'adresse de la médiathèque
+                    ->from($user->getEmailRecup())
+                    ->to($user->getEmailRecup())
+                    ->subject('Modification de profil')
+                    ->htmlTemplate('users/profil/mail_edit_profil.html.twig');
+                $mailer->send($email);
                 $manager->persist($user);
                 $manager->flush();
                 $this->addFlash(

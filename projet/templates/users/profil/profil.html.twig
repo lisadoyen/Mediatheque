@@ -3,6 +3,15 @@
 <div class="container cadre">
     <div class="row">
         <div class="col-sm">
+            <a href="" class="edit-btn float-left">Voir les emprunts / achat en cours</a>
+        </div>
+        <div class="col-sm">
+            <a href="" class="edit-btn float-right">Voir l'historique des activités</a>
+        </div>
+    </div><hr>
+
+    <div class="row">
+        <div class="col-sm">
             {% if app.user.avatar is not empty %}
                 <img style="width:100px;height:100px" src="{{asset('assets/images/account/')}}{{app.user.avatar}}" alt="Image {{app.user.avatar}}" >
             {% else %}
@@ -121,32 +130,14 @@
 
     <div class="row">
         <div class="col-sm">
-            <a href="{{path('mes_donnees')}}" class="edit-btn float-left">Mes données personnels</a>
+            <a href="{{path('mes_donnees')}}" class="edit-btn float-left">Mes données personnelles</a>
         </div>
         <div class="col-sm">
-            <a href="{{path('edit_profil')}}" class="edit-btn float-right">Modifier les paramètres</a>
+            <a href="{{path('edit_password_profil')}}" class="edit-btn float-center">Modifier mon mot de passe</a>
+        </div>
+        <div class="col-sm">
+            <a href="{{path('edit_profil')}}" class="edit-btn float-right">Modifier les paramètres secondaire</a>
         </div>
     </div><hr>
-
-    <div class="row">
-        <div class="col-sm">
-            <a href="" class="edit-btn float-left">Voir les emprunts / achat en cours</a>
-        </div>
-        <div class="col-sm">
-            <a href="" class="edit-btn float-right">Voir l'historique des activités</a>
-        </div>
-    </div><hr>
-
-    <!--
-    <div class="row">
-        <div class="col-sm">
-            Mot de passe :
-        </div>
-        <div class="col-sm">
-            <a href="{# {path('edit_password_profil')}#}" class="edit-btn  float-right">Modifier le mot de passe</a>
-        </div>
-    </div>
-    -->
-
 </div>
 {% endblock %}

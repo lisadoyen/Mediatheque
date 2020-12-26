@@ -132,7 +132,10 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
         <ul id=\"lateral-menu\">
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Éditer les statistiques</a></li>
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Gestion des emprunts/retours</a></li>
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Gestion des annonces</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"";
+            // line 47
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_index");
+            echo "\">Gestion des annonces</a></li>
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"";
             // line 48
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("operations_articles");
@@ -161,7 +164,10 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("data_base_users");
                 echo "\">Import/Export de la base de donnée des adhérents</a></li>
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Définir les paramètres et les règles d'emprunts</a></li>
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Maintenance du site</a></li>";
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"";
+                // line 56
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("crud_list");
+                echo "\">Maintenance du site</a></li>";
             }
             // line 57
             echo "        </ul>
@@ -188,7 +194,7 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
 
     public function getDebugInfo()
     {
-        return array (  167 => 57,  161 => 54,  157 => 53,  152 => 52,  149 => 51,  144 => 50,  142 => 49,  138 => 48,  125 => 37,  123 => 36,  106 => 22,  102 => 21,  91 => 15,  85 => 14,  79 => 13,  73 => 12,  68 => 10,  66 => 9,  62 => 7,  60 => 6,  55 => 5,  53 => 4,  47 => 3,  43 => 1,);
+        return array (  173 => 57,  169 => 56,  164 => 54,  160 => 53,  155 => 52,  152 => 51,  147 => 50,  145 => 49,  141 => 48,  137 => 47,  125 => 37,  123 => 36,  106 => 22,  102 => 21,  91 => 15,  85 => 14,  79 => 13,  73 => 12,  68 => 10,  66 => 9,  62 => 7,  60 => 6,  55 => 5,  53 => 4,  47 => 3,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -239,7 +245,7 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
         <ul id=\"lateral-menu\">
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Éditer les statistiques</a></li>
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Gestion des emprunts/retours</a></li>
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Gestion des annonces</a></li>
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('annonce_index') }}\">Gestion des annonces</a></li>
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('operations_articles') }}\">Opérations sur les articles</a></li>
             {% if is_granted('ROLE_BENEVOLE') and not is_granted('ROLE_ADMIN')%}
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('data_base_articles') }}\">Export de la base de données des articles</a></li>{% endif %}
@@ -248,7 +254,7 @@ class __TwigTemplate_65afdd1d16ef6997bd14a75fc6af39b66d4b46aaf18b6ce982effdf4cec
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('users_accueil') }}\">Opérations sur les adhérents</a></li>
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('data_base_users') }}\">Import/Export de la base de donnée des adhérents</a></li>
                 <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Définir les paramètres et les règles d'emprunts</a></li>
-                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"#\">Maintenance du site</a></li>{% endif %}
+                <li class=\"lateral-menu\"><a class=\"lateral-menu\" href=\"{{ path('crud_list') }}\">Maintenance du site</a></li>{% endif %}
         </ul>
     </nav>
 {% endif %}", "_nav.html.twig", "D:\\Utilisateurs\\Thibault\\Documents\\Etudes\\Superieur\\DutInfo\\Cours\\S3\\ProjetTut\\Mediatheque\\projet\\templates\\_nav.html.twig");

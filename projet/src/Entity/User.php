@@ -33,7 +33,7 @@ class User implements UserInterface
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
      */
     private $username;
 
@@ -111,7 +111,7 @@ class User implements UserInterface
     private $notificationPro;
 
     /**
-     * @ORM\Column(type="string", length=254)
+     * @ORM\Column(type="string", length=254, unique=true)
      */
     private $emailRecup;
 

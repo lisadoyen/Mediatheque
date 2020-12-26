@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -34,13 +35,14 @@ class EditProfilFormType extends AbstractType
                 ],
             ])
             ->add('username', TextType::class, array(
+                'label' => 'Identifiant',
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'Veuillez saisir un identifiant']),
-                    new Assert\Length(['min' => 5, 'minMessage' => 'L\'identifiant doit faire au minimum 5 caractères']),
+                    new Assert\Length(['min' => 2, 'minMessage' => 'L\'identifiant doit faire au minimum 2 caractères']),
                 ],
-                'required' => true
+                'required' => true,
             ))
             ->add('email_perso')
+            ->add('email_recup')
             ->add('tel_perso')
             ->add('tel_perso2')
             ->add('email_pro')

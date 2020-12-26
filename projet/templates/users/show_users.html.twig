@@ -25,11 +25,11 @@
                     {% for utilisateur in users %}
                         <tr>
                             <td>{{utilisateur.username}}</td>
-                            <td>{{utilisateur.firstname}}</td>
-                            <td>{{utilisateur.name}}</td>
-                            <td>{{utilisateur.email}}</td>
-                            <td>{{utilisateur.phone}}</td>
-                            <td>{{utilisateur.status}}</td>
+                            <td>{{utilisateur.prenom}}</td>
+                            <td>{{utilisateur.nom}}</td>
+                            <td>{{utilisateur.emailPerso}}</td>
+                            <td>{{utilisateur.telPerso}}</td>
+                            <td>{{utilisateur.fonction.libelle}}</td>
                             <td>{{utilisateur.getRoles[0]}}</td>
                             <td>
                                 <a href="" class="edit-btn">Détails</a>

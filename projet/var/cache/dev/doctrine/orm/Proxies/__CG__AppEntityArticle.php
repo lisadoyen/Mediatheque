@@ -818,4 +818,15 @@ class Article extends \App\Entity\Article implements \Doctrine\ORM\Proxy\Proxy
         return parent::removeAction($action);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function __toString()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', []);
+
+        return parent::__toString();
+    }
+
 }

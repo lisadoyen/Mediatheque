@@ -151,13 +151,13 @@ class __TwigTemplate_98f0065911d85a2729ec887685f8ac1464fe61d0b39e626b7bdaa98dbcc
                 // line 45
                 echo "                                            <a href=\"";
                 echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("add_article_favoris", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["livre"]) || array_key_exists("livre", $context) ? $context["livre"] : (function () { throw new RuntimeError('Variable "livre" does not exist.', 45, $this->source); })()), "id", [], "any", false, false, false, 45)]), "html", null, true);
-                echo "\"><i class=\"far fa-heart\"></i></a>
+                echo "\"><i class=\"far fa-heart text-danger\"></i></a>
                                         ";
             } else {
                 // line 47
                 echo "                                            <a href=\"";
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("remove_favoris", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["livre"]) || array_key_exists("livre", $context) ? $context["livre"] : (function () { throw new RuntimeError('Variable "livre" does not exist.', 47, $this->source); })()), "id", [], "any", false, false, false, 47)]), "html", null, true);
-                echo "\"><i class=\"fas fa-heart\"></i></a>
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("remove_article_favoris", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["livre"]) || array_key_exists("livre", $context) ? $context["livre"] : (function () { throw new RuntimeError('Variable "livre" does not exist.', 47, $this->source); })()), "id", [], "any", false, false, false, 47)]), "html", null, true);
+                echo "\"><i class=\"fas fa-heart text-danger\"></i></a>
                                         ";
             }
             // line 49
@@ -248,9 +248,9 @@ class __TwigTemplate_98f0065911d85a2729ec887685f8ac1464fe61d0b39e626b7bdaa98dbcc
                                     <td>
                                         <a href=\"{#{ path('livre_edit', {id: livre.id}) }#}\" class=\"btn btn-primary mb-2\">Réserver</a>
                                         {% if favoris is empty %}
-                                            <a href=\"{{ path('add_article_favoris', {id: livre.id}) }}\"><i class=\"far fa-heart\"></i></a>
+                                            <a href=\"{{ path('add_article_favoris', {id: livre.id}) }}\"><i class=\"far fa-heart text-danger\"></i></a>
                                         {% else %}
-                                            <a href=\"{{ path('remove_favoris', {id: livre.id}) }}\"><i class=\"fas fa-heart\"></i></a>
+                                            <a href=\"{{ path('remove_article_favoris', {id: livre.id}) }}\"><i class=\"fas fa-heart text-danger\"></i></a>
                                         {% endif %}
                                     </td>
                                 </tr>
