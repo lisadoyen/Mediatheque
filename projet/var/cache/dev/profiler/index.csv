@@ -2623,3 +2623,9 @@ db0709,127.0.0.1,GET,https://127.0.0.1:8000/favoris/add/42,1608556133,,302
 e16559,127.0.0.1,GET,https://127.0.0.1:8000/livres/42,1608556134,,200
 9838eb,127.0.0.1,GET,https://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_locale%3Dfr%26_controller%3DApp%255CController%255CGenreController%253A%253AgetAllGenres,1608556137,bb9edc,200
 bb9edc,127.0.0.1,GET,https://127.0.0.1:8000/livres/42,1608556137,,200
+3559d9,127.0.0.1,GET,https://127.0.0.1:8000/,1608971607,,302
+ede4bc,127.0.0.1,GET,https://127.0.0.1:8000/connexion,1608971607,,200
+87e61f,127.0.0.1,GET,https://127.0.0.1:8000/favicon.ico,1608971613,2dbd8a,404
+2dbd8a,127.0.0.1,GET,https://127.0.0.1:8000/favicon.ico,1608971613,,404
+6cd7f0,127.0.0.1,POST,https://127.0.0.1:8000/connexion,1608971621,,302
+b80736,127.0.0.1,GET,https://127.0.0.1:8000/connexion,1608971621,,200
