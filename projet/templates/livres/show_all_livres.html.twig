@@ -36,7 +36,13 @@
                                     <td>{{livre.gencode}}</td>
                                     <td>{{livre.titre}}</td>
                                     <td>{{livre.description}}</td>
-                                    <td>{{livre.vignette}}</td>
+                                    <td>
+                                        {% if livre.vignette == NULL %}
+                                            <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="75" height="75">
+                                        {% else %}
+                                            <img src="{{ livre.vignette }}" alt="{{ livre.vignette }}" width="75" height="75">
+                                        {% endif %}
+                                    </td>
                                     <td>
                                         {% if livre.numerique == 0 %}
                                             <span style="color:red">Non</span>

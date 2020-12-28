@@ -19,16 +19,19 @@
         <div class="row">
             <div class="col-sm sub-dropdown container">
                 <a href="{{ path('livres_show') }}" class="media-item dropbtn">Livres</a>
-                {{ render(controller('App\\Controller\\GenreController::getAllGenres')) }}
+                {{ render(controller('App\\Controller\\GenreController::getLivreGenres')) }}
             </div>
-            <div class="col-sm">
-                <a href="#" class="media-item">Films</a>
+            <div class="col-sm sub-dropdown container" >
+                <a href="#" class="media-item dropbtn">Videos</a>
+                {{ render(controller('App\\Controller\\GenreController::getVideoGenres')) }}
             </div>
-            <div class="col-sm">
-                <a href="#" class="media-item">Musiques</a>
+            <div class="col-sm sub-dropdown container">
+                <a href="#" class="media-item dropbtn">Musiques</a>
+                {{ render(controller('App\\Controller\\GenreController::getMusiqueGenres')) }}
             </div>
-            <div class="col-sm">
-                <a href="#" class="media-item">Jeux</a>
+            <div class="col-sm sub-dropdown container">
+                <a href="#" class="media-item dropbtn">Jeux</a>
+                {{ render(controller('App\\Controller\\GenreController::getJeuGenres')) }}
             </div>
         </div>
     </div>
