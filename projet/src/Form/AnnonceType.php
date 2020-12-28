@@ -14,7 +14,7 @@ class AnnonceType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('contenu', CKEditorType::class)
+            ->add('contenu', CKEditorType::class, array())
         ;
     }
 
