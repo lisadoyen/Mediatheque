@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Sodium\add;
 
 /**
  * @Route("/genre")
@@ -17,10 +18,35 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class GenreController extends AbstractController
 {
-    public function getAllGenres()
+    public function getLivreGenres(GenreRepository $genreRepository)
     {
+        return $this->render('genres/_genre_submenu.html.twig', ['genres' => $this->getGenreByCategorie("livre")]);
+    }
+    public function getVideoGenres(GenreRepository $genreRepository)
+    {
+        return $this->render('genres/_genre_submenu.html.twig', ['genres' => $this->getGenreByCategorie("video")]);
+    }
+    public function getMusiqueGenres(GenreRepository $genreRepository)
+    {
+        return $this->render('genres/_genre_submenu.html.twig', ['genres' => $this->getGenreByCategorie("jeu")]);
+    }
+    public function getJeuGenres(GenreRepository $genreRepository)
+    {
+        return $this->render('genres/_genre_submenu.html.twig', ['genres' => $this->getGenreByCategorie("musique")]);
+    }
+
+    public function getGenreByCategorie($libelleCategorie){
         $genres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
-        return $this->render('genres/_genre_submenu.html.twig', ['genres' => $genres]);
+        $genresCategorie = array();
+        foreach ($genres as $genre){
+            $categories = $genre->getCategories();
+            foreach ($categories as $categorie){
+                if($categorie->getLibelle() == $libelleCategorie){
+                    array_push($genresCategorie,$genre);
+                }
+            }
+        }
+        return $genresCategorie;
     }
 
     /**

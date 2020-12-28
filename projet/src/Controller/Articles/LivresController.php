@@ -29,6 +29,7 @@ use App\Repository\TypeEnregistrementRepository;
 use App\Repository\TypeEntiteRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoldRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Knp\Component\Pager\PaginatorInterface;
@@ -398,8 +399,7 @@ class LivresController extends AbstractController
     public function transfertEntite(VideoldRepository $videoldRepository,
                                  EntiteRepository $entiteRepository,
                                  EntityManagerInterface $em,
-                                 ArticleRepository $articleRepository)
-    {
+                                 ArticleRepository $articleRepository){
 
 
         foreach ($videoldRepository->findAll() as $video){
@@ -412,6 +412,51 @@ class LivresController extends AbstractController
                 $em->flush();
             }
         }
+
+        return $this->redirectToRoute("index");
+    }
+
+    /**
+     * test xml
+     * @Route("/testxml", name="testxml", methods={"GET","POST"}, options={"expose" = true})
+     * @param ArticleRepository $articleRepository
+     * @param EntityManagerInterface $em
+     * @return Response
+     * @throws Exception
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function testxml(ArticleRepository $articleRepository, EntityManagerInterface $em){
+        foreach ($articleRepository->findAll() as $article){
+            if($article->getGencode() != ""){
+                $xml = simplexml_load_file("https://www.dvdfr.com/api/search.php?gencode=".$article->getGencode());
+                $xml = $xml->dvd;
+                $json = json_encode($xml);
+                $array = json_decode($json,TRUE);
+                $cover = $array['cover'] ?? null;
+                $titre = $array['titres']['fr'] ?? null;
+                $annee = $array['annee'] ?? null;
+                if($cover != null) $article->setVignette($cover);
+                if($titre != null) $article->setTitre($titre);
+                if($annee != null) $article->setDatePublication(DateTime::createFromFormat('Y', $annee));
+                $em->persist($article);
+                $em->flush();
+            }
+        }
+
+        return $this->redirectToRoute("index");
+    }
+
+    /**
+     * tesl
+     * @Route("/test", name="test", methods={"GET","POST"}, options={"expose" = true})
+     * @param ArticleRepository $articleRepository
+     * @param EntityManagerInterface $em
+     * @return Response
+     * @throws Exception
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function test(ArticleRepository $articleRepository, EntityManagerInterface $em){
+        dd(DateTime::createFromFormat('Y', '2009'));
 
         return $this->redirectToRoute("index");
     }
