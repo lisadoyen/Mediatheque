@@ -30,20 +30,23 @@ class ArticleRepository extends ServiceEntityRepository
     public function getSearchQuery(SearchData $search, $ignorePrice = false): \Doctrine\ORM\QueryBuilder
     {
         $query = $this
-            ->createQueryBuilder('b')
-            ->select('t', 'b')
-            ->join('b.genre', 't');
+            ->createQueryBuilder('a') // a = article
+            ->select('g', 's', 'a') // g = genre , s = statut
+            ->join('a.genre', 'g')
+            ->join('a.statut', 's')
+            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'");
+            // selection des articles avec le statut vendable ou empruntable
 
 
         if(!empty($search->q)){
             $query = $query
-                ->andWhere('b.titre LIKE :q')
+                ->andWhere('a.titre LIKE :q')
                 ->setParameter('q', "%{$search->q}");
         }
 
         if(!empty($search->genre)) {
             $query = $query
-                ->andWhere('t.id IN (:genre)')
+                ->andWhere('g.id IN (:genre)')
                 ->setParameter('genre', $search->genre);
         }
 

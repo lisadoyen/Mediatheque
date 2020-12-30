@@ -13,3 +13,47 @@ span.text-orange{
 span.text-bold{
     font-weight: bold;
 }
+
+.style-button-article-emprunt{
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex;
+    padding: 7px;
+    width: auto;
+    height: auto;
+    border-radius: 25px;
+    border: 2px solid #ab5e12;
+    font-size: 1rem;
+    background-color:#ab5e12;
+    color: white !important;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.style-button-article-emprunt:hover{
+    background-color:white;
+    color:#9f5811 !important;
+}
+
+.style-button-article-achat{
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex;
+    padding: 7px;
+    width: auto;
+    height: auto;
+    border-radius: 25px;
+    border: 2px solid #ebb986;
+    font-size: 1rem;
+    background-color:#ebb986;
+    color: white !important;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.style-button-article-achat:hover{
+    background-color:white;
+    color:#ebb986 !important;
+}
