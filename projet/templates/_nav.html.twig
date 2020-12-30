@@ -11,6 +11,9 @@
 
     <a href="{{ path('panier') }}"><img src="{{asset('assets/images/yellow/shopping-cart.png')}}" class="icon  shopCar" alt="Panier"></a>
     <a href="{{ path('favoris') }}"><img src="{{asset('assets/images/yellow/star.png')}}" class="icon  fav" alt="Favories"></a>
+    {% for notif in app.flashes('notif') %}
+        <span style="position: absolute;height: 2vh;width: 2vh;top: 5.5vh;right: 28vh;background-color: #dc3545;border-radius: 50px;color: white;overflow: hidden;padding: 0.15vh;font-weight: bold;font-size: 1.3vh;text-align: center">{{ notif }}</span>
+    {% endfor %}
     <a href="{{ path('profil') }}"><img src="{{asset('assets/images/yellow/user.png')}}" class="icon  account" alt="Profile"></a>
     <a href="{{ path('security_logout') }}"><img src="{{asset('assets/images/yellow/logout.png')}}" class="icon  logout" alt="Déconnexion"></a>
 </nav>

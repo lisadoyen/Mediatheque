@@ -128,7 +128,7 @@ class ProfilController extends AbstractController
         $this->getDoctrine()->getManager()->persist($favoris);
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', 'L\'article  : ' . $articleRepository->find($id)->getTitre() . ' à été ajouté à vos favoris');
+        $this->addFlash('notif',"+1");
 
         return $this->redirectToRoute('livre_details',['id'=>$id]);
     }
@@ -148,7 +148,7 @@ class ProfilController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
         }
 
-        $this->addFlash('success', 'Tous les articles ont été supprimé de vos favoris');
+        $this->addFlash('notif',"-1");
 
         return $this->redirectToRoute('favoris');
     }
@@ -163,7 +163,7 @@ class ProfilController extends AbstractController
         $this->getDoctrine()->getManager()->remove($fav);
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', 'L\'article  : ' . $articleRepository->find($id)->getTitre() . ' à été supprimé à vos favoris');
+        $this->addFlash('notif',"-1");
 
         return $this->redirectToRoute('livre_details',['id'=>$id]);
     }
@@ -178,8 +178,8 @@ class ProfilController extends AbstractController
         $this->getDoctrine()->getManager()->remove($fav);
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', 'L\'article  : ' . $articleRepository->find($id)->getTitre() . ' à été supprimé à vos favoris');
-
+        $this->addFlash('notif',"-1");
+        
         return $this->redirectToRoute('favoris');
     }
 
