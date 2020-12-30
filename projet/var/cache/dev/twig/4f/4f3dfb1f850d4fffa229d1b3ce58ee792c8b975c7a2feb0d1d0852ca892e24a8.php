@@ -164,7 +164,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 91
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP1.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
@@ -172,7 +172,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 96
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP2.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +191,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 112
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP3.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
@@ -199,7 +199,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 117
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP4.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -218,7 +218,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 133
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP5.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
 
                                     </div>
                                 </div>
@@ -227,7 +227,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 139
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP7.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -295,7 +295,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 204
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP1.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
@@ -303,7 +303,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 209
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP2.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -322,7 +322,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 225
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP3.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
@@ -330,7 +330,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 230
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP4.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +349,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 246
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP5.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
 
                                     </div>
                                 </div>
@@ -358,7 +358,7 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                                         <a href=\"#\"><img src=\"";
         // line 252
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/tmp/HP7.jpg"), "html", null, true);
-        echo "\" class=\"img-fluid\" alt=\"\"></a>
+        echo "\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -501,12 +501,12 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                             <div class=\"row\">
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP1.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP1.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP2.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP2.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -522,12 +522,12 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                             <div class=\"row\">
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP3.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP3.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP4.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP4.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -543,13 +543,13 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                             <div class=\"row\">
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP5.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP5.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
 
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP7.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP7.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -614,12 +614,12 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                             <div class=\"row\">
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP1.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP1.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP2.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP2.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -635,12 +635,12 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                             <div class=\"row\">
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP3.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP3.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP4.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP4.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>
@@ -656,13 +656,13 @@ class __TwigTemplate_3d1f58042cf79c40643702e1ee70d13cd76d18cd1ca3cc06d8446169fb1
                             <div class=\"row\">
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP5.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP5.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
 
                                     </div>
                                 </div>
                                 <div class=\"col-sm\">
                                     <div class=\"img-box h-100 w-100 d-inline-block\">
-                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP7.jpg') }}\" class=\"img-fluid\" alt=\"\"></a>
+                                        <a href=\"#\"><img src=\"{{ asset('assets/images/tmp/HP7.jpg') }}\" class=\"img-fluid\" alt=\"\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Voir plus de détails\"></a>
                                     </div>
                                 </div>
                             </div>

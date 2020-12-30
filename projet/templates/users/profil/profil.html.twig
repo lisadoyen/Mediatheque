@@ -1,4 +1,5 @@
 {% extends "layout.html.twig" %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
 <div class="container cadre">
     <div class="row">
@@ -12,16 +13,78 @@
 
     <div class="row">
         <div class="col-sm">
-            {% if app.user.avatar is not empty %}
-                <img style="width:100px;height:100px" src="{{asset('assets/images/account/')}}{{app.user.avatar}}" alt="Image {{app.user.avatar}}" >
-            {% else %}
-                <img style="width:100px;height:100px" src="{{asset('assets/images/account/account.png')}}" alt="Aucun avatar">
-            {% endif %}
+            <button type="button" class="btn" data-toggle="modal" data-target="#imgProfil" data-toggle="tooltip" data-placement="bottom" title="Changer l'avatar">
+                {% if app.user.avatar is not null %}
+                    <img style="width:100px;height:100px" src="{{asset('assets/images/account/')}}{{app.user.avatar}}" alt="Image {{app.user.avatar}}" >
+                {% else %}
+                    <img style="width:100px;height:100px" src="{{asset('assets/images/account/account_yellow.png')}}" alt="Aucun avatar">
+                {% endif %}
+            </button>
         </div>
         <div class="col-sm">
             <h1>Votre profil</h1>
         </div>
     </div><hr>
+    
+    <div class="modal fade" id="imgProfil" tabindex="-1" role="dialog" aria-labelledby="imgProfilTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle">Changer l'avatar</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm">
+                                <a href="{{ path('edit_color_avatar_profil', {color:"dark"}) }}" class="btn" style="{% if app.user.avatar == "account_dark.png" %} border: 1px solid lightgray {% endif %}" data-target="#imgProfil" data-toggle="tooltip" data-placement="bottom" title="Changer l'avatar">
+                                    <img style="width:100px;height:100px" src="{{asset('assets/images/account/account_dark.png')}}" alt="Aucun avatar">
+                                </a>
+                            </div>
+                            <div class="col-sm">
+                                <a href="{{ path('edit_color_avatar_profil', {color:"blue"}) }}" class="btn" style="{% if app.user.avatar == "account_blue.png" %} border: 1px solid lightgray {% endif %}"  data-target="#imgProfil" data-toggle="tooltip" data-placement="bottom" title="Changer l'avatar">
+                                    <img style="width:100px;height:100px" src="{{asset('assets/images/account/account_blue.png')}}" alt="Aucun avatar">
+                                </a>
+                            </div>
+                            <div class="col-sm">
+                                <a href="{{ path('edit_color_avatar_profil', {color:"green"}) }}" class="btn" style="{% if app.user.avatar == "account_green.png" %} border: 1px solid lightgray {% endif %}" data-target="#imgProfil" data-toggle="tooltip" data-placement="bottom" title="Changer l'avatar">
+                                    <img style="width:100px;height:100px" src="{{asset('assets/images/account/account_green.png')}}" alt="Aucun avatar">
+                                </a>
+                            </div>
+                            <div class="col-sm">
+                                <a href="{{ path('edit_color_avatar_profil', {color:"red"}) }}" class="btn" style="{% if app.user.avatar == "account_red.png" %} border: 1px solid lightgray {% endif %}" data-target="#imgProfil" data-toggle="tooltip" data-placement="bottom" title="Changer l'avatar">
+                                    <img style="width:100px;height:100px" src="{{asset('assets/images/account/account_red.png')}}" alt="Aucun avatar">
+                                </a>
+                            </div>
+                        </div>
+                        <hr>
+                        {{ form_start(form) }}
+                        <h3>Importer une image depuis votre ordinateur :</h3><br>
+                        <div class="row">
+                            {% if app.user.avatar != "account_dark.png" and app.user.avatar != "account_blue.png" and app.user.avatar != "account_green.png" and app.user.avatar != "account_red.png" and app.user.avatar != "account_yellow.png" %}
+                            <div class="col-2">
+                                    <img style="width:100px;height:100px;" src="{{asset('assets/images/account/')}}{{app.user.avatar}}" alt="Image {{app.user.avatar}}" >
+                            </div>
+                            {% endif %}
+                            <div class="col-6">
+                            {{ form_row(form.avatar, {'label' : 'Choisir un ficher'}) }}
+                            </div>
+                            <div class="col-4">
+                                <button type="submit" class="edit-btn" style="margin-top: 1.4em;">Choisir cette image</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ path('edit_color_avatar_profil', {color:"yellow"}) }}" class="btn btn-secondary">Rétablir l'avatar par défaut</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-sm">

@@ -655,6 +655,9 @@
     <service id="App\Form\AuteurType" class="App\Form\AuteurType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\AvatarProfilFormType" class="App\Form\AvatarProfilFormType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\BibliothequeType" class="App\Form\BibliothequeType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -1263,6 +1266,7 @@
       <argument type="collection">
         <argument>App\Form\AnnonceType</argument>
         <argument>App\Form\AuteurType</argument>
+        <argument>App\Form\AvatarProfilFormType</argument>
         <argument>App\Form\BibliothequeType</argument>
         <argument>App\Form\CategorieType</argument>
         <argument>App\Form\EditProfilFormType</argument>
@@ -1625,7 +1629,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.LhURJb4"/>
+      <argument type="service" id=".service_locator.R7BTvf7"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -6307,6 +6311,8 @@
     <service id=".abstract.instanceof.App\Form\AnnonceType" class="App\Form\AnnonceType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\AuteurType" class="App\Form\AuteurType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\AuteurType" class="App\Form\AuteurType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\AvatarProfilFormType" class="App\Form\AvatarProfilFormType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\AvatarProfilFormType" class="App\Form\AvatarProfilFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\BibliothequeType" class="App\Form\BibliothequeType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\BibliothequeType" class="App\Form\BibliothequeType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" abstract="true"/>
@@ -6933,6 +6939,12 @@
         <argument key="manager" type="service" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
+    <service id=".service_locator.Om4dtJv" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="manager" type="service" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
     <service id=".service_locator.g9O6NUz" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6960,7 +6972,7 @@
         <argument key="session" type="service" id="session"/>
       </argument>
     </service>
-    <service id=".service_locator.E6ToVu1" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.tlooZiV" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AnnonceController::delete" type="service" id=".service_locator.fzNWGsg"/>
@@ -7026,9 +7038,11 @@
         <argument key="App\Controller\UserController::index" type="service" id=".service_locator.FXD6KYr"/>
         <argument key="App\Controller\UserController::show" type="service" id=".service_locator.hEwcf7A"/>
         <argument key="App\Controller\Users\ProfilController::addFavoris" type="service" id=".service_locator.Zr91eP6"/>
+        <argument key="App\Controller\Users\ProfilController::editAvatarColorProfil" type="service" id=".service_locator.Om4dtJv"/>
         <argument key="App\Controller\Users\ProfilController::editPassword" type="service" id=".service_locator.g9O6NUz"/>
         <argument key="App\Controller\Users\ProfilController::editProfil" type="service" id=".service_locator.ZBygHc1"/>
         <argument key="App\Controller\Users\ProfilController::favoris" type="service" id=".service_locator.TYM6kqm"/>
+        <argument key="App\Controller\Users\ProfilController::index" type="service" id=".service_locator.ZBygHc1"/>
         <argument key="App\Controller\Users\ProfilController::removeAllFavoris" type="service" id=".service_locator._.3Lzd6"/>
         <argument key="App\Controller\Users\ProfilController::removeFavoris" type="service" id=".service_locator.TYM6kqm"/>
         <argument key="App\Controller\Users\ProfilController::removeFavoris2" type="service" id=".service_locator.TYM6kqm"/>
@@ -7103,9 +7117,11 @@
         <argument key="App\Controller\UserController:index" type="service" id=".service_locator.FXD6KYr"/>
         <argument key="App\Controller\UserController:show" type="service" id=".service_locator.hEwcf7A"/>
         <argument key="App\Controller\Users\ProfilController:addFavoris" type="service" id=".service_locator.Zr91eP6"/>
+        <argument key="App\Controller\Users\ProfilController:editAvatarColorProfil" type="service" id=".service_locator.Om4dtJv"/>
         <argument key="App\Controller\Users\ProfilController:editPassword" type="service" id=".service_locator.g9O6NUz"/>
         <argument key="App\Controller\Users\ProfilController:editProfil" type="service" id=".service_locator.ZBygHc1"/>
         <argument key="App\Controller\Users\ProfilController:favoris" type="service" id=".service_locator.TYM6kqm"/>
+        <argument key="App\Controller\Users\ProfilController:index" type="service" id=".service_locator.ZBygHc1"/>
         <argument key="App\Controller\Users\ProfilController:removeAllFavoris" type="service" id=".service_locator._.3Lzd6"/>
         <argument key="App\Controller\Users\ProfilController:removeFavoris" type="service" id=".service_locator.TYM6kqm"/>
         <argument key="App\Controller\Users\ProfilController:removeFavoris2" type="service" id=".service_locator.TYM6kqm"/>
@@ -7181,11 +7197,12 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.LhURJb4" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.R7BTvf7" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\AnnonceType" type="service" id="App\Form\AnnonceType"/>
         <argument key="App\Form\AuteurType" type="service" id="App\Form\AuteurType"/>
+        <argument key="App\Form\AvatarProfilFormType" type="service" id="App\Form\AvatarProfilFormType"/>
         <argument key="App\Form\BibliothequeType" type="service" id="App\Form\BibliothequeType"/>
         <argument key="App\Form\CategorieType" type="service" id="App\Form\CategorieType"/>
         <argument key="App\Form\EditProfilFormType" type="service" id="App\Form\EditProfilFormType"/>
@@ -7740,12 +7757,12 @@
       <argument type="service" id="EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.E6ToVu1"/>
+      <argument type="service" id=".service_locator.tlooZiV"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.E6ToVu1"/>
+      <argument type="service" id=".service_locator.tlooZiV"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface" public="false">
       <argument type="collection"/>
@@ -8168,7 +8185,7 @@
     <service id="fm_elfinder.loader" alias="fm_elfinder.loader.default" public="true"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.WaGDpDt" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.E6ToVu1"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.tlooZiV"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>
@@ -8183,7 +8200,7 @@
     <service id="Psr\Log\LoggerInterface $securityLogger" alias="monolog.logger.security"/>
     <service id="Psr\Log\LoggerInterface $debugLogger" alias="monolog.logger.debug"/>
     <service id=".service_locator.AjmrG8B" alias=".service_locator.Xl5XdWY" public="false"/>
-    <service id=".service_locator.QBIuV0C" alias=".service_locator.LhURJb4" public="false"/>
+    <service id=".service_locator.GfLOF1w" alias=".service_locator.R7BTvf7" public="false"/>
     <service id="validator" alias="debug.validator" public="true"/>
     <service id="translator.data_collector.inner" alias="translator.default" public="false"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>

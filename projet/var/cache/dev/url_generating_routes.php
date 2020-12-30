@@ -99,6 +99,7 @@ return [
     'profil' => [[], ['_controller' => 'App\\Controller\\Users\\ProfilController::index'], [], [['text', '/profil']], [], []],
     'mes_donnees' => [[], ['_controller' => 'App\\Controller\\Users\\ProfilController::donneePerso'], [], [['text', '/profil/MesDonnees']], [], []],
     'edit_profil' => [[], ['_controller' => 'App\\Controller\\Users\\ProfilController::editProfil'], [], [['text', '/profil/edit']], [], []],
+    'edit_color_avatar_profil' => [['color'], ['color' => null, '_controller' => 'App\\Controller\\Users\\ProfilController::editAvatarColorProfil'], [], [['variable', '/', '[^/]++', 'color', true], ['text', '/profil/edit/avatar']], [], []],
     'edit_password_profil' => [[], ['_controller' => 'App\\Controller\\Users\\ProfilController::editPassword'], [], [['text', '/profil/edit/password']], [], []],
     'favoris' => [[], ['_controller' => 'App\\Controller\\Users\\ProfilController::favoris'], [], [['text', '/favoris']], [], []],
     'add_article_favoris' => [['id'], ['id' => 1, '_controller' => 'App\\Controller\\Users\\ProfilController::addFavoris'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/favoris/add']], [], []],

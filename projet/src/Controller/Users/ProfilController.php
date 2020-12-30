@@ -4,11 +4,11 @@ namespace App\Controller\Users;
 
 use App\Entity\Favoris;
 use App\Entity\User;
+use App\Form\AvatarProfilFormType;
 use App\Form\EditProfilFormType;
 use App\Repository\ArticleRepository;
 use App\Repository\FavorisRepository;
 use App\Service\FileUploader;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -24,9 +24,28 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil", name="profil")
      */
-    public function index()
+    public function index(Request $request, EntityManagerInterface $manager, FileUploader $fileUploader)
     {
-        return $this->render('users/profil/profil.html.twig');
+        $user = $this->getUser();
+        $form = $this->createForm(AvatarProfilFormType::class,$user);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $avatar = $form->get('avatar')->getData();
+            if ($avatar){
+                $photoName = $fileUploader->upload($avatar);
+                $user->setAvatar($photoName);
+            }
+            $manager->persist($user);
+            $manager->flush();
+            $this->addFlash(
+                'success',
+                'Votre avatar à bien été mis à jour !'
+            );
+            return $this->redirectToRoute('profil');
+        }
+        return $this->render('users/profil/profil.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
     /**
      * @Route("/profil/MesDonnees", name="mes_donnees")
@@ -39,18 +58,13 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/edit", name="edit_profil")
      */
-    public function editProfil(Request $request, EntityManagerInterface $manager, FileUploader $fileUploader)
+    public function editProfil(Request $request, EntityManagerInterface $manager, MailerInterface $mailer)
     {
         $user = $this->getUser();
         $form = $this->createForm(EditProfilFormType::class,$user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $avatar = $form->get('avatar')->getData();
-            if ($avatar){
-                $photoName = $fileUploader->upload($avatar);
-                $user->setAvatar($photoName);
-            }
             if (!$user->getNotificationPerso() && !$user->getNotificationPro()){
                 $this->addFlash(
                     'danger',
@@ -59,6 +73,14 @@ class ProfilController extends AbstractController
                 return $this->render('users/profil/_profil_form.html.twig', [
                     'form' => $form->createView()
                 ]);
+            } else {
+                $email = (new TemplatedEmail())
+                    ->from($user->getEmailRecup())//TODO lien avec l'adresse de la médiathèque
+                    ->to($user->getEmailPro())
+                    ->to($user->getEmailPerso())
+                    ->subject('Modification des notifications')
+                    ->htmlTemplate('users/profil/mail/mail_edit_notif.html.twig');
+                $mailer->send($email);
             }
             $manager->persist($user);
             $manager->flush();
@@ -73,6 +95,23 @@ class ProfilController extends AbstractController
         ]);
         
     }
+
+    /**
+     * @Route("/profil/edit/avatar/{color}", name="edit_color_avatar_profil")
+     */
+    public function editAvatarColorProfil(EntityManagerInterface $manager, $color = null)
+    {
+        $user = $this->getUser();
+        $user->setAvatar("account_".$color.".png");
+
+        $manager->persist($user);
+        $manager->flush();
+        $this->addFlash(
+        'success',
+        'Votre avatar à bien été mis à jour !'
+        );
+        return $this->redirectToRoute('profil');
+    }
     /**
      * @Route("/profil/edit/password", name="edit_password_profil")
      */
@@ -86,7 +125,7 @@ class ProfilController extends AbstractController
                     ->from($user->getEmailRecup())
                     ->to($user->getEmailRecup())
                     ->subject('Modification de profil')
-                    ->htmlTemplate('users/profil/mail_edit_profil.html.twig');
+                    ->htmlTemplate('users/profil/mail/mail_edit_profil.html.twig');
                 $mailer->send($email);
                 $manager->persist($user);
                 $manager->flush();
@@ -179,7 +218,7 @@ class ProfilController extends AbstractController
         $this->getDoctrine()->getManager()->flush();
 
         $this->addFlash('notif',"-1");
-        
+
         return $this->redirectToRoute('favoris');
     }
 

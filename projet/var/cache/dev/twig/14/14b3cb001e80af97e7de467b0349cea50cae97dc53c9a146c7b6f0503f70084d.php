@@ -44,6 +44,9 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "users/profil/profil.html.twig"));
 
+        // line 2
+        $this->env->getRuntime("Symfony\\Component\\Form\\FormRenderer")->setTheme((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 2, $this->source); })()), [0 => "bootstrap_4_layout.html.twig"], true);
+        // line 1
         $this->parent = $this->loadTemplate("layout.html.twig", "users/profil/profil.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
@@ -54,7 +57,7 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
 
     }
 
-    // line 2
+    // line 3
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -64,7 +67,7 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 3
+        // line 4
         echo "<div class=\"container cadre\">
     <div class=\"row\">
         <div class=\"col-sm\">
@@ -77,30 +80,155 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
 
     <div class=\"row\">
         <div class=\"col-sm\">
-            ";
-        // line 15
-        if ( !twig_test_empty(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 15, $this->source); })()), "user", [], "any", false, false, false, 15), "avatar", [], "any", false, false, false, 15))) {
-            // line 16
-            echo "                <img style=\"width:100px;height:100px\" src=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/account/"), "html", null, true);
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 16, $this->source); })()), "user", [], "any", false, false, false, 16), "avatar", [], "any", false, false, false, 16), "html", null, true);
-            echo "\" alt=\"Image ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 16, $this->source); })()), "user", [], "any", false, false, false, 16), "avatar", [], "any", false, false, false, 16), "html", null, true);
-            echo "\" >
-            ";
-        } else {
+            <button type=\"button\" class=\"btn\" data-toggle=\"modal\" data-target=\"#imgProfil\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Changer l'avatar\">
+                ";
+        // line 17
+        if ( !(null === twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 17, $this->source); })()), "user", [], "any", false, false, false, 17), "avatar", [], "any", false, false, false, 17))) {
             // line 18
-            echo "                <img style=\"width:100px;height:100px\" src=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/account/account.png"), "html", null, true);
+            echo "                    <img style=\"width:100px;height:100px\" src=\"";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/account/"), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 18, $this->source); })()), "user", [], "any", false, false, false, 18), "avatar", [], "any", false, false, false, 18), "html", null, true);
+            echo "\" alt=\"Image ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 18, $this->source); })()), "user", [], "any", false, false, false, 18), "avatar", [], "any", false, false, false, 18), "html", null, true);
+            echo "\" >
+                ";
+        } else {
+            // line 20
+            echo "                    <img style=\"width:100px;height:100px\" src=\"";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/account/account_yellow.png"), "html", null, true);
             echo "\" alt=\"Aucun avatar\">
-            ";
+                ";
         }
-        // line 20
-        echo "        </div>
+        // line 22
+        echo "            </button>
+        </div>
         <div class=\"col-sm\">
             <h1>Votre profil</h1>
         </div>
     </div><hr>
+    
+    <div class=\"modal fade\" id=\"imgProfil\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"imgProfilTitle\" aria-hidden=\"true\">
+        <div class=\"modal-dialog modal-dialog-centered modal-lg\" role=\"document\">
+            <div class=\"modal-content\">
+                <div class=\"modal-header\">
+                    <h2 class=\"modal-title\" id=\"exampleModalLongTitle\">Changer l'avatar</h2>
+                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
+                        <span aria-hidden=\"true\">&times;</span>
+                    </button>
+                </div>
+                <div class=\"modal-body\">
+                    <div class=\"container-fluid\">
+                        <div class=\"row\">
+                            <div class=\"col-sm\">
+                                <a href=\"";
+        // line 42
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("edit_color_avatar_profil", ["color" => "dark"]);
+        echo "\" class=\"btn\" style=\"";
+        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 42, $this->source); })()), "user", [], "any", false, false, false, 42), "avatar", [], "any", false, false, false, 42), "account_dark.png"))) {
+            echo " border: 1px solid lightgray ";
+        }
+        echo "\" data-target=\"#imgProfil\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Changer l'avatar\">
+                                    <img style=\"width:100px;height:100px\" src=\"";
+        // line 43
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/account/account_dark.png"), "html", null, true);
+        echo "\" alt=\"Aucun avatar\">
+                                </a>
+                            </div>
+                            <div class=\"col-sm\">
+                                <a href=\"";
+        // line 47
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("edit_color_avatar_profil", ["color" => "blue"]);
+        echo "\" class=\"btn\" style=\"";
+        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 47, $this->source); })()), "user", [], "any", false, false, false, 47), "avatar", [], "any", false, false, false, 47), "account_blue.png"))) {
+            echo " border: 1px solid lightgray ";
+        }
+        echo "\"  data-target=\"#imgProfil\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Changer l'avatar\">
+                                    <img style=\"width:100px;height:100px\" src=\"";
+        // line 48
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/account/account_blue.png"), "html", null, true);
+        echo "\" alt=\"Aucun avatar\">
+                                </a>
+                            </div>
+                            <div class=\"col-sm\">
+                                <a href=\"";
+        // line 52
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("edit_color_avatar_profil", ["color" => "green"]);
+        echo "\" class=\"btn\" style=\"";
+        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 52, $this->source); })()), "user", [], "any", false, false, false, 52), "avatar", [], "any", false, false, false, 52), "account_green.png"))) {
+            echo " border: 1px solid lightgray ";
+        }
+        echo "\" data-target=\"#imgProfil\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Changer l'avatar\">
+                                    <img style=\"width:100px;height:100px\" src=\"";
+        // line 53
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/account/account_green.png"), "html", null, true);
+        echo "\" alt=\"Aucun avatar\">
+                                </a>
+                            </div>
+                            <div class=\"col-sm\">
+                                <a href=\"";
+        // line 57
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("edit_color_avatar_profil", ["color" => "red"]);
+        echo "\" class=\"btn\" style=\"";
+        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 57, $this->source); })()), "user", [], "any", false, false, false, 57), "avatar", [], "any", false, false, false, 57), "account_red.png"))) {
+            echo " border: 1px solid lightgray ";
+        }
+        echo "\" data-target=\"#imgProfil\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Changer l'avatar\">
+                                    <img style=\"width:100px;height:100px\" src=\"";
+        // line 58
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/account/account_red.png"), "html", null, true);
+        echo "\" alt=\"Aucun avatar\">
+                                </a>
+                            </div>
+                        </div>
+                        <hr>
+                        ";
+        // line 63
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 63, $this->source); })()), 'form_start');
+        echo "
+                        <h3>Importer une image depuis votre ordinateur :</h3><br>
+                        <div class=\"row\">
+                            ";
+        // line 66
+        if ((((((0 !== twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 66, $this->source); })()), "user", [], "any", false, false, false, 66), "avatar", [], "any", false, false, false, 66), "account_dark.png")) && (0 !== twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 66, $this->source); })()), "user", [], "any", false, false, false, 66), "avatar", [], "any", false, false, false, 66), "account_blue.png"))) && (0 !== twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 66, $this->source); })()), "user", [], "any", false, false, false, 66), "avatar", [], "any", false, false, false, 66), "account_green.png"))) && (0 !== twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 66, $this->source); })()), "user", [], "any", false, false, false, 66), "avatar", [], "any", false, false, false, 66), "account_red.png"))) && (0 !== twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 66, $this->source); })()), "user", [], "any", false, false, false, 66), "avatar", [], "any", false, false, false, 66), "account_yellow.png")))) {
+            // line 67
+            echo "                            <div class=\"col-2\">
+                                    <img style=\"width:100px;height:100px;\" src=\"";
+            // line 68
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/account/"), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 68, $this->source); })()), "user", [], "any", false, false, false, 68), "avatar", [], "any", false, false, false, 68), "html", null, true);
+            echo "\" alt=\"Image ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 68, $this->source); })()), "user", [], "any", false, false, false, 68), "avatar", [], "any", false, false, false, 68), "html", null, true);
+            echo "\" >
+                            </div>
+                            ";
+        }
+        // line 71
+        echo "                            <div class=\"col-6\">
+                            ";
+        // line 72
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 72, $this->source); })()), "avatar", [], "any", false, false, false, 72), 'row', ["label" => "Choisir un ficher"]);
+        echo "
+                            </div>
+                            <div class=\"col-4\">
+                                <button type=\"submit\" class=\"edit-btn\" style=\"margin-top: 1.4em;\">Choisir cette image</button>
+                            </div>
+                        </div>
+                        ";
+        // line 78
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 78, $this->source); })()), 'form_end');
+        echo "
+                    </div>
+                </div>
+                <div class=\"modal-footer\">
+                    <a href=\"";
+        // line 82
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("edit_color_avatar_profil", ["color" => "yellow"]);
+        echo "\" class=\"btn btn-secondary\">Rétablir l'avatar par défaut</a>
+                    <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class=\"row\">
         <div class=\"col-sm\">
@@ -108,8 +236,8 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 31
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 31, $this->source); })()), "user", [], "any", false, false, false, 31), "matricule", [], "any", false, false, false, 31), "html", null, true);
+        // line 94
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 94, $this->source); })()), "user", [], "any", false, false, false, 94), "matricule", [], "any", false, false, false, 94), "html", null, true);
         echo "
         </div>
     </div><hr>
@@ -120,8 +248,8 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 40
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 40, $this->source); })()), "user", [], "any", false, false, false, 40), "username", [], "any", false, false, false, 40), "html", null, true);
+        // line 103
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 103, $this->source); })()), "user", [], "any", false, false, false, 103), "username", [], "any", false, false, false, 103), "html", null, true);
         echo "
         </div>
     </div><hr>
@@ -133,8 +261,8 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 50
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 50, $this->source); })()), "user", [], "any", false, false, false, 50), "prenom", [], "any", false, false, false, 50), "html", null, true);
+        // line 113
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 113, $this->source); })()), "user", [], "any", false, false, false, 113), "prenom", [], "any", false, false, false, 113), "html", null, true);
         echo "
         </div>
     </div><hr>
@@ -145,8 +273,8 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 59
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 59, $this->source); })()), "user", [], "any", false, false, false, 59), "nom", [], "any", false, false, false, 59), "html", null, true);
+        // line 122
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 122, $this->source); })()), "user", [], "any", false, false, false, 122), "nom", [], "any", false, false, false, 122), "html", null, true);
         echo "
         </div>
     </div><hr>
@@ -157,8 +285,8 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 68
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 68, $this->source); })()), "user", [], "any", false, false, false, 68), "entreprise", [], "any", false, false, false, 68), "nom", [], "any", false, false, false, 68), "html", null, true);
+        // line 131
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 131, $this->source); })()), "user", [], "any", false, false, false, 131), "entreprise", [], "any", false, false, false, 131), "nom", [], "any", false, false, false, 131), "html", null, true);
         echo "
         </div>
     </div><hr>
@@ -169,8 +297,8 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 77
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 77, $this->source); })()), "user", [], "any", false, false, false, 77), "fonction", [], "any", false, false, false, 77), "libelle", [], "any", false, false, false, 77), "html", null, true);
+        // line 140
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 140, $this->source); })()), "user", [], "any", false, false, false, 140), "fonction", [], "any", false, false, false, 140), "libelle", [], "any", false, false, false, 140), "html", null, true);
         echo "
         </div>
     </div><hr>
@@ -181,8 +309,8 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 86
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 86, $this->source); })()), "user", [], "any", false, false, false, 86), "emailRecup", [], "any", false, false, false, 86), "html", null, true);
+        // line 149
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 149, $this->source); })()), "user", [], "any", false, false, false, 149), "emailRecup", [], "any", false, false, false, 149), "html", null, true);
         echo "
         </div>
     </div><hr>
@@ -193,34 +321,34 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 95
-        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 95, $this->source); })()), "user", [], "any", false, false, false, 95), "droitEmprunt", [], "any", false, false, false, 95), 1))) {
-            // line 96
+        // line 158
+        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 158, $this->source); })()), "user", [], "any", false, false, false, 158), "droitEmprunt", [], "any", false, false, false, 158), 1))) {
+            // line 159
             echo "                <span class=\"text-success\">Oui</span>
             ";
         } else {
-            // line 98
+            // line 161
             echo "                <span class=\"text-danger\">Non</span>
             ";
         }
-        // line 100
+        // line 163
         echo "        </div>
         <div class=\"col-sm border-left\">
             Droit d'achat :
         </div>
         <div class=\"col-sm\">
             ";
-        // line 105
-        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 105, $this->source); })()), "user", [], "any", false, false, false, 105), "droitAchat", [], "any", false, false, false, 105), 1))) {
-            // line 106
+        // line 168
+        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 168, $this->source); })()), "user", [], "any", false, false, false, 168), "droitAchat", [], "any", false, false, false, 168), 1))) {
+            // line 169
             echo "                <span class=\"text-success\">Oui</span>
             ";
         } else {
-            // line 108
+            // line 171
             echo "                <span class=\"text-danger\">Non</span>
             ";
         }
-        // line 110
+        // line 173
         echo "        </div>
     </div><hr>
     <div class=\"row\">
@@ -229,34 +357,34 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 117
-        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 117, $this->source); })()), "user", [], "any", false, false, false, 117), "notificationPerso", [], "any", false, false, false, 117), 1))) {
-            // line 118
+        // line 180
+        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 180, $this->source); })()), "user", [], "any", false, false, false, 180), "notificationPerso", [], "any", false, false, false, 180), 1))) {
+            // line 181
             echo "                <span class=\"text-success\">Oui</span>
             ";
         } else {
-            // line 120
+            // line 183
             echo "                <span class=\"text-danger\">Non</span>
             ";
         }
-        // line 122
+        // line 185
         echo "        </div>
         <div class=\"col-sm border-left\">
             Notification professionnel :
         </div>
         <div class=\"col-sm\">
             ";
-        // line 127
-        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 127, $this->source); })()), "user", [], "any", false, false, false, 127), "notificationPro", [], "any", false, false, false, 127), 1))) {
-            // line 128
+        // line 190
+        if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 190, $this->source); })()), "user", [], "any", false, false, false, 190), "notificationPro", [], "any", false, false, false, 190), 1))) {
+            // line 191
             echo "                <span class=\"text-success\">Oui</span>
             ";
         } else {
-            // line 130
+            // line 193
             echo "                <span class=\"text-danger\">Non</span>
             ";
         }
-        // line 132
+        // line 195
         echo "        </div>
     </div><hr>
 
@@ -266,8 +394,8 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 140
-        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 140, $this->source); })()), "user", [], "any", false, false, false, 140), "dateCreation", [], "any", false, false, false, 140), "d/m/Y"), "html", null, true);
+        // line 203
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 203, $this->source); })()), "user", [], "any", false, false, false, 203), "dateCreation", [], "any", false, false, false, 203), "d/m/Y"), "html", null, true);
         echo "
         </div>
     </div><hr>
@@ -278,8 +406,8 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
         </div>
         <div class=\"col-sm\">
             ";
-        // line 149
-        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 149, $this->source); })()), "user", [], "any", false, false, false, 149), "dateModification", [], "any", false, false, false, 149), "d/m/Y"), "html", null, true);
+        // line 212
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 212, $this->source); })()), "user", [], "any", false, false, false, 212), "dateModification", [], "any", false, false, false, 212), "d/m/Y"), "html", null, true);
         echo "
         </div>
     </div><hr>
@@ -287,19 +415,19 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
     <div class=\"row\">
         <div class=\"col-sm\">
             <a href=\"";
-        // line 155
+        // line 218
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mes_donnees");
         echo "\" class=\"edit-btn float-left\">Mes données personnelles</a>
         </div>
         <div class=\"col-sm\">
             <a href=\"";
-        // line 158
+        // line 221
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("edit_password_profil");
         echo "\" class=\"edit-btn float-center\">Modifier mon mot de passe</a>
         </div>
         <div class=\"col-sm\">
             <a href=\"";
-        // line 161
+        // line 224
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("edit_profil");
         echo "\" class=\"edit-btn float-right\">Modifier les paramètres secondaire</a>
         </div>
@@ -326,12 +454,13 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
 
     public function getDebugInfo()
     {
-        return array (  303 => 161,  297 => 158,  291 => 155,  282 => 149,  270 => 140,  260 => 132,  256 => 130,  252 => 128,  250 => 127,  243 => 122,  239 => 120,  235 => 118,  233 => 117,  224 => 110,  220 => 108,  216 => 106,  214 => 105,  207 => 100,  203 => 98,  199 => 96,  197 => 95,  185 => 86,  173 => 77,  161 => 68,  149 => 59,  137 => 50,  124 => 40,  112 => 31,  99 => 20,  93 => 18,  84 => 16,  82 => 15,  68 => 3,  58 => 2,  35 => 1,);
+        return array (  431 => 224,  425 => 221,  419 => 218,  410 => 212,  398 => 203,  388 => 195,  384 => 193,  380 => 191,  378 => 190,  371 => 185,  367 => 183,  363 => 181,  361 => 180,  352 => 173,  348 => 171,  344 => 169,  342 => 168,  335 => 163,  331 => 161,  327 => 159,  325 => 158,  313 => 149,  301 => 140,  289 => 131,  277 => 122,  265 => 113,  252 => 103,  240 => 94,  225 => 82,  218 => 78,  209 => 72,  206 => 71,  197 => 68,  194 => 67,  192 => 66,  186 => 63,  178 => 58,  170 => 57,  163 => 53,  155 => 52,  148 => 48,  140 => 47,  133 => 43,  125 => 42,  103 => 22,  97 => 20,  88 => 18,  86 => 17,  71 => 4,  61 => 3,  50 => 1,  48 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends \"layout.html.twig\" %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
 <div class=\"container cadre\">
     <div class=\"row\">
@@ -345,16 +474,78 @@ class __TwigTemplate_744023e0adab50915bb165b1b3111a1c6bd025ff2e27b650d3f9ed99625
 
     <div class=\"row\">
         <div class=\"col-sm\">
-            {% if app.user.avatar is not empty %}
-                <img style=\"width:100px;height:100px\" src=\"{{asset('assets/images/account/')}}{{app.user.avatar}}\" alt=\"Image {{app.user.avatar}}\" >
-            {% else %}
-                <img style=\"width:100px;height:100px\" src=\"{{asset('assets/images/account/account.png')}}\" alt=\"Aucun avatar\">
-            {% endif %}
+            <button type=\"button\" class=\"btn\" data-toggle=\"modal\" data-target=\"#imgProfil\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Changer l'avatar\">
+                {% if app.user.avatar is not null %}
+                    <img style=\"width:100px;height:100px\" src=\"{{asset('assets/images/account/')}}{{app.user.avatar}}\" alt=\"Image {{app.user.avatar}}\" >
+                {% else %}
+                    <img style=\"width:100px;height:100px\" src=\"{{asset('assets/images/account/account_yellow.png')}}\" alt=\"Aucun avatar\">
+                {% endif %}
+            </button>
         </div>
         <div class=\"col-sm\">
             <h1>Votre profil</h1>
         </div>
     </div><hr>
+    
+    <div class=\"modal fade\" id=\"imgProfil\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"imgProfilTitle\" aria-hidden=\"true\">
+        <div class=\"modal-dialog modal-dialog-centered modal-lg\" role=\"document\">
+            <div class=\"modal-content\">
+                <div class=\"modal-header\">
+                    <h2 class=\"modal-title\" id=\"exampleModalLongTitle\">Changer l'avatar</h2>
+                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
+                        <span aria-hidden=\"true\">&times;</span>
+                    </button>
+                </div>
+                <div class=\"modal-body\">
+                    <div class=\"container-fluid\">
+                        <div class=\"row\">
+                            <div class=\"col-sm\">
+                                <a href=\"{{ path('edit_color_avatar_profil', {color:\"dark\"}) }}\" class=\"btn\" style=\"{% if app.user.avatar == \"account_dark.png\" %} border: 1px solid lightgray {% endif %}\" data-target=\"#imgProfil\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Changer l'avatar\">
+                                    <img style=\"width:100px;height:100px\" src=\"{{asset('assets/images/account/account_dark.png')}}\" alt=\"Aucun avatar\">
+                                </a>
+                            </div>
+                            <div class=\"col-sm\">
+                                <a href=\"{{ path('edit_color_avatar_profil', {color:\"blue\"}) }}\" class=\"btn\" style=\"{% if app.user.avatar == \"account_blue.png\" %} border: 1px solid lightgray {% endif %}\"  data-target=\"#imgProfil\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Changer l'avatar\">
+                                    <img style=\"width:100px;height:100px\" src=\"{{asset('assets/images/account/account_blue.png')}}\" alt=\"Aucun avatar\">
+                                </a>
+                            </div>
+                            <div class=\"col-sm\">
+                                <a href=\"{{ path('edit_color_avatar_profil', {color:\"green\"}) }}\" class=\"btn\" style=\"{% if app.user.avatar == \"account_green.png\" %} border: 1px solid lightgray {% endif %}\" data-target=\"#imgProfil\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Changer l'avatar\">
+                                    <img style=\"width:100px;height:100px\" src=\"{{asset('assets/images/account/account_green.png')}}\" alt=\"Aucun avatar\">
+                                </a>
+                            </div>
+                            <div class=\"col-sm\">
+                                <a href=\"{{ path('edit_color_avatar_profil', {color:\"red\"}) }}\" class=\"btn\" style=\"{% if app.user.avatar == \"account_red.png\" %} border: 1px solid lightgray {% endif %}\" data-target=\"#imgProfil\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Changer l'avatar\">
+                                    <img style=\"width:100px;height:100px\" src=\"{{asset('assets/images/account/account_red.png')}}\" alt=\"Aucun avatar\">
+                                </a>
+                            </div>
+                        </div>
+                        <hr>
+                        {{ form_start(form) }}
+                        <h3>Importer une image depuis votre ordinateur :</h3><br>
+                        <div class=\"row\">
+                            {% if app.user.avatar != \"account_dark.png\" and app.user.avatar != \"account_blue.png\" and app.user.avatar != \"account_green.png\" and app.user.avatar != \"account_red.png\" and app.user.avatar != \"account_yellow.png\" %}
+                            <div class=\"col-2\">
+                                    <img style=\"width:100px;height:100px;\" src=\"{{asset('assets/images/account/')}}{{app.user.avatar}}\" alt=\"Image {{app.user.avatar}}\" >
+                            </div>
+                            {% endif %}
+                            <div class=\"col-6\">
+                            {{ form_row(form.avatar, {'label' : 'Choisir un ficher'}) }}
+                            </div>
+                            <div class=\"col-4\">
+                                <button type=\"submit\" class=\"edit-btn\" style=\"margin-top: 1.4em;\">Choisir cette image</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                <div class=\"modal-footer\">
+                    <a href=\"{{ path('edit_color_avatar_profil', {color:\"yellow\"}) }}\" class=\"btn btn-secondary\">Rétablir l'avatar par défaut</a>
+                    <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class=\"row\">
         <div class=\"col-sm\">

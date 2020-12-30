@@ -168,6 +168,7 @@ return [
                     .'|/edit(*:1062)'
                     .'|(*:1071)'
                 .')'
+                .'|/profil/edit/avatar(?:/([^/]++))?(*:1114)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -222,8 +223,9 @@ return [
         1020 => [[['_route' => 'type_entite_delete', '_controller' => 'App\\Controller\\TypeEntiteController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
         1048 => [[['_route' => 'user_show', '_controller' => 'App\\Controller\\UserController::show'], ['id'], ['GET' => 0], null, false, true, null]],
         1062 => [[['_route' => 'user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        1071 => [
-            [['_route' => 'user_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
+        1071 => [[['_route' => 'user_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        1114 => [
+            [['_route' => 'edit_color_avatar_profil', 'color' => null, '_controller' => 'App\\Controller\\Users\\ProfilController::editAvatarColorProfil'], ['color'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

@@ -4,15 +4,14 @@
 <div class="container cadre">
     <h1>Modification du profil</h1><hr>
         {{ form_start(form) }}
-            {{ form_row(form.avatar, {'label' : 'Avatar '}) }}<br>
             {{ form_row(form.username, {'label' : 'Identifiant '}) }}<br>
             {{ form_row(form.email_recup, {'label' : 'Email Récupération '}) }}<br>
             {{ form_row(form.email_perso, {'label' : 'Email personnel '}) }}<br>
-            {{ form_row(form.tel_perso, {'label' : 'Téléphone personnel '}) }}<br>
-            {{ form_row(form.tel_perso2, {'label' : 'Téléphone personnel 2 '}) }}<br>
+            {{ form_row(form.tel_perso, {'label' : 'Téléphone personnel principal'}) }}<br>
+            {{ form_row(form.tel_perso2, {'label' : 'Téléphone personnel secondaire '}) }}<br>
             {{ form_row(form.email_pro, {'label' : 'Email professionnel '}) }}<br>
-            {{ form_row(form.tel_pro, {'label' : 'Téléphone professionnel '}) }}<br>
-            {{ form_row(form.tel_pro2, {'label' : 'Téléphone professionnel 2'}) }}<br>
+            {{ form_row(form.tel_pro, {'label' : 'Téléphone professionnel principal'}) }}<br>
+            {{ form_row(form.tel_pro2, {'label' : 'Téléphone professionnel secondaire'}) }}<br>
             {{ form_row(form.notification_perso, {'label' : 'Notification Personnel'}) }}<br>
             {{ form_row(form.notification_pro, {'label' : 'Notification professionnel'}) }}<br>
             {{form_row(form.adresse_rue, {'label' : 'Rue'}) }}<br>

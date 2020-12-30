@@ -6,7 +6,7 @@
                 {% if app.user.avatar is not empty %}
                     <img style="width:100px;height:100px" src="{{asset('assets/images/account/')}}{{app.user.avatar}}" alt="Image {{app.user.avatar}}" >
                 {% else %}
-                    <img style="width:100px;height:100px" src="{{asset('assets/images/account/account.png')}}" alt="Aucun avatar">
+                    <img style="width:100px;height:100px" src="{{asset('assets/images/account/account_yellow.png')}}" alt="Aucun avatar">
                 {% endif %}
             </div>
             <div class="col-sm">
@@ -106,7 +106,7 @@
 
         <div class="row">
             <div class="col-sm">
-                Télephone Personnels :
+                Télephone personnel principal :
             </div>
             <div class="col-sm">
                 {{  app.user.telPerso  }}
@@ -114,7 +114,7 @@
         </div><hr>
         <div class="row">
             <div class="col-sm">
-                Télephone Personnel 2 :
+                Télephone personnel secondaire :
             </div>
             <div class="col-sm">
                 {{  app.user.telPerso2  }}
@@ -123,7 +123,7 @@
 
         <div class="row">
             <div class="col-sm">
-                Télephone Professionnel :
+                Télephone professionnel principal :
             </div>
             <div class="col-sm">
                 {{  app.user.telPro  }}
@@ -132,10 +132,33 @@
 
         <div class="row">
             <div class="col-sm">
-                Télephone Professionnel 2 :
+                Télephone professionnel secondaire :
             </div>
             <div class="col-sm">
                 {{  app.user.telPro2  }}
+            </div>
+        </div><hr>
+
+        <div class="row">
+            <div class="col-sm">
+                Notification personnel :
+            </div>
+            <div class="col-sm">
+                {% if app.user.notificationPerso == 1 %}
+                    <span class="text-success">Oui</span>
+                {% else %}
+                    <span class="text-danger">Non</span>
+                {% endif %}
+            </div>
+            <div class="col-sm border-left">
+                Notification professionnel :
+            </div>
+            <div class="col-sm">
+                {% if app.user.notificationPro == 1 %}
+                    <span class="text-success">Oui</span>
+                {% else %}
+                    <span class="text-danger">Non</span>
+                {% endif %}
             </div>
         </div><hr>
 
