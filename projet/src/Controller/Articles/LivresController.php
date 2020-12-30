@@ -47,8 +47,8 @@ use Symfony\Component\Validator\Constraints\Date;
 class LivresController extends AbstractController
 {
     /**
-     * @Route("/livres/show", name="livres_show",methods={"GET", "POST"})
-     * @Route("/livres/genres/{id}/show", name="genres_id_livres_show",methods={"GET", "POST"})
+     * @Route("/livres/show", name="livres_show", methods={"GET", "POST"})
+     * @Route("/livres/genres/{id}/show", name="genres_id_livres_show", methods={"GET", "POST"})
      * @param null $id
      * @param SessionInterface $session
      * @param ArticleRepository $ar
@@ -78,8 +78,8 @@ class LivresController extends AbstractController
                 $request->query->getInt('page',1),
                 30
             );
+
             return $this->render('livres/show_all_livres.html.twig', [
-                'session' => $session,
                 'livres' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
                 'donnees' => $donnees
@@ -124,7 +124,9 @@ class LivresController extends AbstractController
                 $request->query->getInt('page', 1),
                 10
             );
+
             return $this->render('livres/show_all_livres.html.twig', [
+                'session' => $session,
                 'livres' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
                 'donnees' => $donnees
@@ -235,6 +237,10 @@ class LivresController extends AbstractController
 
     /**
      * @Route("/livres/{id}", name="livre_details")
+     * @param ArticleRepository $articleRepository
+     * @param FavorisRepository $favorisRepository
+     * @param int $id
+     * @return Response
      */
     public function livreDetails(ArticleRepository $articleRepository, FavorisRepository $favorisRepository, $id=1){
         $livre = $articleRepository->findOneBy(['id' => $id]);

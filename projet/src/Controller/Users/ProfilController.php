@@ -4,15 +4,16 @@ namespace App\Controller\Users;
 
 use App\Entity\Favoris;
 use App\Entity\User;
-use App\Form\AvatarProfilFormType;
 use App\Form\EditProfilFormType;
 use App\Repository\ArticleRepository;
 use App\Repository\FavorisRepository;
 use App\Service\FileUploader;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,28 +25,9 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil", name="profil")
      */
-    public function index(Request $request, EntityManagerInterface $manager, FileUploader $fileUploader)
+    public function index()
     {
-        $user = $this->getUser();
-        $form = $this->createForm(AvatarProfilFormType::class,$user);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $avatar = $form->get('avatar')->getData();
-            if ($avatar){
-                $photoName = $fileUploader->upload($avatar);
-                $user->setAvatar($photoName);
-            }
-            $manager->persist($user);
-            $manager->flush();
-            $this->addFlash(
-                'success',
-                'Votre avatar à bien été mis à jour !'
-            );
-            return $this->redirectToRoute('profil');
-        }
-        return $this->render('users/profil/profil.html.twig', [
-            'form' => $form->createView()
-        ]);
+        return $this->render('users/profil/profil.html.twig');
     }
     /**
      * @Route("/profil/MesDonnees", name="mes_donnees")
@@ -58,13 +40,18 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/edit", name="edit_profil")
      */
-    public function editProfil(Request $request, EntityManagerInterface $manager, MailerInterface $mailer)
+    public function editProfil(Request $request, EntityManagerInterface $manager, FileUploader $fileUploader)
     {
         $user = $this->getUser();
         $form = $this->createForm(EditProfilFormType::class,$user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $avatar = $form->get('avatar')->getData();
+            if ($avatar){
+                $photoName = $fileUploader->upload($avatar);
+                $user->setAvatar($photoName);
+            }
             if (!$user->getNotificationPerso() && !$user->getNotificationPro()){
                 $this->addFlash(
                     'danger',
@@ -73,14 +60,6 @@ class ProfilController extends AbstractController
                 return $this->render('users/profil/_profil_form.html.twig', [
                     'form' => $form->createView()
                 ]);
-            } else {
-                $email = (new TemplatedEmail())
-                    ->from($user->getEmailRecup())//TODO lien avec l'adresse de la médiathèque
-                    ->to($user->getEmailPro())
-                    ->to($user->getEmailPerso())
-                    ->subject('Modification des notifications')
-                    ->htmlTemplate('users/profil/mail/mail_edit_notif.html.twig');
-                $mailer->send($email);
             }
             $manager->persist($user);
             $manager->flush();
@@ -95,23 +74,6 @@ class ProfilController extends AbstractController
         ]);
         
     }
-
-    /**
-     * @Route("/profil/edit/avatar/{color}", name="edit_color_avatar_profil")
-     */
-    public function editAvatarColorProfil(EntityManagerInterface $manager, $color = null)
-    {
-        $user = $this->getUser();
-        $user->setAvatar("account_".$color.".png");
-
-        $manager->persist($user);
-        $manager->flush();
-        $this->addFlash(
-        'success',
-        'Votre avatar à bien été mis à jour !'
-        );
-        return $this->redirectToRoute('profil');
-    }
     /**
      * @Route("/profil/edit/password", name="edit_password_profil")
      */
@@ -125,7 +87,7 @@ class ProfilController extends AbstractController
                     ->from($user->getEmailRecup())
                     ->to($user->getEmailRecup())
                     ->subject('Modification de profil')
-                    ->htmlTemplate('users/profil/mail/mail_edit_profil.html.twig');
+                    ->htmlTemplate('users/profil/mail_edit_profil.html.twig');
                 $mailer->send($email);
                 $manager->persist($user);
                 $manager->flush();
@@ -156,9 +118,9 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/favoris/add/{id}", name="add_article_favoris")
+     * @Route("/{page}/favoris/add/{id}", name="add_article_favoris")
      */
-    public function addFavoris(ArticleRepository $articleRepository, $id=1){
+    public function addFavoris(SessionInterface $session, ArticleRepository $articleRepository, $id=1, $page){
         $user = $this->getUser();
 
         $favoris = new Favoris();
@@ -169,13 +131,28 @@ class ProfilController extends AbstractController
 
         $this->addFlash('notif',"+1");
 
-        return $this->redirectToRoute('livre_details',['id'=>$id]);
+        if($page == "list"){
+            $donnees = $session->get('donnees');
+            if(empty($donnees))
+                return $this->redirectToRoute('livres_show');
+            else {
+                if (!empty($donnees['genres'])) {
+                    return $this->redirectToRoute('genres_id_livres_show', ['id' => 1]);
+                } else {
+                    return $this->redirectToRoute('livres_show');
+                }
+            }
+        }
+        if ($page == "detail") {
+            return $this->redirectToRoute('livre_details', ['id' => $id]);
+        }
+        return;
     }
 
     /**
      * @Route("/favoris/remove", name="remove_all_favoris", methods={"DELETE"})
      */
-    public function removeAllFavoris(FavorisRepository $favorisRepository, Request $request){
+    public function removeAllFavoris( FavorisRepository $favorisRepository, Request $request){
         if(!$this->isCsrfTokenValid('favoris_delete', $request->get('token'))) {
             throw new  InvalidCsrfTokenException('Invalid CSRF token delete favoris');
         }
@@ -193,9 +170,9 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/livres/{id}/remove/favoris", name="remove_article_favoris")
+     * @Route("/{page}/livres/{id}/remove/favoris", name="remove_article_favoris")
      */
-    public function removeFavoris(ArticleRepository $articleRepository,FavorisRepository $favorisRepository, $id=1){
+    public function removeFavoris(SessionInterface $session, ArticleRepository $articleRepository,FavorisRepository $favorisRepository, $id=1, $page){
         $user = $this->getUser();
         $fav = $favorisRepository->findOneBy(['article' => $id, 'utilisateur'=>$user]);
 
@@ -204,7 +181,22 @@ class ProfilController extends AbstractController
 
         $this->addFlash('notif',"-1");
 
-        return $this->redirectToRoute('livre_details',['id'=>$id]);
+        if($page == "list"){
+            $donnees = $session->get('donnees');
+            if(empty($donnees))
+                return $this->redirectToRoute('livres_show');
+            else {
+                if (!empty($donnees['genres'])) {
+                    return $this->redirectToRoute('genres_id_livres_show', ['id' => 1]);
+                } else {
+                    return $this->redirectToRoute('livres_show');
+                }
+            }
+        }
+        if ($page == "detail") {
+            return $this->redirectToRoute('livre_details', ['id' => $id]);
+        }
+        return;
     }
 
     /**
@@ -218,7 +210,7 @@ class ProfilController extends AbstractController
         $this->getDoctrine()->getManager()->flush();
 
         $this->addFlash('notif',"-1");
-
+        
         return $this->redirectToRoute('favoris');
     }
 

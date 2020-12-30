@@ -41,9 +41,9 @@
                                 <td>
                                     <a href="{#{ path('livre_edit', {id: livre.id}) }#}" class="btn btn-primary mb-2">Réserver</a>
                                     {% if favoris is empty %}
-                                        <a href="{{ path('add_article_favoris', {id: livre.id}) }}"><i class="far fa-star text-danger"></i></a>
+                                        <a href="{{ path('add_article_favoris', {id: livre.id, page:"detail"}) }}"><i class="far fa-star text-danger"></i></a>
                                     {% else %}
-                                        <a href="{{ path('remove_article_favoris', {id: livre.id}) }}"><i class="fas fa-star text-danger"></i></a>
+                                        <a href="{{ path('remove_article_favoris', {id: livre.id, page:"detail"}) }}"><i class="fas fa-star text-danger"></i></a>
                                     {% endif %}
                                 </td>
                             </tr>

@@ -33,10 +33,17 @@
                             {% endif %}
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                                 <div class="text-size-title"><span class="text-orange"> titre : </span><span class="text-bold">{{livre.titre | capitalize }}</span></div>
                                 <div class="text-size"><span class="text-orange">auteur : </span>auteur</div>
                                 <div class="text-size"><span class="text-orange">date de publication : </span>{{livre.datePublication | date('d/m/Y')}}</div>
+                        </div>
+                        <div class="col-md-1">
+                            {% if livre.favoris is empty %}
+                                <a href="{{ path('add_article_favoris', {id: livre.id, page: "list"}) }}"><i class="far fa-star text-danger fa-2x"></i></a>
+                            {% else %}
+                                <a href="{{ path('remove_article_favoris', {id: livre.id, page: "list"}) }}"><i class="fas fa-star text-danger fa-2x"></i></a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
