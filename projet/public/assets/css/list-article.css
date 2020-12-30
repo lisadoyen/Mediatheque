@@ -13,7 +13,11 @@ span.text-orange{
 span.text-bold{
     font-weight: bold;
 }
-
+span.text-nouveaute{
+    color : #902b2b;
+    text-transform: uppercase;
+    font-size: 2.3vh;
+}
 .style-button-article-emprunt{
     text-decoration: none;
     text-align: center;

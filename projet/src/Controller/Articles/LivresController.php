@@ -56,7 +56,7 @@ class LivresController extends AbstractController
      * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function showAll($id = null, SessionInterface $session,ArticleRepository $ar, Request $request, PaginatorInterface $paginator)
+    public function showAll($id = null, SessionInterface $session,ArticleRepository $ar,CategorieRepository $categorieRepo, ActionRepository $actionsRepo,TypeActionRepository $typeActionRepo, Request $request, PaginatorInterface $paginator)
     {
         // Menu genre
         if($id != null) {
@@ -79,10 +79,13 @@ class LivresController extends AbstractController
                 30
             );
 
+            $nouveaute = $this-> findArticleNouveaute($categorieRepo, $actionsRepo);
+
             return $this->render('livres/show_all_livres.html.twig', [
                 'livres' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
-                'donnees' => $donnees
+                'donnees' => $donnees,
+                'nouveaute' => $nouveaute
             ]);
         }
         // filtre
@@ -122,16 +125,65 @@ class LivresController extends AbstractController
             $livres = $paginator->paginate(
                 $articles,
                 $request->query->getInt('page', 1),
-                10
+                30
             );
+
+            $nouveaute = $this-> findArticleNouveaute($categorieRepo, $actionsRepo);
 
             return $this->render('livres/show_all_livres.html.twig', [
                 'session' => $session,
                 'livres' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
-                'donnees' => $donnees
+                'donnees' => $donnees,
+                'nouveaute' => $nouveaute
             ]);
         }
+    }
+
+    /** Fonction qui permet de transformer une date,
+     * sert à calculer la date en fonction de la durée pour la nouveauté
+     * @param $date
+     * @param $nombre_jour
+     * @return false|string
+     */
+    function transformDate($date,$nombre_jour) {
+
+        $year = (int)substr($date, 0, 4);
+        $month = (int)substr($date, 5, 2);
+        $day = (int)substr($date, 8, 2);
+
+        // récupère la date du jour
+        $date_string = mktime(0,0,0,$month,$day,$year);
+
+        // Supprime les jours
+        $timestamp = $date_string - ($nombre_jour * 86400);
+        $nouvelle_date = date("d/m/Y", $timestamp);
+
+        // pour afficher
+        return $nouvelle_date;
+
+    }
+
+    /**
+     * fonctions qui peremt de déterminer si un article est nouveau ou non
+     * @param CategorieRepository $categorieRepo
+     * @param ActionRepository $actionsRepo
+     * @return int|mixed|string
+     */
+    function findArticleNouveaute(CategorieRepository $categorieRepo,ActionRepository $actionsRepo){
+
+        $dateTodayConvert=\DateTime::createFromFormat('d/m/Y', \date("d/m/Y"));
+        $today = $dateTodayConvert->format('Y-m-d');
+
+        $categorie = $categorieRepo->findAll(); // selection de toutes les catégories
+        $nbJourNouveaute = null; // variable pour la durée de la nouveauté
+        foreach ($categorie as $cat){
+            $nbJourNouveaute = $cat->getDureeNouveaute(); // récupération nb nouveauté
+        }
+        $dateDureeMax = $this->transformDate($today, 812); // TODO 812 pour test => mettre nbJournouveaute normalement
+        $nouveaute = $actionsRepo->findIsNouveaute($dateDureeMax);
+
+        return $nouveaute;
     }
 
     /**
