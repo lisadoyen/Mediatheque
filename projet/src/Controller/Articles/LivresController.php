@@ -76,7 +76,7 @@ class LivresController extends AbstractController
             $livres = $paginator ->paginate(
                 $articles,
                 $request->query->getInt('page',1),
-                10
+                30
             );
             return $this->render('livres/show_all_livres.html.twig', [
                 'session' => $session,

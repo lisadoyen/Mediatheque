@@ -1,0 +1,15 @@
+span.text-orange{
+    color: var(--second-color) !important;
+}
+
+.text-size{
+    font-size: 1.5vh;
+}
+
+.text-size-title{
+    font-size: 1.8vh;
+}
+
+span.text-bold{
+    font-weight: bold;
+}
