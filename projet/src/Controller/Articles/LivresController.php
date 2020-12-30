@@ -49,14 +49,14 @@ class LivresController extends AbstractController
     /**
      * @Route("/livres/show", name="livres_show",methods={"GET", "POST"})
      * @Route("/livres/genres/{id}/show", name="genres_id_livres_show",methods={"GET", "POST"})
-     * @param $id
+     * @param null $id
      * @param SessionInterface $session
-     * @param ArticleRepository $br
+     * @param ArticleRepository $ar
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function showAll($id = null, SessionInterface $session,ArticleRepository $br, Request $request, PaginatorInterface $paginator)
+    public function showAll($id = null, SessionInterface $session,ArticleRepository $ar, Request $request, PaginatorInterface $paginator)
     {
         // Menu genre
         if($id != null) {
@@ -72,7 +72,7 @@ class LivresController extends AbstractController
                 $data->genre = $donnees['genres'];
             }
 
-            $articles = $br->findSearch($data);
+            $articles = $ar->findSearch($data);
             $livres = $paginator ->paginate(
                 $articles,
                 $request->query->getInt('page',1),
@@ -117,7 +117,7 @@ class LivresController extends AbstractController
                     }
                 }
             }
-            $articles = $br->findSearch($data);
+            $articles = $ar->findSearch($data);
 
             $livres = $paginator->paginate(
                 $articles,

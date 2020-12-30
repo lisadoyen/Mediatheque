@@ -24,17 +24,23 @@
                             <a href="{{ path('livre_details', {id: livre.id}) }}">
                                 <img src="{{ livre.vignette }}" alt="{{ livre.vignette }}" width="120" height="120"></a>
                         {% endif %}
+                            <div class="p-2">
+                            <input type="hidden" name="id" value="{{ livre.id }}">
+                            {%  if livre.statut.libelle == "empruntable" %}
+                                <a class="style-button-article-emprunt">Emprunter</a>
+                            {% else %}
+                                <a class="style-button-article-achat">Acheter</a>
+                            {% endif %}
+                            </div>
                         </div>
                         <div class="col-md-8">
                                 <div class="text-size-title"><span class="text-orange"> titre : </span><span class="text-bold">{{livre.titre | capitalize }}</span></div>
                                 <div class="text-size"><span class="text-orange">auteur : </span>auteur</div>
                                 <div class="text-size"><span class="text-orange">date de publication : </span>{{livre.datePublication | date('d/m/Y')}}</div>
                         </div>
-                        <input type="hidden" name="id" value="{{ livre.id }}">
-                        <a href="{#{ path('livre_details', {id: livre.id}) }#}">Emprunter/Acheter</a>
                     </div>
                 </div>
-                {% endfor %}
+            {% endfor %}
         </div>
             <div class="pagination">
                 {{ knp_pagination_render(livres)}}</div>
