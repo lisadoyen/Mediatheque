@@ -51,6 +51,15 @@ class ProfilController extends AbstractController
                 $photoName = $fileUploader->upload($avatar);
                 $user->setAvatar($photoName);
             }
+            if (!$user->getNotificationPerso() && !$user->getNotificationPro()){
+                $this->addFlash(
+                    'danger',
+                    'Vous devez activer au moins une notification (personnel ou professionnel) !'
+                );
+                return $this->render('users/profil/_profil_form.html.twig', [
+                    'form' => $form->createView()
+                ]);
+            }
             $manager->persist($user);
             $manager->flush();
             $this->addFlash(

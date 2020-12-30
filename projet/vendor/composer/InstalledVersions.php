@@ -14,24 +14,24 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => 'f940612f0e17e0a40f23da4d94267c5c7caf409c',
     'name' => '__root__',
   ),
   'versions' => 
   array (
     '__root__' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => 'f940612f0e17e0a40f23da4d94267c5c7caf409c',
     ),
     'composer/package-versions-deprecated' => 
     array (
@@ -221,6 +221,24 @@ private static $installed = array (
       array (
       ),
       'reference' => 'f46887bc48db66c7f38f668eb7d6ae54583617ff',
+    ),
+    'friendsofsymfony/ckeditor-bundle' => 
+    array (
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7e1cfe2a83faba0be02661d44289d35e940bb5ea',
+    ),
+    'helios-ag/fm-elfinder-bundle' => 
+    array (
+      'pretty_version' => '10.0.4',
+      'version' => '10.0.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '334dbd43623d34c962c2e9607565babede2e917a',
     ),
     'knplabs/knp-components' => 
     array (
@@ -453,6 +471,24 @@ private static $installed = array (
       ),
       'reference' => '430d14c01836b77c28092883d195a43ce413ee32',
     ),
+    'stfalcon/tinymce-bundle' => 
+    array (
+      'pretty_version' => 'v3.0.0',
+      'version' => '3.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '481e8022c4af861d02a13763780d21c252f1d5bc',
+    ),
+    'studio-42/elfinder' => 
+    array (
+      'pretty_version' => '2.1.57',
+      'version' => '2.1.57.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '087524b1d7a4d76cfd848dee2093cd8daf987f78',
+    ),
     'symfony/apache-pack' => 
     array (
       'pretty_version' => 'v1.0.1',
@@ -464,12 +500,12 @@ private static $installed = array (
     ),
     'symfony/asset' => 
     array (
-      'pretty_version' => 'v5.2.0',
-      'version' => '5.2.0.0',
+      'pretty_version' => 'v5.1.5',
+      'version' => '5.1.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => '19c59713f750642206b21a1edec5c18dea80f979',
+      'reference' => '2f07b5993f1607c1c489bac3e15a000c33668b4b',
     ),
     'symfony/browser-kit' => 
     array (

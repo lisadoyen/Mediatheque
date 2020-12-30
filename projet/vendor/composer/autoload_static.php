@@ -135,6 +135,7 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'F' => 
         array (
             'FOS\\CKEditorBundle\\' => 19,
+            'FM\\ElfinderBundle\\' => 18,
         ),
         'E' => 
         array (
@@ -515,6 +516,10 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         array (
             0 => __DIR__ . '/..' . '/friendsofsymfony/ckeditor-bundle/src',
         ),
+        'FM\\ElfinderBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src',
+        ),
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
@@ -601,6 +606,16 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'Stfalcon\\Bundle\\TinymceBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/stfalcon/tinymce-bundle',
+            ),
         ),
     );
 
@@ -695,6 +710,7 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'App\\Security\\AccessDeniedHandler' => __DIR__ . '/../..' . '/src/Security/AccessDeniedHandler.php',
         'App\\Service\\FileUploader' => __DIR__ . '/../..' . '/src/Service/FileUploader.php',
         'Collator' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/Collator.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Doctrine\\Bundle\\DoctrineBundle\\Command\\CreateDatabaseDoctrineCommand' => __DIR__ . '/..' . '/doctrine/doctrine-bundle/Command/CreateDatabaseDoctrineCommand.php',
         'Doctrine\\Bundle\\DoctrineBundle\\Command\\DoctrineCommand' => __DIR__ . '/..' . '/doctrine/doctrine-bundle/Command/DoctrineCommand.php',
         'Doctrine\\Bundle\\DoctrineBundle\\Command\\DropDatabaseDoctrineCommand' => __DIR__ . '/..' . '/doctrine/doctrine-bundle/Command/DropDatabaseDoctrineCommand.php',
@@ -2023,6 +2039,24 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
+        'FM\\ElfinderBundle\\Bridge\\ElFinderBridge' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Bridge/ElFinderBridge.php',
+        'FM\\ElfinderBundle\\Command\\ElFinderInstallerCommand' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Command/ElFinderInstallerCommand.php',
+        'FM\\ElfinderBundle\\Configuration\\ElFinderConfigurationProviderInterface' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Configuration/ElFinderConfigurationProviderInterface.php',
+        'FM\\ElfinderBundle\\Configuration\\ElFinderConfigurationReader' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Configuration/ElFinderConfigurationReader.php',
+        'FM\\ElfinderBundle\\Connector\\ElFinderConnector' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Connector/ElFinderConnector.php',
+        'FM\\ElfinderBundle\\Controller\\ElFinderController' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Controller/ElFinderController.php',
+        'FM\\ElfinderBundle\\DependencyInjection\\Compiler\\TwigFormPass' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/DependencyInjection/Compiler/TwigFormPass.php',
+        'FM\\ElfinderBundle\\DependencyInjection\\Configuration' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/DependencyInjection/Configuration.php',
+        'FM\\ElfinderBundle\\DependencyInjection\\FMElfinderExtension' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/DependencyInjection/FMElfinderExtension.php',
+        'FM\\ElfinderBundle\\ElFinder\\ElFinder' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/ElFinder/ElFinder.php',
+        'FM\\ElfinderBundle\\Event\\ElFinderPostExecutionEvent' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Event/ElFinderPostExecutionEvent.php',
+        'FM\\ElfinderBundle\\Event\\ElFinderPreExecutionEvent' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Event/ElFinderPreExecutionEvent.php',
+        'FM\\ElfinderBundle\\FMElfinderBundle' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/FMElfinderBundle.php',
+        'FM\\ElfinderBundle\\Form\\Type\\ElFinderType' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Form/Type/ElFinderType.php',
+        'FM\\ElfinderBundle\\Loader\\ElFinderLoader' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Loader/ElFinderLoader.php',
+        'FM\\ElfinderBundle\\Security\\ElfinderSecurityInterface' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Security/ElfinderSecurityInterface.php',
+        'FM\\ElfinderBundle\\Session\\ElFinderSession' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Session/ElFinderSession.php',
+        'FM\\ElfinderBundle\\Twig\\Extension\\FMElfinderExtension' => __DIR__ . '/..' . '/helios-ag/fm-elfinder-bundle/src/Twig/Extension/FMElfinderExtension.php',
         'FOS\\CKEditorBundle\\Builder\\JsonBuilder' => __DIR__ . '/..' . '/friendsofsymfony/ckeditor-bundle/src/Builder/JsonBuilder.php',
         'FOS\\CKEditorBundle\\Command\\CKEditorInstallerCommand' => __DIR__ . '/..' . '/friendsofsymfony/ckeditor-bundle/src/Command/CKEditorInstallerCommand.php',
         'FOS\\CKEditorBundle\\Config\\CKEditorConfiguration' => __DIR__ . '/..' . '/friendsofsymfony/ckeditor-bundle/src/Config/CKEditorConfiguration.php',
@@ -2731,6 +2765,7 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
+        'RecursiveCallbackFilterIterator' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeLocalFileSystem.class.php',
         'Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Cache' => __DIR__ . '/..' . '/sensio/framework-extra-bundle/src/Configuration/Cache.php',
         'Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\ConfigurationAnnotation' => __DIR__ . '/..' . '/sensio/framework-extra-bundle/src/Configuration/ConfigurationAnnotation.php',
         'Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\ConfigurationInterface' => __DIR__ . '/..' . '/sensio/framework-extra-bundle/src/Configuration/ConfigurationInterface.php',
@@ -2763,6 +2798,11 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Sensio\\Bundle\\FrameworkExtraBundle\\Security\\ExpressionLanguage' => __DIR__ . '/..' . '/sensio/framework-extra-bundle/src/Security/ExpressionLanguage.php',
         'Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle' => __DIR__ . '/..' . '/sensio/framework-extra-bundle/src/SensioFrameworkExtraBundle.php',
         'Sensio\\Bundle\\FrameworkExtraBundle\\Templating\\TemplateGuesser' => __DIR__ . '/..' . '/sensio/framework-extra-bundle/src/Templating/TemplateGuesser.php',
+        'Stfalcon\\Bundle\\TinymceBundle\\DependencyInjection\\Configuration' => __DIR__ . '/..' . '/stfalcon/tinymce-bundle/Stfalcon/Bundle/TinymceBundle/DependencyInjection/Configuration.php',
+        'Stfalcon\\Bundle\\TinymceBundle\\DependencyInjection\\StfalconTinymceExtension' => __DIR__ . '/..' . '/stfalcon/tinymce-bundle/Stfalcon/Bundle/TinymceBundle/DependencyInjection/StfalconTinymceExtension.php',
+        'Stfalcon\\Bundle\\TinymceBundle\\Helper\\LocaleHelper' => __DIR__ . '/..' . '/stfalcon/tinymce-bundle/Stfalcon/Bundle/TinymceBundle/Helper/LocaleHelper.php',
+        'Stfalcon\\Bundle\\TinymceBundle\\StfalconTinymceBundle' => __DIR__ . '/..' . '/stfalcon/tinymce-bundle/Stfalcon/Bundle/TinymceBundle/StfalconTinymceBundle.php',
+        'Stfalcon\\Bundle\\TinymceBundle\\Twig\\Extension\\StfalconTinymceExtension' => __DIR__ . '/..' . '/stfalcon/tinymce-bundle/Stfalcon/Bundle/TinymceBundle/Twig/Extension/StfalconTinymceExtension.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Bridge\\Doctrine\\CacheWarmer\\ProxyCacheWarmer' => __DIR__ . '/..' . '/symfony/doctrine-bridge/CacheWarmer/ProxyCacheWarmer.php',
         'Symfony\\Bridge\\Doctrine\\ContainerAwareEventManager' => __DIR__ . '/..' . '/symfony/doctrine-bridge/ContainerAwareEventManager.php',
@@ -2815,7 +2855,6 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Symfony\\Bridge\\Monolog\\Handler\\MailerHandler' => __DIR__ . '/..' . '/symfony/monolog-bridge/Handler/MailerHandler.php',
         'Symfony\\Bridge\\Monolog\\Handler\\NotifierHandler' => __DIR__ . '/..' . '/symfony/monolog-bridge/Handler/NotifierHandler.php',
         'Symfony\\Bridge\\Monolog\\Handler\\ServerLogHandler' => __DIR__ . '/..' . '/symfony/monolog-bridge/Handler/ServerLogHandler.php',
-        'Symfony\\Bridge\\Monolog\\Handler\\ServerLogHandlerTrait' => __DIR__ . '/..' . '/symfony/monolog-bridge/Handler/ServerLogHandler.php',
         'Symfony\\Bridge\\Monolog\\Handler\\SwiftMailerHandler' => __DIR__ . '/..' . '/symfony/monolog-bridge/Handler/SwiftMailerHandler.php',
         'Symfony\\Bridge\\Monolog\\Logger' => __DIR__ . '/..' . '/symfony/monolog-bridge/Logger.php',
         'Symfony\\Bridge\\Monolog\\Processor\\ConsoleCommandProcessor' => __DIR__ . '/..' . '/symfony/monolog-bridge/Processor/ConsoleCommandProcessor.php',
@@ -3187,7 +3226,6 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Symfony\\Component\\Cache\\Adapter\\DoctrineAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/DoctrineAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\FilesystemAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/FilesystemAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\FilesystemTagAwareAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/FilesystemTagAwareAdapter.php',
-        'Symfony\\Component\\Cache\\Adapter\\LazyValue' => __DIR__ . '/..' . '/symfony/cache/Adapter/PhpFilesAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\MemcachedAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/MemcachedAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\NullAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/NullAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\PdoAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/PdoAdapter.php',
@@ -3200,7 +3238,6 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Symfony\\Component\\Cache\\Adapter\\TagAwareAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/TagAwareAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\TagAwareAdapterInterface' => __DIR__ . '/..' . '/symfony/cache/Adapter/TagAwareAdapterInterface.php',
         'Symfony\\Component\\Cache\\Adapter\\TraceableAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/TraceableAdapter.php',
-        'Symfony\\Component\\Cache\\Adapter\\TraceableAdapterEvent' => __DIR__ . '/..' . '/symfony/cache/Adapter/TraceableAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\TraceableTagAwareAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/TraceableTagAwareAdapter.php',
         'Symfony\\Component\\Cache\\CacheItem' => __DIR__ . '/..' . '/symfony/cache/CacheItem.php',
         'Symfony\\Component\\Cache\\DataCollector\\CacheDataCollector' => __DIR__ . '/..' . '/symfony/cache/DataCollector/CacheDataCollector.php',
@@ -3468,12 +3505,9 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Symfony\\Component\\DependencyInjection\\Compiler\\DefinitionErrorExceptionPass' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/DefinitionErrorExceptionPass.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\ExtensionCompilerPass' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/ExtensionCompilerPass.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\InlineServiceDefinitionsPass' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/InlineServiceDefinitionsPass.php',
-        'Symfony\\Component\\DependencyInjection\\Compiler\\MergeExtensionConfigurationContainerBuilder' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/MergeExtensionConfigurationPass.php',
-        'Symfony\\Component\\DependencyInjection\\Compiler\\MergeExtensionConfigurationParameterBag' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/MergeExtensionConfigurationPass.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\MergeExtensionConfigurationPass' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/MergeExtensionConfigurationPass.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\PassConfig' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/PassConfig.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\PriorityTaggedServiceTrait' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/PriorityTaggedServiceTrait.php',
-        'Symfony\\Component\\DependencyInjection\\Compiler\\PriorityTaggedServiceUtil' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/PriorityTaggedServiceTrait.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\RegisterEnvVarProcessorsPass' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/RegisterEnvVarProcessorsPass.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\RegisterReverseContainerPass' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/RegisterReverseContainerPass.php',
         'Symfony\\Component\\DependencyInjection\\Compiler\\RegisterServiceSubscribersPass' => __DIR__ . '/..' . '/symfony/dependency-injection/Compiler/RegisterServiceSubscribersPass.php',
@@ -3582,7 +3616,6 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Symfony\\Component\\DependencyInjection\\Loader\\GlobFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/GlobFileLoader.php',
         'Symfony\\Component\\DependencyInjection\\Loader\\IniFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/IniFileLoader.php',
         'Symfony\\Component\\DependencyInjection\\Loader\\PhpFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/PhpFileLoader.php',
-        'Symfony\\Component\\DependencyInjection\\Loader\\ProtectedPhpFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/PhpFileLoader.php',
         'Symfony\\Component\\DependencyInjection\\Loader\\XmlFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/XmlFileLoader.php',
         'Symfony\\Component\\DependencyInjection\\Loader\\YamlFileLoader' => __DIR__ . '/..' . '/symfony/dependency-injection/Loader/YamlFileLoader.php',
         'Symfony\\Component\\DependencyInjection\\Parameter' => __DIR__ . '/..' . '/symfony/dependency-injection/Parameter.php',
@@ -3642,7 +3675,6 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/WrappedListener.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\AddEventAliasesPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php',
-        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\ExtractingEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcherInterface.php',
@@ -3952,8 +3984,6 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Symfony\\Component\\HttpClient\\NativeHttpClient' => __DIR__ . '/..' . '/symfony/http-client/NativeHttpClient.php',
         'Symfony\\Component\\HttpClient\\NoPrivateNetworkHttpClient' => __DIR__ . '/..' . '/symfony/http-client/NoPrivateNetworkHttpClient.php',
         'Symfony\\Component\\HttpClient\\Psr18Client' => __DIR__ . '/..' . '/symfony/http-client/Psr18Client.php',
-        'Symfony\\Component\\HttpClient\\Psr18NetworkException' => __DIR__ . '/..' . '/symfony/http-client/Psr18Client.php',
-        'Symfony\\Component\\HttpClient\\Psr18RequestException' => __DIR__ . '/..' . '/symfony/http-client/Psr18Client.php',
         'Symfony\\Component\\HttpClient\\Response\\AmpResponse' => __DIR__ . '/..' . '/symfony/http-client/Response/AmpResponse.php',
         'Symfony\\Component\\HttpClient\\Response\\CurlResponse' => __DIR__ . '/..' . '/symfony/http-client/Response/CurlResponse.php',
         'Symfony\\Component\\HttpClient\\Response\\HttplugPromise' => __DIR__ . '/..' . '/symfony/http-client/Response/HttplugPromise.php',
@@ -4526,7 +4556,6 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Symfony\\Component\\Routing\\Loader\\GlobFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/GlobFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\ObjectLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/ObjectLoader.php',
         'Symfony\\Component\\Routing\\Loader\\PhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
-        'Symfony\\Component\\Routing\\Loader\\ProtectedPhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\XmlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/XmlFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\YamlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/YamlFileLoader.php',
         'Symfony\\Component\\Routing\\Matcher\\CompiledUrlMatcher' => __DIR__ . '/..' . '/symfony/routing/Matcher/CompiledUrlMatcher.php',
@@ -5140,9 +5169,7 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Symfony\\Component\\Validator\\Mapping\\PropertyMetadataInterface' => __DIR__ . '/..' . '/symfony/validator/Mapping/PropertyMetadataInterface.php',
         'Symfony\\Component\\Validator\\Mapping\\TraversalStrategy' => __DIR__ . '/..' . '/symfony/validator/Mapping/TraversalStrategy.php',
         'Symfony\\Component\\Validator\\ObjectInitializerInterface' => __DIR__ . '/..' . '/symfony/validator/ObjectInitializerInterface.php',
-        'Symfony\\Component\\Validator\\Test\\AssertingContextualValidator' => __DIR__ . '/..' . '/symfony/validator/Test/ConstraintValidatorTestCase.php',
         'Symfony\\Component\\Validator\\Test\\ConstraintValidatorTestCase' => __DIR__ . '/..' . '/symfony/validator/Test/ConstraintValidatorTestCase.php',
-        'Symfony\\Component\\Validator\\Test\\ConstraintViolationAssertion' => __DIR__ . '/..' . '/symfony/validator/Test/ConstraintValidatorTestCase.php',
         'Symfony\\Component\\Validator\\Util\\PropertyPath' => __DIR__ . '/..' . '/symfony/validator/Util/PropertyPath.php',
         'Symfony\\Component\\Validator\\Validation' => __DIR__ . '/..' . '/symfony/validator/Validation.php',
         'Symfony\\Component\\Validator\\ValidatorBuilder' => __DIR__ . '/..' . '/symfony/validator/ValidatorBuilder.php',
@@ -5513,6 +5540,37 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         'Webimpress\\SafeWriter\\FileWriter' => __DIR__ . '/..' . '/webimpress/safe-writer/src/FileWriter.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',
+        'elFinder' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinder.class.php',
+        'elFinderAbortException' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinder.class.php',
+        'elFinderConnector' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderConnector.class.php',
+        'elFinderEditor' => __DIR__ . '/..' . '/studio-42/elfinder/php/editors/editor.php',
+        'elFinderEditorOnlineConvert' => __DIR__ . '/..' . '/studio-42/elfinder/php/editors/OnlineConvert/editor.php',
+        'elFinderEditorZipArchive' => __DIR__ . '/..' . '/studio-42/elfinder/php/editors/ZipArchive/editor.php',
+        'elFinderEditorZohoOffice' => __DIR__ . '/..' . '/studio-42/elfinder/php/editors/ZohoOffice/editor.php',
+        'elFinderLibGdBmp' => __DIR__ . '/..' . '/studio-42/elfinder/php/libs/GdBmp.php',
+        'elFinderPlugin' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderPlugin.php',
+        'elFinderPluginAutoResize' => __DIR__ . '/..' . '/studio-42/elfinder/php/plugins/AutoResize/plugin.php',
+        'elFinderPluginAutoRotate' => __DIR__ . '/..' . '/studio-42/elfinder/php/plugins/AutoRotate/plugin.php',
+        'elFinderPluginNormalizer' => __DIR__ . '/..' . '/studio-42/elfinder/php/plugins/Normalizer/plugin.php',
+        'elFinderPluginSanitizer' => __DIR__ . '/..' . '/studio-42/elfinder/php/plugins/Sanitizer/plugin.php',
+        'elFinderPluginWatermark' => __DIR__ . '/..' . '/studio-42/elfinder/php/plugins/Watermark/plugin.php',
+        'elFinderSession' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderSession.php',
+        'elFinderSessionInterface' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderSessionInterface.php',
+        'elFinderTriggerException' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinder.class.php',
+        'elFinderVolumeBox' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeBox.class.php',
+        'elFinderVolumeDriver' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeDriver.class.php',
+        'elFinderVolumeDropbox' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeDropbox.class.php',
+        'elFinderVolumeDropbox2' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeDropbox2.class.php',
+        'elFinderVolumeFTP' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeFTP.class.php',
+        'elFinderVolumeFlysystemGoogleDriveCache' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderFlysystemGoogleDriveNetmount.php',
+        'elFinderVolumeFlysystemGoogleDriveNetmount' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderFlysystemGoogleDriveNetmount.php',
+        'elFinderVolumeGoogleDrive' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeGoogleDrive.class.php',
+        'elFinderVolumeGroup' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeGroup.class.php',
+        'elFinderVolumeLocalFileSystem' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeLocalFileSystem.class.php',
+        'elFinderVolumeMySQL' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeMySQL.class.php',
+        'elFinderVolumeOneDrive' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeOneDrive.class.php',
+        'elFinderVolumeTrash' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeTrash.class.php',
+        'elFinderVolumeTrashMySQL' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeTrashMySQL.class.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',
         'phpDocumentor\\Reflection\\DocBlockFactoryInterface' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactoryInterface.php',
@@ -5600,6 +5658,7 @@ class ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit7605637ee4d86c6dd3f1f4dc6125eae0::$classMap;
 
         }, null, ClassLoader::class);

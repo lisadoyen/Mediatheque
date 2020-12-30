@@ -109,6 +109,28 @@
             {% endif %}
         </div>
     </div><hr>
+    <div class="row">
+        <div class="col-sm">
+            Notification personnel :
+        </div>
+        <div class="col-sm">
+            {% if app.user.notificationPerso == 1 %}
+                <span class="text-success">Oui</span>
+            {% else %}
+                <span class="text-danger">Non</span>
+            {% endif %}
+        </div>
+        <div class="col-sm border-left">
+            Notification professionnel :
+        </div>
+        <div class="col-sm">
+            {% if app.user.notificationPro == 1 %}
+                <span class="text-success">Oui</span>
+            {% else %}
+                <span class="text-danger">Non</span>
+            {% endif %}
+        </div>
+    </div><hr>
 
     <div class="row">
         <div class="col-sm">

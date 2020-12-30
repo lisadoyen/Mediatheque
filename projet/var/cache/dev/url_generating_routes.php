@@ -29,6 +29,8 @@ return [
     'livre_details' => [['id'], ['id' => 1, '_controller' => 'App\\Controller\\Articles\\LivresController::livreDetails'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/livres']], [], []],
     'modifVideold' => [[], ['_controller' => 'App\\Controller\\Articles\\LivresController::transfertBDD'], [], [['text', '/bdd/transfert']], [], []],
     'modifEntite' => [[], ['_controller' => 'App\\Controller\\Articles\\LivresController::transfertEntite'], [], [['text', '/bdd/transfert/entite']], [], []],
+    'testxml' => [[], ['_controller' => 'App\\Controller\\Articles\\LivresController::testxml'], [], [['text', '/testxml']], [], []],
+    'test' => [[], ['_controller' => 'App\\Controller\\Articles\\LivresController::test'], [], [['text', '/test']], [], []],
     'categorie_index' => [[], ['_controller' => 'App\\Controller\\CategorieController::index'], [], [['text', '/categorie/']], [], []],
     'categorie_new' => [[], ['_controller' => 'App\\Controller\\CategorieController::new'], [], [['text', '/categorie/new']], [], []],
     'categorie_show' => [['id'], ['_controller' => 'App\\Controller\\CategorieController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/categorie']], [], []],
@@ -107,4 +109,7 @@ return [
     'users_accueil' => [[], ['_controller' => 'App\\Controller\\Users\\UserController::accueilUser'], [], [['text', '/users']], [], []],
     'users_show' => [[], ['_controller' => 'App\\Controller\\Users\\UserController::showUser'], [], [['text', '/users/show']], [], []],
     'users_add' => [[], ['_controller' => 'App\\Controller\\Users\\UserController::addUser'], [], [['text', '/users/add']], [], []],
+    'ef_connect' => [['instance', 'homeFolder'], ['_controller' => 'FM\\ElfinderBundle\\Controller\\ElFinderController::load', 'instance' => 'default', 'homeFolder' => ''], [], [['variable', '/', '[^/]++', 'homeFolder', true], ['variable', '/', '[^/]++', 'instance', true], ['text', '/efconnect']], [], []],
+    'ef_main_js' => [[], ['_controller' => 'FM\\ElfinderBundle\\Controller\\ElFinderController::mainJS'], [], [['text', '/elfinder.main.js']], [], []],
+    'elfinder' => [['instance', 'homeFolder'], ['_controller' => 'FM\\ElfinderBundle\\Controller\\ElFinderController::show', 'instance' => 'default', 'homeFolder' => ''], [], [['variable', '/', '[^/]++', 'homeFolder', true], ['variable', '/', '[^/]++', 'instance', true], ['text', '/elfinder']], [], []],
 ];

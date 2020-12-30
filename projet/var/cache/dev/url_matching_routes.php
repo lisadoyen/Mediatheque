@@ -21,6 +21,8 @@ return [
         '/livres/add' => [[['_route' => 'add_livre', '_controller' => 'App\\Controller\\Articles\\LivresController::addLivre'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/bdd/transfert' => [[['_route' => 'modifVideold', '_controller' => 'App\\Controller\\Articles\\LivresController::transfertBDD'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/bdd/transfert/entite' => [[['_route' => 'modifEntite', '_controller' => 'App\\Controller\\Articles\\LivresController::transfertEntite'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/testxml' => [[['_route' => 'testxml', '_controller' => 'App\\Controller\\Articles\\LivresController::testxml'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/test' => [[['_route' => 'test', '_controller' => 'App\\Controller\\Articles\\LivresController::test'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/categorie' => [[['_route' => 'categorie_index', '_controller' => 'App\\Controller\\CategorieController::index'], null, ['GET' => 0], null, true, false, null]],
         '/categorie/new' => [[['_route' => 'categorie_new', '_controller' => 'App\\Controller\\CategorieController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/articles' => [[['_route' => 'operations_articles', '_controller' => 'App\\Controller\\DataBaseController::index'], null, null, null, false, false, null]],
@@ -62,6 +64,7 @@ return [
         '/users' => [[['_route' => 'users_accueil', '_controller' => 'App\\Controller\\Users\\UserController::accueilUser'], null, null, null, false, false, null]],
         '/users/show' => [[['_route' => 'users_show', '_controller' => 'App\\Controller\\Users\\UserController::showUser'], null, null, null, false, false, null]],
         '/users/add' => [[['_route' => 'users_add', '_controller' => 'App\\Controller\\Users\\UserController::addUser'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/elfinder.main.js' => [[['_route' => 'ef_main_js', '_controller' => 'FM\\ElfinderBundle\\Controller\\ElFinderController::mainJS'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -106,60 +109,64 @@ return [
                     .'|(*:426)'
                 .')'
                 .'|/database/([^/]++)/file(*:458)'
-                .'|/ent(?'
-                    .'|ite/([^/]++)(?'
-                        .'|(*:488)'
-                        .'|/edit(*:501)'
-                        .'|(*:509)'
+                .'|/e(?'
+                    .'|nt(?'
+                        .'|ite/([^/]++)(?'
+                            .'|(*:491)'
+                            .'|/edit(*:504)'
+                            .'|(*:512)'
+                        .')'
+                        .'|reprise/([^/]++)(?'
+                            .'|(*:540)'
+                            .'|/edit(*:553)'
+                            .'|(*:561)'
+                        .')'
                     .')'
-                    .'|reprise/([^/]++)(?'
-                        .'|(*:537)'
-                        .'|/edit(*:550)'
-                        .'|(*:558)'
-                    .')'
+                    .'|fconnect(?:/([^/]++)(?:/([^/]++))?)?(*:607)'
+                    .'|lfinder(?:/([^/]++)(?:/([^/]++))?)?(*:650)'
                 .')'
                 .'|/f(?'
                     .'|onction/([^/]++)(?'
-                        .'|(*:592)'
-                        .'|/edit(*:605)'
-                        .'|(*:613)'
+                        .'|(*:683)'
+                        .'|/edit(*:696)'
+                        .'|(*:704)'
                     .')'
                     .'|avoris/(?'
-                        .'|add(?:/([^/]++))?(*:649)'
-                        .'|remove(?:/([^/]++))?(*:677)'
+                        .'|add(?:/([^/]++))?(*:740)'
+                        .'|remove(?:/([^/]++))?(*:768)'
                     .')'
                 .')'
                 .'|/genre/([^/]++)(?'
-                    .'|(*:705)'
-                    .'|/edit(*:718)'
-                    .'|(*:726)'
+                    .'|(*:796)'
+                    .'|/edit(*:809)'
+                    .'|(*:817)'
                 .')'
                 .'|/rubrique/([^/]++)(?'
-                    .'|(*:756)'
-                    .'|/edit(*:769)'
-                    .'|(*:777)'
+                    .'|(*:847)'
+                    .'|/edit(*:860)'
+                    .'|(*:868)'
                 .')'
                 .'|/t(?'
                     .'|ag/([^/]++)(?'
-                        .'|(*:805)'
-                        .'|/edit(*:818)'
-                        .'|(*:826)'
+                        .'|(*:896)'
+                        .'|/edit(*:909)'
+                        .'|(*:917)'
                     .')'
                     .'|rancheAge/([^/]++)(?'
-                        .'|(*:856)'
-                        .'|/edit(*:869)'
-                        .'|(*:877)'
+                        .'|(*:947)'
+                        .'|/edit(*:960)'
+                        .'|(*:968)'
                     .')'
                     .'|ypeEntite/([^/]++)(?'
-                        .'|(*:907)'
-                        .'|/edit(*:920)'
-                        .'|(*:928)'
+                        .'|(*:998)'
+                        .'|/edit(*:1011)'
+                        .'|(*:1020)'
                     .')'
                 .')'
                 .'|/user/([^/]++)(?'
-                    .'|(*:955)'
-                    .'|/edit(*:968)'
-                    .'|(*:976)'
+                    .'|(*:1048)'
+                    .'|/edit(*:1062)'
+                    .'|(*:1071)'
                 .')'
             .')/?$}sDu',
     ],
@@ -185,35 +192,37 @@ return [
         418 => [[['_route' => 'categorie_edit', '_controller' => 'App\\Controller\\CategorieController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         426 => [[['_route' => 'categorie_delete', '_controller' => 'App\\Controller\\CategorieController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
         458 => [[['_route' => 'data_base_file', 'table' => null, '_controller' => 'App\\Controller\\DataBaseController::backupDataBase'], ['table'], null, null, false, false, null]],
-        488 => [[['_route' => 'entite_show', '_controller' => 'App\\Controller\\EntiteController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        501 => [[['_route' => 'entite_edit', '_controller' => 'App\\Controller\\EntiteController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        509 => [[['_route' => 'entite_delete', '_controller' => 'App\\Controller\\EntiteController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        537 => [[['_route' => 'entreprise_show', '_controller' => 'App\\Controller\\EntrepriseController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        550 => [[['_route' => 'entreprise_edit', '_controller' => 'App\\Controller\\EntrepriseController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        558 => [[['_route' => 'entreprise_delete', '_controller' => 'App\\Controller\\EntrepriseController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        592 => [[['_route' => 'fonction_show', '_controller' => 'App\\Controller\\FonctionController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        605 => [[['_route' => 'fonction_edit', '_controller' => 'App\\Controller\\FonctionController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        613 => [[['_route' => 'fonction_delete', '_controller' => 'App\\Controller\\FonctionController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        649 => [[['_route' => 'add_article_favoris', 'id' => 1, '_controller' => 'App\\Controller\\Users\\ProfilController::addFavoris'], ['id'], null, null, false, true, null]],
-        677 => [[['_route' => 'remove_favoris', 'id' => 1, '_controller' => 'App\\Controller\\Users\\ProfilController::removeFavoris2'], ['id'], null, null, false, true, null]],
-        705 => [[['_route' => 'genre_show', '_controller' => 'App\\Controller\\GenreController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        718 => [[['_route' => 'genre_edit', '_controller' => 'App\\Controller\\GenreController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        726 => [[['_route' => 'genre_delete', '_controller' => 'App\\Controller\\GenreController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        756 => [[['_route' => 'rubrique_show', '_controller' => 'App\\Controller\\RubriqueController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        769 => [[['_route' => 'rubrique_edit', '_controller' => 'App\\Controller\\RubriqueController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        777 => [[['_route' => 'rubrique_delete', '_controller' => 'App\\Controller\\RubriqueController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        805 => [[['_route' => 'tag_show', '_controller' => 'App\\Controller\\TagController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        818 => [[['_route' => 'tag_edit', '_controller' => 'App\\Controller\\TagController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        826 => [[['_route' => 'tag_delete', '_controller' => 'App\\Controller\\TagController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        856 => [[['_route' => 'tranche_age_show', '_controller' => 'App\\Controller\\TrancheAgeController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        869 => [[['_route' => 'tranche_age_edit', '_controller' => 'App\\Controller\\TrancheAgeController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        877 => [[['_route' => 'tranche_age_delete', '_controller' => 'App\\Controller\\TrancheAgeController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        907 => [[['_route' => 'type_entite_show', '_controller' => 'App\\Controller\\TypeEntiteController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        920 => [[['_route' => 'type_entite_edit', '_controller' => 'App\\Controller\\TypeEntiteController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        928 => [[['_route' => 'type_entite_delete', '_controller' => 'App\\Controller\\TypeEntiteController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        955 => [[['_route' => 'user_show', '_controller' => 'App\\Controller\\UserController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        968 => [[['_route' => 'user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        976 => [
+        491 => [[['_route' => 'entite_show', '_controller' => 'App\\Controller\\EntiteController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        504 => [[['_route' => 'entite_edit', '_controller' => 'App\\Controller\\EntiteController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        512 => [[['_route' => 'entite_delete', '_controller' => 'App\\Controller\\EntiteController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        540 => [[['_route' => 'entreprise_show', '_controller' => 'App\\Controller\\EntrepriseController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        553 => [[['_route' => 'entreprise_edit', '_controller' => 'App\\Controller\\EntrepriseController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        561 => [[['_route' => 'entreprise_delete', '_controller' => 'App\\Controller\\EntrepriseController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        607 => [[['_route' => 'ef_connect', '_controller' => 'FM\\ElfinderBundle\\Controller\\ElFinderController::load', 'instance' => 'default', 'homeFolder' => ''], ['instance', 'homeFolder'], null, null, false, true, null]],
+        650 => [[['_route' => 'elfinder', '_controller' => 'FM\\ElfinderBundle\\Controller\\ElFinderController::show', 'instance' => 'default', 'homeFolder' => ''], ['instance', 'homeFolder'], null, null, false, true, null]],
+        683 => [[['_route' => 'fonction_show', '_controller' => 'App\\Controller\\FonctionController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        696 => [[['_route' => 'fonction_edit', '_controller' => 'App\\Controller\\FonctionController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        704 => [[['_route' => 'fonction_delete', '_controller' => 'App\\Controller\\FonctionController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        740 => [[['_route' => 'add_article_favoris', 'id' => 1, '_controller' => 'App\\Controller\\Users\\ProfilController::addFavoris'], ['id'], null, null, false, true, null]],
+        768 => [[['_route' => 'remove_favoris', 'id' => 1, '_controller' => 'App\\Controller\\Users\\ProfilController::removeFavoris2'], ['id'], null, null, false, true, null]],
+        796 => [[['_route' => 'genre_show', '_controller' => 'App\\Controller\\GenreController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        809 => [[['_route' => 'genre_edit', '_controller' => 'App\\Controller\\GenreController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        817 => [[['_route' => 'genre_delete', '_controller' => 'App\\Controller\\GenreController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        847 => [[['_route' => 'rubrique_show', '_controller' => 'App\\Controller\\RubriqueController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        860 => [[['_route' => 'rubrique_edit', '_controller' => 'App\\Controller\\RubriqueController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        868 => [[['_route' => 'rubrique_delete', '_controller' => 'App\\Controller\\RubriqueController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        896 => [[['_route' => 'tag_show', '_controller' => 'App\\Controller\\TagController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        909 => [[['_route' => 'tag_edit', '_controller' => 'App\\Controller\\TagController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        917 => [[['_route' => 'tag_delete', '_controller' => 'App\\Controller\\TagController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        947 => [[['_route' => 'tranche_age_show', '_controller' => 'App\\Controller\\TrancheAgeController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        960 => [[['_route' => 'tranche_age_edit', '_controller' => 'App\\Controller\\TrancheAgeController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        968 => [[['_route' => 'tranche_age_delete', '_controller' => 'App\\Controller\\TrancheAgeController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        998 => [[['_route' => 'type_entite_show', '_controller' => 'App\\Controller\\TypeEntiteController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        1011 => [[['_route' => 'type_entite_edit', '_controller' => 'App\\Controller\\TypeEntiteController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1020 => [[['_route' => 'type_entite_delete', '_controller' => 'App\\Controller\\TypeEntiteController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        1048 => [[['_route' => 'user_show', '_controller' => 'App\\Controller\\UserController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        1062 => [[['_route' => 'user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1071 => [
             [['_route' => 'user_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

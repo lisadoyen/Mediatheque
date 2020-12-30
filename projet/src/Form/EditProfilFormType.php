@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,6 +49,14 @@ class EditProfilFormType extends AbstractType
             ->add('email_pro')
             ->add('tel_pro')
             ->add('tel_pro2')
+            ->add('notification_perso', CheckboxType::class, [
+                'label_attr' => ['class' => 'switch-custom'],
+                'required' => false,
+            ])
+            ->add('notification_pro', CheckboxType::class, [
+                'label_attr' => ['class' => 'switch-custom'],
+                'required' => false,
+            ])
             ->add('ville', TextType::class, array(
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'La ville doit faire au minimum 2 caractères']),
