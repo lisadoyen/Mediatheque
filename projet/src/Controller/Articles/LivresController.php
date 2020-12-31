@@ -296,15 +296,26 @@ class LivresController extends AbstractController
      * @Route("/livres/{id}", name="livre_details")
      * @param ArticleRepository $articleRepository
      * @param FavorisRepository $favorisRepository
+     * @param CategorieRepository $categorieRepository
+     * @param ActionRepository $actionRepository
      * @param int $id
      * @return Response
      */
-    public function livreDetails(ArticleRepository $articleRepository, FavorisRepository $favorisRepository, $id=1){
+    public function livreDetails(ArticleRepository $articleRepository, FavorisRepository $favorisRepository,CategorieRepository $categorieRepository, ActionRepository $actionRepository, $id=1){
         $livre = $articleRepository->findOneBy(['id' => $id]);
         $fav = $favorisRepository->findOneBy(['utilisateur'=>$this->getUser(), 'article'=>$livre]);
+        $nouveaute = $this->findArticleNouveaute($categorieRepository,$actionRepository);
+        $nouveau = null;
+        foreach($nouveaute as $new){
+            if($new['id'] == $livre->getId()){
+                $nouveau = $livre->getId();
+            }
+        }
         return $this->render('livres/show_livre_details.html.twig', [
             'livre' => $livre,
             'favoris' => $fav,
+            'nouveaute' => $nouveaute,
+            'idNouveaute' => $nouveau
         ]);
     }
 

@@ -52,12 +52,12 @@
                                         <img src="{{ livre.vignette }}" alt="{{ livre.vignette }}" width="120" height="120"></a>
                                 {% endif %}
                                     <div class="p-4">
-                             <input type="hidden" name="id" value="{{ livre.id }}">
-                                    {%  if livre.statut.libelle == "empruntable" %}
-                                        <a class="style-button-article-emprunt">Emprunter</a>
-                                    {% else %}
-                                        <a class="style-button-article-achat">Acheter</a>
-                                    {% endif %}
+                                        <input type="hidden" name="id" value="{{ livre.id }}">
+                                        {%  if livre.statut.libelle == "empruntable" %}
+                                            <a class="style-button-article-emprunt">Emprunter</a>
+                                        {% else %}
+                                            <a class="style-button-article-achat">Acheter</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-lg-6">

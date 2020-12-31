@@ -1,59 +1,97 @@
 {% extends "layout.html.twig" %}
 {% block body %}
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-9">
-                <h1 class="center p-3">{{ livre.titre }}</h1><br>
-                <div>
-                    <table class="table table-striped table-bordered">
-                        <caption>Détails de {{ livre.titre }}</caption>
-                        interface a refaire
-                        <thead class="thead-dark">
-                        <tr>
-                            <th>Code Livre</th>
-                            <th>Code ISBN</th>
-                            <th>Titre</th>
-                            <th>Description</th>
-                            <th>Photo</th>
-                            <th>Numérique</th>
-                            <th>Date de publication</th>
-                            <th>Libelle genre</th>
-                            <th>Opérations</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% if livre is not empty %}
-                            <tr>
-                                <td>{{livre.codeArticle}}</td>
-                                <td>{{livre.gencode}}</td>
-                                <td>{{livre.titre}}</td>
-                                <td>{{livre.description}}</td>
-                                <td>{{livre.vignette}}</td>
-                                <td>
-                                    {% if livre.numerique == 0 %}
-                                        <span style="color:red">Non</span>
-                                    {% else %}
-                                        <span style="color:green">Oui</span>
-                                    {% endif %}
-                                </td>
-                                <td>{{livre.datePublication | date('d/m/Y')}}</td>
-                                <td>{{livre.genre.libelle}}</td>
-                                <td>
-                                    <a href="{#{ path('livre_edit', {id: livre.id}) }#}" class="btn btn-primary mb-2">Réserver</a>
-                                    {% if favoris is empty %}
-                                        <a href="{{ path('add_article_favoris', {id: livre.id, page:"detail"}) }}"><i class="far fa-star text-danger"></i></a>
-                                    {% else %}
-                                        <a href="{{ path('remove_article_favoris', {id: livre.id, page:"detail"}) }}"><i class="fas fa-star text-danger"></i></a>
-                                    {% endif %}
-                                </td>
-                            </tr>
+        <div class="row p-4">
+            {% if livre is not empty %}
+            <div class="col-lg-3 float-left">
+                {%  if livre.vignette is not empty %}
+                    <img src="{{ livre.vignette }}" alt="image de {{ livre.titre }}" width="350" height="350">
+                {% else %}
+                    <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="350" height="350">
+                {% endif %}
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="text-detail-size-title"><span class="text-orange"> titre : </span><span class="text-bold">{{livre.titre | capitalize }}</span></div>
+                </div>
+                <div class="row pt-4 pb-4">
+                    <div class="col-lg-6">
+                        <div class="text-detail-size"><span class="text-orange">auteur : </span>auteur</div>
+                        <div class="text-detail-size"><span class="text-orange">date de publication : </span>{{livre.datePublication | date('d/m/Y')}}</div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="text-detail-size"><span class="text-orange">genre : </span>{{livre.genre.libelle}}</div>
+                        <div class="text-detail-size"><span class="text-orange">rubrique : </span>rubrique</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="text-justify"><span class="text-orange">description : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non metus diam. Nunc placerat ante at iaculis egestas. Pellentesque risus mauris, interdum vitae tellus eu, pellentesque dignissim urna. Nulla mattis enim mauris, quis aliquam nisi placerat imperdiet. Morbi consequat leo vel ante varius finibus. Pellentesque vitae ante vitae turpis maximus volutpat porta vitae orci. Donec tincidunt felis at tortor tincidunt, quis porta ipsum dignissim. Vivamus imperdiet est augue, eu ultricies elit pulvinar ornare. Pellentesque nulla nulla, congue facilisis aliquam id, ultricies id nibh. Pellentesque sed nibh eget sapien mollis malesuada. Vivamus eget congue sem, id dapibus dui. </div>
+                </div>
+            </div>
+            <div class="col-lg-3 p-4">
+                <div class="row">
+                    <div class="row col-lg-4"></div>
+                    <div class="col-lg-8">
+                    {% if idNouveaute == livre.id %}
+                        <span class="text-bold text-detail-size-nouveaute"> nouveau !</span>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="row p-4">
+                    <div class="row col-lg-5"></div>
+                    <div class="col-lg-7">
+                    {% if favoris is empty %}
+                        <a href="{{ path('add_article_favoris', {id: livre.id, page:"detail"}) }}"><i class="far fa-star text-danger fa-5x"></i></a>
+                    {% else %}
+                        <a href="{{ path('remove_article_favoris', {id: livre.id, page:"detail"}) }}"><i class="fas fa-star text-danger fa-5x"></i></a>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="row p-4">
+                    <div class="row col-lg-4">
+                    {%  if livre.statut.libelle == "vendable" %}
+                        <div class="text-detail-size"><span class="text-orange">prix : </span><br>
+                            <span style="color: red">{{ livre.montantVente }}€</span></div>
+                    {% endif %}
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="hidden" name="id" value="{{ livre.id }}">
+                        {%  if livre.statut.libelle == "empruntable" %}
+                            <a class="style-button-article-emprunt-detail">Emprunter</a>
                         {% else %}
-                            <tr class="table-warning"><td>Pas de livre</td></tr>
+                            <a class="style-button-article-achat-detail">Acheter</a>
                         {% endif %}
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
         </div>
+       <div class="row">
+           <div class="col-lg-3">
+               <div class="text-detail-size"><span class="text-orange">moyenne : </span>nb étoile</div>
+           </div>
+           <div class="col-lg-7">
+               <div class="text-detail-size-subtitle p-2"><span class="text-bold">Informations supplémentaires : </span></div>
+               <div class="text-detail-size p-2"> <span class="text-orange">format :</span>
+               {% if livre.numerique == 0 %}
+                   <span>papier</span>
+               {% else %}
+                   <span>numérique</span>
+               {% endif %}
+               </div>
+               <div class="text-detail-size p-2"> <span class="text-orange">code ISBN :</span>
+                   {% if livre.genCode is empty %}
+                        aucun
+                   {% else %}
+                        {{ livre.genCode }}
+                   {% endif %}
+               </div>
+               <div class="text-detail-size p-2"> <span class="text-orange">entite :</span> entite</div>
+               <div class="text-detail-size p-2"> <span class="text-orange">liens :</span> liens</div>
+           </div>
+       </div>
+        <div class="row">
+            <a class="edit-btn">Retour</a>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}
