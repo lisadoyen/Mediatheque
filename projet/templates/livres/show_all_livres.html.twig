@@ -10,11 +10,28 @@
             <!--
                 Récup les infos dans entite via article_entite
             -->
-            <div class="col-lg-9">
+            <div class="col-lg-9 p-4">
+                <div class="row">
+                    <div class="col-lg-6 float-left">
+                        <img class="pl-2 pt-2" src="{{asset('assets/images/article/icone.jpg')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage en icone" alt="mode affichage en icones" width="70" height="70">
+                        <img class="pl-2 pt-2" src="{{asset('assets/images/article/list.png')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage liste détaillée" alt="mode affichage liste détaillé" width="70" height="70">
+                        <span class="pl-4 pt-4 text-trier">trier par</span>
+                        <button id="navbarDropdown" data-toggle="dropdown" class="edit-btn">
+                            <i class="fas fa-arrow-up"></i></button>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">titre</a>
+                                <a class="dropdown-item" href="#">date d'aquisition</a>
+                                <a class="dropdown-item" href="#">prix</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">popularité</a>
+                            </div>
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
                 {% if livres is defined %}
                     {% for livre in livres | slice(0, 30) %}
-                        <div class="col-4 mt-4 float-left">
-                            <div class="p-2">
+                        <div class="col-4 pt-4 pb-4 float-left">
+                            <div class="pl-2">
                                 {% if nouveaute is defined %}
                                     {% for new in nouveaute %}
                                         {% if new.id == livre.id %}
@@ -35,7 +52,7 @@
                                         <img src="{{ livre.vignette }}" alt="{{ livre.vignette }}" width="120" height="120"></a>
                                 {% endif %}
                                     <div class="p-4">
-                                    <input type="hidden" name="id" value="{{ livre.id }}">
+                             <input type="hidden" name="id" value="{{ livre.id }}">
                                     {%  if livre.statut.libelle == "empruntable" %}
                                         <a class="style-button-article-emprunt">Emprunter</a>
                                     {% else %}
@@ -43,18 +60,17 @@
                                     {% endif %}
                                     </div>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-lg-6">
                                         <div class="text-size-title"><span class="text-orange"> titre : </span><span class="text-bold">{{livre.titre | capitalize }}</span></div>
-                                        <div class="text-size"><span class="text-orange">auteur : </span>auteur</div>
-                                        <div class="text-size"><span class="text-orange">date de publication : </span>{{livre.datePublication | date('d/m/Y')}}</div>
-
-                                        <div class="text-size mt-3"><span class="text-orange">moyenne : </span>moyenne (étoile)</div>
+                                        <div class="text-size pt-2"><span class="text-orange">auteur : </span>auteur</div>
+                                        <div class="text-size pt-1"><span class="text-orange">date de publication : </span>{{livre.datePublication | date('d/m/Y')}}</div>
+                                        <div class="text-size pt-3"><span class="text-orange">moyenne : </span>moyenne (étoile)</div>
                                         {%  if livre.statut.libelle == "vendable" %}
                                             <hr>
                                             <div class="text-size"><span class="text-orange">prix : </span><span style="color: red">{{ livre.montantVente }}€</span></div>
                                         {% endif %}
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-lg-1"> <!-- pour tablette : p-4-->
                                     {% if livre.favoris is empty %}
                                         <a href="{{ path('add_article_favoris', {id: livre.id, page: "list"}) }}"><i class="far fa-star text-danger fa-2x"></i></a>
                                     {% else %}

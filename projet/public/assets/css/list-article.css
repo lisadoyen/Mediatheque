@@ -3,13 +3,16 @@ span.text-orange{
 }
 
 .text-size{
-    font-size: 1.5vh;
+    font-size: 1.4vh;
 }
+
 
 .text-size-title{
     font-size: 1.8vh;
 }
-
+span.text-trier{
+    font-size: 1.5vh;
+}
 span.text-bold{
     font-weight: bold;
 }

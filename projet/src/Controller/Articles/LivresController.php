@@ -52,11 +52,16 @@ class LivresController extends AbstractController
      * @param null $id
      * @param SessionInterface $session
      * @param ArticleRepository $ar
+     * @param CategorieRepository $categorieRepo
+     * @param ActionRepository $actionsRepo
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function showAll($id = null, SessionInterface $session,ArticleRepository $ar,CategorieRepository $categorieRepo, ActionRepository $actionsRepo,TypeActionRepository $typeActionRepo, Request $request, PaginatorInterface $paginator)
+    public function showAll($id = null, SessionInterface $session, ArticleRepository $ar,
+                            CategorieRepository $categorieRepo,
+                            ActionRepository $actionsRepo,
+                            Request $request, PaginatorInterface $paginator)
     {
         // Menu genre
         if($id != null) {
@@ -165,7 +170,7 @@ class LivresController extends AbstractController
     }
 
     /**
-     * fonctions qui peremt de déterminer si un article est nouveau ou non
+     * fonctions qui permet de déterminer si un article est nouveau ou non
      * @param CategorieRepository $categorieRepo
      * @param ActionRepository $actionsRepo
      * @return int|mixed|string
@@ -180,7 +185,7 @@ class LivresController extends AbstractController
         foreach ($categorie as $cat){
             $nbJourNouveaute = $cat->getDureeNouveaute(); // récupération nb nouveauté
         }
-        $dateDureeMax = $this->transformDate($today, 812); // TODO 812 pour test => mettre nbJournouveaute normalement
+        $dateDureeMax = $this->transformDate($today, 812); // TODO 812 pour test => mettre nbJourNouveaute normalement
         $nouveaute = $actionsRepo->findIsNouveaute($dateDureeMax);
 
         return $nouveaute;
