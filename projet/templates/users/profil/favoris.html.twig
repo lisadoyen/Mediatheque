@@ -63,7 +63,7 @@
                     <a href="{# ajouter au panier achat #}" class="btn edit-btn">Ajouter au panier</a>
                 {% else %}
                 {% endif %}
-                <a href="{{ path('livre_details', {id: fav.article.id}) }}" class="btn edit-btn">Voir plus de détail</a>
+                <a href="{{ path('article_details', {id: fav.article.id}) }}" class="btn edit-btn">Voir plus de détail</a>
             </div>
             <div class="col-1 align-content-center">
                 <a href="{{ path('remove_favoris', {id: fav.article.id}) }}" class="close p-4" aria-label="Close" onclick="return confirm('Voulez vous vraiment supprimer cet article de vos favoris ?')">

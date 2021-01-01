@@ -311,11 +311,17 @@ class ArticleController extends AbstractController
                 $nouveau = $livre->getId();
             }
         }
+        $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non metus diam. Nunc placerat ante at iaculis egestas. Pellentesque risus mauris, interdum vitae
+                        tellus eu, pellentesque dignissim urna. Nulla mattis enim mauris, quis aliquam nisi placerat imperdiet. Morbi consequat leo vel ante varius finibus.
+                        Pellentesque vitae ante vitae turpis maximus volutpat porta vitae orci. Donec tincidunt felis at tortor tincidunt, quis porta ipsum dignissim. Vivamus
+                        imperdiet est augue, eu ultricies elit pulvinar ornare. Pellentesque nulla nulla, congue facilisis aliquam id, ultricies id nibh. Pellentesque sed nibh
+                        eget sapien mollis malesuada. Vivamus eget congue sem, id dapibus dui.";
         return $this->render('articles/show_article_details.html.twig', [
             'livre' => $livre,
             'favoris' => $fav,
             'nouveaute' => $nouveaute,
-            'idNouveaute' => $nouveau
+            'idNouveaute' => $nouveau,
+            'description' => $description
         ]);
     }
 
