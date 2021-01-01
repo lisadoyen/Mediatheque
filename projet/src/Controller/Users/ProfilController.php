@@ -2,24 +2,32 @@
 
 namespace App\Controller\Users;
 
+use App\Entity\Avis;
 use App\Entity\Favoris;
 use App\Entity\User;
 use App\Form\AvatarProfilFormType;
+use App\Form\AvisFormType;
+use App\Form\CommentaireFormType;
 use App\Form\EditProfilFormType;
 use App\Repository\ArticleRepository;
+use App\Repository\AvisRepository;
 use App\Repository\FavorisRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProfilController extends AbstractController
 {

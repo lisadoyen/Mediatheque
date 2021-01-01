@@ -12,9 +12,11 @@ use App\Entity\Favoris;
 use App\Entity\Genre;
 use App\Entity\StatutEnregistrement;
 use App\Entity\TypeEntite;
+use App\Form\AvisFormType;
 use App\Form\BibliothequeType;
 use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\AvisRepository;
 use App\Repository\BibliothequeRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\EnregistrementRepository;
@@ -294,6 +296,9 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/article/{id}", name="article_details")
+     * @param UserInterface $user
+     * @param Request $request
+     * @param AvisRepository $avisRepository
      * @param ArticleRepository $articleRepository
      * @param FavorisRepository $favorisRepository
      * @param CategorieRepository $categorieRepository
@@ -301,7 +306,7 @@ class ArticleController extends AbstractController
      * @param int $id
      * @return Response
      */
-    public function livreDetails(ArticleRepository $articleRepository, FavorisRepository $favorisRepository,CategorieRepository $categorieRepository, ActionRepository $actionRepository, $id=1){
+    public function livreDetails(UserInterface $user, Request $request,AvisRepository $avisRepository, ArticleRepository $articleRepository, FavorisRepository $favorisRepository,CategorieRepository $categorieRepository, ActionRepository $actionRepository, $id=1){
         $livre = $articleRepository->findOneBy(['id' => $id]);
         $fav = $favorisRepository->findOneBy(['utilisateur'=>$this->getUser(), 'article'=>$livre]);
         $nouveaute = $this->findArticleNouveaute($categorieRepository,$actionRepository);
@@ -316,13 +321,51 @@ class ArticleController extends AbstractController
                         Pellentesque vitae ante vitae turpis maximus volutpat porta vitae orci. Donec tincidunt felis at tortor tincidunt, quis porta ipsum dignissim. Vivamus
                         imperdiet est augue, eu ultricies elit pulvinar ornare. Pellentesque nulla nulla, congue facilisis aliquam id, ultricies id nibh. Pellentesque sed nibh
                         eget sapien mollis malesuada. Vivamus eget congue sem, id dapibus dui.";
+
+        $avis = $avisRepository->findBy(['article'=>$id]);
+
+        $nbCom = $avisRepository->sumNbCommentaire();
+
+        $form = $this->createFormCommentaire($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commentaire = $form->getData();
+            $commentaire->setArticle($articleRepository->find($id));
+            $commentaire->setSignale(0);
+            $user->addAvi($commentaire);
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->persist($commentaire);
+            $this->getDoctrine()->getManager()->flush();
+            return $this->render('articles/show_article_details.html.twig', [
+                'livre' => $livre,
+                'favoris' => $fav,
+                'nouveaute' => $nouveaute,
+                'idNouveaute' => $nouveau,
+                'description' => $description,
+                'avis' => $avis,
+                'nbCom' =>$nbCom,
+                'form' => $form->createView()
+            ]);
+        }
+
+
         return $this->render('articles/show_article_details.html.twig', [
             'livre' => $livre,
             'favoris' => $fav,
             'nouveaute' => $nouveaute,
             'idNouveaute' => $nouveau,
-            'description' => $description
+            'description' => $description,
+            'avis' => $avis,
+            'nbCom' =>$nbCom,
+            'form' => $form->createView()
         ]);
+    }
+
+    public function createFormCommentaire( Request $request){
+        $form = $this->createForm(AvisFormType::class, NULL, [
+            'method' => 'POST'
+        ]);
+        $form->handleRequest($request);
+        return $form;
     }
 
     /**

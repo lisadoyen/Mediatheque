@@ -19,6 +19,16 @@ class AvisRepository extends ServiceEntityRepository
         parent::__construct($registry, Avis::class);
     }
 
+    public function sumNbCommentaire(){
+        $qb = $this->createQueryBuilder('com');
+        $qb->select('count(com.id) as nbCom') // g = genre , s = statut
+            ->join('App:Article', 'a')
+            ->where('com.article = a.id');
+
+        return $qb->getQuery()->getResult();
+
+    }
+
     // /**
     //  * @return Avis[] Returns an array of Avis objects
     //  */
