@@ -1,11 +1,10 @@
-
 <div id="1" style="visibility: visible">
     <form action="{{ path('filter_clear') }}" method="post">
         <input type="hidden" name="_method" value="GET">
         <button type="submit" class="edit-btn float-left" onclick="return confirm('Voulez-vous vraiment vider le filtre ?')">Vider</button>
     </form>
 
-    <form method="post" action="{{ path('livres_show') }}" >
+    <form method="post" action="{{ path('articles_show') }}" >
 
         <input type="hidden" name="token" value="{{ csrf_token('form_articles') }}">
         <button type="submit" class="edit-btn ">Filtrer</button>

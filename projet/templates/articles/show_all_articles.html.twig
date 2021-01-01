@@ -28,13 +28,13 @@
                     </div>
                     <div class="col-md-6"></div>
                 </div>
-                {% if livres is defined %}
-                    {% for livre in livres | slice(0, 30) %}
+                {% if articles is defined %}
+                    {% for article in articles | slice(0, 30) %}
                         <div class="col-4 pt-4 pb-4 float-left">
                             <div class="pl-2">
                                 {% if nouveaute is defined %}
                                     {% for new in nouveaute %}
-                                        {% if new.id == livre.id %}
+                                        {% if new.id == article.id %}
                                             <span class="text-size text-bold text-size-title text-nouveaute"> nouveau !</span>
                                         {% endif %}
                                     {% endfor %}
@@ -42,18 +42,18 @@
                             </div>
                             <div class="row p-2">
                                 <div class="col-lg-4">
-                                {% if livre.vignette == NULL %}
-                                    <input type="hidden" name="id" value="{{ livre.id }}">
-                                    <a href="{{ path('livre_details', {id: livre.id}) }}">
+                                {% if article.vignette == NULL %}
+                                    <input type="hidden" name="id" value="{{ article.id }}">
+                                    <a href="{{ path('article_details', {id: article.id}) }}">
                                         <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120"></a>
                                 {% else %}
-                                    <input type="hidden" name="id" value="{{ livre.id }}">
-                                    <a href="{{ path('livre_details', {id: livre.id}) }}">
-                                        <img src="{{ livre.vignette }}" alt="{{ livre.vignette }}" width="120" height="120"></a>
+                                    <input type="hidden" name="id" value="{{ article.id }}">
+                                    <a href="{{ path('article_details', {id: article.id}) }}">
+                                        <img src="{{ article.vignette }}" alt="{{ article.vignette }}" width="120" height="120"></a>
                                 {% endif %}
                                     <div class="p-4">
-                                        <input type="hidden" name="id" value="{{ livre.id }}">
-                                        {%  if livre.statut.libelle == "empruntable" %}
+                                        <input type="hidden" name="id" value="{{ article.id }}">
+                                        {%  if article.statut.libelle == "empruntable" %}
                                             <a class="style-button-article-emprunt">Emprunter</a>
                                         {% else %}
                                             <a class="style-button-article-achat">Acheter</a>
@@ -61,20 +61,20 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                        <div class="text-size-title"><span class="text-orange"> titre : </span><span class="text-bold">{{livre.titre | capitalize }}</span></div>
+                                        <div class="text-size-title"><span class="text-orange"> titre : </span><span class="text-bold">{{article.titre | capitalize }}</span></div>
                                         <div class="text-size pt-2"><span class="text-orange">auteur : </span>auteur</div>
-                                        <div class="text-size pt-1"><span class="text-orange">date de publication : </span>{{livre.datePublication | date('d/m/Y')}}</div>
+                                        <div class="text-size pt-1"><span class="text-orange">date de publication : </span>{{article.datePublication | date('d/m/Y')}}</div>
                                         <div class="text-size pt-3"><span class="text-orange">moyenne : </span>moyenne (étoile)</div>
-                                        {%  if livre.statut.libelle == "vendable" %}
+                                        {%  if article.statut.libelle == "vendable" %}
                                             <hr>
-                                            <div class="text-size"><span class="text-orange">prix : </span><span style="color: red">{{ livre.montantVente }}€</span></div>
+                                            <div class="text-size"><span class="text-orange">prix : </span><span style="color: red">{{ article.montantVente }}€</span></div>
                                         {% endif %}
                                 </div>
                                 <div class="col-lg-1"> <!-- pour tablette : p-4-->
-                                    {% if livre.favoris is empty %}
-                                        <a href="{{ path('add_article_favoris', {id: livre.id, page: "list"}) }}"><i class="far fa-star text-danger fa-2x"></i></a>
+                                    {% if article.favoris is empty %}
+                                        <a href="{{ path('add_article_favoris', {id: article.id, page: "list"}) }}"><i class="far fa-star text-danger fa-2x"></i></a>
                                     {% else %}
-                                        <a href="{{ path('remove_article_favoris', {id: livre.id, page: "list"}) }}"><i class="fas fa-star text-danger fa-2x"></i></a>
+                                        <a href="{{ path('remove_article_favoris', {id: article.id, page: "list"}) }}"><i class="fas fa-star text-danger fa-2x"></i></a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                 {% endif %}
             </div>
             <div class="pagination">
-                {{ knp_pagination_render(livres)}}</div>
+                {{ knp_pagination_render(articles)}}</div>
         </div>
     </div>
 {% endblock %}

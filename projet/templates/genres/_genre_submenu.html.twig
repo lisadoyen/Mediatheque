@@ -1,7 +1,7 @@
 <div class="sub-dropdown-content">
     {% for genre in genres %}
         {% if genre.libelle != 'POUBELLE' and genre.libelle != 'Inconnu' %}
-        <a href="{{ path('genres_id_livres_show', {id : genre.id}) }}">
+        <a href="{{ path('genres_id_articles_show', {id : genre.id}) }}">
             {{ genre.libelle|capitalize }}
         </a>
         {% endif %}

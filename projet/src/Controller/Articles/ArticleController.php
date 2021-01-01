@@ -44,11 +44,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints\Date;
 
-class LivresController extends AbstractController
+class ArticleController extends AbstractController
 {
     /**
-     * @Route("/livres/show", name="livres_show", methods={"GET", "POST"})
-     * @Route("/livres/genres/{id}/show", name="genres_id_livres_show", methods={"GET", "POST"})
+     * @Route("/articles/show", name="articles_show", methods={"GET", "POST"})
+     * @Route("/articles/genres/{id}/show", name="genres_id_articles_show", methods={"GET", "POST"})
      * @param null $id
      * @param SessionInterface $session
      * @param ArticleRepository $ar
@@ -86,8 +86,8 @@ class LivresController extends AbstractController
 
             $nouveaute = $this-> findArticleNouveaute($categorieRepo, $actionsRepo);
 
-            return $this->render('livres/show_all_livres.html.twig', [
-                'livres' => $livres,
+            return $this->render('articles/show_all_articles.html.twig', [
+                'articles' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
                 'donnees' => $donnees,
                 'nouveaute' => $nouveaute
@@ -135,9 +135,9 @@ class LivresController extends AbstractController
 
             $nouveaute = $this-> findArticleNouveaute($categorieRepo, $actionsRepo);
 
-            return $this->render('livres/show_all_livres.html.twig', [
+            return $this->render('articles/show_all_articles.html.twig', [
                 'session' => $session,
-                'livres' => $livres,
+                'articles' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
                 'donnees' => $donnees,
                 'nouveaute' => $nouveaute
@@ -192,26 +192,26 @@ class LivresController extends AbstractController
     }
 
     /**
-     * @Route("/livre/filtre/clear", name="filter_clear", methods={"GET", "POST"})
+     * @Route("/article/filtre/clear", name="filter_clear", methods={"GET", "POST"})
      * @param SessionInterface $session
      * @return Response
      */
     public function clearFiltrer(SessionInterface $session){
         $session->set('donnees', null);
-        return $this->redirectToRoute('livres_show');
+        return $this->redirectToRoute('articles_show');
     }
 
     /**
-     * @Route("/livres/getISBN", name="get_ISBN", methods={"GET","POST"})
+     * @Route("/articles/getISBN", name="get_ISBN", methods={"GET","POST"})
      * @return Response
      * @IsGranted("ROLE_BENEVOLE")
      */
     public function getISBN(){
-        return $this->render('livres/get_ISBN.html.twig');
+        return $this->render('articles/get_ISBN.html.twig');
     }
 
     /**
-     * @Route("/livres/get/{isbn}", name="livres_search_isbn", methods={"GET","POST"})
+     * @Route("/articles/get/{isbn}", name="livres_search_isbn", methods={"GET","POST"})
      * @param $isbn
      * @param SerializerInterface $serializer
      * @return Response
@@ -272,7 +272,7 @@ class LivresController extends AbstractController
     }
 
     /**
-     * @Route("/livres/add", name="add_livre", methods={"GET","POST"}, options={"expose" = true})
+     * @Route("/articles/add", name="add_livre", methods={"GET","POST"}, options={"expose" = true})
      * @return Response
      * @IsGranted("ROLE_BENEVOLE")
      */
@@ -286,14 +286,14 @@ class LivresController extends AbstractController
         }
         $form = $this->createForm(BibliothequeType::class,$article);
 
-        return $this->render('livres/add.html.twig',[
+        return $this->render('articles/add.html.twig',[
             'form' => $form->createView(),
             'data' => $data ?? null
         ]);
     }
 
     /**
-     * @Route("/livres/{id}", name="livre_details")
+     * @Route("/article/{id}", name="article_details")
      * @param ArticleRepository $articleRepository
      * @param FavorisRepository $favorisRepository
      * @param CategorieRepository $categorieRepository
@@ -311,7 +311,7 @@ class LivresController extends AbstractController
                 $nouveau = $livre->getId();
             }
         }
-        return $this->render('livres/show_livre_details.html.twig', [
+        return $this->render('articles/show_article_details.html.twig', [
             'livre' => $livre,
             'favoris' => $fav,
             'nouveaute' => $nouveaute,

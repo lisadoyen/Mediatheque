@@ -2,7 +2,7 @@
     <h1 id="main-title">Médiathèque</h1>
     <a href="{{ path('accueil') }}" data-toggle="tooltip" data-placement="bottom" title="Accueil"><img src="{{asset('assets/images/yellow/home.png')}}" class="icon home" alt="Accueil"></a>
     {% if app.request.pathInfo != '/accueil' %}
-    <form action="{{ path('livres_show') }}" id="search" method="post" class="search-in-nav">
+    <form action="{{ path('articles_show') }}" id="search" method="post" class="search-in-nav">
         {% include '_search_bar.html.twig' %}
     </form>
     {% endif %}
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm sub-dropdown container">
-                <a href="{{ path('livres_show') }}" class="media-item dropbtn">Livres</a>
+                <a href="{{ path('articles_show') }}" class="media-item dropbtn">Livres</a>
                 {{ render(controller('App\\Controller\\GenreController::getLivreGenres')) }}
             </div>
             <div class="col-sm sub-dropdown container" >

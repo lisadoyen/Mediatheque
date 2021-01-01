@@ -175,17 +175,17 @@ class ProfilController extends AbstractController
         if($page == "list"){
             $donnees = $session->get('donnees');
             if(empty($donnees))
-                return $this->redirectToRoute('livres_show');
+                return $this->redirectToRoute('articles_show');
             else {
                 if (!empty($donnees['genres'])) {
-                    return $this->redirectToRoute('genres_id_livres_show', ['id' => 1]);
+                    return $this->redirectToRoute('genres_id_articles_show', ['id' => 1]);
                 } else {
-                    return $this->redirectToRoute('livres_show');
+                    return $this->redirectToRoute('articles_show');
                 }
             }
         }
         if ($page == "detail") {
-            return $this->redirectToRoute('livre_details', ['id' => $id]);
+            return $this->redirectToRoute('article_details', ['id' => $id]);
         }
         return;
     }
@@ -211,7 +211,7 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/{page}/livres/{id}/remove/favoris", name="remove_article_favoris")
+     * @Route("/{page}/articles/{id}/remove/favoris", name="remove_article_favoris")
      */
     public function removeFavoris(SessionInterface $session, ArticleRepository $articleRepository,FavorisRepository $favorisRepository, $id=1, $page){
         $user = $this->getUser();
@@ -225,17 +225,17 @@ class ProfilController extends AbstractController
         if($page == "list"){
             $donnees = $session->get('donnees');
             if(empty($donnees))
-                return $this->redirectToRoute('livres_show');
+                return $this->redirectToRoute('articles_show');
             else {
                 if (!empty($donnees['genres'])) {
-                    return $this->redirectToRoute('genres_id_livres_show', ['id' => 1]);
+                    return $this->redirectToRoute('genres_id_articles_show', ['id' => 1]);
                 } else {
-                    return $this->redirectToRoute('livres_show');
+                    return $this->redirectToRoute('articles_show');
                 }
             }
         }
         if ($page == "detail") {
-            return $this->redirectToRoute('livre_details', ['id' => $id]);
+            return $this->redirectToRoute('article_details', ['id' => $id]);
         }
         return;
     }
