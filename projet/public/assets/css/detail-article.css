@@ -75,3 +75,14 @@ span.text-com{
     color : #713e0c !important;
 }
 
+.star:hover .star-pleine,
+.star .star-nonpleine {
+    display: none;
+}
+.star:hover .star-nonpleine {
+    display: inline;
+}
+a:hover {
+    text-decoration: none !important;
+}
+

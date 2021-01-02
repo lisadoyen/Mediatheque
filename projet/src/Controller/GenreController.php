@@ -28,11 +28,11 @@ class GenreController extends AbstractController
     }
     public function getMusiqueGenres(GenreRepository $genreRepository)
     {
-        return $this->render('genres/_genre_submenu.html.twig', ['genres' => $this->getGenreByCategorie("jeu")]);
+        return $this->render('genres/_genre_submenu.html.twig', ['genres' => $this->getGenreByCategorie("musique")]);
     }
     public function getJeuGenres(GenreRepository $genreRepository)
     {
-        return $this->render('genres/_genre_submenu.html.twig', ['genres' => $this->getGenreByCategorie("musique")]);
+        return $this->render('genres/_genre_submenu.html.twig', ['genres' => $this->getGenreByCategorie("jeu")]);
     }
 
     public function getGenreByCategorie($libelleCategorie){

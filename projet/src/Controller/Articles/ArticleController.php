@@ -5,6 +5,7 @@ namespace App\Controller\Articles;
 use App\Data\SearchData;
 use App\Entity\Action;
 use App\Entity\Article;
+use App\Entity\Avis;
 use App\Entity\Bibliotheque;
 use App\Entity\Enregistrement;
 use App\Entity\Entite;
@@ -295,7 +296,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/article/{id}", name="article_details")
+     * @Route("/article/{id}", name="article_details",methods={"GET","POST"} )
      * @param UserInterface $user
      * @param Request $request
      * @param AvisRepository $avisRepository
@@ -316,35 +317,24 @@ class ArticleController extends AbstractController
                 $nouveau = $livre->getId();
             }
         }
-        $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non metus diam. Nunc placerat ante at iaculis egestas. Pellentesque risus mauris, interdum vitae
-                        tellus eu, pellentesque dignissim urna. Nulla mattis enim mauris, quis aliquam nisi placerat imperdiet. Morbi consequat leo vel ante varius finibus.
-                        Pellentesque vitae ante vitae turpis maximus volutpat porta vitae orci. Donec tincidunt felis at tortor tincidunt, quis porta ipsum dignissim. Vivamus
-                        imperdiet est augue, eu ultricies elit pulvinar ornare. Pellentesque nulla nulla, congue facilisis aliquam id, ultricies id nibh. Pellentesque sed nibh
-                        eget sapien mollis malesuada. Vivamus eget congue sem, id dapibus dui.";
 
         $avis = $avisRepository->findBy(['article'=>$id]);
 
-        $nbCom = $avisRepository->sumNbCommentaire();
+        $form = $this->createForm(AvisFormType::class, NULL, [
+            'action' => '/article/'.$id,
+            'method' => 'POST'
+        ]);
+        $form->handleRequest($request);
 
-        $form = $this->createFormCommentaire($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Avis $commentaire */
             $commentaire = $form->getData();
             $commentaire->setArticle($articleRepository->find($id));
             $commentaire->setSignale(0);
-            $user->addAvi($commentaire);
-            $this->getDoctrine()->getManager()->persist($user);
+            $commentaire->setUtilisateur($user);
             $this->getDoctrine()->getManager()->persist($commentaire);
             $this->getDoctrine()->getManager()->flush();
-            return $this->render('articles/show_article_details.html.twig', [
-                'livre' => $livre,
-                'favoris' => $fav,
-                'nouveaute' => $nouveaute,
-                'idNouveaute' => $nouveau,
-                'description' => $description,
-                'avis' => $avis,
-                'nbCom' =>$nbCom,
-                'form' => $form->createView()
-            ]);
+            return $this->redirectToRoute('article_details', ['id' => $id]);
         }
 
 
@@ -353,19 +343,9 @@ class ArticleController extends AbstractController
             'favoris' => $fav,
             'nouveaute' => $nouveaute,
             'idNouveaute' => $nouveau,
-            'description' => $description,
             'avis' => $avis,
-            'nbCom' =>$nbCom,
             'form' => $form->createView()
         ]);
-    }
-
-    public function createFormCommentaire( Request $request){
-        $form = $this->createForm(AvisFormType::class, NULL, [
-            'method' => 'POST'
-        ]);
-        $form->handleRequest($request);
-        return $form;
     }
 
     /**
@@ -568,18 +548,192 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute("index");
     }
-
     /**
-     * tesl
-     * @Route("/test", name="test", methods={"GET","POST"}, options={"expose" = true})
-     * @param ArticleRepository $articleRepository
-     * @param EntityManagerInterface $em
+     * transfert bdd
+     * @Route("/transfertLivre", name="modifLivre", methods={"GET","POST"}, options={"expose" = true})
      * @return Response
-     * @throws Exception
      * @IsGranted("ROLE_ADMIN")
+     * @throws Exception
      */
-    public function test(ArticleRepository $articleRepository, EntityManagerInterface $em){
-        dd(DateTime::createFromFormat('Y', '2009'));
+    public function transfertBDDLivre(LivreOldRepository $livreOldRepository,
+                                      EntiteRepository $entiteRepository,
+                                      CategorieRepository $categorieRepository,
+                                      TrancheAgeRepository $trancheAgeRepository,
+                                      StatutRepository $statutRepository,
+                                      GenreRepository $genreRepository,
+                                      UserRepository $userRepository,
+                                      TypeActionRepository $typeActionRepository,
+                                      TypeEnregistrementRepository $typeEnregistrementRepository,
+                                      StatutEnregistrementRepository $statutEnregistrementRepository,
+                                      EnregistrementRepository $enregistrementRepository,
+                                      EntityManagerInterface $em,
+                                      TypeEntiteRepository $typeEntiteRepository)
+    {
+        $admin = $userRepository->find(2);
+        $typeEmprunt = $typeEnregistrementRepository->find(2);
+        $typeAchat= $typeEnregistrementRepository->find(1);
+        $livres= $livreOldRepository->findAll();
+        $typeAuteur = $typeEntiteRepository->find(1);
+        $categorieLivre = $categorieRepository->find(1);
+        $tranche = $trancheAgeRepository->find(1);
+        $statutEmprunte = $statutEnregistrementRepository->find(5);
+        $statutAchete = $statutEnregistrementRepository->find(6);
+        $statutRendu = $statutEnregistrementRepository->find(7);
+        $empruntable = $statutRepository->find(1);
+        $donne = $statutRepository->find(4);
+        $emprunte = $statutRepository->find(6);
+        $perdu = $statutRepository->find(3);
+        $vendu = $statutRepository->find(5);
+
+        $obtention = $typeActionRepository->find(1); // achat
+        $creation = $typeActionRepository->find(2); // mise en bdd
+        $modification = $typeActionRepository->find(3);
+        $declassement = $typeActionRepository->find(4);
+
+        $sport = $genreRepository->find(3);
+
+        $em->getConnection()->getConfiguration()->setSQLLogger(null);
+
+        foreach ($livres as $livre) {
+            $nom = $livre->getNomAuteur();
+            $prenom = $livre->getPrenomAuteur();
+            $auteur = NULL;
+            if(!$entiteRepository->findBy(['nom' => $nom]) && !preg_match('~[0-9]+~', $nom)){
+                $auteur = new Entite();
+                $auteur->setTypeEntite($typeAuteur);
+                $auteur->setNom($nom);
+                $auteur->setPrenom($prenom);
+                $em->persist($auteur);
+                $em->flush();
+            }
+            $article = new Article();
+            $article->setCategorie($categorieLivre);
+
+            if($auteur != NULL) $article->addEntite($auteur);
+            $article->setTrancheAge($tranche);
+
+            if($livre->getCodeEtat() === 'AC'){
+                $article->setStatut($empruntable);
+                if($livre->getSortie() === 'S'){
+                    $article->setStatut($emprunte);
+                    $enregistrement = new Enregistrement();
+                    $enregistrement->setArticle($article);
+                    $enregistrement->setDateEnregistrement(new \DateTime());
+                    $enregistrement->setTypeEnregistrement($typeEmprunt); // type Emprunt
+                    $enregistrement->setStatutEnregistrement($statutEmprunte); // statut emprunte
+                    $enregistrement->addStaff($admin);
+                    $enregistrement->setUtilisateur($admin);
+                    $date = new \DateTime();
+                    $date->add(new \DateInterval('P'.$categorieLivre->getDureeEmpruntMax().'D'));
+                    $enregistrement->setDateRenduTheorique($date);
+                    $enregistrement->setNoCommande(2);
+                    $em->persist($enregistrement);
+                }
+                $dateRendu = new \DateTime();
+                $dateRendu->add(new \DateInterval('P10D'));
+                $datePrepFini = new \DateTime();
+                $datePrepFini->add(new \DateInterval('P5D'));
+                $date = new \DateTime();
+                for($i = 0; $i < $livre->getNbSortie() ; $i++){
+                    $enregistrement = new Enregistrement();
+                    $enregistrement->setArticle($article);
+                    $enregistrement->setDateEnregistrement($date);
+                    $enregistrement->setDateRenduTheorique( $dateRendu);
+                    $enregistrement->setDateRendu($dateRendu);
+                    $enregistrement->setDatePreparationFini($datePrepFini);
+                    $enregistrement->setTypeEnregistrement($typeEmprunt); // type Emprunt
+                    $enregistrement->setStatutEnregistrement($statutRendu); // statut rendu
+                    $enregistrement->addStaff($admin);
+                    $enregistrement->setUtilisateur($admin);
+                    $enregistrement->setNoCommande(2);
+                    $em->persist($enregistrement);
+                }
+            }else if ($livre->getCodeEtat() === ('PERDU') ){
+                $article->setStatut($perdu);
+            }else if ($livre->getCodeEtat() === 'DON'){
+                $article->setStatut($donne);
+            }else{
+                $article->setStatut($vendu);
+
+                $dateRendu = new \DateTime();
+                $dateRendu->add(new \DateInterval('P10D'));
+                $datePrepFini = new \DateTime();
+                $datePrepFini->add(new \DateInterval('P5D'));
+                $date = new \DateTime();
+
+                $enregistrement = new Enregistrement();
+                $enregistrement->setArticle($article);
+                $enregistrement->setDateEnregistrement($date);
+                $enregistrement->setDateRenduTheorique( $dateRendu);
+                $enregistrement->setDateRendu($dateRendu);
+                $enregistrement->setDatePreparationFini($datePrepFini);
+                $enregistrement->setTypeEnregistrement($typeAchat); // type Emprunt
+                $enregistrement->setStatutEnregistrement($statutAchete); // statut rendu
+                $enregistrement->addStaff($admin);
+                $enregistrement->setUtilisateur($admin);
+                $enregistrement->setNoCommande(2);
+                $em->persist($enregistrement);
+            }
+
+            // création du livre dans la bdd
+            $action = new Action();
+            $date = $livre->getDateCreation();
+            if($date == NULL){
+                $date= $livre->getDateModif();
+                if($date == NULL){
+                    $date = $livre->getDateRetrait();
+                }
+            }
+            $action->setStaff($admin);
+            $action->setDate($date);
+            $action->setTypeAction($creation);
+            $article->addAction($action);
+            $em->persist($action);
+
+            // modification du livre dans la bdd
+            $dateModif = $livre->getDateModif();
+            if ($dateModif != NULL){
+                $action = new Action();
+                $action->setStaff($admin);
+                $action->setDate($dateModif);
+                $action->setTypeAction($modification);
+                $article->addAction($action);
+                $em->persist($action);
+            }
+
+            // obtention du livre
+            $dateAchat = $livre->getDateAchat();
+            if ($dateAchat!= NULL){
+                $action = new Action();
+                $action->setDate($dateAchat);
+                $action->setStaff($admin);
+                $action->setTypeAction($obtention);
+                $article->addAction($action);
+                $em->persist($action);
+            }
+
+            // déclassement du livre
+            $dateModif = $livre->getDateRetrait();
+            if ($dateModif != NULL) {
+                $action = new Action();
+                $action->setDate($dateModif);
+                $action->setStaff($admin);
+                $action->setTypeAction($declassement);
+                $article->addAction($action);
+                $em->persist($action);
+            }
+
+            $article->setGenre($sport);
+            $article->setGencode($livre->getGencode());
+            $article->setCodeArticle($livre->getCodeArticle());
+            $article->setTitre($livre->getTitre());
+            $article->setMontantObtention($livre->getPrixAchat());
+            $article->setMontantCaution(5.30);
+            $article->setMontantVente(5.40);
+            $article->setNumerique(false);
+            $em->persist($article);
+            $em->flush();
+        }
 
         return $this->redirectToRoute("index");
     }
