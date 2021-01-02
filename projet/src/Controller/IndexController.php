@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\AnnonceRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -24,9 +25,11 @@ class IndexController extends AbstractController
     /**
      * @Route("/accueil", name="accueil")
      */
-    public function accueil()
+    public function accueil(AnnonceRepository $ar)
     {
-        return $this->render('accueil.html.twig');
+        return $this->render('accueil.html.twig', [
+            'annonces' => $ar->findAll()
+        ]);
     }
 
     /**
