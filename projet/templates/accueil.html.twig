@@ -19,71 +19,32 @@
                         <li data-target="#newsCarousel" data-slide-to="2"></li>
                     </ol>
 
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100">
-                                        <a href="#"><img src="{{ asset('assets/images/tmp/HP1.jpg') }}" class="img-fluid" alt="" data-toggle="tooltip" data-placement="bottom" title="Voir plus de détails"></a>
-                                    </div>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100 d-inline-block">
-                                        <a href="#"><img src="{{ asset('assets/images/tmp/HP2.jpg') }}" class="img-fluid" alt="" data-toggle="tooltip" data-placement="bottom" title="Voir plus de détails"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100">
-                                        <button class="edit-btn" style="float: right">Voir plus de détail</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100 d-inline-block">
-                                        <a href="#"><img src="{{ asset('assets/images/tmp/HP3.jpg') }}" class="img-fluid" alt="" data-toggle="tooltip" data-placement="bottom" title="Voir plus de détails"></a>
-                                    </div>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100 d-inline-block">
-                                        <a href="#"><img src="{{ asset('assets/images/tmp/HP4.jpg') }}" class="img-fluid" alt="" data-toggle="tooltip" data-placement="bottom" title="Voir plus de détails"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100">
-                                        <button class="edit-btn" style="float: right">Voir plus de détail</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100 d-inline-block">
-                                        <a href="#"><img src="{{ asset('assets/images/tmp/HP5.jpg') }}" class="img-fluid" alt="" data-toggle="tooltip" data-placement="bottom" title="Voir plus de détails"></a>
 
+                    <div class="carousel-inner">
+                        {% for article in articles %}
+                            {% for new in nouveaute | slice(0, 3) %}
+                                {% if new.id == article.id %}
+                                    <div class="carousel-item active">
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <div class="img-box h-100 w-100 d-inline-block">
+                                                    <h2 class="text-center">{{ article.titre}}</h2>
+                                                    {% if article.vignette == NULL %}
+                                                        <input type="hidden" name="id" value="{{ article.id }}">
+                                                        <a href="{{ path('article_details', {id: article.id}) }}">
+                                                            <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="500" height="500"></a>
+                                                    {% else %}
+                                                        <input type="hidden" name="id" value="{{ article.id }}">
+                                                        <a href="{{ path('article_details', {id: article.id}) }}">
+                                                            <img src="{{ article.vignette }}" alt="{{ article.vignette }}" width="500" height="500"></a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100 d-inline-block">
-                                        <a href="#"><img src="{{ asset('assets/images/tmp/HP7.jpg') }}" class="img-fluid" alt="" data-toggle="tooltip" data-placement="bottom" title="Voir plus de détails"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100">
-                                        <button class="edit-btn" style="float: right">Voir plus de détail</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
                     </div>
                     <div class="col-sm text-center m-3">
                         <a href="#" class="edit-btn">Voir la liste des nouveautés disponibles</a>
@@ -146,13 +107,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100">
-                                        <button class="edit-btn" style="float: right">Voir plus de détail</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="carousel-item">
                             <div class="row">
@@ -164,13 +118,6 @@
                                 <div class="col-sm">
                                     <div class="img-box h-100 w-100 d-inline-block">
                                         <a href="#"><img src="{{ asset('assets/images/tmp/HP4.jpg') }}" class="img-fluid" alt="" data-toggle="tooltip" data-placement="bottom" title="Voir plus de détails"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100">
-                                        <button class="edit-btn" style="float: right">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>
@@ -186,13 +133,6 @@
                                 <div class="col-sm">
                                     <div class="img-box h-100 w-100 d-inline-block">
                                         <a href="#"><img src="{{ asset('assets/images/tmp/HP7.jpg') }}" class="img-fluid" alt="" data-toggle="tooltip" data-placement="bottom" title="Voir plus de détails"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="img-box h-100 w-100">
-                                        <button class="edit-btn" style="float: right">Voir plus de détail</button>
                                     </div>
                                 </div>
                             </div>

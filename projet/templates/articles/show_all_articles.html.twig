@@ -63,7 +63,7 @@
                                 <div class="col-lg-6">
                                         <div class="text-size-title"><span class="text-orange"> titre : </span><span class="text-bold">{{article.titre | capitalize }}</span></div>
                                         <div class="text-size pt-2"><span class="text-orange">auteur : </span>auteur</div>
-                                        <div class="text-size pt-1"><span class="text-orange">date de publication : </span>{{article.datePublication is empty ? "INCONNU" : article.datePublication|date("d/m/Y")}}</div>
+                                        <div class="text-size pt-1"><span class="text-orange">date de publication : </span>{{article.datePublication is empty ? "inconnu" : article.datePublication|date("d/m/Y")}}</div>
                                     <div class="text-size pt-3"><span class="text-orange">moyenne : </span>moyenne (étoile)</div>
                                         {%  if article.statut.libelle == "vendable" %}
                                             <hr>

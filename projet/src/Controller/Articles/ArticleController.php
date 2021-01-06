@@ -194,6 +194,7 @@ class ArticleController extends AbstractController
         return $nouveaute;
     }
 
+
     /**
      * @Route("/article/filtre/clear", name="filter_clear", methods={"GET", "POST"})
      * @param SessionInterface $session
