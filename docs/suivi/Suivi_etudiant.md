@@ -110,3 +110,58 @@
 
 étudiant 4 : modification du schéma ERD en fonction de l'avis du client
 
+
+**Semaine 8 (du 14/11 au 21/11) :**
+
+étudiant 1 : logigramme + maquette autres page + filtre
+
+étudiant 2 : recherche code ISBN avec autres API (bibliosurf, ...)
+
+étudiant 3 : fonction import export de la bdd à partir du site
+
+étudiant 4 : modification du schéma ERD
+
+
+**Semaine 9 (du 21/11 au 28/11) :**
+
+étudiant 1 : logigramme + maquette page article
+
+étudiant 2 : recherche code ISBN avec une API Amazon
+
+étudiant 3 : codage de la page d'accueil en fonction de la maquette définitive
+
+étudiant 4 : élaboration du schéma ERD définitif
+
+
+**Semaine 10 (du 28/11 au 05/12) :**
+
+étudiant 1 : logigramme + maquette page article
+
+étudiant 2 : élaboration du schéma ERD définitif
+
+étudiant 3 : codage de la page d'accueil en fonction de la maquette définitive
+
+étudiant 4 : élaboration du schéma ERD définitif
+
+
+**Semaine 10 (du 05/12 au 12/12) :**
+
+étudiant 1 : logigramme + maquette page article + codage des pages articles
+
+étudiant 2 : élaboration du schéma ERD définitif + recherche APIs vidéos
+
+étudiant 3 : codage de la page favoris et profil
+
+étudiant 4 : élaboration du schéma ERD définitif + commencement des CRUD
+
+
+**Semaine 10 (du 12/12 au 19/12) :**
+
+étudiant 1 : codage des pages articles
+
+étudiant 2 : recherche APIs vidéos + intégration des éléments trouvés à partir des APIs dans la nouvelle bdd
+
+étudiant 3 : codage de la page favoris et profil + correction bug
+
+étudiant 4 : élaboration des CRUD pour plusieurs tables de la bdd
+
