@@ -111,6 +111,9 @@
 étudiant 4 : modification du schéma ERD en fonction de l'avis du client
 
 
+<u>rdv avec client : le 18/11</u>
+
+
 **Semaine 8 (du 14/11 au 21/11) :**
 
 étudiant 1 : logigramme + maquette autres page + filtre
@@ -132,6 +135,8 @@
 
 étudiant 4 : élaboration du schéma ERD définitif
 
+
+<u>rdv avec client : le 01/12</u>
 
 **Semaine 10 (du 28/11 au 05/12) :**
 
@@ -155,7 +160,10 @@
 étudiant 4 : élaboration du schéma ERD définitif + commencement des CRUD
 
 
-**Semaine 10 (du 12/12 au 19/12) :**
+
+<u>rdv avec client : le 14/12</u>
+
+**Semaine 11 (du 12/12 au 19/12) :**
 
 étudiant 1 : codage des pages articles
 
