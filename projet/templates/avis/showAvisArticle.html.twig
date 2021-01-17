@@ -6,7 +6,7 @@
                     <span style="font-size: 4vh;font-weight: bold;color : #aa2222 !important;"> Commentaires </span>
                 </div>
                 <div class="col-lg-3">
-                    {{ render(controller('App\\Controller\\AvisController::getTotalCommentairesByArticle',{ 'idArticle': livre.id })) }}
+                    {{ render(controller('App\\Controller\\AvisController::getTotalCommentairesByArticle',{ 'idArticle': article.id })) }}
                 </div>
             </div>
             <hr>

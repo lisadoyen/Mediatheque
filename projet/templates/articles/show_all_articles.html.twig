@@ -72,7 +72,13 @@
                                             {% elseif article.categorie.libelle == 'musique' %}
                                                 <span class="text-orange">artiste : </span>
                                             {% endif %}
-                                            auteur
+                                            <!-- changer quand on aura une liste des entités par article, pour l'instant il n'y a qu'une entité par article -->
+                                            {% if article.entites[0] is defined %}
+                                                {{ article.entites[0].prenom | capitalize }}
+                                                {{article.entites[0].nom is empty ? "inconnu" : article.entites[0].nom | capitalize }}
+                                            {% else %}
+                                                inconnu
+                                            {% endif %}
                                         </div>
                                         <div class="text-size pt-1"><span class="text-orange">date de publication : </span>{{article.datePublication is empty ? "inconnu" : article.datePublication|date("d/m/Y")}}</div>
                                     <div class="text-size pt-3"><span class="text-orange">moyenne : </span>moyenne (étoile)</div>

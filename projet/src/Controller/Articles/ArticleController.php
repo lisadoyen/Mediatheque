@@ -61,12 +61,14 @@ class ArticleController extends AbstractController
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @param Nouveaute $new
+     * @param EntiteRepository $entite
      * @return Response
      */
     public function showAll($id = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo,
                             ActionRepository $actionsRepo,
-                            Request $request, PaginatorInterface $paginator, Nouveaute $new)
+                            Request $request, PaginatorInterface $paginator, Nouveaute $new,
+                            EntiteRepository $entite, TypeEntiteRepository $typeEntite)
     {
         // Menu genre
         if($id != null) {
@@ -140,12 +142,13 @@ class ArticleController extends AbstractController
 
             $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo);
 
+
             return $this->render('articles/show_all_articles.html.twig', [
                 'session' => $session,
                 'articles' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
                 'donnees' => $donnees,
-                'nouveaute' => $nouveaute
+                'nouveaute' => $nouveaute,
             ]);
         }
     }
@@ -304,7 +307,7 @@ class ArticleController extends AbstractController
 
 
         return $this->render('articles/show_article_details.html.twig', [
-            'livre' => $livre,
+            'article' => $livre,
             'favoris' => $fav,
             'nouveaute' => $nouveaute,
             'idNouveaute' => $nouveau,

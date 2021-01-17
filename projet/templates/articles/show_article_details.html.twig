@@ -2,10 +2,10 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row p-4">
-            {% if livre is not empty %}
+            {% if article is not empty %}
             <div class="col-lg-3 float-left">
-                {%  if livre.vignette is not empty %}
-                    <img src="{{ livre.vignette }}" alt="image de {{ livre.titre }}" width="350" height="350">
+                {%  if article.vignette is not empty %}
+                    <img src="{{ article.vignette }}" alt="image de {{ article.titre }}" width="350" height="350">
                 {% else %}
                     <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="350" height="350">
                 {% endif %}
@@ -14,24 +14,38 @@
                 <div class="row">
                     <div class="text-detail-size-title">
                         <span class="text-orange"> titre : </span>
-                        <span class="text-bold">{{livre.titre | capitalize }}</span>
+                        <span class="text-bold">{{article.titre | capitalize }}</span>
                     </div>
                 </div>
                 <div class="row pt-4 pb-4">
                     <div class="col-lg-6">
                         <div class="text-detail-size">
-                            <span class="text-orange">auteur : </span>
-                            auteur
+                            {% if article.categorie.libelle == 'video' %}
+                                <span class="text-orange">réalisateur : </span>
+                            {% elseif article.categorie.libelle == 'livre' %}
+                                <span class="text-orange">auteur : </span>
+                            {% elseif article.categorie.libelle == 'jeux' %}
+                                <span class="text-orange">éditeur : </span>
+                            {% elseif article.categorie.libelle == 'musique' %}
+                                <span class="text-orange">artiste : </span>
+                            {% endif %}
+                            <!-- changer quand on aura une liste des entités par article, pour l'instant il n'y a qu'une entité par article -->
+                            {% if article.entites[0] is defined %}
+                                {{ article.entites[0].prenom | capitalize }}
+                                {{article.entites[0].nom is empty ? "inconnu" : article.entites[0].nom | capitalize }}
+                            {% else %}
+                                inconnu
+                            {% endif %}
                         </div>
                         <div class="text-detail-size">
                             <span class="text-orange">date de publication : </span>
-                            {{livre.datePublication is empty ? "inconnu" : livre.datePublication|date("d/m/Y")}}
+                            {{article.datePublication is empty ? "inconnu" : article.datePublication|date("d/m/Y")}}
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="text-detail-size">
                             <span class="text-orange">genre : </span>
-                            {{livre.genre.libelle}}
+                            {{article.genre.libelle}}
                         </div>
                         <div class="text-detail-size">
                             <span class="text-orange">rubrique : </span>
@@ -42,7 +56,7 @@
                 <div class="row">
                     <div class="text-justify text-detail-size">
                         <span class="text-orange">description : </span>
-                        <p class="readMore"> <!--changer description en livre.description-->
+                        <p class="readMore"> <!--changer description en article.description-->
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non metus diam. Nunc placerat ante at iaculis egestas. Pellentesque risus mauris, interdum vitae
                             tellus eu, pellentesque dignissim urna. Nulla mattis enim mauris, quis aliquam nisi placerat imperdiet. Morbi consequat leo vel ante varius finibus.
                             Pellentesque vitae ante vitae turpis maximus volutpat porta vitae orci. Donec tincidunt felis at tortor tincidunt, quis porta ipsum dignissim. Vivamus
@@ -56,7 +70,7 @@
                 <div class="row">
                     <div class="row col-lg-4"></div>
                     <div class="col-lg-8">
-                    {% if idNouveaute == livre.id %}
+                    {% if idNouveaute == article.id %}
                         <span class="text-bold text-detail-size-nouveaute"> nouveau !</span>
                     {% endif %}
                     </div>
@@ -64,19 +78,19 @@
                 <div class="row p-4">
                     <div class="row col-lg-5"></div>
                     <div class="col-lg-7">
-                        {{ render(controller('App\\Controller\\FavorisController::isFavourite',{ 'idArticle': livre.id })) }}
+                        {{ render(controller('App\\Controller\\FavorisController::isFavourite',{ 'idArticle': article.id })) }}
                     </div>
                 </div>
                 <div class="row p-4">
                     <div class="row col-lg-4">
-                    {%  if livre.statut.libelle == "vendable" %}
+                    {%  if article.statut.libelle == "vendable" %}
                         <div class="text-detail-size"><span class="text-orange">prix : </span><br>
-                            <span style="color: red">{{ livre.montantVente }}€</span></div>
+                            <span style="color: red">{{ article.montantVente }}€</span></div>
                     {% endif %}
                     </div>
                     <div class="col-lg-8">
-                        <input type="hidden" name="id" value="{{ livre.id }}">
-                        {%  if livre.statut.libelle == "empruntable" %}
+                        <input type="hidden" name="id" value="{{ article.id }}">
+                        {%  if article.statut.libelle == "empruntable" %}
                             <a class="style-button-article-emprunt-detail">Emprunter</a>
                         {% else %}
                             <a class="style-button-article-achat-detail">Acheter</a>
@@ -94,17 +108,17 @@
                    <div class="col-lg-6">
                        <div class="text-detail-size-subtitle p-2"><span class="text-bold">Informations supplémentaires : </span></div>
                        <div class="p-2"> <span class="text-orange">format :</span>
-                       {% if livre.numerique == 0 %}
+                       {% if article.numerique == 0 %}
                            <span>papier</span>
                        {% else %}
                            <span>numérique</span>
                        {% endif %}
                        </div>
                        <div class="p-2"> <span class="text-orange">code ISBN :</span>
-                           {% if livre.genCode is empty %}
+                           {% if article.genCode is empty %}
                                 aucun
                            {% else %}
-                                {{ livre.genCode }}
+                                {{ article.genCode }}
                            {% endif %}
                        </div>
                        <div class="p-2"> <span class="text-orange">entite :</span> entite</div>
