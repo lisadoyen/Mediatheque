@@ -25,7 +25,7 @@
                         </div>
                         <div class="text-detail-size">
                             <span class="text-orange">date de publication : </span>
-                            {{livre.datePublication | date('d/m/Y')}}
+                            {{livre.datePublication is empty ? "inconnu" : livre.datePublication|date("d/m/Y")}}
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -47,7 +47,7 @@
                             tellus eu, pellentesque dignissim urna. Nulla mattis enim mauris, quis aliquam nisi placerat imperdiet. Morbi consequat leo vel ante varius finibus.
                             Pellentesque vitae ante vitae turpis maximus volutpat porta vitae orci. Donec tincidunt felis at tortor tincidunt, quis porta ipsum dignissim. Vivamus
                             imperdiet est augue, eu ultricies elit pulvinar ornare. Pellentesque nulla nulla, congue facilisis aliquam id, ultricies id nibh. Pellentesque sed nibh
-                            eget sapien mollis malesuada. Vivamus eget congue sem, id dapibus dui.
+                            eget sapien mollis malesuada. Vivamus eget congue sem, id da
                         </p>
                     </div>
                 </div>

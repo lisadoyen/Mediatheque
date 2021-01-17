@@ -32,6 +32,7 @@ use App\Repository\TypeEnregistrementRepository;
 use App\Repository\TypeEntiteRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoldRepository;
+use App\Service\Nouveaute;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -59,12 +60,13 @@ class ArticleController extends AbstractController
      * @param ActionRepository $actionsRepo
      * @param Request $request
      * @param PaginatorInterface $paginator
+     * @param Nouveaute $new
      * @return Response
      */
     public function showAll($id = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo,
                             ActionRepository $actionsRepo,
-                            Request $request, PaginatorInterface $paginator)
+                            Request $request, PaginatorInterface $paginator, Nouveaute $new)
     {
         // Menu genre
         if($id != null) {
@@ -87,7 +89,7 @@ class ArticleController extends AbstractController
                 30
             );
 
-            $nouveaute = $this-> findArticleNouveaute($categorieRepo, $actionsRepo);
+            $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo);
 
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
@@ -136,7 +138,7 @@ class ArticleController extends AbstractController
                 30
             );
 
-            $nouveaute = $this-> findArticleNouveaute($categorieRepo, $actionsRepo);
+            $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo);
 
             return $this->render('articles/show_all_articles.html.twig', [
                 'session' => $session,
@@ -147,53 +149,6 @@ class ArticleController extends AbstractController
             ]);
         }
     }
-
-    /** Fonction qui permet de transformer une date,
-     * sert à calculer la date en fonction de la durée pour la nouveauté
-     * @param $date
-     * @param $nombre_jour
-     * @return false|string
-     */
-    function transformDate($date,$nombre_jour) {
-
-        $year = (int)substr($date, 0, 4);
-        $month = (int)substr($date, 5, 2);
-        $day = (int)substr($date, 8, 2);
-
-        // récupère la date du jour
-        $date_string = mktime(0,0,0,$month,$day,$year);
-
-        // Supprime les jours
-        $timestamp = $date_string - ($nombre_jour * 86400);
-        $nouvelle_date = date("d/m/Y", $timestamp);
-
-        // pour afficher
-        return $nouvelle_date;
-
-    }
-
-    /**
-     * fonctions qui permet de déterminer si un article est nouveau ou non
-     * @param CategorieRepository $categorieRepo
-     * @param ActionRepository $actionsRepo
-     * @return int|mixed|string
-     */
-    function findArticleNouveaute(CategorieRepository $categorieRepo,ActionRepository $actionsRepo){
-
-        $dateTodayConvert=\DateTime::createFromFormat('d/m/Y', \date("d/m/Y"));
-        $today = $dateTodayConvert->format('Y-m-d');
-
-        $categorie = $categorieRepo->findAll(); // selection de toutes les catégories
-        $nbJourNouveaute = null; // variable pour la durée de la nouveauté
-        foreach ($categorie as $cat){
-            $nbJourNouveaute = $cat->getDureeNouveaute(); // récupération nb nouveauté
-        }
-        $dateDureeMax = $this->transformDate($today, 812); // TODO 812 pour test => mettre nbJourNouveaute normalement
-        $nouveaute = $actionsRepo->findIsNouveaute($dateDureeMax);
-
-        return $nouveaute;
-    }
-
 
     /**
      * @Route("/article/filtre/clear", name="filter_clear", methods={"GET", "POST"})
@@ -306,12 +261,21 @@ class ArticleController extends AbstractController
      * @param CategorieRepository $categorieRepository
      * @param ActionRepository $actionRepository
      * @param int $id
+     * @param Nouveaute $new
      * @return Response
      */
-    public function livreDetails(UserInterface $user, Request $request,AvisRepository $avisRepository, ArticleRepository $articleRepository, FavorisRepository $favorisRepository,CategorieRepository $categorieRepository, ActionRepository $actionRepository, $id=1){
+    public function livreDetails(UserInterface $user, Request $request,
+                                 AvisRepository $avisRepository,
+                                 ArticleRepository $articleRepository,
+                                 FavorisRepository $favorisRepository,
+                                 CategorieRepository $categorieRepository,
+                                 ActionRepository $actionRepository, $id=1,
+                                Nouveaute $new): Response
+    {
+
         $livre = $articleRepository->findOneBy(['id' => $id]);
         $fav = $favorisRepository->findOneBy(['utilisateur'=>$this->getUser(), 'article'=>$livre]);
-        $nouveaute = $this->findArticleNouveaute($categorieRepository,$actionRepository);
+        $nouveaute = $new->findArticleNouveaute($categorieRepository,$actionRepository);
         $nouveau = null;
         foreach($nouveaute as $new){
             if($new['id'] == $livre->getId()){
