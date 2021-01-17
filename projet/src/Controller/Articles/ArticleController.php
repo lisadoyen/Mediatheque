@@ -61,6 +61,7 @@ class ArticleController extends AbstractController
      * @param SessionInterface $session
      * @param ArticleRepository $ar
      * @param CategorieRepository $categorieRepo
+     * @param GenreRepository $genreRepository
      * @param ActionRepository $actionsRepo
      * @param Request $request
      * @param PaginatorInterface $paginator
@@ -68,7 +69,7 @@ class ArticleController extends AbstractController
      * @return Response
      */
     public function showAll($idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
-                            CategorieRepository $categorieRepo,
+                            CategorieRepository $categorieRepo, GenreRepository $genreRepository,
                             ActionRepository $actionsRepo,
                             Request $request, PaginatorInterface $paginator, Nouveaute $new)
     {
@@ -77,14 +78,14 @@ class ArticleController extends AbstractController
             $data = new SearchData();
             $genres = [];
             if($idGenre != null) {
-                $genres[$idGenre] = $this->getDoctrine()->getRepository(Genre::class)->find($idGenre);
+                $genres[$idGenre] = $genreRepository->find($idGenre);
                 $data->genre = $genres;
                 $donnees['genres'] = $genres;
             }
             $categories = [];
             if($idCategorie != null) {
-                $categories[$idCategorie] = $this->getDoctrine()->getRepository(Categorie::class)->find($idCategorie);
-                $data->genre = $categories;
+                $categories[$idCategorie] = $categorieRepo->find($idCategorie);
+                $data->categorie = $categories;
                 $donnees['categories'] = $categories;
             }
             $session->set('donnees', null);
@@ -103,8 +104,8 @@ class ArticleController extends AbstractController
             $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo);
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
-                'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
-                'categories' => $this->getDoctrine()->getRepository(Categorie::class)->findAll(),
+                'genres' => $genreRepository->findAll(),
+                'categories' => $categorieRepo->findAll(),
                 'donnees' => $donnees,
                 'nouveaute' => $nouveaute
             ]);
@@ -119,7 +120,7 @@ class ArticleController extends AbstractController
                     $donnees['genres'] = $_POST['genres'];
                     $genres = [];
                     foreach ($donnees['genres'] as $id) {
-                        $genres[$id] = $this->getDoctrine()->getRepository(Genre::class)->find($id);
+                        $genres[$id] = $genreRepository->find($id);
                         $data->genre = $genres;
                         $donnees['genres'] = $genres;
                     }
@@ -128,7 +129,7 @@ class ArticleController extends AbstractController
                     $donnees['categories'] = $_POST['categories'];
                     $categories = [];
                     foreach ($donnees['categories'] as $id) {
-                        $categories[$id] = $this->getDoctrine()->getRepository(Categorie::class)->find($id);
+                        $categories[$id] = $categorieRepo->find($id);
                         $data->categorie = $categories;
                         $donnees['categories'] = $categories;
                     }
@@ -161,8 +162,8 @@ class ArticleController extends AbstractController
 
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
-                'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
-                'categories' => $this->getDoctrine()->getRepository(Categorie::class)->findAll(),
+                'genres' => $genreRepository->findAll(),
+                'categories' => $categorieRepo->findAll(),
                 'donnees' => $donnees,
                 'nouveaute' => $nouveaute,
             ]);
