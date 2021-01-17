@@ -5,5 +5,9 @@
     <span class="text-bold">
         {{ total }}
     </span>
+    {% if total == 0 %}
+    commentaire
+    {% else %}
     commentaires
+    {% endif %}
 </div>

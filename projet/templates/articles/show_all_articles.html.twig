@@ -13,8 +13,8 @@
             <div class="col-lg-9 p-4">
                 <div class="row">
                     <div class="col-lg-6 float-left">
-                        <img class="pl-2 pt-2" src="{{asset('assets/images/article/icone.jpg')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage en icone" alt="mode affichage en icones" width="70" height="70">
-                        <img class="pl-2 pt-2" src="{{asset('assets/images/article/list.png')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage liste détaillée" alt="mode affichage liste détaillé" width="70" height="70">
+                        <button onclick="test(3)"><img src="{{asset('assets/images/article/icone.jpg')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage en icone" alt="mode affichage en icones" width="20" height="20"></button>
+                        <button onclick="test(4)"><img src="{{asset('assets/images/article/list.png')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage liste détaillée" alt="mode affichage liste détaillée" width="20" height="20"></button>
                         <span class="pl-4 pt-4 text-trier">trier par</span>
                         <button id="navbarDropdown" data-toggle="dropdown" class="edit-btn">
                             <i class="fas fa-arrow-up"></i></button>
@@ -31,15 +31,6 @@
                 {% if articles is defined %}
                     {% for article in articles | slice(0, 30) %}
                         <div class="col-4 pt-4 pb-4 float-left">
-                            <div class="pl-2">
-                                {% if nouveaute is defined %}
-                                    {% for new in nouveaute %}
-                                        {% if new.id == article.id %}
-                                            <span class="text-size text-bold text-size-title text-nouveaute"> nouveau !</span>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
                             <div class="row p-2">
                                 <div class="col-lg-4">
                                 {% if article.vignette == NULL %}
@@ -61,7 +52,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                        <div class="text-size-title"><span class="text-orange"> titre : </span><span class="text-bold">{{article.titre | capitalize }}</span></div>
+                                        <div class="text-size-title"><span class="text-bold">{{article.titre | capitalize }}</span></div>
                                         <div class="text-size pt-2">
                                             {% if article.categorie.libelle == 'video' %}
                                             <span class="text-orange">réalisateur : </span>
@@ -93,6 +84,15 @@
                                     {% else %}
                                         <a href="{{ path('remove_article_favoris', {id: article.id, page: "list"}) }}"><i class="fas fa-star text-danger fa-2x"></i></a>
                                     {% endif %}
+                                    <div class="pl-2">
+                                        {% if nouveaute is defined %}
+                                            {% for new in nouveaute %}
+                                                {% if new.id == article.id %}
+                                                    <span class="text-size text-bold text-size-title text-nouveaute"> new !</span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>

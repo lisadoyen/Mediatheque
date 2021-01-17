@@ -55,7 +55,15 @@
                 </div>
                 <div class="row">
                     <div class="text-justify text-detail-size">
-                        <span class="text-orange">description : </span>
+                        {% if article.categorie.libelle == 'video' %}
+                            <span class="text-orange">synopsis : </span>
+                        {% elseif article.categorie.libelle == 'livre' %}
+                            <span class="text-orange">résumé : </span>
+                        {% elseif article.categorie.libelle == 'jeux' %}
+                            <span class="text-orange">description : </span>
+                        {% elseif article.categorie.libelle == 'musique' %}
+                            <span class="text-orange">description : </span>
+                        {% endif %}
                         <p class="readMore"> <!--changer description en article.description-->
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non metus diam. Nunc placerat ante at iaculis egestas. Pellentesque risus mauris, interdum vitae
                             tellus eu, pellentesque dignissim urna. Nulla mattis enim mauris, quis aliquam nisi placerat imperdiet. Morbi consequat leo vel ante varius finibus.

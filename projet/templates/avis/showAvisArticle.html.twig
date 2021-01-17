@@ -23,8 +23,8 @@
                         <div class="col-lg-2">
                             {% if av.utilisateur.avatar == NULL %}
                                 <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="40" height="40">
-                            {% else %}
-                                <img src="{{ av.utilisateur.avatar }}" alt="{{ av.utilisateur.avatar }}" width="40" height="40">
+                            {% else  %}
+                                <img src="{{asset('assets/images/account/')}}{{av.utilisateur.avatar}}" alt="Image {{av.utilisateur.avatar}}" width="40" height="40">
                             {% endif %}
                         </div>
                         <div class="col-lg-10">

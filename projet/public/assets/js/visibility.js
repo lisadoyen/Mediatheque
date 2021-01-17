@@ -6,6 +6,14 @@ function toggle_visibility(id) {
         e.style.visibility = 'collapse';
 }
 
+function test(id) {
+    var e = document.getElementById(id);
+    if(e.style.visibility === 'collapse')
+        e.style.visibility = 'visible';
+    else
+        e.style.visibility = 'collapse';
+}
+
 function btn_icone(x){
     x.classList.toggle("fa-arrow-down");
 }
