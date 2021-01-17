@@ -1,6 +1,7 @@
 <?php
 namespace App\Data;
 
+use App\Entity\Categorie;
 use App\Entity\Genre;
 
 class SearchData{
@@ -13,6 +14,10 @@ class SearchData{
      * @var Genre[]
      */
     public $genre = [];
+    /**
+     * @var Categorie[]
+     */
+    public $categorie = [];
     /**
      * @var null|integer
      */

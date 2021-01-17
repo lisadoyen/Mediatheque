@@ -33,6 +33,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->createQueryBuilder('a') // a = article
             ->select('g', 's', 'a') // g = genre , s = statut
             ->join('a.genre', 'g')
+            ->join('a.categorie', 'c')
             ->join('a.statut', 's')
             ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'");
             // selection des articles avec le statut vendable ou empruntable
@@ -41,13 +42,19 @@ class ArticleRepository extends ServiceEntityRepository
         if(!empty($search->q)){
             $query = $query
                 ->andWhere('a.titre LIKE :q')
-                ->setParameter('q', "%{$search->q}");
+                ->setParameter('q', "%{$search->q}%");
         }
 
         if(!empty($search->genre)) {
             $query = $query
                 ->andWhere('g.id IN (:genre)')
                 ->setParameter('genre', $search->genre);
+        }
+
+        if(!empty($search->categorie)) {
+            $query = $query
+                ->andWhere('c.id IN (:categorie)')
+                ->setParameter('categorie', $search->categorie);
         }
 
         return $query;

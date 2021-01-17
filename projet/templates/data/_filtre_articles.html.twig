@@ -15,6 +15,13 @@
                     {% if donnees.search is not empty %}
                     <li> recherche : <strong>{{ donnees.search }}</strong></li>
                 {% endif %}{% endif %}
+                {% if categories is not empty %}
+                    {% for categorie in categories %}
+                        {% if donnees.categories[categorie.id] is defined %}
+                            <li> categorie : <strong>{{ categorie.libelle|capitalize }}</strong></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 {% if genres is not empty %}
                     {% for genre in genres %}
                         {% if donnees.genres[genre.id] is defined %}
@@ -35,8 +42,17 @@
             </div>
             <div id="mon-bloc-1" class="hide-box p-2">
                 <div class="filtre">
-                    filtre à ajouter (livre, jeu, musique video)
+                    {% for categorie in categories|slice(0, categories|length/2) %}
+                        <input  type="checkbox" name="categories[]" value="{{ categorie.id }}"{% if donnees.categories[categorie.id] is defined %} checked {% endif %}>
+                        {{ categorie.libelle|capitalize }}
+                        <br/>
+                    {% endfor %}
                 </div>
+                {% for categorie in categories|slice(categories|length/2, categories|length) %}
+                    <input type="checkbox" name="categories[]" value="{{ categorie.id}}"{% if donnees.ctegories[categorie.id] is defined %} checked {% endif %}>
+                    {{ categorie.libelle|capitalize }}
+                    <br/>
+                {% endfor %}
             </div>
         </div>
 

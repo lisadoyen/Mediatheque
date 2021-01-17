@@ -31,6 +31,15 @@
                 {% if articles is defined %}
                     {% for article in articles | slice(0, 30) %}
                         <div class="col-4 pt-4 pb-4 float-left">
+                            <div class="pl-2">
+                                {% if nouveaute is defined %}
+                                    {% for new in nouveaute %}
+                                        {% if new.id == article.id %}
+                                            <span class="text-size text-bold text-size-title text-nouveaute"> nouveau !</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
                             <div class="row p-2">
                                 <div class="col-lg-4">
                                 {% if article.vignette == NULL %}
@@ -84,15 +93,6 @@
                                     {% else %}
                                         <a href="{{ path('remove_article_favoris', {id: article.id, page: "list"}) }}"><i class="fas fa-star text-danger fa-2x"></i></a>
                                     {% endif %}
-                                    <div class="pl-2">
-                                        {% if nouveaute is defined %}
-                                            {% for new in nouveaute %}
-                                                {% if new.id == article.id %}
-                                                    <span class="text-size text-bold text-size-title text-nouveaute"> new !</span>
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}
-                                    </div>
                                 </div>
                             </div>
                         </div>

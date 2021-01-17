@@ -7,6 +7,7 @@ use App\Entity\Action;
 use App\Entity\Article;
 use App\Entity\Avis;
 use App\Entity\Bibliotheque;
+use App\Entity\Categorie;
 use App\Entity\Enregistrement;
 use App\Entity\Entite;
 use App\Entity\Favoris;
@@ -52,8 +53,11 @@ class ArticleController extends AbstractController
 {
     /**
      * @Route("/articles/show", name="articles_show", methods={"GET", "POST"})
-     * @Route("/articles/genres/{id}/show", name="genres_id_articles_show", methods={"GET", "POST"})
-     * @param null $id
+     * @Route("/articles/categorie/{idCategorie}/show", name="categories_id_articles_show", methods={"GET", "POST"})
+     * @Route("/articles/genres/{idGenre}/show", name="genres_id_articles_show", methods={"GET", "POST"})
+     * @Route("/articles/categorie/{idCategorie}/genres/{idGenre}/show", name="categories_id_genres_id_articles_show", methods={"GET", "POST"})
+     * @param null $idGenre
+     * @param null $idCategorie
      * @param SessionInterface $session
      * @param ArticleRepository $ar
      * @param CategorieRepository $categorieRepo
@@ -61,41 +65,46 @@ class ArticleController extends AbstractController
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @param Nouveaute $new
-     * @param EntiteRepository $entite
      * @return Response
      */
-    public function showAll($id = null, SessionInterface $session, ArticleRepository $ar,
+    public function showAll($idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo,
                             ActionRepository $actionsRepo,
-                            Request $request, PaginatorInterface $paginator, Nouveaute $new,
-                            EntiteRepository $entite, TypeEntiteRepository $typeEntite)
+                            Request $request, PaginatorInterface $paginator, Nouveaute $new)
     {
         // Menu genre
-        if($id != null) {
+        if($idGenre != null || $idCategorie != null) {
             $data = new SearchData();
+            $genres = [];
+            if($idGenre != null) {
+                $genres[$idGenre] = $this->getDoctrine()->getRepository(Genre::class)->find($idGenre);
+                $data->genre = $genres;
+                $donnees['genres'] = $genres;
+            }
             $categories = [];
-            $categories[$id] = $this->getDoctrine()->getRepository(Genre::class)->find($id);
-            $data->genre = $categories;
-            $donnees['genres'] = $categories;
+            if($idCategorie != null) {
+                $categories[$idCategorie] = $this->getDoctrine()->getRepository(Categorie::class)->find($idCategorie);
+                $data->genre = $categories;
+                $donnees['categories'] = $categories;
+            }
             $session->set('donnees', null);
             $session->set('donnees', $donnees);
             if (!empty($donnees)) {
                 $donnees = $session->get('donnees');
-                $data->genre = $donnees['genres'];
+                if($idGenre != null) $data->genre = $donnees['genres'];
+                if($idCategorie != null) $data->categorie = $donnees['categories'];
             }
-
             $articles = $ar->findSearch($data);
             $livres = $paginator ->paginate(
                 $articles,
                 $request->query->getInt('page',1),
                 30
             );
-
             $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo);
-
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
+                'categories' => $this->getDoctrine()->getRepository(Categorie::class)->findAll(),
                 'donnees' => $donnees,
                 'nouveaute' => $nouveaute
             ]);
@@ -104,18 +113,25 @@ class ArticleController extends AbstractController
         else {
             $data = new SearchData();
             if ($request->getMethod() == 'POST') {
-
                 $donnees['search'] = $_POST['search'];
-
                 $data->q = $donnees['search'];
-                if (!empty($_POST['genres'])) {
+                if(!empty($_POST['genres'])){
                     $donnees['genres'] = $_POST['genres'];
-                    $categories = [];
+                    $genres = [];
                     foreach ($donnees['genres'] as $id) {
-                        $categories[$id] = $this->getDoctrine()->getRepository(Genre::class)->find($id);
+                        $genres[$id] = $this->getDoctrine()->getRepository(Genre::class)->find($id);
+                        $data->genre = $genres;
+                        $donnees['genres'] = $genres;
                     }
-                    $data->genre = $categories;
-                    $donnees['genres'] = $categories;
+                }
+                if(!empty($_POST['categories'])) {
+                    $donnees['categories'] = $_POST['categories'];
+                    $categories = [];
+                    foreach ($donnees['categories'] as $id) {
+                        $categories[$id] = $this->getDoctrine()->getRepository(Categorie::class)->find($id);
+                        $data->categorie = $categories;
+                        $donnees['categories'] = $categories;
+                    }
                 }
                 if(isset($donnees))
                     $session->set('donnees', $donnees);
@@ -130,23 +146,23 @@ class ArticleController extends AbstractController
                     if (!empty($donnees['genres'])) {
                         $data->genre = $donnees['genres'];
                     }
+                    if (!empty($donnees['categories'])) {
+                        $data->categorie = $donnees['categories'];
+                    }
                 }
             }
             $articles = $ar->findSearch($data);
-
             $livres = $paginator->paginate(
                 $articles,
                 $request->query->getInt('page', 1),
                 30
             );
-
             $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo);
 
-
             return $this->render('articles/show_all_articles.html.twig', [
-                'session' => $session,
                 'articles' => $livres,
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll(),
+                'categories' => $this->getDoctrine()->getRepository(Categorie::class)->findAll(),
                 'donnees' => $donnees,
                 'nouveaute' => $nouveaute,
             ]);

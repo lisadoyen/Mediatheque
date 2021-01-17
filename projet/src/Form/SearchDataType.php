@@ -2,6 +2,7 @@
 namespace App\Form;
 
 use App\Data\SearchData;
+use App\Entity\Categorie;
 use App\Entity\Genre;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -24,6 +25,13 @@ class SearchDataType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'class' =>Genre::class,
+                'expanded' => true,
+                'multiple' => true
+            ])
+            ->add('categorie', EntityType::class,[
+                'label' => false,
+                'required' => false,
+                'class' =>Categorie::class,
                 'expanded' => true,
                 'multiple' => true
             ])
