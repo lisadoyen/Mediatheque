@@ -171,6 +171,31 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * @Route("/articles/test", name="articles_show_test", methods={"GET", "POST"})
+     * @param $consumer_secret
+     * @param null $token_secret
+     * @param string $http_method
+     */
+    function sign_request( $token_secret = null, $http_method = 'GET') {
+
+
+        $base = str_replace('+', ' ', str_replace('%7E', '~', rawurlencode($http_method)));
+        $base.= '&';
+        $base.= str_replace('+', ' ', str_replace('%7E', '~', rawurlencode("http://api.music-story.com/oauth/request_token")));
+        $base.= '&';
+        $base.= str_replace('+', ' ', str_replace('%7E', '~', rawurlencode("oauth_consumer_key=bfc91e71e5dc3289b85bdee0c76c698e22cc3b5a")));
+
+        $hmac_key = str_replace('+', ' ', str_replace('%7E', '~', rawurlencode("8e0a650048d01bfa5f150ce6868903e8681c2687")));
+        $hmac_key.= '&';
+        $hmac_key.= str_replace('+', ' ', str_replace('%7E', '~', rawurlencode($token_secret)));
+
+        $oauth_signature = base64_encode(hash_hmac('sha1', $base, $hmac_key, true));
+
+        dd($oauth_signature);
+    }
+
+
+    /**
      * @Route("/article/filtre/clear", name="filter_clear", methods={"GET", "POST"})
      * @param SessionInterface $session
      * @return Response
