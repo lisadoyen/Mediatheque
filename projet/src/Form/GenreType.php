@@ -13,6 +13,7 @@ class GenreType extends AbstractType
     {
         $builder
             ->add('libelle')
+            ->add('categories')
         ;
     }
 

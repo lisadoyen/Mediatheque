@@ -70,6 +70,13 @@ class GenreController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            // many to many
+            foreach ($genre->getCategories() as $categorie) {
+                $categorie->addGenre($genre);
+                $entityManager->persist($categorie);
+            }
+
             $entityManager->persist($genre);
             $entityManager->flush();
 
