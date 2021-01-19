@@ -30,7 +30,7 @@
                         <div class="col-lg-10">
                             <div class="text-size-title"><span class="text-orange text-bold"> {{ av.utilisateur.username }} </span></div>
                             <div class="text-size pt-3">{{ av.texte | raw }}</div>
-                            <div class="text-size pt-3">(date du commentaire)</div>
+                            <div class="text-size pt-3">Le {{ av.date|date('d/m/Y') }} à {{ av.date|date('H:m') }}</div>
                         </div>
                     </div>
                     <hr>

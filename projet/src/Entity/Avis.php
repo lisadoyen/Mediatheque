@@ -33,6 +33,11 @@ class Avis
     private $signale;
 
     /**
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    private $date;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="avis")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -105,6 +110,18 @@ class Avis
     public function setUtilisateur(?User $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

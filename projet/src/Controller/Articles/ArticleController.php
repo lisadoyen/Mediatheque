@@ -342,6 +342,7 @@ class ArticleController extends AbstractController
             $commentaire->setArticle($articleRepository->find($id));
             $commentaire->setSignale(0);
             $commentaire->setUtilisateur($user);
+            $commentaire->setDate(\DateTime::createFromFormat('d-m-Y', date('d-m-Y')));
             $this->getDoctrine()->getManager()->persist($commentaire);
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('article_details', ['id' => $id]);
