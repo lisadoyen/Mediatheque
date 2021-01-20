@@ -7,14 +7,22 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ genre.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ genre.libelle }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ genre.id }}</td>
+        </tr>
+        <tr>
+            <th>Libelle</th>
+            <td>{{ genre.libelle }}</td>
+        </tr>
+        <tr>
+            <th>Categories</th>
+            <td>
+                {% for cat in genre.categories %}
+                    {{ cat.libelle }}
+                {% endfor %}
+            </td>
+        </tr>
         </tbody>
     </table>
 

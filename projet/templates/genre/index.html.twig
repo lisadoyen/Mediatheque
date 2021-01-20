@@ -7,17 +7,23 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Libelle</th>
+            <th>Categories</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for genre in genres %}
             <tr>
                 <td>{{ genre.id }}</td>
                 <td>{{ genre.libelle }}</td>
+                <td>
+                    {% for cat in genre.categories %}
+                        {{ cat.libelle }}
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('genre_show', {'id': genre.id}) }}">show</a>
                     <a href="{{ path('genre_edit', {'id': genre.id}) }}">edit</a>
@@ -27,6 +33,7 @@
             <tr>
                 <td colspan="3">no records found</td>
             </tr>
+
         {% endfor %}
         </tbody>
     </table>

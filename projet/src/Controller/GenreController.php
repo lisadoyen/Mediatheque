@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Genre;
 use App\Form\GenreType;
+use App\Repository\CategorieRepository;
 use App\Repository\GenreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -104,11 +106,34 @@ class GenreController extends AbstractController
      */
     public function edit(Request $request, Genre $genre): Response
     {
+        // categories actuellement selectionnees
+        $categoriesCurr = new ArrayCollection();
+        foreach ($genre->getCategories() as $categorie) {
+            $categoriesCurr->add($categorie);
+        }
+
         $form = $this->createForm(GenreType::class, $genre);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            // supprime les categories decochees
+            foreach ($categoriesCurr as $categorie) {
+                if (!$genre->getCategories()->contains($categorie)) {
+                    $categorie->removeGenre($genre);
+                    $entityManager->persist($categorie);
+                }
+            }
+
+            // ajoute les nouvelles
+            foreach ($genre->getCategories() as $categorie) {
+                $categorie->addGenre($genre);
+                $entityManager->persist($categorie);
+            }
+
+            $entityManager->persist($genre);
+            $entityManager->flush();
 
             return $this->redirectToRoute('genre_index');
         }
@@ -122,10 +147,16 @@ class GenreController extends AbstractController
     /**
      * @Route("/{id}", name="genre_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Genre $genre): Response
+    public function delete(Request $request, Genre $genre, CategorieRepository $rep): Response
     {
         if ($this->isCsrfTokenValid('delete'.$genre->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            foreach ($rep->findAll() as $categorie) {
+                if ($categorie->getGenres()->contains($genre)) {
+                    $categorie->removeGenre($genre);
+                    $entityManager->persist($categorie);
+                }
+            }
             $entityManager->remove($genre);
             $entityManager->flush();
         }
