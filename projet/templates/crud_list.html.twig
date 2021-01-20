@@ -3,14 +3,6 @@
     <div class="container cadre">
         <h1>Liens CRUD</h1><hr>
         <div class="row">
-            <div class="col-sm">User</div>
-            <div class="col-sm">
-                <a href="{# { path('user_index') }#}" class="edit-btn">index</a>
-            </div>
-            <div class="col-sm">
-                <a href="{# { path('user_new') }#}" class="edit-btn">add</a>
-            </div>
-        </div><hr><div class="row">
             <div class="col-sm">Annonce</div>
             <div class="col-sm">
                 <a href="{{ path('annonce_index') }}" class="edit-btn">index</a>
@@ -108,6 +100,6 @@
             <div class="col-sm">
                 <a href="{{ path('type_entite_new') }}" class="edit-btn">add</a>
             </div>
-        </div><hr>
+        </div>
     </div>
 {% endblock %}
