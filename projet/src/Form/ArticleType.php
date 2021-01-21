@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +18,7 @@ class ArticleType extends AbstractType
             ->add('gencode')
             ->add('codeArticle')
             ->add('titre')
-            ->add('description')
+            ->add('description', CKEditorType::class)
             ->add('vignette')
             ->add('datePublication')
             ->add('montantObtention')
@@ -29,7 +32,11 @@ class ArticleType extends AbstractType
             ->add('genre')
             ->add('rubriques')
             ->add('tags')
-            ->add('entites')
+            ->add('entites', CollectionType::class, [
+                'entry_type' => EntiteType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true
+            ]);
         ;
     }
 

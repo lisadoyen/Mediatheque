@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-
-<title>New Article</title>
-
+{% extends "layout.html.twig" %}
 {% block body %}
-    <h1>Create new Article</h1>
+    <div class="container cadre">
 
+    <h1>Ajouter un article</h1>
     {{ include('article/_form.html.twig') }}
-
     <a href="{{ path('article_index') }}">back to list</a>
 {% endblock %}
