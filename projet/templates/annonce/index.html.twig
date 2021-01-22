@@ -10,6 +10,7 @@
                 <th>Titre</th>
                 <th>Contenu</th>
                 <th>DateCreation</th>
+                <th>créée par</th>
                 <th>actions</th>
             </tr>
             </thead>
@@ -20,6 +21,7 @@
                     <td>{{ annonce.titre }}</td>
                     <td>{{ annonce.contenu|raw }}</td>
                     <td>{{ annonce.dateCreation ? annonce.dateCreation|date('d/m/Y') : '' }}</td>
+                    <td>{{ annonce.staff.nom|upper }} {{ annonce.staff.prenom|capitalize }}</td>
                     <td>
                         <a href="{{ path('annonce_show', {'id': annonce.id}) }}" >details</a>
                         <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" >modifier</a>
