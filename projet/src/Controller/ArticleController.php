@@ -44,6 +44,14 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            foreach ($article->getEntites() as $entite) {
+                // creer l'entite si elle n'existe pas
+                // todo : [Theo] methode existe($entite)
+                /*if (!exise($entite)) */
+                $entityManager->persist($entite);
+            }
+
             $entityManager->persist($article);
             $entityManager->flush();
 

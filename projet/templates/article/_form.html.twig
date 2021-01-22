@@ -1,3 +1,18 @@
+{# Permet de mettre le style de formulaire a toutes les entites ajoutées#}
+{% import _self as formMacros %}
+{% macro printEntiteSubForm(entite) %}
+        <div class="row">
+            <div class="col">
+                {{ form_row(entite.typeEntite, {'label': 'Type'}) }}
+            </div><div class="col">
+                {{ form_row(entite.nom) }}
+            </div><div class="col">
+                {{ form_row(entite.prenom) }}
+            </div>
+        </div>
+{% endmacro %}
+
+{# Formulaire #}
 {{ form_start(form) }}
 {{ form_row(form.gencode) }}
 {{ form_row(form.codeArticle) }}
@@ -18,18 +33,17 @@
 {{ form_row(form.statut) }}
 
 {{ form_label(form.entites) }}
-<div class="entites" data-prototype="{{ form_widget(form.entites.vars.prototype)|e('html_attr') }}">
+{#{{ dump(form.entites.vars) }}#}
+<div class="entites" data-prototype="{{ formMacros.printEntiteSubForm(form.entites.vars.prototype)|e('html_attr') }}">
     {% for entite in form.entites %}
-        <div class="entite-subform">
-            {{ form_row(entite.nom) }}
-            {{ form_row(entite.prenom) }}
-            {{ form_row(entite.typeEntite) }}
-        </div>
+        <div class="entite-subform">{{ formMacros.printEntiteSubForm(entite) }}</div>
     {% endfor %}
 </div>
+
 <button type="button" class="add_item_link" data-collection-holder-class="entites">+</button>
 
-<button class="btn">{{ button_label|default('Save') }}</button>
+<button class="edit-btn">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(form) }}
+
 
 <script src="{{ asset('assets/js/add-entite-subform.js') }}"></script>

@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,7 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('gencode')
+            ->add('gencode', TextType::class, ['required' => true])
             ->add('codeArticle')
             ->add('titre')
             ->add('description', CKEditorType::class)
