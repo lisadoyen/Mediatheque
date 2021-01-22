@@ -12,6 +12,7 @@ use App\Form\EditProfilFormType;
 use App\Repository\ArticleRepository;
 use App\Repository\AvisRepository;
 use App\Repository\FavorisRepository;
+use App\Repository\PanierRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -159,7 +160,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/favoris", name="favoris")
      */
-    public function favoris(FavorisRepository $favorisRepository, ArticleRepository $articleRepository)
+    public function favoris(FavorisRepository $favorisRepository)
     {
         $favoris = $favorisRepository->findBy(['utilisateur' => $this->getUser()]);
 
@@ -266,8 +267,10 @@ class ProfilController extends AbstractController
     /**
      * @Route("/panier", name="panier")
      */
-    public function panier()
+    public function panier(PanierRepository $panierRepository)
     {
-        return $this->render('users/profil/panier.html.twig');
+        $panier = $panierRepository->findBy(['utilisateur' => $this->getUser()]);
+
+        return $this->render('users/profil/panier.html.twig', ['panier' => $panier]);
     }
 }
