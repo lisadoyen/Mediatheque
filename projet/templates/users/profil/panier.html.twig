@@ -15,11 +15,37 @@
 
         {% if panier is not empty %}
             <div class="row justify-content-end">
-                <form action="{{ path('remove_all_article_panier') }}" method="POST" style="display:inline">
-                    <input type="hidden" name="token" value="{{ csrf_token('panier_delete') }}">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-danger float-right m-3" onclick="return confirm('Voulez vous vraiment vider votre panier ?')">Vider le panier</button>
-                </form>
+                <button type="button" class="btn btn-danger mr-6" data-toggle="modal" data-target="#viderPanier">
+                    Vider le panier
+                </button>
+            </div>
+
+            <div class="modal fade" id="viderPanier" tabindex="-1" role="dialog" aria-labelledby="viderPanierTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="viderPanierTitle">Vider le panier</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Voulez-vous vraiment vider votre panier ?
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-sm">
+                                <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Non</button>
+                            </div>
+                            <div class="col-sm">
+                                <form action="{{ path('vider_panier') }}" method="POST" style="display:inline">
+                                    <input type="hidden" name="token" value="{{ csrf_token('panier_delete') }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-success float-left">Oui</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <table class="table">
@@ -92,14 +118,14 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            Voulez vous mettre cette article dans vos favoris ?
+                                            Voulez-vous mettre cette article dans vos favoris ?
                                         </div>
                                         <div class="modal-footer">
                                             <div class="col-sm">
                                                 <a href="{{ path('remove_article_panier', {id: pan.article.id}) }}" class="btn btn-danger float-right">Non</a>
                                             </div>
                                             <div class="col-sm">
-                                                <a href="{{ path('remove_article_panier_favoris', {id: pan.article.id}) }}" class="btn btn-success float-left">Oui</a>
+                                                <a href="{{ path('move_article_panier_favoris', {id: pan.article.id}) }}" class="btn btn-success float-left">Oui</a>
                                             </div>
                                         </div>
                                     </div>
@@ -115,11 +141,37 @@
 
                 <div class="col-sm">Total des articles achetés : {{ totalAchat }}€</div>
                 <div class="col-sm">
-                    <form action="{#{ path('') }#}" method="POST" style="display:inline">
-                        <input type="hidden" name="token" value="{# { csrf_token('') }#}">
-                        <input type="hidden" name="_method" value="POST">
-                        <button type="submit" class="btn btn-success float-right m-3" onclick="return confirm('Voulez vous vraiment valider votre panier ?')">Valider la commande</button>
-                    </form>
+                    <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#validerCommande">
+                        Valider la commande
+                    </button>
+
+                    <div class="modal fade" id="validerCommande" tabindex="-1" role="dialog" aria-labelledby="validerCommandeTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="validerCommandeTitle">Valider la commande</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Voulez-vous vraiment valider votre panier ?
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="col-sm">
+                                        <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Non</button>
+                                    </div>
+                                    <div class="col-sm">
+                                        <form action="{#{ path('') }#}" method="POST" style="display:inline">
+                                            <input type="hidden" name="token" value="{# { csrf_token('') }#}">
+                                            <input type="hidden" name="_method" value="POST">
+                                            <button type="submit" class="btn btn-success float-left">Oui</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <small class="text-danger">* Temps restant avant le vidage du panier</small>

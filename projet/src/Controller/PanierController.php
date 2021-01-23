@@ -74,7 +74,7 @@ class PanierController extends AbstractController
     }
 
     /**
-     * @Route("/panier/move/{id}/favoris", name="remove_article_panier_favoris")
+     * @Route("/panier/move/{id}/favoris", name="move_article_panier_favoris")
      */
     public function moveArticlePanierFavoris(PanierRepository $panierRepository, $id=1){
         $user = $this->getUser();
@@ -94,7 +94,7 @@ class PanierController extends AbstractController
     }
 
     /**
-     * @Route("/panier/remove", name="remove_all_article_panier", methods={"DELETE"})
+     * @Route("/panier/vider", name="vider_panier", methods={"DELETE"})
      */
     public function viderPanier(PanierRepository $panierRepository, Request $request)
     {
@@ -114,3 +114,18 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('panier');
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

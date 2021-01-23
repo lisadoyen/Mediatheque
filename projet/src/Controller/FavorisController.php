@@ -27,9 +27,21 @@ class FavorisController extends AbstractController
     }
 
     /**
-     * @Route("/favoris/remove", name="remove_all_favoris", methods={"DELETE"})
+     * @Route("/favoris", name="favoris")
      */
-    public function removeAllFavoris( FavorisRepository $favorisRepository, Request $request){
+    public function favoris(FavorisRepository $favorisRepository)
+    {
+        $favoris = $favorisRepository->findBy(['utilisateur' => $this->getUser()]);
+
+        return $this->render('users/profil/favoris.html.twig', ['favoris' => $favoris]);
+    }
+
+
+    /**
+     * @Route("/favoris/vider", name="vider_favoris", methods={"DELETE"})
+     */
+    public function viderFavoris( FavorisRepository $favorisRepository, Request $request)
+    {
         if(!$this->isCsrfTokenValid('favoris_delete', $request->get('token'))) {
             throw new  InvalidCsrfTokenException('Invalid CSRF token delete favoris');
         }
@@ -91,16 +103,7 @@ class FavorisController extends AbstractController
         return $this->redirectToRoute('favoris');
     }
 
-    /**
-     * @Route("/favoris", name="favoris")
-     */
-    public function favoris(FavorisRepository $favorisRepository)
-    {
-        $favoris = $favorisRepository->findBy(['utilisateur' => $this->getUser()]);
-
-        return $this->render('users/profil/favoris.html.twig', ['favoris' => $favoris]);
-    }
-
+    //TODO vérifier si le favoris n'est pas dans les favoris
     /**
      * @Route("/{page}/favoris/add/{id}", name="add_article_favoris")
      */
