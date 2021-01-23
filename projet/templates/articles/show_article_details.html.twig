@@ -98,11 +98,13 @@
                     </div>
                     <div class="col-lg-8">
                         <input type="hidden" name="id" value="{{ article.id }}">
-                        {%  if article.statut.libelle == "empruntable" %}
-                            <a class="style-button-article-emprunt-detail">Emprunter</a>
-                        {% else %}
-                            <a class="style-button-article-achat-detail">Acheter</a>
-                        {% endif %}
+                        <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-achat-detail">
+                            {%  if article.statut.libelle == "empruntable" %}
+                                Emprunter
+                            {% else %}
+                                Acheter
+                            {% endif %}
+                        </a>
                     </div>
                 </div>
             </div>

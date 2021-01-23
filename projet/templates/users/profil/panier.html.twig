@@ -7,101 +7,113 @@
                 <h1>Votre Panier ({{ panier|length }})</h1>
             </div>
             <div class="col-sm">
-                <b class="float-right pr-2">00:00:00 <span class="text-danger">*</span></b>
+                {% if panier is not empty %}
+                    <b class="float-right pr-2">00:00:00 <span class="text-danger">*</span></b>
+                {% endif %}
             </div>
         </div><hr>
 
         {% if panier is not empty %}
             <div class="row justify-content-end">
-                <form action="{#{ path('remove_all_panier') }#}" method="POST" style="display:inline">
+                <form action="{{ path('remove_all_article_panier') }}" method="POST" style="display:inline">
                     <input type="hidden" name="token" value="{{ csrf_token('panier_delete') }}">
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger float-right m-3" onclick="return confirm('Voulez vous vraiment vider votre panier ?')">Vider le panier</button>
                 </form>
             </div>
-            <div class="row mt-3">
-                <div class="col-sm">
-                    <b>Vignette</b>
-                </div>
-                <div class="col-sm">
-                    <b>Titre</b>
-                </div>
-                <div class="col-sm">
-                    <b>Genre</b>
-                </div>
-                <div class="col-sm">
-                    <b>Catégorie</b>
-                </div>
-                <div class="col-sm</b>">
-                    <b>Statut</b>
-                </div>
 
-                <div class="col-5"></div>
-            </div>
-            <hr style="border: 1px solid black;">
-            {% for pan in panier %}
-                <div class="row">
-                    <div class="col-sm">
-                        {%  if pan.article.vignette is not empty %}
-                            <img src="{{ pan.article.vignette }}" alt="image de {{ pan.article.titre }}" width="120" height="120">
-                        {% else %}
-                            <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120">
-                        {% endif %}
-                    </div>
-                    <div class="col-sm">
-                        {%  if pan.article.titre is not empty %}
-                            {{ pan.article.titre | capitalize }}
-                        {% else %}
-                            {{ pan.article.codeArticle }}
-                        {% endif %}
-                    </div>
-                    <div class="col-sm">
-                        {{ pan.article.genre.libelle }}
-                    </div>
-                    <div class="col-sm">
-                        {{ pan.article.categorie.libelle }}
-                    </div>
-                    <div class="col-sm">
-                        <span class="text-success">{{ pan.article.statut.libelle }}</span>
-                    </div>
-                    <div class="col-3">
-                        <a href="{{ path('article_details', {id: pan.article.id}) }}" class="btn edit-btn">Voir plus de détail</a>
-                    </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Vignette</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Disponiblité</th>
+                        <th scope="col">Statut</th>
+                        <th scope="col">Prix</th>
+                        <th colspan="2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pan in panier %}
+                    <tr>
+                        <td>
+                            {%  if pan.article.vignette is not empty %}
+                                <img src="{{ pan.article.vignette }}" alt="image de {{ pan.article.titre }}" width="120" height="120">
+                            {% else %}
+                                <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {%  if pan.article.titre is not empty %}
+                                {{ pan.article.titre | capitalize }}
+                            {% else %}
+                                {{ pan.article.codeArticle }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ pan.article.genre.libelle }}
+                        </td>
+                        <td>
+                            {{ pan.article.categorie.libelle }}
+                        </td>
+                        <td>
+                            {{ pan.typeEnregistrement.libelle }}
+                        </td>
+                        <td>
+                            {{ pan.article.statut.libelle }}
+                        </td>
+                        <td>
+                            {% if pan.typeEnregistrement.libelle == "achat" and pan.article.statut.libelle !="vendu" %}
+                                {{ pan.article.MontantVente }} €
+                            {% elseif pan.typeEnregistrement.libelle == "achat" and pan.article.statut.libelle =="vendu" %}
+                                vendu
+                            {% else %}
+                                Gratuit
+                            {% endif %}
+                        </td>
+                        <td class="col-3">
+                            <a href="{{ path('article_details', {id: pan.article.id}) }}" class="btn edit-btn">Voir plus de détail</a>
+                        </td>
 
-                    <div class="col-1 align-content-center">
-                        <button type="button" class="close p-4" aria-label="Close" data-toggle="modal" data-target="#supprArticlePanier">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <td class="align-content-center">
+                            <button type="button" class="close p-4" aria-label="Close" data-toggle="modal" data-target="#supprArticlePanier{{ pan.article.id }}">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
 
-                        <div class="modal fade" id="supprArticlePanier" tabindex="-1" role="dialog" aria-labelledby="supprArticlePanierTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Supprimer cette article</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Voulez vous mettre cette article dans vos favoris ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="col-sm">
-                                            <button type="button" class="btn btn-danger float-right">Non</button>
+                            <div class="modal fade" id="supprArticlePanier{{ pan.article.id }}" tabindex="-1" role="dialog" aria-labelledby="supprArticlePanier{{ pan.article.id }}Title" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Supprimer cette article</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                        <div class="col-sm">
-                                            <button type="button" class="btn btn-success float-left">Oui</button>
+                                        <div class="modal-body">
+                                            Voulez vous mettre cette article dans vos favoris ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="col-sm">
+                                                <a href="{{ path('remove_article_panier', {id: pan.article.id}) }}" class="btn btn-danger float-right">Non</a>
+                                            </div>
+                                            <div class="col-sm">
+                                                <a href="{{ path('remove_article_panier_favoris', {id: pan.article.id}) }}" class="btn btn-success float-left">Oui</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div><hr>
-            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <hr>
             <div class="row justify-content-end">
 
-                <div class="col-sm">Total des articles achetés : 0€</div>
+                <div class="col-sm">Total des articles achetés : {{ totalAchat }}€</div>
                 <div class="col-sm">
                     <form action="{#{ path('') }#}" method="POST" style="display:inline">
                         <input type="hidden" name="token" value="{# { csrf_token('') }#}">
