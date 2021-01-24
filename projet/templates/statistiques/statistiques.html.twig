@@ -1,0 +1,119 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Chiffre d'affaire</h1>
+                <table class="table dataTable my-0" id="dataTable">
+                    <tbody>
+                        <tr>
+                            <td>{{ CA }} €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Chiffre d'affaire par type</h1>
+                <table class="table dataTable my-0" id="dataTable">
+                    <thead id="darkBar">
+                    <tr>
+                        <th>Nombre d'achat</th>
+                        <th>Libelle</th>
+                        <th>Prix</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for type in types %}
+                            <tr>
+                                <td>{{ type.nbAchat|number_format}}</td>
+                                <td>{{ type.libelle }}</td>
+                                <td>{{ type.prix }} €</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Moyenne par client</h1>
+                <table class="table dataTable my-0" id="dataTable">
+                    <tbody>
+                    <tr>
+                        <td>{{ clients.moy|number_format(2) }} €</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Statistiques</h1>
+                <br>
+                <form action="{{ path('admin_stats_periode') }}" method="POST" style="display:inline">
+                    <input type="date" name="before"  value="{% if before is defined and before is not null %}{{ before|date('d/m/Y') }}{% endif %}">
+                    <input type="date" name="after" value="{% if after is defined and after is not null %}{{ after|date('d/m/Y') }}{% endif %}">
+                    <button type="submit" class="btn btn-success">Appliquer la période</button>
+                </form>
+                <table class="table dataTable my-0" id="dataTable">
+                    <tbody>
+                    <tr>
+                        <td><canvas id="myChart"></canvas></td>
+                        <td><canvas id="myChart2"></canvas></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block charts %}
+
+    <script type="text/javascript">
+        let ctx = document.getElementById('myChart').getContext('2d');
+        let chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [{% if before is defined and before is not null %}'{{ before|date('d/m/Y') }}'{% else %}'01/01/2020'{% endif %},'période en cours', {% if after is defined and after is not null %}'{{ after|date('d/m/Y') }}'{% else %}'31/12/2020'{% endif %}],
+                datasets: [{
+                    label:'Commandes',
+                    backgroundColor: 'rgb(255,0,54)',
+                    borderColor: 'rgb(255,0,54)',
+                    data: [0,{{ commandes }},0]
+                }]
+            },
+            options: {}
+        });
+    </script>
+    <script type="text/javascript">
+        let ctx2 = document.getElementById('myChart2').getContext('2d');
+        let chart2 = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for type in types %}'{{ type.libelle }}',{% endfor %}],
+                datasets: [{
+                    backgroundColor: ['rgb(231, 76, 60)', 'rgb(142, 68, 173)', 'rgb(52, 152, 219)', 'rgb(241, 196, 15)', 'rgb(39, 174, 96)', 'rgb(243, 156, 18)'],
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [{% for type in types %}{{ type.nbAchat|number_format}},{% endfor %}]
+                }]
+            },
+            options: {}
+        });
+    </script>
+
+{% endblock %}
