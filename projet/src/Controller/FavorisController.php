@@ -103,35 +103,39 @@ class FavorisController extends AbstractController
         return $this->redirectToRoute('favoris');
     }
 
-    //TODO vérifier si le favoris n'est pas dans les favoris
     /**
      * @Route("/{page}/favoris/add/{id}", name="add_article_favoris")
      */
-    public function addFavoris(SessionInterface $session, ArticleRepository $articleRepository, $id=1, $page){
+    public function addFavoris(SessionInterface $session, ArticleRepository $articleRepository, FavorisRepository  $favorisRepository,$id=1, $page){
         $user = $this->getUser();
+        $article = $articleRepository->find($id);
 
-        $favoris = new Favoris();
-        $favoris->setArticle($articleRepository->find($id));
-        $favoris->setUtilisateur($user);
-        $this->getDoctrine()->getManager()->persist($favoris);
-        $this->getDoctrine()->getManager()->flush();
+        $verifFav = $favorisRepository->findOneBy(['utilisateur'=>$user,'article'=>$article]);
 
-        $this->addFlash('notif',"+1");
+        if(!$verifFav){
+            $favoris = new Favoris();
+            $favoris->setArticle($article);
+            $favoris->setUtilisateur($user);
+            $this->getDoctrine()->getManager()->persist($favoris);
+            $this->getDoctrine()->getManager()->flush();
 
-        if($page == "list"){
-            $donnees = $session->get('donnees');
-            if(empty($donnees))
-                return $this->redirectToRoute('articles_show');
-            else {
-                if (!empty($donnees['genres'])) {
-                    return $this->redirectToRoute('genres_id_articles_show', ['id' => 1]);
-                } else {
+            $this->addFlash('notif',"+1");
+
+            if($page == "list"){
+                $donnees = $session->get('donnees');
+                if(empty($donnees))
                     return $this->redirectToRoute('articles_show');
+                else {
+                    if (!empty($donnees['genres'])) {
+                        return $this->redirectToRoute('genres_id_articles_show', ['id' => 1]);
+                    } else {
+                        return $this->redirectToRoute('articles_show');
+                    }
                 }
             }
-        }
-        if ($page == "detail") {
-            return $this->redirectToRoute('article_details', ['id' => $id]);
+            if ($page == "detail") {
+                return $this->redirectToRoute('article_details', ['id' => $id]);
+            }
         }
     }
 }

@@ -56,14 +56,14 @@ class DataBaseController extends AbstractController
                 , '--host=localhost'
                 , '--user=root'
                 , '--password='
-                , 'mediathequenewbdd']);
+                , 'mediatheque']);
         } else {
             $process= new Process([
                 'mysqldump'
                 , '--host=localhost'
                 , '--user=root'
                 , '--password='
-                , 'mediathequenewbdd'
+                , 'mediatheque'
                 , $table]);
         }
 
