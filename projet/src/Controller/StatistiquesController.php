@@ -20,20 +20,19 @@ class StatistiquesController extends AbstractController
 {
     /**
      * @Route("/admin/statistiques", name="admin_statistiques", methods={"GET"})
-     * @param Request $request
      * @param EnregistrementRepository $enregistrementRepository
      * @param PaginatorInterface $paginator
      * @return Response
      */
     public function statistiques(Request $request, EnregistrementRepository $enregistrementRepository,  PaginatorInterface $paginator): Response
     {
-
+        $allArticles =  $enregistrementRepository->getNbEmpruntByArticle();
         $articles = $paginator->paginate(
-            $enregistrementRepository->getNbEmpruntByArticle(),
+            $allArticles,
             $request->query->getInt('page', 1),
             10
         );
-        return $this->render('statistiques/statistiques.html.twig', ['articles'=>$articles]);
+        return $this->render('statistiques/statistiques.html.twig', ['articles'=>$articles, 'allArticles'=>$allArticles]);
     }
 
 }

@@ -47,7 +47,8 @@
                     {{ knp_pagination_render(articles)}}</div>
             </div>
             <div class="col-lg-6">
-                <canvas id="myChart"></canvas>
+                <h3 class="pb-3" style="font-weight: bold;color : #aa2222 !important;">Graphique</h3>
+                <canvas id="myChart" height="200"></canvas>
             </div>
         </div>
     </div>
@@ -58,14 +59,12 @@
 <script type="text/javascript">
     let ctx = document.getElementById('myChart').getContext('2d');
     let chart = new Chart(ctx, {
-        type: 'bar',
+        type: 'doughnut',
         data: {
-            labels: [{% for article in articles|slice(0,10) %}'{{article.titre}}',{% endfor %}],
+            labels: [{% for article in articles %}'{{article.titre | capitalize}}',{% endfor %}],
             datasets: [{
-                label:'article',
-                backgroundColor: 'rgb(255,0,54)',
-                borderColor: 'rgb(255,0,54)',
-                data:  [{% for article in articles %}{{article.nbEmpruntParArticle}},{% endfor %}]
+                backgroundColor: ['rgb(154,205,50)','rgb(241, 196, 15)', 'rgb(52, 152, 219)'],
+                data:  [{% for article in  articles %}{{article.nbEmpruntParArticle}},{% endfor %}]
             }]
         },
         options: {
