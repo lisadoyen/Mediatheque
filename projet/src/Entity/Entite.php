@@ -119,5 +119,4 @@ class Entite
         return $this->getNom();
     }
 
-
 }

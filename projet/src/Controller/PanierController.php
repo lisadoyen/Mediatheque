@@ -34,27 +34,29 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/add/{id}", name="add_article_panier")
      */
-    public function addArticlePanier(ArticleRepository $articleRepository,TypeEnregistrementRepository $typeEnregistrementRepository, $id=1){
+    public function addArticlePanier(ArticleRepository $articleRepository, TypeEnregistrementRepository $typeEnregistrementRepository,PanierRepository $panierRepository,$id = 1)
+    {
         $user = $this->getUser();
         $article = $articleRepository->findOneBy(['id' => $id]);
-        $statut = $article->getStatut()->getLibelle();
-        $lignePanier = new Panier();
-        $lignePanier->setUtilisateur($user);
-        $lignePanier->setArticle($article);
 
-        if ($statut == "empruntable" or $statut =="emprunte") {
-            $lignePanier->setTypeEnregistrement($typeEnregistrementRepository->findOneBy(['libelle'=>'emprunt']));
-        } else if ($statut == "vendable" or $statut =="vendu") {
-            $lignePanier->setTypeEnregistrement($typeEnregistrementRepository->findOneBy(['libelle'=>'achat']));
+        $verifFav = $panierRepository->findOneBy(['utilisateur'=>$user,'article'=>$article]);
+
+        if (!$verifFav){
+            $statut = $article->getStatut()->getLibelle();
+            $lignePanier = new Panier();
+            $lignePanier->setUtilisateur($user);
+            $lignePanier->setArticle($article);
+
+            if ($statut == "empruntable" or $statut == "emprunte") {
+                $lignePanier->setTypeEnregistrement($typeEnregistrementRepository->findOneBy(['libelle' => 'emprunt']));
+            } else if ($statut == "vendable" or $statut == "vendu") {
+                $lignePanier->setTypeEnregistrement($typeEnregistrementRepository->findOneBy(['libelle' => 'achat']));
+            }
+            $this->getDoctrine()->getManager()->persist($lignePanier);
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', "L'article \"" . $lignePanier->getArticle()->getTitre() . "\" a bien été ajouté de votre panier");
         }
-
-        //TODO verfier que l'article n'est pas le panier
-
-        $this->getDoctrine()->getManager()->persist($lignePanier);
-        $this->getDoctrine()->getManager()->flush();
-
-        $this->addFlash('success',"L'article \"".$lignePanier->getArticle()->getTitre()."\" a bien été ajouté de votre panier");
-
         return $this->redirectToRoute('panier');
     }
 
@@ -76,19 +78,25 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/move/{id}/favoris", name="move_article_panier_favoris")
      */
-    public function moveArticlePanierFavoris(PanierRepository $panierRepository, $id=1){
+    public function moveArticlePanierFavoris(PanierRepository $panierRepository, FavorisRepository $favorisRepository, $id = 1)
+    {
         $user = $this->getUser();
-        $lignePanier = $panierRepository->findOneBy(['article' => $id, 'utilisateur'=>$user]);
+        $lignePanier = $panierRepository->findOneBy(['article' => $id, 'utilisateur' => $user]);
 
-        $favoris = new Favoris();
-        $favoris->setUtilisateur($user);
-        $favoris->setArticle($lignePanier->getArticle());
+        $verifFav = $favorisRepository->findOneBy(['utilisateur'=>$user,'article'=>$lignePanier->getArticle()]);
 
-        $this->getDoctrine()->getManager()->persist($favoris);
+        if(!$verifFav) {
+            $favoris = new Favoris();
+            $favoris->setUtilisateur($user);
+            $favoris->setArticle($lignePanier->getArticle());
+
+            $this->getDoctrine()->getManager()->persist($favoris);
+
+
+            $this->addFlash('success', "L'article \"" . $lignePanier->getArticle()->getTitre() . "\" a bien été supprimé de votre panier et ajouté à vos favoris !");
+        }
         $this->getDoctrine()->getManager()->remove($lignePanier);
         $this->getDoctrine()->getManager()->flush();
-
-        $this->addFlash('success',"L'article \"".$lignePanier->getArticle()->getTitre()."\" a bien été supprimé de votre panier et ajouté à vos favoris !");
 
         return $this->redirectToRoute('panier');
     }

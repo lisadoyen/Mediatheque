@@ -53,13 +53,9 @@
                                 {% endif %}
                                     <div class="p-4">
                                         <input type="hidden" name="id" value="{{ article.id }}">
-                                        {%  if article.statut.libelle == "empruntable" %}
-                                            <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-emprunt">
-                                                Emprunter</a>
-                                            {% else %}
-                                        <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-achat">
-                                                Acheter</a>
-                                            {% endif %}
+                                        <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-achat-detail">
+                                            Ajouter au panier
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
