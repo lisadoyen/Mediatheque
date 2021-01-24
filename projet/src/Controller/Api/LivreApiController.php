@@ -23,10 +23,10 @@ class LivreApiController extends AbstractController
      * @return Response
      */
     public function getDataFromIsbn($isbn,SerializerInterface $serializer){
-        $articleGoogle = $this->getGoogleIsbn($isbn,$serializer);
-        $articleEbay = $this->getEbayIsbn($isbn,$serializer);
-        $articleOl = $this->getOlIsbn($isbn,$serializer);
-        $articleSurf = $this->getSurfIsbn($isbn,$serializer);
+        $articleGoogle = $this->getGoogleIsbn($isbn,$serializer); // récupère les infos de google
+        $articleEbay = $this->getEbayIsbn($isbn,$serializer); // récupère les infos de ebay
+        $articleOl = $this->getOlIsbn($isbn,$serializer); // recupère les infos de Open Library
+        $articleSurf = $this->getSurfIsbn($isbn,$serializer); // recupère les infos de bibliosurf
         dd($this->verifyResponseIsbn($articleGoogle,$articleEbay,$articleOl,$articleSurf));
         //return $this->json($this->verifyResponseIsbn($articleGoogle,$articleEbay,$articleOl,$articleSurf),200, []);
     }
@@ -47,12 +47,20 @@ class LivreApiController extends AbstractController
 
     public function getSurfIsbn($isbn,$serializer){
         // bibliosurf
-        $response = file_get_contents('https://www.bibliosurf.com/?page=api_isbn&isbn='.$isbn) ?? null;
-        if($response == null) return null;
-        if($response != " \n"){
+
+        $xml_string = file_get_contents("https://www.goodreads.com/book/isbn/9782840554684?format=xml&key=GawUBNIKswjA2y2MmSA");
+        $xml = simplexml_load_string($xml_string);
+        dd($xml);
+        $json = json_encode($xml);
+        $array = json_decode($json,TRUE);
+        dd($array);
+
+
+        $response = file_get_contents('https://www.goodreads.com/book/isbn/9782840554684?format=json');
+        dd($response);
+
             $articleSurf = $serializer->decode($response,'json');
-            return $articleSurf ?? null;
-        }
+            dd($articleSurf);
         return null;
     }
     public function getOlIsbn($isbn,$serializer){
@@ -73,7 +81,26 @@ class LivreApiController extends AbstractController
         $infos['isbn'] = $articleGoogle['industryIdentifiers'][0]["identifier"] ?? $articleOl['identifiers']['isbn_13'] ?? '';
         $infos['image'] =   $articleGoogle['imageLinks']['thumbnail'] ??
                             $articleOl['cover']['large'] ?? $articleOl['cover']['medium'] ?? $articleOl['cover']['small']??
-                            $articleSurf['image'] ?? $articleEbay['galleryURL'] ?? '';
+                            $articleSurf['image'] ?? array_shift($articleEbay['galleryURL']) ?? '';
+        // $infos['image'] = $this->getImages($articleGoogle,$articleEbay,$articleOl,$articleOl);
+        if(is_array($infos['titre'])){
+            $infos['titre'] = array_shift($infos['titre']);
+        }
+
         return $infos;
+    }
+    public function getImages($articleGoogle,$articleEbay,$articleOl,$articleSurf){
+        $images = array();
+        if (!empty($articleGoogle['imageLinks']) && !empty($articleGoogle['imageLinks']['thumbnail'])) {
+            array_push($images,$articleGoogle['imageLinks']['thumbnail']);
+        }
+        if(!empty($articleOl['cover'])){
+            if(!empty($articleOl['cover']['large'])) array_push($images,$articleOl['cover']['large']);
+            if(!empty($articleOl['cover']['medium'])) array_push($images,$articleOl['cover']['medium']);
+            if(!empty($articleOl['cover']['small'])) array_push($images,$articleOl['cover']['small']);
+        }
+        if(!empty($articleSurf['image'])) array_push($images,$articleSurf['image']);
+        if(!empty($articleEbay['galleryURL'])) array_push($images,$articleEbay['galleryURL']);
+        return $images;
     }
 }
