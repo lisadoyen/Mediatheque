@@ -3,9 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Avis;
+use Doctrine\DBAL\Types\DecimalType;
+use Doctrine\DBAL\Types\FloatType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AvisFormType extends AbstractType
@@ -20,8 +25,8 @@ class AvisFormType extends AbstractType
                         'placeholder' => 'saisir un commentaire'
                     ]
                 ]
-            );
-            //->add('note')
+            )
+            ->add('note');
             //->add('signale')
             //->add('article')
             //->add('utilisateur')

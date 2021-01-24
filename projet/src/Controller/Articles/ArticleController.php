@@ -335,6 +335,7 @@ class ArticleController extends AbstractController
             'method' => 'POST'
         ]);
         $form->handleRequest($request);
+        $test = $form->get('note')->getData();
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Avis $commentaire */
@@ -348,13 +349,13 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('article_details', ['id' => $id]);
         }
 
-
         return $this->render('articles/show_article_details.html.twig', [
             'article' => $livre,
             'favoris' => $fav,
             'nouveaute' => $nouveaute,
             'idNouveaute' => $nouveau,
             'avis' => $avis,
+            'test'=> $test,
             'form' => $form->createView()
         ]);
     }
