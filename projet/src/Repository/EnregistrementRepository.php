@@ -19,6 +19,20 @@ class EnregistrementRepository extends ServiceEntityRepository
         parent::__construct($registry, Enregistrement::class);
     }
 
+    public function getNbEmpruntByArticle(){
+        $qb = $this->createQueryBuilder('e');
+        $qb ->select('distinct count(a.id) as nbEmpruntParArticle, a.titre')
+            ->join('App:Article', 'a')
+            ->where('a.id=e.article')
+            ->join('App:TypeEnregistrement', 'te')
+            ->andWhere('te.id=e.typeEnregistrement')
+            ->andWhere("te.libelle='emprunt'")
+            ->groupBy('a.id')
+            ->addOrderBy('nbEmpruntParArticle','DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Enregistrement[] Returns an array of Enregistrement objects
     //  */
