@@ -21,17 +21,19 @@
                 {% for av in avis %}
                     <div class="row">
                         <div class="col-lg-8">
-                            <div class="col-lg-6">
-                                {% if av.utilisateur.avatar == NULL %}
-                                    <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="40" height="40">
-                                {% else  %}
-                                    <img src="{{asset('assets/images/account/')}}{{av.utilisateur.avatar}}" alt="Image {{av.utilisateur.avatar}}" width="40" height="40">
-                                {% endif %}
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="text-size-title"><span class="text-orange text-bold"> {{ av.utilisateur.username }} </span></div>
-                                <div class="text-size pt-5">{{ av.texte | raw }}</div>
-                                <div class="text-size pt-3">Le {{ av.date|date('d/m/Y') }} à {{ av.date|date('H:m') }}</div>
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    {% if av.utilisateur.avatar == NULL %}
+                                        <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="40" height="40">
+                                    {% else  %}
+                                        <img src="{{asset('assets/images/account/')}}{{av.utilisateur.avatar}}" alt="Image {{av.utilisateur.avatar}}" width="40" height="40">
+                                    {% endif %}
+                                </div>
+                                <div class="col-lg-11">
+                                    <div class="text-size-title"><span class="text-orange text-bold"> {{ av.utilisateur.username }} </span></div>
+                                    <div class="text-size pt-5">{{ av.texte | raw }}</div>
+                                    <div class="text-size pt-3">Le {{ av.date|date('d/m/Y') }} à {{ av.date|date('H:m') }}</div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
