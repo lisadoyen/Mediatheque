@@ -1,6 +1,12 @@
 jQuery(document).ready(function() {
     // Get the div that holds the collection of tags
     var $entitesCollectionHolder = $('div.entites');
+
+    // add a delete link to all of the existing entite form
+    $entitesCollectionHolder.find('div.entite-subform').each(function() {
+        addTagFormDeleteLink($(this));
+    });
+
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
     $entitesCollectionHolder.data('index', $entitesCollectionHolder.find('input').length);
@@ -35,7 +41,24 @@ function addFormToCollection($collectionHolderClass) {
     $collectionHolder.data('index', index + 1);
 
     // Display the form in the page before the "Add a tag" link
-    var $newFormLi = $('<div class="entite-subform"></div>').append(newForm);
+    var $newForm = $('<div class="entite-subform"></div>').append(newForm);
+
+    // add a delete link to the new form
+    addTagFormDeleteLink($newForm);
+
     // Add the new form at the end of the list
-    $collectionHolder.append($newFormLi)
+    $collectionHolder.append($newForm)
 }
+
+function addTagFormDeleteLink($tagForm) {
+    var $removeFormButton = $('<div class="col-sm-1">\n' +
+        '                <button type="button" class="remove_item_link">x</button>\n' +
+        '            </div>');
+    $tagForm.find('div.row').append($removeFormButton);
+
+    $removeFormButton.on('click', function(e) {
+        // remove the form
+        $tagForm.remove();
+    });
+}
+
