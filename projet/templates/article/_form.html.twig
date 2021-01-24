@@ -35,16 +35,14 @@
 {{ form_row(form.statut) }}
 
 {{ form_label(form.entites) }}
-{#{{ dump(form.entites.vars) }}#}
 <div class="entites" data-prototype="{{ formMacros.printEntiteSubForm(form.entites.vars.prototype)|e('html_attr') }}">
     {% for entite in form.entites %}
         <div class="entite-subform">{{ formMacros.printEntiteSubForm(entite) }}</div>
     {% endfor %}
 </div>
 
-<button type="button" class="add_item_link" data-collection-holder-class="entites">+</button>
-
-<button class="edit-btn">{{ button_label|default('Ajouter') }}</button>
+<button type="button" class="add_item_link" data-collection-holder-class="entites">+</button> <br>
+<button class="edit-btn">{{ button_label|default('Appliquer') }}</button>
 {{ form_end(form) }}
 
 

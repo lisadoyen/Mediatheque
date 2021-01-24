@@ -8,7 +8,7 @@
     <div class="container cadre">
 
     <h1>Ajouter un article</h1>
-    {{ include('article/_form.html.twig') }}
+    {{ include('article/_form.html.twig', {'button_label': 'Ajouter l\'article'}) }}
     <a href="{{ path('article_index') }}">back to list</a>
     </div>
 {% endblock %}

@@ -25,7 +25,7 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('gencode', TextType::class, ['required' => true])
+            ->add('gencode', TextType::class, ['required' => false])
             ->add('codeArticle', TextType::class, ['required' => true])
             ->add('titre', TextType::class, ['required' => true])
             ->add('description', CKEditorType::class, ['required' => true])
