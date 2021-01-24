@@ -47,8 +47,30 @@
                     {{ knp_pagination_render(articles)}}</div>
             </div>
             <div class="col-lg-6">
-                Graphique
+                <canvas id="myChart"></canvas>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block charts %}
+
+<script type="text/javascript">
+    let ctx = document.getElementById('myChart').getContext('2d');
+    let chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [{% for article in articles|slice(0,10) %}'{{article.titre}}',{% endfor %}],
+            datasets: [{
+                label:'article',
+                backgroundColor: 'rgb(255,0,54)',
+                borderColor: 'rgb(255,0,54)',
+                data:  [{% for article in articles %}{{article.nbEmpruntParArticle}},{% endfor %}]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
 {% endblock %}
