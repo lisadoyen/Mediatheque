@@ -20,13 +20,14 @@ class ActionRepository extends ServiceEntityRepository
         parent::__construct($registry, Action::class);
     }
 
-    public function findIsNouveaute($donnees){
+    public function findIsNouveaute($donnees,$max){
         $dateTodayConvert=\DateTime::createFromFormat('d/m/Y', \date("d/m/Y"));
         $dateDureeMaxConvert=\DateTime::createFromFormat('d/m/Y',$donnees);
         $today = $dateTodayConvert->format('Y-m-d');
         $dateDureeMax = $dateDureeMaxConvert->format('Y-m-d');
         $qb = $this->createQueryBuilder('ac');
-        $qb ->select(' distinct ac.date as dateCreation, ar.titre as titre, ar.id as id')
+        $qb ->select(' distinct ac.date as dateCreation, ar.titre as titre, ar.id as id, ar.vignette')
+            ->setMaxResults($max)
             ->join( 'App:Article', 'ar')
             ->where('ar.id=ac.article')
             ->join( 'App:Statut', 's')

@@ -37,9 +37,10 @@ class Nouveaute
      * fonctions qui permet de déterminer si un article est nouveau ou non
      * @param CategorieRepository $categorieRepo
      * @param ActionRepository $actionsRepo
+     * @param int $max nombre de nouveaute max a recherche
      * @return int|mixed|string
      */
-    function findArticleNouveaute(CategorieRepository $categorieRepo,ActionRepository $actionsRepo){
+    function findArticleNouveaute(CategorieRepository $categorieRepo,ActionRepository $actionsRepo, $max){
 
         $dateTodayConvert=\DateTime::createFromFormat('d/m/Y', \date("d/m/Y"));
         $today = $dateTodayConvert->format('Y-m-d');
@@ -50,7 +51,7 @@ class Nouveaute
             $nbJourNouveaute = $cat->getDureeNouveaute(); // récupération nb nouveauté
         }
         $dateDureeMax = $this->transformDate($today, 812); // TODO 812 pour test => mettre nbJourNouveaute normalement
-        $nouveaute = $actionsRepo->findIsNouveaute($dateDureeMax);
+        $nouveaute = $actionsRepo->findIsNouveaute($dateDureeMax,$max);
 
         return $nouveaute;
     }
