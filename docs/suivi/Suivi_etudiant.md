@@ -173,3 +173,45 @@
 
 étudiant 4 : élaboration des CRUD pour plusieurs tables de la bdd
 
+
+
+**Semaine 12-13 (du 19/12 au 02/01) :**
+
+Vacance + préparation du diapo de la soutenance
+
+
+
+**Semaine 14 (du 02/01 au 09/01) :**
+
+partiel
+
+
+
+**Semaine 15 (du 09/01 au 16/01) :**
+
+étudiant 1 : ajout des commentaires
+
+étudiant 2 : controllerLivre => controllerArticle + ajout des livres dans la bdd
+
+étudiant 3 : correction page profil + changement photo de profil
+
+étudiant 4 : Annonces + crud automatique
+
+
+
+**Semaine 16 (du 16/01 au 23/01) :**
+
+étudiant 1 : page statistique
+
+étudiant 2 : apiMusique + renouvellement apiLivre + detail ApiVideo
+
+étudiant 3 : page panier + emprunt
+
+étudiant 4 : crud article complet
+
+
+
+
+
+
+
