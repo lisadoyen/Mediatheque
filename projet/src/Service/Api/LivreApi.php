@@ -32,7 +32,7 @@ class LivreApi
     public function getDataFromIsbn($isbn){
         $this->isbn = $isbn;
         $this->getGoogleIsbn(); // récupère les infos de google
-        $this->getEbayIsbn($this->isbn); // récupère les infos de ebay
+        $this->infosEbay = $this->getEbayIsbn($this->isbn); // récupère les infos de ebay
         $this->getOlIsbn(); // recupère les infos de Open Library
         $this->getGoodReadIsbn(); // recupère les infos de goodReads
         $this->verifyResponseIsbn();
@@ -43,33 +43,63 @@ class LivreApi
      * récupure les infos de google
      */
     private function getGoogleIsbn(){
-        $response = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:' . $this->isbn) ?? null;
+        $response = @file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:' . $this->isbn) ?? null;
+        if($response == false){
+            $this->infosGoogle['erreur'] = "Google Books n'a aucune information";
+            return;
+        }
         $article = $this->serializer->decode($response,'json');
         $this->infosGoogle = $article["items"][0]["volumeInfo"] ?? null;
     }
 
     /**
      * récupère les infos de ebay
+     * @param $key -isbn/ean/code musique
+     * @return mixed|void|null
      */
     public function getEbayIsbn($key){
         // url
         $firstEbay = 'https://svcs.ebay.com/services/search/FindingService/v1?SECURITY-APPNAME=ArthurDu-proktila-PRD-47ccf9c51-93b76bcb&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=';
         // fin url
         $lastEbay = '&paginationInput.entriesPerPage=6&GLOBAL-ID=EBAY-FR&siteid=71&Content-Type=application/json';
-        $response = file_get_contents($firstEbay.$this->isbn.$lastEbay) ?? null;
+        $response = @file_get_contents($firstEbay.$key.$lastEbay) ?? null;
+        // gestion d'erreurs
+        if($response == false){
+            $this->infosEbay['erreur'] = "Ebay n'a aucune information";
+            return;
+        }
         // transforme en tableau php
         $articleEbay = $this->serializer->decode($response,'json');
         // récupère le 1er élément
-        $this->infosEbay = $articleEbay['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][0] ?? null;
+        return $articleEbay['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][0] ?? null;
     }
 
     /**
-     * récupère les infos xml de good read et les convertit en tablea
+     * récupère les infos de open Library
+     */
+    private function getOlIsbn(){
+        $response = @file_get_contents('https://openlibrary.org/api/books?bibkeys=ISBN:'.$this->isbn.'&jscmd=data&format=json') ?? null;
+        if($response == false){
+            $this->infosOpenLibrary['erreur'] = "Open library n'a aucune information";
+            return;
+        }
+        // transforme les données en tableau
+        $article = $this->serializer->decode($response,'json');
+        $this->infosOpenLibrary = array_shift($article) ?? null;
+    }
+
+    /**
+     * récupère les infos xml de good read et les convertit en tableau
      */
     private function getGoodReadIsbn(){
 
         // récupère le xml
-        $response = file_get_contents("https://www.goodreads.com/book/isbn/".$this->isbn."?format=xml&key=GawUBNIKswjA2y2MmSA");
+        $response = @file_get_contents("https://www.goodreads.com/book/isbn/".$this->isbn."?format=xml&key=GawUBNIKswjA2y2MmSA");
+        // gestion d'erreurs
+        if($response == false){
+            $this->infosGoodRead['erreur'] = "Good read n'a aucune information";
+            return;
+        }
         // crée un élément php xml
         $xml = new SimpleXMLElement($response);
         // prend uniquement le contenu "book" du xml
@@ -138,38 +168,26 @@ class LivreApi
         foreach ($auteurs as $auteur){
             array_push($allAuteurs,$auteur);
         }
+        $auteurs = [];
+        if(sizeof($allAuteurs) == 1){
+            array_push($auteurs,$allAuteurs[0]->name);
+            return $auteurs;
+        }
+        $allAuteurs = array_shift($allAuteurs);
+        foreach ($allAuteurs as $auteur){
+            array_push($auteurs,$auteur->name);
+        }
         // renvoie le 1 élement du tableau contenant tout les auteurs
-        return array_shift($allAuteurs);
+        return $auteurs;
     }
 
-    /**
-     * récupère les infos de open Library
-     */
-    private function getOlIsbn(){
-        $response = @file_get_contents('https://openlibrary.org/api/books?bibkeys=ISBN:'.$this->isbn.'&jscmd=data&format=json') ?? null;
-        if (isset($this->serializer)) {
-            // transforme les données en tableau
-            $article = $this->serializer->decode($response,'json');
-        }
-        $this->infosOpenLibrary = array_shift($article) ?? null;
-    }
 
     private function verifyResponseIsbn(){
-        $infos['titres'] = [];
-        array_push($infos['titres'],$this->infosGoogle['title'] ?? '');
-        array_push($infos['titres'],$this->infosGoodRead['titre'] ?? '');
-        array_push($infos['titres'],$this->infosOpenLibrary['title'] ?? '');
-        array_push($infos['titres'],$this->infosEbay['title'][0] ?? '');
+        $infos['titres'] = $this->getTitres();
 
-        $infos['auteurs'] = [];
-        array_push($infos['auteurs'],$this->infosGoogle["authors"] ?? '');
-        array_push($infos['auteurs'],$this->infosGoodRead['auteurs'] ?? '');
-        array_push($infos['auteurs'],$this->infosOpenLibrary['authors'] ?? '');
+        $infos['auteurs'] = $this->getAuteurs(); // TODO PROBLEME AUTEUR AVEC ISBN 9780747549550
 
-        $infos['editeurs'] = [];
-        array_push($infos['editeurs'],$this->infosGoogle['publisher'] ?? '');
-        array_push($infos['editeurs'],$this->infosGoodRead['editeur'] ?? '');
-        array_push($infos['editeurs'],$this->infosOpenLibrary['publishers'][0]['name'] ?? '');
+        $infos['editeurs'] = $this->getEditeurs();
 
         $infos['publication'] = [];
         array_push($infos['publication'], $this->infosGoogle['publishedDate'] ?? '');
@@ -192,6 +210,57 @@ class LivreApi
 
         return $infos;
     }
+
+    /**
+     * regroupe les titres des différentes api en 1 tableau
+     * @return array de titre
+     */
+    private function getTitres(): array
+    {
+        $infos['titres'] = [];
+        array_push($infos['titres'],$this->infosGoogle['title'] ?? '');
+        array_push($infos['titres'],$this->infosGoodRead['titre'] ?? '');
+        array_push($infos['titres'],$this->infosOpenLibrary['title'] ?? '');
+        array_push($infos['titres'],$this->infosEbay['title'][0] ?? '');
+        return $infos['titres'];
+    }
+
+    /**
+     * regroupe les auteurs des différents api en 1 tableau
+     * @return array d'auteurs
+     */
+    private function getAuteurs():array{
+        $infos['auteurs'] = [];
+        $infos['auteurs'] = $this->remplirTableauAuteur($this->infosGoogle["authors"] ?? null,$infos['auteurs']);
+        $infos['auteurs'] = $this->remplirTableauAuteur($this->infosGoodRead['auteurs'] ?? null,$infos['auteurs']);
+        $infos['auteurs'] = $this->remplirTableauAuteur($this->infosOpenLibrary['authors'] ?? null,$infos['auteurs']);
+        return $infos['auteurs'];
+    }
+
+    private function getEditeurs():array{
+        $infos['editeurs'] = [];
+        array_push($infos['editeurs'],$this->infosGoogle['publisher'] ?? '');
+        array_push($infos['editeurs'],$this->infosGoodRead['editeur'] ?? '');
+        array_push($infos['editeurs'],$this->infosOpenLibrary['publishers'][0]['name'] ?? '');
+        return $infos['editeurs'];
+    }
+
+    private function getDatePublication():array{
+        $infos['publication'] = [];
+        array_push($infos['publication'], $this->infosGoogle['publishedDate'] ?? '');
+        array_push($infos['publication'], $this->infosGoodRead['publication'] ?? '');
+        array_push($infos['publication'], $this->infosOpenLibrary['publish_date'] ?? '');
+    }
+
+    private function remplirTableauAuteur($entree,$sortie){
+        if(!empty($entree)){
+            foreach ($entree as $auteur){
+                array_push($sortie,$auteur);
+            }
+        }
+        return $sortie;
+    }
+
     private function getImages(){
         $images = array();
         if (!empty($this->infosGoogle['imageLinks']) && !empty($this->infosGoogle['imageLinks']['thumbnail'])) {
