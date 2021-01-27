@@ -8,7 +8,7 @@ use App\Repository\ActionRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
-use App\Service\Nouveaute;
+use App\Service\Article\Nouveaute;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DependencyInjection\ControllerArgumentValueResolverPass;
 use Symfony\Component\Routing\Annotation\Route;
