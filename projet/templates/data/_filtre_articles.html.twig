@@ -49,7 +49,7 @@
                     {% endfor %}
                 </div>
                 {% for categorie in categories|slice(categories|length/2, categories|length) %}
-                    <input type="checkbox" name="categories[]" value="{{ categorie.id}}"{% if donnees.ctegories[categorie.id] is defined %} checked {% endif %}>
+                    <input type="checkbox" name="categories[]" value="{{ categorie.id}}"{% if donnees.categories[categorie.id] is defined %} checked {% endif %}>
                     {{ categorie.libelle|capitalize }}
                     <br/>
                 {% endfor %}

@@ -33,7 +33,8 @@ use App\Repository\TypeEnregistrementRepository;
 use App\Repository\TypeEntiteRepository;
 use App\Repository\UserRepository;
 use App\Repository\VideoldRepository;
-use App\Service\Nouveaute;
+use App\Service\Article\Filtre;
+use App\Service\Article\Nouveaute;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -63,6 +64,7 @@ class ArticleController extends AbstractController
      * @param CategorieRepository $categorieRepo
      * @param GenreRepository $genreRepository
      * @param ActionRepository $actionsRepo
+     * @param Filtre $filtre
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @param Nouveaute $new
@@ -70,34 +72,13 @@ class ArticleController extends AbstractController
      */
     public function showAll($idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository,
-                            ActionRepository $actionsRepo,
+                            ActionRepository $actionsRepo, Filtre $filtre,
                             Request $request, PaginatorInterface $paginator, Nouveaute $new)
     {
-        // Menu genre
+        // Menu genre et/ou catégorie
         if($idGenre != null || $idCategorie != null) {
-            $data = new SearchData();
-            $genres = [];
-            if($idGenre != null) {
-                $genres[$idGenre] = $genreRepository->find($idGenre);
-                $data->genre = $genres;
-                $donnees['genres'] = $genres;
-            }
-            $categories = [];
-            if($idCategorie != null) {
-                $categories[$idCategorie] = $categorieRepo->find($idCategorie);
-                $data->categorie = $categories;
-                $donnees['categories'] = $categories;
-            }
-            $session->set('donnees', null);
-            $session->set('donnees', $donnees);
-            if (!empty($donnees)) {
-                $donnees = $session->get('donnees');
-                if($idGenre != null) $data->genre = $donnees['genres'];
-                if($idCategorie != null) $data->categorie = $donnees['categories'];
-            }
-            $articles = $ar->findSearch($data);
             $livres = $paginator ->paginate(
-                $articles,
+                $filtre->filtreAvecCategorie_Genre($idGenre,$idCategorie, true, $genreRepository, $categorieRepo, $session, $ar),
                 $request->query->getInt('page',1),
                 30
             );
@@ -106,55 +87,14 @@ class ArticleController extends AbstractController
                 'articles' => $livres,
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
-                'donnees' => $donnees,
+                'donnees' => $filtre->filtreAvecCategorie_Genre($idGenre,$idCategorie, false, $genreRepository, $categorieRepo, $session, $ar),
                 'nouveaute' => $nouveaute
             ]);
         }
         // filtre
         else {
-            $data = new SearchData();
-            if ($request->getMethod() == 'POST') {
-                $donnees['search'] = $_POST['search'];
-                $data->q = $donnees['search'];
-                if(!empty($_POST['genres'])){
-                    $donnees['genres'] = $_POST['genres'];
-                    $genres = [];
-                    foreach ($donnees['genres'] as $id) {
-                        $genres[$id] = $genreRepository->find($id);
-                        $data->genre = $genres;
-                        $donnees['genres'] = $genres;
-                    }
-                }
-                if(!empty($_POST['categories'])) {
-                    $donnees['categories'] = $_POST['categories'];
-                    $categories = [];
-                    foreach ($donnees['categories'] as $id) {
-                        $categories[$id] = $categorieRepo->find($id);
-                        $data->categorie = $categories;
-                        $donnees['categories'] = $categories;
-                    }
-                }
-                if(isset($donnees))
-                    $session->set('donnees', $donnees);
-                else
-                    $donnees=null;
-            } else {
-                // on remplie le filtre avec la session
-                $donnees = $session->get('donnees');
-                if (!empty($donnees)) {
-                    if(isset($donnees['search']))
-                        $data->q = $donnees['search'];
-                    if (!empty($donnees['genres'])) {
-                        $data->genre = $donnees['genres'];
-                    }
-                    if (!empty($donnees['categories'])) {
-                        $data->categorie = $donnees['categories'];
-                    }
-                }
-            }
-            $articles = $ar->findSearch($data);
             $livres = $paginator->paginate(
-                $articles,
+                $filtre->filtre($request, true, $genreRepository, $categorieRepo, $session, $ar),
                 $request->query->getInt('page', 1),
                 30
             );
@@ -164,7 +104,7 @@ class ArticleController extends AbstractController
                 'articles' => $livres,
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
-                'donnees' => $donnees,
+                'donnees' => $filtre->filtre($request, false, $genreRepository, $categorieRepo, $session, $ar),
                 'nouveaute' => $nouveaute,
             ]);
         }

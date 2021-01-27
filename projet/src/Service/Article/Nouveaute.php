@@ -1,5 +1,5 @@
 <?php
-namespace App\Service;
+namespace App\Service\Article;
 
 use App\Repository\ActionRepository;
 use App\Repository\CategorieRepository;
