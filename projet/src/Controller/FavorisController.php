@@ -75,9 +75,13 @@ class FavorisController extends AbstractController
             if(empty($donnees))
                 return $this->redirectToRoute('articles_show');
             else {
-                if (!empty($donnees['genres'])) {
-                    return $this->redirectToRoute('genres_id_articles_show', ['id' => 1]);
-                } else {
+                if(!empty($donnees['categorie']) && !empty($donnees['genre'])){
+                    return $this->redirectToRoute('categories_id_genres_id_articles_show', ['idCategorie' => 1, 'idGenre'=>1]);
+                }
+                elseif(!empty($donnees['categorie'])){
+                    return $this->redirectToRoute('categories_id_articles_show', ['idCategorie' => 1]);
+                }
+                 else {
                     return $this->redirectToRoute('articles_show');
                 }
             }
@@ -126,9 +130,12 @@ class FavorisController extends AbstractController
                 if(empty($donnees))
                     return $this->redirectToRoute('articles_show');
                 else {
-                    if (!empty($donnees['genres'])) {
-                        return $this->redirectToRoute('genres_id_articles_show', ['id' => 1]);
-                    } else {
+                    if(!empty($donnees['categorie']) && !empty($donnees['genre'])){
+                        return $this->redirectToRoute('categories_id_genres_id_articles_show', ['idCategorie' => 1, 'idGenre'=>1]);
+                    }
+                    elseif(!empty($donnees['categorie'])){
+                        return $this->redirectToRoute('categories_id_articles_show', ['idCategorie' => 1]);
+                    }else {
                         return $this->redirectToRoute('articles_show');
                     }
                 }
