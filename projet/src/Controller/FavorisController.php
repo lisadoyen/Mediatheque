@@ -53,7 +53,7 @@ class FavorisController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
         }
 
-        $this->addFlash('notif',"-1");
+        //$this->addFlash('notif',"-1");
 
         return $this->redirectToRoute('favoris');
     }
