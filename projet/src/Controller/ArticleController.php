@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Action;
 use App\Entity\Article;
 use App\Entity\Entite;
 use App\Form\ArticleType;
+use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\EntiteRepository;
 use App\Repository\StatutRepository;
+use App\Repository\TypeActionRepository;
 use App\Repository\TypeEntiteRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +37,9 @@ class ArticleController extends AbstractController
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
      */
-    public function new(Request $request, TypeEntiteRepository $typeEntiteRepository): Response
+    public function new(Request $request,
+                        TypeEntiteRepository $typeEntiteRepository,
+                        TypeActionRepository $typeActionRepository): Response
     {
         $article = new Article();
 
@@ -49,6 +54,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
 
+            // ajout des entites
             foreach ($article->getEntites() as $entite) {
                 $find = $this->exists($entite);
                 // creer l'entite si elle n'existe pas
@@ -60,7 +66,24 @@ class ArticleController extends AbstractController
                 }
             }
 
+            // ajout de l'action creation
+            // type id 2 = creation
+            $creation = new Action();
+            $creation->setDate(new \DateTime());
+            $creation->setStaff($this->getUser());
+            $creation->setTypeAction($typeActionRepository->findOneBy(['id' => 2]));
+            $creation->setArticle($article);
+            // ajout de l'action obtention
+            // type id 1 = obtention
+            $obtention = new Action();
+            $obtention->setDate($form->get('dateObtention')->getData());
+            $obtention->setStaff($this->getUser());
+            $obtention->setTypeAction($typeActionRepository->findOneBy(['id' => 1]));
+            $obtention->setArticle($article);
+
             $entityManager->persist($article);
+            $entityManager->persist($obtention);
+            $entityManager->persist($creation);
             $entityManager->flush();
 
             return $this->redirectToRoute('article_index');

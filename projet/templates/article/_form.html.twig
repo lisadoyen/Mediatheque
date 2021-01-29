@@ -26,13 +26,7 @@
 {{ form_row(form.genre) }}
 {{ form_row(form.rubriques) }}
 {{ form_row(form.tags) }}
-{{ form_row(form.montantObtention) }}
-{{ form_row(form.montantCaution) }}
-{{ form_row(form.montantVente) }}
-{{ form_row(form.observation) }}
-{{ form_row(form.numerique) }}
 {{ form_row(form.trancheAge) }}
-{{ form_row(form.statut) }}
 
 {{ form_label(form.entites) }}
 <div class="entites" data-prototype="{{ formMacros.printEntiteSubForm(form.entites.vars.prototype)|e('html_attr') }}">
@@ -40,9 +34,23 @@
         <div class="entite-subform">{{ formMacros.printEntiteSubForm(entite) }}</div>
     {% endfor %}
 </div>
+<button type="button" class="add_item_link" data-collection-holder-class="entites">+</button>
 
-<button type="button" class="add_item_link" data-collection-holder-class="entites">+</button> <br>
+
+<br><hr >
+{{ form_row(form.statut) }}
+{{ form_row(form.montantObtention) }}
+{{ form_row(form.dateObtention) }}
+{{ form_row(form.montantCaution) }}
+{{ form_row(form.montantVente) }}
+{{ form_row(form.observation) }}
+{{ form_row(form.numerique) }}
+
+<br>
 <button class="edit-btn">{{ button_label|default('Appliquer') }}</button>
+
+
+
 {{ form_end(form) }}
 
 

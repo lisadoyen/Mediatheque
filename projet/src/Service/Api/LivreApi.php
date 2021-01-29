@@ -169,13 +169,13 @@ class LivreApi
             array_push($allAuteurs,$auteur);
         }
         $auteurs = [];
-        if(sizeof($allAuteurs) == 1){
+        if(is_array($allAuteurs[0])){
+            $allAuteurs = array_shift($allAuteurs);
+            foreach ($allAuteurs as $auteur){
+                array_push($auteurs,$auteur->name);
+            }
+        }else{
             array_push($auteurs,$allAuteurs[0]->name);
-            return $auteurs;
-        }
-        $allAuteurs = array_shift($allAuteurs);
-        foreach ($allAuteurs as $auteur){
-            array_push($auteurs,$auteur->name);
         }
         // renvoie le 1 élement du tableau contenant tout les auteurs
         return $auteurs;
@@ -185,7 +185,7 @@ class LivreApi
     private function verifyResponseIsbn(){
         $infos['titres'] = $this->getTitres();
 
-        $infos['auteurs'] = $this->getAuteurs(); // TODO PROBLEME AUTEUR AVEC ISBN 9780747549550
+        $infos['auteurs'] = $this->getAuteurs();
 
         $infos['editeurs'] = $this->getEditeurs();
 

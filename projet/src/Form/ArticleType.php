@@ -7,12 +7,9 @@ use App\Entity\Categorie;
 use App\Entity\Genre;
 use App\Entity\Statut;
 use App\Entity\TrancheAge;
-use App\Repository\TrancheAgeRepository;
-use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -34,6 +31,12 @@ class ArticleType extends AbstractType
                 'placeholder' => ['year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'],
                 'years' => range(date('Y'), date('Y') - 100, -1),
                 'required' => false
+            ])
+            ->add('dateObtention', DateType::class, [
+                'placeholder' => ['year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'],
+                'years' => range(date('Y'), date('Y') - 100, -1),
+                'required' => true,
+                'mapped' => false
             ])
             ->add('montantObtention', NumberType::class, ['required' => true, 'label' => 'Montant d\'achat'])
             ->add('montantCaution', NumberType::class, ['required' => true, 'label' => 'Montant de caution'])
