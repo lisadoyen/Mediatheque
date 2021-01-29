@@ -13,7 +13,7 @@ use App\Repository\ArticleRepository;
 use App\Repository\AvisRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\PanierRepository;
-use App\Service\Api\FileUploader;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 

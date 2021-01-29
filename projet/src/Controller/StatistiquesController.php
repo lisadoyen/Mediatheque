@@ -2,8 +2,41 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
+use App\Entity\Action;
+use App\Entity\Article;
+use App\Entity\Avis;
+use App\Entity\Categorie;
+use App\Entity\Enregistrement;
+use App\Entity\Entite;
+use App\Entity\Favoris;
+use App\Entity\Genre;
+use App\Entity\StatutEnregistrement;
+use App\Entity\TypeEntite;
+use App\Form\AvisFormType;
+use App\Form\BibliothequeType;
+use App\Repository\ActionRepository;
+use App\Repository\ArticleRepository;
+use App\Repository\AvisRepository;
+use App\Repository\BibliothequeRepository;
+use App\Repository\CategorieRepository;
 use App\Repository\EnregistrementRepository;
-
+use App\Repository\EntiteRepository;
+use App\Repository\FavorisRepository;
+use App\Repository\GenreRepository;
+use App\Repository\StatutEnregistrementRepository;
+use App\Repository\StatutRepository;
+use App\Repository\TrancheAgeRepository;
+use App\Repository\TypeActionRepository;
+use App\Repository\TypeEnregistrementRepository;
+use App\Repository\TypeEntiteRepository;
+use App\Repository\UserRepository;
+use App\Repository\VideoldRepository;
+use App\Service\Article\Filtre;
+use App\Service\Article\Nouveaute;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -20,11 +53,19 @@ class StatistiquesController extends AbstractController
 {
     /**
      * @Route("/admin/statistiques", name="admin_statistiques", methods={"GET"})
+     * @param Request $request
      * @param EnregistrementRepository $enregistrementRepository
      * @param PaginatorInterface $paginator
+     * @param Filtre $filtre
+     * @param GenreRepository $genreRepository
+     * @param CategorieRepository $categorieRepo
+     * @param SessionInterface $session
+     * @param ArticleRepository $ar
      * @return Response
      */
-    public function statistiques(Request $request, EnregistrementRepository $enregistrementRepository,  PaginatorInterface $paginator): Response
+    public function statistiques(Request $request, EnregistrementRepository $enregistrementRepository,
+                                 PaginatorInterface $paginator, Filtre $filtre, GenreRepository $genreRepository,
+                                 CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar)
     {
         $allArticles =  $enregistrementRepository->getNbEmpruntByArticle();
         $articles = $paginator->paginate(
@@ -32,7 +73,13 @@ class StatistiquesController extends AbstractController
             $request->query->getInt('page', 1),
             10
         );
-        return $this->render('statistiques/statistiques.html.twig', ['articles'=>$articles, 'allArticles'=>$allArticles]);
+        return $this->render('statistiques/statistiques.html.twig', [
+            'articles'=>$articles,
+            'allArticles'=>$allArticles,
+            'donnees' => $filtre->filtre($request, false, $genreRepository, $categorieRepo, $session, $ar),
+            'genres' => $genreRepository->findAll(),
+            'categories' => $categorieRepo->findAll(),
+        ]);
     }
 
 }

@@ -4,7 +4,12 @@
     <div class="container-fluid p-5">
         <h1>Statistiques</h1>
         <hr>
-        <div class="p-3 row">
+        <div class="row">
+            <div class="col-lg-3">
+                <h2 class="center p-4">Filtre
+                    <button class="edit-btn" onclick="toggle_visibility(1)"><i onclick="btn_icone(this)" class="fas fa-arrow-up"></i></button></h2>
+                {% include 'data/_filtre_articles.html.twig' %}
+            </div>
             <div class="col-lg-6">
                 <div class="row text-center">
                     <h3 class="pb-3" style="font-weight: bold;color : #aa2222 !important;">Tableau des articles les plus empruntés</h3>

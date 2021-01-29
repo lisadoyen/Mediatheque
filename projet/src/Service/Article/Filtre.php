@@ -48,8 +48,10 @@ class Filtre
                     CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar){
         $data = new SearchData();
         if ($request->getMethod() == 'POST') {
-            $donnees['search'] = $_POST['search'];
-            $data->q = $donnees['search'];
+            if(isset($_POST['search'])) {
+                $donnees['search'] = $_POST['search'];
+                $data->q = $donnees['search'];
+            }
             if(!empty($_POST['genres'])){
                 $donnees['genres'] = $_POST['genres'];
                 $genres = [];
