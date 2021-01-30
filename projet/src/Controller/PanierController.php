@@ -18,17 +18,23 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier", name="panier")
      */
-    public function panier(PanierRepository $panierRepository)
+    public function panier(PanierRepository $panierRepository, TypeEnregistrementRepository $typeEnregistrementRepository)
     {
-        $panier = $panierRepository->findBy(['utilisateur' => $this->getUser()]);
+        $panierAchat = $panierRepository->findBy(['utilisateur' => $this->getUser(), 'typeEnregistrement' => $typeEnregistrementRepository->findBy(['libelle' => 'achat' ])]);
+        $panierEmprunt = $panierRepository->findBy(['utilisateur' => $this->getUser(), 'typeEnregistrement' => $typeEnregistrementRepository->findBy(['libelle' => 'emprunt' ])]);
         $totalAchat = 0;
-        foreach ($panier as $article){
+        foreach ($panierAchat as $article){
             if ($article->getTypeEnregistrement()->getLibelle() =="achat" and $article->getArticle()->getStatut()->getLibelle() != "vendu"){
                 $totalAchat = $totalAchat + $article->getArticle()->getMontantVente();
             }
         }
 
-        return $this->render('users/profil/panier.html.twig', ['panier' => $panier, 'totalAchat' => $totalAchat]);
+        return $this->render('users/profil/panier.html.twig', [
+            'achat' => $panierAchat,
+            'emprunt' => $panierEmprunt,
+            'totalAchat' => $totalAchat,
+            'totalPanier' => count($panierAchat) + count($panierEmprunt)
+        ]);
     }
 
     /**
