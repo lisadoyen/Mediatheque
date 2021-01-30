@@ -1,6 +1,25 @@
 <div class="searchbar form-group">
-    <input value="{{donnees.search|default('')}}" class="search_input" type="text" name="search" placeholder="Search...">
-    <a type="submit" value="{{donnees.search|default('')}}" href="{{ path('articles_show') }}" class="search_icon" onclick="this.closest('form').submit();return false;">
+    {% if donnees.search is defined and donnees.search is empty %}
+        <input value="{{donnees.search|default('')}}" class="search_input" type="text" name="search" placeholder="Search...">
+    {% else %}
+        {% if donnees.search is not defined %}
+            <input value="{{donnees.search|default('')}}" class="search_input" type="text" name="search" placeholder="Search...">
+        {% else %}
+            <input value="{{donnees.search|default('')}}" style="
+            color:white;
+            border: 0;
+            outline: 0;
+            background: none;
+            width:50vh;
+            caret-color:white;
+            line-height: 4vh;
+            transition: width 0.4s linear;
+            font-size: 3vh!important;
+            height: 3.2vh;
+            " type="text" name="search" placeholder="Search...">
+        {% endif %}
+    {% endif %}
+    <a type="submit" value="{{donnees.search|default('')}}" href="{{ path('articles_show') }}" class="search_icon">
         <img src="{{asset('assets/images/yellow/search.png')}}" class="search-icon">
     </a>
 </div>
