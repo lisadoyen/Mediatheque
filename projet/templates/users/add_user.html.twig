@@ -1,7 +1,8 @@
 {% extends "layout.html.twig" %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
-<div class="container cadre">
-    <h1>Ajouter un utilisateur</h1><hr>
+<div class="container">
+    <h1 class="mt-5">Ajouter un utilisateur</h1><hr>
     {{ form_start(form) }}
 {#        {{ form_row(form.name, {'label' : 'Nom '}) }}<br>#}
 {#        {{ form_row(form.firstname, {'label' : 'Prenom ' }) }}<br>#}
@@ -12,7 +13,8 @@
 {#        {{ form_row(form.password, {'label' : 'Mot de passe ', 'type':'password'}) }}<br>#}
 {#        {{ form_row(form.confirm_password, {'label' :'Confirmer le Mot de passe ', 'type':'password'}) }}<br>#}
 {#        <hr>#}
-        <div class="row">
+    {{ form_widget(form) }}
+        <div class="row mb-5">
             <div class="col-sm">
                 <a href="{{path('users_accueil')}}" class="edit-btn">Annuler</a>
             </div>
