@@ -67,7 +67,7 @@ class StatistiquesController extends AbstractController
      */
     public function statistiques(Request $request, EnregistrementRepository $enregistrementRepository, StatutRepository $statutRepository,
                                  PaginatorInterface $paginator, Filtre $filtre, GenreRepository $genreRepository, TrancheAgeRepository $ageRepository,
-                                 CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar)
+                                 CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar,  Nouveaute $new, ActionRepository $actionsRepo)
     {
         $allArticles =  $enregistrementRepository->getNbEmpruntByArticle();
         $articles = $paginator->paginate(
@@ -75,12 +75,19 @@ class StatistiquesController extends AbstractController
             $request->query->getInt('page', 1),
             10
         );
+        $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,30);
+
         return $this->render('statistiques/statistiques.html.twig', [
             'articles'=>$articles,
             'allArticles'=>$allArticles,
             'donnees' => $filtre->filtre($request, false, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
             'genres' => $genreRepository->findAll(),
             'categories' => $categorieRepo->findAll(),
+            'statuts' => $statutRepository->findAll(),
+            'ages' =>$ageRepository ->findAll(),
+            'min' => $filtre->filtre($request, false, true, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+            'max' => $filtre->filtre($request, false, false, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+            'nouveaute' => $nouveaute,
         ]);
     }
 
