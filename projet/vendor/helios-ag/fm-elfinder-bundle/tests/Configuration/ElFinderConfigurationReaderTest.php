@@ -27,13 +27,13 @@ class ElFinderConfigurationReaderTest extends \PHPUnit\Framework\TestCase
         $containerMock
             ->expects($this->any())
             ->method('has')
-            ->will($this->returnValueMap(array(
-                array(
+            ->will($this->returnValueMap([
+                [
                     'elfinder.driver.local',
                     ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE,
                     $this->elFinderVolumeMock,
-                ),
-            )));
+                ],
+            ]));
 
         /** @var \Symfony\Component\HttpFoundation\RequestStack $requestStack|\PHPUnit_Framework_MockObject_MockObject */
         $requestStack = $this->createMock('Symfony\Component\HttpFoundation\RequestStack');
@@ -60,15 +60,15 @@ class ElFinderConfigurationReaderTest extends \PHPUnit\Framework\TestCase
             ->method('getCurrentRequest')
             ->will($this->returnValue($requestObject));
 
-        $params = array(
-            'instances' => array(
-                'default'  => array(
+        $params = [
+            'instances' => [
+                'default'  => [
                     'cors_support' => '',
-                    'connector'    => array(
+                    'connector'    => [
                         'debug' => '', 'binds' => '', 'plugins' => '',
-                        'roots' => array(
-                            'uploads' => array(
-                                'flysystem'         => array('enabled' => false),
+                        'roots' => [
+                            'uploads' => [
+                                'flysystem'         => ['enabled' => false],
                                 'volume_id'         => 0,
                                 'security_voter'    => '',
                                 'show_hidden'       => false,
@@ -109,17 +109,18 @@ class ElFinderConfigurationReaderTest extends \PHPUnit\Framework\TestCase
                                 'archive_mimes'     => '',
                                 'archivers'         => '',
                                 'fileMode'          => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'with_path_with_url'  => array(
+                                'quarantine'        => null,
+                            ],
+                        ],
+                    ],
+                ],
+                'with_path_with_url'  => [
                     'cors_support' => true,
-                    'connector'    => array(
+                    'connector'    => [
                         'debug' => '', 'binds' => '', 'plugins' => '',
-                        'roots' => array(
-                            'uploads' => array(
-                                'flysystem'         => array('enabled' => false),
+                        'roots' => [
+                            'uploads' => [
+                                'flysystem'         => ['enabled' => false],
                                 'volume_id'         => 1,
                                 'security_voter'    => '',
                                 'show_hidden'       => false,
@@ -162,17 +163,18 @@ class ElFinderConfigurationReaderTest extends \PHPUnit\Framework\TestCase
                                 'archive_mimes'     => '',
                                 'archivers'         => '',
                                 'fileMode'          => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'without_path_with_url'  => array(
+                                'quarantine'        => null,
+                            ],
+                        ],
+                    ],
+                ],
+                'without_path_with_url'  => [
                     'cors_support' => true,
-                    'connector'    => array(
+                    'connector'    => [
                         'debug' => '', 'binds' => '', 'plugins' => '',
-                        'roots' => array(
-                            'uploads' => array(
-                                'flysystem'         => array('enabled' => false),
+                        'roots' => [
+                            'uploads' => [
+                                'flysystem'         => ['enabled' => false],
                                 'volume_id'         => 2,
                                 'security_voter'    => '',
                                 'show_hidden'       => false,
@@ -215,17 +217,18 @@ class ElFinderConfigurationReaderTest extends \PHPUnit\Framework\TestCase
                                 'archive_mimes'     => '',
                                 'archivers'         => '',
                                 'fileMode'          => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'without_path_with_url_absolute_homeFolder'  => array(
+                                'quarantine'        => null,
+                            ],
+                        ],
+                    ],
+                ],
+                'without_path_with_url_absolute_homeFolder'  => [
                     'cors_support' => true,
-                    'connector'    => array(
+                    'connector'    => [
                         'debug' => '', 'binds' => '', 'plugins' => '',
-                        'roots' => array(
-                            'uploads' => array(
-                                'flysystem'         => array('enabled' => false),
+                        'roots' => [
+                            'uploads' => [
+                                'flysystem'         => ['enabled' => false],
                                 'volume_id'         => 2,
                                 'security_voter'    => '',
                                 'show_hidden'       => false,
@@ -268,12 +271,13 @@ class ElFinderConfigurationReaderTest extends \PHPUnit\Framework\TestCase
                                 'archive_mimes'     => '',
                                 'archivers'         => '',
                                 'fileMode'          => '',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                                'quarantine'        => null,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         return new ElFinderConfigurationReader($params, $requestStack, $containerMock);
     }

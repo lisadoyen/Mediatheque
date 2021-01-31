@@ -16,6 +16,8 @@ use App\Repository\PanierRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -63,6 +65,39 @@ class ProfilController extends AbstractController
     public function donneePerso()
     {
         return $this->render('users/profil/rgpd_data.html.twig');
+    }
+
+    /**
+     * @Route("/profil/data/download", name="mes_donnees_download")
+     */
+    public function mesDonneeDownload()
+    {
+        $pdfOption = new Options();
+        $pdfOption->set('defaultFont','Roboto');
+        $pdfOption->setIsRemoteEnabled(true);
+
+        $dompdf = new Dompdf($pdfOption);
+        $context = stream_context_create([
+            'ssl' => [
+                'verfify_peer' => FALSE,
+                'verfify_peer_name' => FALSE,
+                'allow_self_signed' => TRUE
+            ]
+        ]);
+        $dompdf->setHttpContext($context);
+
+        $html = $this->renderView('users/profil/download_data.html.twig');
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4','portrait');
+        $dompdf->render();
+        $file = $this->getUser()->getUsername().'-data-'.date('Y-m-d-H-i').'.pdf';
+
+        $dompdf->stream($file,[
+            'Attachement' => true
+        ]);
+
+        return new Response();
     }
 
     /**

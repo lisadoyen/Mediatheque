@@ -8,8 +8,11 @@ use App\Repository\ArticleRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\PanierRepository;
 use App\Repository\TypeEnregistrementRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
@@ -126,6 +129,53 @@ class PanierController extends AbstractController
         $this->addFlash('success',"Votre panier a bien été vidé !");
 
         return $this->redirectToRoute('panier');
+    }
+
+    /**
+     * @Route("/panier/recap", name="recap_panier")
+     */
+    public function recapPanier(PanierRepository $panierRepository)
+    {
+        $user = $this->getUser();
+        $panier = $panierRepository->findBy(['utilisateur'=>$user]);
+        $totalAchat = 0;
+        foreach ($panier as $article){
+            if ($article->getTypeEnregistrement()->getLibelle() =="achat" and $article->getArticle()->getStatut()->getLibelle() != "vendu"){
+                $totalAchat = $totalAchat + $article->getArticle()->getMontantVente();
+            }
+        }
+
+        $pdfOption = new Options();
+        $pdfOption->set('defaultFont','Roboto');
+        $pdfOption->setIsRemoteEnabled(true);
+
+        $dompdf = new Dompdf($pdfOption);
+        $context = stream_context_create([
+            'ssl' => [
+                'verfify_peer' => FALSE,
+                'verfify_peer_name' => FALSE,
+                'allow_self_signed' => TRUE
+            ]
+        ]);
+        $dompdf->setHttpContext($context);
+
+        $html = $this->renderView('users/profil/panier_recap_pdf.html.twig', [
+            'panier'=>$panier,
+            'total' => $totalAchat,
+            'date' => new \DateTime(),
+            'commande' => 12345 //Récup le num de la commande lors de la validation
+        ]);
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4','portrait');
+        $dompdf->render();
+        $file = 'panier-'.date('Y-m-d-H-i').'.pdf';
+
+        $dompdf->stream($file,[
+            'Attachement' => true
+        ]);
+
+        return new Response();
     }
 }
 

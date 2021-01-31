@@ -41,6 +41,8 @@ Recommended bundles to use with:
     - [Events](/docs/events-listeners-subscribers.md#events)
     - [Sub requests](/docs/events-listeners-subscribers.md#sub-requests)
 - [Elfinder Form Type](/docs/elfinder-form-type.md)
+    - [Configuration](/docs/elfinder-form-type.md#configuration)
+    - [EasyAdmin 2.x](/docs/elfinder-form-type.md#easyadmin-2x-integration)
 - [CKEditor integration](/docs/ckeditor-integration.md)
     - [Installation](/docs/ckeditor-integration.md#step-1-installation)
     - [Configuration](/docs/ckeditor-integration.md#step-2-configure-ckeditor-setting-via-settingsyml-or-through-form-builder)
@@ -54,6 +56,7 @@ Recommended bundles to use with:
     - [Plugins](/docs/advanced-configuration.md#plugins)
     - [Service as volume driver](/docs/advanced-configuration.md#symfony-service-as-a-volume-driver)
     - [Flysystem configuration](/docs/advanced-configuration.md#flysystem-configuration)
+- [Configuration dump](/docs/configuration-dump.md)
 
 ## Installation
 
@@ -126,8 +129,9 @@ fm_elfinder:
     #assets_path: / # default is /assets, this is where css/js elfinder files are
     instances:
         default:
-            locale: %locale% # defaults to current request locale
+            locale: '%locale%' # defaults to current request locale
             editor: ckeditor # other options are tinymce, tinymce4, fm_tinymce, form, simple, custom
+            relative_path: false #default true, will produce absolute urls to specified file(s)
             #editor_template: custom template for your editor # default null
             #path_prefix: / # for setting custom assets path prefix, useful for non vhost configurations, i.e. http://127.0.0.1/mysite/
             #fullscreen: true|false # default is true, applies to simple and ckeditor editors
@@ -190,3 +194,48 @@ To use this feature, you **must** provide the instance name in the URL,
 and of course be sure to set proper write/read permissions on home folders.
 
 **Note:** this feature is only available with `LocalFileSystem` driver.
+
+
+## If I want more one home folder is possible ?
+
+Yes you can with this configuration in your fm_elfinder.yaml
+
+
+where_is_multi: 
+    {connector}: {index of the connector}
+multi_home_folder: true
+folder_separator: {one char other of /}
+
+### Example
+```
+fm_elfinder:
+    instances:
+        default:
+            locale: fr # defaults to current request locale
+            editor: ckeditor # other options are tinymce, tinymce4, fm_tinymce, form, simple, custom
+            #editor_template: custom template for your editor # default null
+            #path_prefix: http://localhost/ # for setting custom assets path prefix, useful for non vhost configurations, i.e. http://127.0.0.1/mysite/
+            fullscreen: false # default is true, applies to simple and ckeditor editors
+            where_is_multi: 
+                roots: 0
+            multi_home_folder: true
+            folder_separator: "|"
+            #theme: smoothness # jquery theme, default is 'smoothness'
+            #visible_mime_types: ['image/png', 'image/jpg', 'image/jpeg'] # only show these mime types, defaults to show all
+            connector:
+                #debug: true|false # defaults to false
+                roots:       # at least one root must be defined, defines root filemanager directories
+                    uploads:
+                        #show_hidden: true|false # defaults to false, hides dotfiles
+                        driver: LocalFileSystem
+                        path: "/var"
+                        alias: Bibliothèque générale
+                        upload_allow: ['all']
+                        #upload_deny: ['all']
+                        upload_max_size: 500M # also file upload sizes restricted in php.ini
+                        attributes:
+                            - {pattern: '..', read: true, write: true, locked: false}
+                        #attributes: example of setting attributes permission
+                        #    - { pattern: '/(.*?)/', read: true, write: false, locked: true }
+
+```

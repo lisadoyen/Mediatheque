@@ -1,19 +1,14 @@
 {% extends "layout.html.twig" %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/article-form.css') }}">
+{% endblock %}
 {% block body %}
 <div class="container">
     <h1 class="mt-5">Ajouter un utilisateur</h1><hr>
     {{ form_start(form) }}
-{#        {{ form_row(form.name, {'label' : 'Nom '}) }}<br>#}
-{#        {{ form_row(form.firstname, {'label' : 'Prenom ' }) }}<br>#}
-{#        {{ form_row(form.username, {'label' : 'Identifiant'}) }}<br>#}
-{#        {{ form_row(form.email, {'label' : 'Email '}) }}<br>#}
-{#        {{form_row(form.phone, {'label' : 'Numéro de téléphone '}) }}<br>#}
-{#        {{ form_row(form.status, {'label' : 'Statut  '}) }}<br>#}
-{#        {{ form_row(form.password, {'label' : 'Mot de passe ', 'type':'password'}) }}<br>#}
-{#        {{ form_row(form.confirm_password, {'label' :'Confirmer le Mot de passe ', 'type':'password'}) }}<br>#}
-{#        <hr>#}
-    {{ form_widget(form) }}
+        {{ form_widget(form) }}
         <div class="row mb-5">
             <div class="col-sm">
                 <a href="{{path('users_accueil')}}" class="edit-btn">Annuler</a>

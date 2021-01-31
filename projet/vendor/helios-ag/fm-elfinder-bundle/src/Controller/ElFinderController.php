@@ -23,12 +23,6 @@ class ElFinderController extends AbstractController
     /**
      * Renders Elfinder.
      *
-     * @param Request $request
-     * @param string  $instance
-     * @param string  $homeFolder
-     *
-     * @return Response
-     *
      * @throws Exception
      */
     public function show(Request $request, string $instance, string $homeFolder): Response
@@ -44,21 +38,13 @@ class ElFinderController extends AbstractController
             $parameters['locale'] = $request->getLocale();
         }
 
-        $assetsPath   = $efParameters['assets_path'];
-        $result       = $this->selectEditor($parameters, $instance, $homeFolder, $assetsPath, $request->get('id'));
+        $assetsPath      = $efParameters['assets_path'];
+        $result          = $this->selectEditor($parameters, $instance, $homeFolder, $assetsPath, $request->get('id'));
 
         return $this->render($result['template'], $result['params']);
     }
 
     /**
-     * @param array  $parameters
-     * @param string $instance
-     * @param string $homeFolder
-     * @param string $assetsPath
-     * @param string $formTypeId
-     *
-     * @return array
-     *
      * @throws Exception
      */
     private function selectEditor(array $parameters, string $instance, string $homeFolder, string $assetsPath, string $formTypeId = null): array
@@ -92,6 +78,7 @@ class ElFinderController extends AbstractController
                     'theme'         => $theme,
                     'pathPrefix'    => $pathPrefix,
                     'onlyMimes'     => $onlyMimes,
+                    'id'            => $formTypeId,
                 ];
 
                 return $result;
@@ -200,19 +187,11 @@ class ElFinderController extends AbstractController
         }
     }
 
-    /**
-     * @param SessionInterface         $session
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param Request                  $request
-     * @param string                   $instance
-     * @param string                   $homeFolder
-     *
-     * @return JsonResponse
-     */
     public function load(SessionInterface $session, EventDispatcherInterface $eventDispatcher, Request $request, string $instance, string $homeFolder): JsonResponse
     {
-        $loader = $this->get('fm_elfinder.loader');
-        $loader->initBridge($instance); // builds up the Bridge object for the loader with the given instance
+        $efParameters = $this->container->getParameter('fm_elfinder');
+        $loader       = $this->get('fm_elfinder.loader');
+        $loader->initBridge($instance, $efParameters); // builds up the Bridge object for the loader with the given instance
 
         if ($loader instanceof ElFinderLoader) {
             $loader->setSession(new ElFinderSession($session));
@@ -234,8 +213,11 @@ class ElFinderController extends AbstractController
     public function mainJS()
     {
         return new Response(
-            $this->renderView('@FMElfinder/Elfinder/helper/main.js.twig'), 200, [
+            $this->renderView('@FMElfinder/Elfinder/helper/main.js.twig'),
+            200,
+            [
                 'Content-type' => 'text/javascript',
-            ]);
+            ]
+        );
     }
 }
