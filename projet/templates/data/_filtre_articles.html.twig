@@ -168,24 +168,17 @@
 
         <div class="form-group">
             <label>Prix :</label>
-            <input name="min"  type="text"  size="15" placeholder="min" value="{{donnees.min}}" class="vente {% if erreurs.min is defined %}is-invalid{% endif %}">
-            {% if erreurs.min is defined %}
-                <div class="invalid-feedback">{{erreurs.min}}</div>
-            {% endif %}
-            <input name="max"  type="text"  size="15" placeholder="max" value="{{donnees.max}}" class="vente {% if erreurs.max is defined %}is-invalid{% endif %}">
-            <i class="pl-5" style="font-size: 1vh;">ce champs s'applique uniquement sur les produits en vente</i>
-            {% if erreurs.max is defined %}
-                <div class="invalid-feedback">{{erreurs.max}}</div>
-            {% endif %}
-            <br>
+            <input size="15%" name="min" type="text" placeholder="min" value="{{donnees.min}}">
+            <input size="15%" name="max" type="text" placeholder="max" value="{{donnees.max}}">
+            <i class="pl-5" style="font-size:1vh;">ce champs s'applique uniquement sur les produits en vente</i>
         </div>
 
-        <style>
-            .vente::placeholder{
-                color: grey;
-            }
-        </style>
     </form>
 </div>
 
+<style>
+    input::placeholder{
+        color: grey;
+    }
+</style>
 
