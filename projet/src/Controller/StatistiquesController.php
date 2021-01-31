@@ -55,6 +55,7 @@ class StatistiquesController extends AbstractController
      * @Route("/admin/statistiques", name="admin_statistiques", methods={"GET"})
      * @param Request $request
      * @param EnregistrementRepository $enregistrementRepository
+     * @param StatutRepository $statutRepository
      * @param PaginatorInterface $paginator
      * @param Filtre $filtre
      * @param GenreRepository $genreRepository
@@ -63,7 +64,7 @@ class StatistiquesController extends AbstractController
      * @param ArticleRepository $ar
      * @return Response
      */
-    public function statistiques(Request $request, EnregistrementRepository $enregistrementRepository,
+    public function statistiques(Request $request, EnregistrementRepository $enregistrementRepository, StatutRepository $statutRepository,
                                  PaginatorInterface $paginator, Filtre $filtre, GenreRepository $genreRepository,
                                  CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar)
     {
@@ -76,7 +77,7 @@ class StatistiquesController extends AbstractController
         return $this->render('statistiques/statistiques.html.twig', [
             'articles'=>$articles,
             'allArticles'=>$allArticles,
-            'donnees' => $filtre->filtre($request, false, $genreRepository, $categorieRepo, $session, $ar),
+            'donnees' => $filtre->filtre($request, false, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository),
             'genres' => $genreRepository->findAll(),
             'categories' => $categorieRepo->findAll(),
         ]);

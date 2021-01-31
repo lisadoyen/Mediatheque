@@ -21,7 +21,21 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * Récupère le prix minimum et maximum correspondant à une recherche
      * @param SearchData $search
+     * @return int[]
+     */
+    public function findMinMax(SearchData $search):array{
+        $results = $this->getSearchQuery($search, true)
+            ->select('MIN(a.montantVente) as min','MAX(a.montantVente) as max')
+            ->getQuery()
+            ->getScalarResult();
+        return [(int)$results[0]['min'], (int)$results[0]['max']];
+    }
+
+    /**
+     * @param SearchData $search
+     * @return int|mixed|string
      */
     public function findSearch(SearchData $search){
         return $this->getSearchQuery($search)->getQuery()->getResult();
@@ -34,10 +48,23 @@ class ArticleRepository extends ServiceEntityRepository
             ->select('g', 's', 'a') // g = genre , s = statut
             ->join('a.genre', 'g')
             ->join('a.categorie', 'c')
+            ->join('a.actions', 'ac')
             ->join('a.statut', 's')
             ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'");
             // selection des articles avec le statut vendable ou empruntable
 
+        if(!empty($search->min) && $ignorePrice == false){
+            $query=$query
+                ->andWhere('a.montantVente >= :min')
+                //->andWhere('s.libelle = "vendable"')
+                ->setParameter('min', $search->min);
+        }
+        if(!empty($search->max)&& $ignorePrice == false){
+            $query=$query
+                ->andWhere('a.montantVente <= :max')
+                //->andWhere('s.libelle = "vendable"')
+                ->setParameter('max', $search->max);
+        }
 
         if(!empty($search->q)){
             $query = $query
@@ -55,6 +82,17 @@ class ArticleRepository extends ServiceEntityRepository
             $query = $query
                 ->andWhere('c.id IN (:categorie)')
                 ->setParameter('categorie', $search->categorie);
+        }
+
+        if(!empty($search->statut)) {
+            $query = $query
+                ->andWhere("s.id IN (:statut)")
+                ->setParameter('statut', $search->statut);
+        }
+
+        if(!empty($search->nouveaute)){
+            $query=$query
+                ->andWhere('');
         }
 
         return $query;

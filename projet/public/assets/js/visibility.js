@@ -1,17 +1,29 @@
 function toggle_visibility(id) {
     var e = document.getElementById(id);
-    if(e.style.visibility === 'collapse')
+    if(e.style.visibility === 'hidden')
         e.style.visibility = 'visible';
     else
-        e.style.visibility = 'collapse';
+        e.style.visibility = 'hidden';
 }
 
-function test(id) {
-    var e = document.getElementById(id);
-    if(e.style.visibility === 'collapse')
-        e.style.visibility = 'visible';
-    else
-        e.style.visibility = 'collapse';
+function affichageZonePrix(caseACocher)
+{
+    var prix = document.getElementById("ouvert");
+    if (caseACocher.checked) {
+        console.log("coucou");
+        if(prix.style.visibility === 'hidden')
+            prix.style.visibility = "visible";
+        else
+            prix.style.visibility = "visible";
+    }
+    else {
+        console.log("hello");
+        if(prix.style.visibility === 'visible')
+            prix.style.visibility = "hidden";
+        else
+            prix.style.visibility = "hidden";
+    }
+
 }
 
 function btn_icone(x){
@@ -34,8 +46,7 @@ Array.prototype.forEach.call(hiders, function (hider) {
     let hiderTarget = document.querySelector(hiderID);
 
     hider.addEventListener('click', function (event) {
-        event.preventDefault();
-
+       event.preventDefault();
         hiderTarget.classList.toggle('-visible');
     });
 });

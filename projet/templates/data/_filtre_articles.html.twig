@@ -5,34 +5,55 @@
     </form>
 
     <form method="post" action="{{ path('articles_show') }}" >
-
         <input type="hidden" name="token" value="{{ csrf_token('form_articles') }}">
         <button type="submit" class="edit-btn ">Filtrer</button>
+
+        {% if not (donnees.min == "" and donnees.max == "" and
+            donnees.search is not defined and donnees.categories is not defined and
+            donnees.genres is not defined and donnees.statuts is not defined) %}
+            <hr>
+            <div>Filtre activé :</div><br>
+            <div class="container" style="color: grey">
+                <u style="text-decoration: none">
+                    {% if donnees.search is defined %}
+                        {% if donnees.search is not empty %}
+                        <li> recherche : <strong>{{ donnees.search }}</strong></li>
+                        {% endif %}
+                    {% endif %}
+                    {% if categories is not empty %}
+                        {% for categorie in categories %}
+                            {% if donnees.categories[categorie.id] is defined %}
+                                <li> categorie : <strong>{{ categorie.libelle|capitalize }}</strong></li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if genres is not empty %}
+                        {% for genre in genres %}
+                            {% if donnees.genres[genre.id] is defined %}
+                                <li> genre : <strong>{{ genre.libelle|capitalize }}</strong></li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if statuts is not empty %}
+                        {% for statut in statuts %}
+                            {% if donnees.statuts[statut.id] is defined %}
+                                {% if statut.libelle == 'vendable' or statut.libelle == 'empruntable' %}
+                                    <li> statut : <strong>{{ statut.libelle|capitalize }}</strong></li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if donnees.min is not empty %}
+                        <li> prix min : <strong>{{ donnees.min }}</strong></li>
+                    {% endif %}
+                    {% if donnees.max is not empty %}
+                        <li> prix max : <strong>{{ donnees.max }}</strong></li>
+                    {% endif %}
+                </u>
+           </div>
+        {% endif %}
+
         <hr>
-        <div class="container" style="color: grey">
-            <u style="text-decoration: none">
-                {% if donnees.search is defined %}
-                    {% if donnees.search is not empty %}
-                    <li> recherche : <strong>{{ donnees.search }}</strong></li>
-                {% endif %}{% endif %}
-                {% if categories is not empty %}
-                    {% for categorie in categories %}
-                        {% if donnees.categories[categorie.id] is defined %}
-                            <li> categorie : <strong>{{ categorie.libelle|capitalize }}</strong></li>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-                {% if genres is not empty %}
-                    {% for genre in genres %}
-                        {% if donnees.genres[genre.id] is defined %}
-                            <li> genre : <strong>{{ genre.libelle|capitalize }}</strong></li>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-            </u>
-       </div>
-
-
         <div class="form-group">
             <div class="sub-menu-filtre">
                 <a href="#mon-bloc-1" data-js="hide"><h5>Catégories</h5></a>
@@ -86,17 +107,6 @@
 
         <div class="form-group">
             <div class="sub-menu-filtre">
-                <a href="#mon-bloc-4" data-js="hide"><h5>Nouveautés</h5></a>
-            </div>
-            <div id="mon-bloc-4" class="hide-box p-2">
-                <div class="filtre">
-                    filtre à ajouter
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="sub-menu-filtre">
                 <a href="#mon-bloc-5" data-js="hide"><h5>Limite d'âge</h5></a>
             </div>
             <div id="mon-bloc-5" class="hide-box p-2">
@@ -105,17 +115,46 @@
                 </div>
             </div>
         </div>
+
         <div class="form-group">
-            <div class="sub-menu-filtre">
-                <a href="#mon-bloc-6" data-js="hide"><h5>Statut</h5></a>
-            </div>
-            <div id="mon-bloc-6" class="hide-box p-2">
-                <div class="filtre">
-                    filtre prix max/min si vente
-                </div>
-            </div>
+            <label>Nouveauté :</label>
+            <input type="checkbox" name="nouveaute" {% if donnees.nouveaute is defined %} checked {% endif %}/>
         </div>
+
+        <hr>
         <div class="form-group">
+            <div class="filtre">
+                {% for statut in statuts %}
+                    {% if statut.libelle == 'empruntable' %}
+                        <input type="checkbox" name="statuts[]" value="{{statut.id}}"{% if donnees.statuts[statut.id] is defined %} checked {% endif %}>
+                        {{ statut.libelle|capitalize }}
+                        <br/>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% for statut in statuts %}
+                {% if statut.libelle == 'vendable'%}
+                        <input type="checkbox" name="statuts[]" value="{{statut.id}}"{% if donnees.statuts[statut.id] is defined %} checked {% endif %}>
+                    {{ statut.libelle|capitalize }}
+                    <br/>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label>Prix :</label>
+            <input name="min"  type="text"  size="5" placeholder="min" value="{{donnees.min|default('')}}" class="{% if erreurs.min is defined %}is-invalid{% endif %}">
+            {% if erreurs.min is defined %}
+                <div class="invalid-feedback">{{erreurs.min}}</div>
+            {% endif %}
+            <input name="max"  type="text"  size="5" placeholder="max" value="{{donnees.max|default('')}}" class="{% if erreurs.max is defined %}is-invalid{% endif %}">
+            {% if erreurs.max is defined %}
+                <div class="invalid-feedback">{{erreurs.max}}</div>
+            {% endif %}
+        </div>
+
+
+        <!--<div class="form-group">
             <div class="sub-menu-filtre">
                 <a href="#mon-bloc-7" data-js="hide"><h5>Date de parution</h5></a>
             </div>
@@ -125,7 +164,8 @@
                 </div>
             </div>
         </div>
-        <hr>
+        <hr>-->
     </form>
 </div>
+
 

@@ -28,7 +28,6 @@ class EnregistrementRepository extends ServiceEntityRepository
             ->andWhere('te.id=e.typeEnregistrement')
             ->andWhere("te.libelle='emprunt'")
             ->groupBy('a.id')
-            //->andHaving("nbEmpruntParArticle>=100")
             ->addOrderBy('nbEmpruntParArticle','DESC');
 
         return $qb->getQuery()->getResult();

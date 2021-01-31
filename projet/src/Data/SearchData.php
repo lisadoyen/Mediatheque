@@ -3,6 +3,7 @@ namespace App\Data;
 
 use App\Entity\Categorie;
 use App\Entity\Genre;
+use App\Entity\Statut;
 
 class SearchData{
 
@@ -26,4 +27,14 @@ class SearchData{
      * @var null|integer
      */
     public $min;
+    /**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    public $nouveaute = false;
+    /**
+     * @var Statut[]
+     */
+    public $statut = [];
+
 }

@@ -65,6 +65,7 @@ class ArticleController extends AbstractController
      * @param GenreRepository $genreRepository
      * @param ActionRepository $actionsRepo
      * @param Filtre $filtre
+     * @param StatutRepository $statutRepository
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @param Nouveaute $new
@@ -72,29 +73,30 @@ class ArticleController extends AbstractController
      */
     public function showAll($idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository,
-                            ActionRepository $actionsRepo, Filtre $filtre,
+                            ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
                             Request $request, PaginatorInterface $paginator, Nouveaute $new)
     {
         // Menu genre et/ou catégorie
         if($idGenre != null || $idCategorie != null) {
             $livres = $paginator ->paginate(
-                $filtre->filtreAvecCategorie_Genre($idGenre,$idCategorie, true, $genreRepository, $categorieRepo, $session, $ar),
+                $filtre->filtreAvecCategorie_Genre($idGenre,$idCategorie, true, $genreRepository,$statutRepository, $categorieRepo, $session, $ar),
                 $request->query->getInt('page',1),
                 30
             );
             $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,30);
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
+                'statuts' => $statutRepository->findAll(),
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
-                'donnees' => $filtre->filtreAvecCategorie_Genre($idGenre,$idCategorie, false, $genreRepository, $categorieRepo, $session, $ar),
+                'donnees' => $filtre->filtreAvecCategorie_Genre($idGenre,$idCategorie, false, $genreRepository, $statutRepository, $categorieRepo, $session, $ar),
                 'nouveaute' => $nouveaute
             ]);
         }
         // filtre
         else {
             $livres = $paginator->paginate(
-                $filtre->filtre($request, true, $genreRepository, $categorieRepo, $session, $ar),
+                $filtre->filtre($request, true, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository),
                 $request->query->getInt('page', 1),
                 30
             );
@@ -102,9 +104,12 @@ class ArticleController extends AbstractController
 
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
+                'statuts' => $statutRepository->findAll(),
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
-                'donnees' => $filtre->filtre($request, false, $genreRepository, $categorieRepo, $session, $ar),
+                'donnees' => $filtre->filtre($request, false, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository),
+                'min' => $filtre->filtre($request, false, true, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository),
+                'max' => $filtre->filtre($request, false, false, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository),
                 'nouveaute' => $nouveaute,
             ]);
         }
