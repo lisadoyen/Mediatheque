@@ -3,14 +3,14 @@
 namespace App\Form;
 
 use App\Entity\User;
-use Cassandra\Numeric;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\File;
@@ -42,53 +42,59 @@ class RegistrationType extends AbstractType
                 ],
                 'required' => true,
             ))
-            ->add('email_recup')
+            ->add('email_recup', TextType::class, array(
+                'label' => 'Email de récupération',
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'minMessage' => 'L\'email doit faire au minimum 2 caractères']),
+                ],
+                'required' => true,
+            ))
             ->add('matricule')
             ->add('nom')
             ->add('prenom')
             ->add('sexe')
-            ->add('password')
+            ->add('password',PasswordType::class)
             ->add('email_perso', TextType::class, array(
                 'label' => 'Email Personnel',
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'L\'email doit faire au minimum 2 caractères']),
                 ],
-                'required' => true,
+                'required' => false,
             ))
             ->add('tel_perso', TextType::class, array(
                 'label' => 'Téléphone Personnel',
                 'constraints' => [
                     new Assert\Length(['min' => 10, 'minMessage' => 'Le numéro de téléphone doit faire 10 chiffres']),
                 ],
-                'required' => true,
+                'required' => false,
             ))
             ->add('tel_perso2', TextType::class, array(
                 'label' => 'Téléphone Personnel secondaire',
                 'constraints' => [
                     new Assert\Length(['min' => 10, 'minMessage' => 'Le numéro de téléphone doit faire 10 chiffres']),
                 ],
-                'required' => true,
+                'required' => false,
             ))
             ->add('email_pro', TextType::class, array(
                 'label' => 'Email Professionnel',
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'L\'email doit faire au minimum 2 caractères']),
                 ],
-                'required' => true,
+                'required' => false,
             ))
             ->add('tel_pro', TextType::class, array(
                 'label' => 'Téléphone Professionnel',
                 'constraints' => [
                     new Assert\Length(['min' => 10, 'minMessage' => 'Le numéro de téléphone doit faire 10 chiffres']),
                 ],
-                'required' => true,
+                'required' => false,
             ))
             ->add('tel_pro2', TextType::class, array(
                 'label' => 'Téléphone Professionnel secondaire',
                 'constraints' => [
                     new Assert\Length(['min' => 10, 'minMessage' => 'Le numéro de téléphone doit faire 10 chiffres']),
                 ],
-                'required' => true,
+                'required' => false,
             ))
             ->add('notification_perso', CheckboxType::class, [
                 'label' => 'Notification Personnel',

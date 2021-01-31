@@ -44,17 +44,29 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hash = $encoder->encodePassword($user, $user->getPassword());
-            $user->setpassword($hash);
-            $user->setRoles(["ROLE_ADHERENT"]);
+            if (!$user->getNotificationPerso() && !$user->getNotificationPro()){
+                $this->addFlash(
+                    'danger',
+                    'Vous devez activer au moins une notification (personnel ou professionnel) !'
+                );
+                return $this->render('users/add_user.html.twig', [
+                    'form' => $form->createView(),
+                ]);
+            } else {
+                $hash = $encoder->encodePassword($user, $user->getPassword());
+                $user->setpassword($hash);
+                $user->setRoles(["ROLE_ADHERENT"]);
+                $user->setDateCreation(new \DateTime());
+                $user->setDateModification(new \DateTime());
 
-            $manager->persist($user);
-            $manager->flush();
-            $this->addFlash(
-                'sucess',
-                'L\'utilisateur '.$user->getUsername().' à bien été ajouté !'
-            );
-            return $this->redirectToRoute('users_show');
+                $manager->persist($user);
+                $manager->flush();
+                $this->addFlash(
+                    'sucess',
+                    'L\'utilisateur '.$user->getUsername().' à bien été ajouté !'
+                );
+                return $this->redirectToRoute('users_show');
+            }
         }
         
         return $this->render('users/add_user.html.twig', [
