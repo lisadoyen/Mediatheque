@@ -50,26 +50,31 @@ class ArticleRepository extends ServiceEntityRepository
             ->join('a.categorie', 'c')
             ->join('a.actions', 'ac')
             ->join('a.statut', 's')
+            ->join('a.trancheAge', 'age')
             ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'");
             // selection des articles avec le statut vendable ou empruntable
 
-        if(!empty($search->min) && $ignorePrice == false){
-            $query=$query
-                ->andWhere('a.montantVente >= :min')
-                //->andWhere('s.libelle = "vendable"')
-                ->setParameter('min', $search->min);
-        }
-        if(!empty($search->max)&& $ignorePrice == false){
-            $query=$query
-                ->andWhere('a.montantVente <= :max')
-                //->andWhere('s.libelle = "vendable"')
-                ->setParameter('max', $search->max);
+        if(!empty($search->date)){
+            $query = $query
+                ->andWhere('a.datePublication LIKE :date')
+                ->setParameter('date', "%{$search->date}%");
         }
 
         if(!empty($search->q)){
             $query = $query
                 ->andWhere('a.titre LIKE :q')
                 ->setParameter('q', "%{$search->q}%");
+        }
+
+        if(!empty($search->min) && $ignorePrice == false){
+            $query=$query
+                ->andWhere('a.montantVente >= :min')
+                ->setParameter('min', $search->min);
+        }
+        if(!empty($search->max)&& $ignorePrice == false){
+            $query=$query
+                ->andWhere('a.montantVente <= :max')
+                ->setParameter('max', $search->max);
         }
 
         if(!empty($search->genre)) {
@@ -88,6 +93,12 @@ class ArticleRepository extends ServiceEntityRepository
             $query = $query
                 ->andWhere("s.id IN (:statut)")
                 ->setParameter('statut', $search->statut);
+        }
+
+        if(!empty($search->age)) {
+            $query = $query
+                ->andWhere("age.id IN (:age)")
+                ->setParameter('age', $search->age);
         }
 
         if(!empty($search->nouveaute)){

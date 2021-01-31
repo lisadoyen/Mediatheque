@@ -5,9 +5,11 @@ use App\Data\SearchData;
 use App\Entity\Categorie;
 use App\Entity\Genre;
 use App\Entity\Statut;
+use App\Entity\TrancheAge;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -61,6 +63,19 @@ class SearchDataType extends AbstractType
                 'class' =>Statut::class,
                 'expanded' => true,
                 'multiple' => true
+            ])
+            ->add('age', EntityType::class,[
+                'label' => false,
+                'required' => false,
+                'class' =>TrancheAge::class,
+                'expanded' => true,
+                'multiple' => true
+            ])
+            ->add('date', DateType::class,[
+                'placeholder' => ['year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'],
+                'years' => range(date('Y'), date('Y') - 100, -1),
+                'label' => false,
+                'required' => false,
             ])
         ;
     }

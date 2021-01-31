@@ -4,6 +4,9 @@ namespace App\Data;
 use App\Entity\Categorie;
 use App\Entity\Genre;
 use App\Entity\Statut;
+use App\Entity\TrancheAge;
+use DateTime;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class SearchData{
 
@@ -11,6 +14,10 @@ class SearchData{
      * @var string
      */
     public $q = '';
+    /**
+     * @var string
+     */
+    public $date = '';
     /**
      * @var Genre[]
      */
@@ -36,5 +43,9 @@ class SearchData{
      * @var Statut[]
      */
     public $statut = [];
+    /**
+     * @var TrancheAge[]
+     */
+    public $age = [];
 
 }

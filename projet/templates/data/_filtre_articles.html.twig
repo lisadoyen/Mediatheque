@@ -8,9 +8,9 @@
         <input type="hidden" name="token" value="{{ csrf_token('form_articles') }}">
         <button type="submit" class="edit-btn ">Filtrer</button>
 
-        {% if not (donnees.min == "" and donnees.max == "" and
+        {% if not ((donnees.min == "" or donnees.min is not defined) and (donnees.max == "" or donnees.max is not defined) and
             donnees.search is not defined and donnees.categories is not defined and
-            donnees.genres is not defined and donnees.statuts is not defined) %}
+            donnees.genres is not defined and donnees.statuts is not defined and donnees.ages is not defined) %}
             <hr>
             <div>Filtre activé :</div><br>
             <div class="container" style="color: grey">
@@ -42,6 +42,16 @@
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
+                    {% endif %}
+                    {% if ages is not empty %}
+                        {% for age in ages %}
+                            {% if donnees.ages[age.id] is defined %}
+                                <li> age : <strong>{{ age.libelle|capitalize }}</strong></li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if donnees.date is not empty %}
+                        <li> date : <strong>{{ donnees.date| date('d/m/Y') }}</strong></li>
                     {% endif %}
                     {% if donnees.min is not empty %}
                         <li> prix min : <strong>{{ donnees.min }}</strong></li>
@@ -107,18 +117,33 @@
 
         <div class="form-group">
             <div class="sub-menu-filtre">
-                <a href="#mon-bloc-5" data-js="hide"><h5>Limite d'âge</h5></a>
+                <a href="#mon-bloc-5" data-js="hide"><h5>Tranche d'âge</h5></a>
             </div>
             <div id="mon-bloc-5" class="hide-box p-2">
                 <div class="filtre">
-                    filtre à ajouter
+                    {% for age in ages|slice(0, ages|length/2) %}
+                        <input  type="checkbox" name="ages[]" value="{{ age.id }}"{% if donnees.ages[age.id] is defined %} checked {% endif %}>
+                        {{ age.libelle|capitalize }}
+                        <br/>
+                    {% endfor %}
+                </div>
+                {% for age in ages|slice(ages|length/2, ages|length) %}
+                    <input type="checkbox" name="ages[]" value="{{ age.id}}"{% if donnees.ages[age.id] is defined %} checked {% endif %}>
+                    {{ age.libelle|capitalize }}
+                    <br/>
+                {% endfor %}
                 </div>
             </div>
-        </div>
 
         <div class="form-group">
-            <label>Nouveauté :</label>
+            <label> Date de publication :</label>
+            <input type="date" name="date" value="{{ donnees.date }}"/>
+        </div>
+        <hr>
+
+        <div class="form-group">
             <input type="checkbox" name="nouveaute" {% if donnees.nouveaute is defined %} checked {% endif %}/>
+            <label>Nouveauté</label>
         </div>
 
         <hr>
@@ -143,28 +168,23 @@
 
         <div class="form-group">
             <label>Prix :</label>
-            <input name="min"  type="text"  size="5" placeholder="min" value="{{donnees.min|default('')}}" class="{% if erreurs.min is defined %}is-invalid{% endif %}">
+            <input name="min"  type="text"  size="15" placeholder="min" value="{{donnees.min}}" class="vente {% if erreurs.min is defined %}is-invalid{% endif %}">
             {% if erreurs.min is defined %}
                 <div class="invalid-feedback">{{erreurs.min}}</div>
             {% endif %}
-            <input name="max"  type="text"  size="5" placeholder="max" value="{{donnees.max|default('')}}" class="{% if erreurs.max is defined %}is-invalid{% endif %}">
+            <input name="max"  type="text"  size="15" placeholder="max" value="{{donnees.max}}" class="vente {% if erreurs.max is defined %}is-invalid{% endif %}">
+            <i class="pl-5" style="font-size: 1vh;">ce champs s'applique uniquement sur les produits en vente</i>
             {% if erreurs.max is defined %}
                 <div class="invalid-feedback">{{erreurs.max}}</div>
             {% endif %}
+            <br>
         </div>
 
-
-        <!--<div class="form-group">
-            <div class="sub-menu-filtre">
-                <a href="#mon-bloc-7" data-js="hide"><h5>Date de parution</h5></a>
-            </div>
-            <div id="mon-bloc-7" class="hide-box p-2">
-                <div class="filtre">
-                    filtre à ajouter
-                </div>
-            </div>
-        </div>
-        <hr>-->
+        <style>
+            .vente::placeholder{
+                color: grey;
+            }
+        </style>
     </form>
 </div>
 

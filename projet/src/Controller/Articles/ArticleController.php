@@ -16,6 +16,7 @@ use App\Entity\StatutEnregistrement;
 use App\Entity\TypeEntite;
 use App\Form\AvisFormType;
 use App\Form\BibliothequeType;
+use App\Form\SearchDataType;
 use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\AvisRepository;
@@ -69,13 +70,15 @@ class ArticleController extends AbstractController
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @param Nouveaute $new
+     * @param TrancheAgeRepository $ageRepository
      * @return Response
      */
     public function showAll($idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
-                            Request $request, PaginatorInterface $paginator, Nouveaute $new)
+                            Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository)
     {
+
         // Menu genre et/ou catégorie
         if($idGenre != null || $idCategorie != null) {
             $livres = $paginator ->paginate(
@@ -89,6 +92,9 @@ class ArticleController extends AbstractController
                 'statuts' => $statutRepository->findAll(),
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
+                'ages' =>$ageRepository ->findAll(),
+                'min' => 0,
+                'max'=> 100000,
                 'donnees' => $filtre->filtreAvecCategorie_Genre($idGenre,$idCategorie, false, $genreRepository, $statutRepository, $categorieRepo, $session, $ar),
                 'nouveaute' => $nouveaute
             ]);
@@ -96,7 +102,7 @@ class ArticleController extends AbstractController
         // filtre
         else {
             $livres = $paginator->paginate(
-                $filtre->filtre($request, true, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository),
+                $filtre->filtre($request, true, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
                 $request->query->getInt('page', 1),
                 30
             );
@@ -107,9 +113,10 @@ class ArticleController extends AbstractController
                 'statuts' => $statutRepository->findAll(),
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
-                'donnees' => $filtre->filtre($request, false, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository),
-                'min' => $filtre->filtre($request, false, true, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository),
-                'max' => $filtre->filtre($request, false, false, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository),
+                'ages' =>$ageRepository ->findAll(),
+                'donnees' => $filtre->filtre($request, false, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                'min' => $filtre->filtre($request, false, true, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                'max' => $filtre->filtre($request, false, false, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
                 'nouveaute' => $nouveaute,
             ]);
         }

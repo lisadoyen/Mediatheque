@@ -1,3 +1,7 @@
+
+
+// a voir si laisse filtre tous ouvert ou pas
+
 function toggle_visibility(id) {
     var e = document.getElementById(id);
     if(e.style.visibility === 'hidden')
@@ -50,3 +54,5 @@ Array.prototype.forEach.call(hiders, function (hider) {
         hiderTarget.classList.toggle('-visible');
     });
 });
+
+

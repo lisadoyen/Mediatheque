@@ -3,6 +3,10 @@
     width:50%; /* 2 colonnes */
 }
 
+.vente{
+    font-size: 100vh;
+}
+
 .hide-box {
     transition: .25s ease;
     max-height: 0;
