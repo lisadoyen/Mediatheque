@@ -19,22 +19,22 @@ class StatutEnregistrementRepository extends ServiceEntityRepository
         parent::__construct($registry, StatutEnregistrement::class);
     }
 
-    // /**
-    //  * @return StatutEnregistrement[] Returns an array of StatutEnregistrement objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    /**
+     * retourne les articles en cours d'emprunts
+     * @return int|mixed|string
+     */
+    public function findActif()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $query = $this->getEntityManager()
+            ->createQuery("
+                SELECT s.id, s.libelle
+                FROM App:StatutEnregistrement AS s
+                WHERE s.id = 1 or s.id = 2 or s.id = 4 or s.id = 5"
+            );
+        return $query->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?StatutEnregistrement

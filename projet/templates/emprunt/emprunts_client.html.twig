@@ -2,7 +2,7 @@
 {% block body %}
 
     <div class="container mt-5">
-        <h1 class="mt-2">Vos emprunts ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
+        <h1 class="mt-2">Vos emprunts ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
 
         {% if emprunts is not empty %}
             <table class="table">
@@ -71,7 +71,7 @@
             </table>
         {% else %}
             <div class="col-sm m-2">
-                <b>Vous n'avez aucune emprunt</b>
+                <b>Vous n'avez aucune emprunt {{ statut }}</b>
             </div>
         {% endif %}
         <hr class="mb-5">
