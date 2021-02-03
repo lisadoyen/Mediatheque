@@ -2,8 +2,15 @@
 {% block body %}
 
     <div class="container mt-5">
-        <h1 class="mt-2">Les emprunts ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
-
+        <h1 class="mt-2">Les emprunts ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
+        <div class="row">
+            <div class="col-sm">
+                <a href="{{ path('gestion_actif_emprunts') }}" class="edit-btn float-left">Emprunts Actifs</a>
+            </div>
+            <div class="col-sm">
+                <a href="{{ path('gestion_historique_emprunts') }}" class="edit-btn float-right">Tous les emprunts (historiques)</a>
+            </div>
+        </div>
         {% if emprunts is not empty %}
             <table class="table">
                 <thead>
@@ -63,7 +70,7 @@
                             {{ emprunt.statutEnregistrement.libelle }}
                         </td>
                         <td>
-                            <a href="{{ path('article_details', {id: emprunt.article.id}) }}" class="btn edit-btn">Modifier</a>
+                            <a href="{{ path('article_edit', {id: emprunt.article.id}) }}" class="btn edit-btn">Modifier</a>
                         </td>
                     </tr>
                 {% endfor %}

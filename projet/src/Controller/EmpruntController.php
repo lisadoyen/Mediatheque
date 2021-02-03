@@ -50,9 +50,28 @@ class EmpruntController extends AbstractController
     }
 
     /**
-     * @Route("/emprunts/gestion", name="gestion_emprunts")
+     * @Route("/emprunts/gestion/actif", name="gestion_actif_emprunts")
      */
-    public function empruntGestion(EnregistrementRepository $enregistrementRepository, PaginatorInterface $paginator, Request $request)
+    public function empruntGestionActif(EnregistrementRepository $enregistrementRepository,StatutEnregistrementRepository $statutEnregistrementRepository, PaginatorInterface $paginator, Request $request)
+    {
+        $emprunts = $enregistrementRepository->findBy(['statutEnregistrement'=>$statutEnregistrementRepository->findActif()],['dateRendu'=>'DESC']);
+        $empruntsPages = $paginator ->paginate(
+            $emprunts,
+            $request->query->getInt('page',1),
+            10
+        );
+
+        return $this->render('emprunt/gestion_emprunts.html.twig', [
+            'emprunts' => $empruntsPages,
+            'nbEmprunt' => count($emprunts),
+            'statut' => 'en cours'
+        ]);
+    }
+
+    /**
+     * @Route("/emprunts/gestion/historique", name="gestion_historique_emprunts")
+     */
+    public function empruntGestionHistorique(EnregistrementRepository $enregistrementRepository, PaginatorInterface $paginator, Request $request)
     {
         $emprunts = $enregistrementRepository->findAll();
         $empruntsPages = $paginator ->paginate(
@@ -62,7 +81,9 @@ class EmpruntController extends AbstractController
         );
 
         return $this->render('emprunt/gestion_emprunts.html.twig', [
-            'emprunts' => $empruntsPages,'nbEmprunt' => count($emprunts)
+            'emprunts' => $empruntsPages,
+            'nbEmprunt' => count($emprunts),
+            'statut' => 'historique'
         ]);
     }
 }
