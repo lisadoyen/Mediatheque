@@ -15,6 +15,14 @@
                 <th>Libelle</th>
                 <td>{{ rubrique.libelle }}</td>
             </tr>
+            <tr>
+                <th>Categories</th>
+                <td>
+                    {% for cat in rubrique.categories %}
+                        {{ cat.libelle }}
+                    {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 

@@ -151,12 +151,15 @@ class GenreController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$genre->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            // many to many
             foreach ($rep->findAll() as $categorie) {
                 if ($categorie->getGenres()->contains($genre)) {
                     $categorie->removeGenre($genre);
                     $entityManager->persist($categorie);
                 }
             }
+
             $entityManager->remove($genre);
             $entityManager->flush();
         }

@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Rubrique;
 use App\Form\RubriqueType;
+use App\Repository\CategorieRepository;
 use App\Repository\RubriqueRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/rubrique")
- * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_BENEVOLE')")
  */
 class RubriqueController extends AbstractController
 {
@@ -38,6 +38,13 @@ class RubriqueController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            // many to many
+            foreach ($rubrique->getCategories() as $categorie) {
+                $categorie->addRubrique($rubrique);
+                $entityManager->persist($categorie);
+            }
+
             $entityManager->persist($rubrique);
             $entityManager->flush();
 
@@ -65,11 +72,34 @@ class RubriqueController extends AbstractController
      */
     public function edit(Request $request, Rubrique $rubrique): Response
     {
+        // categories actuellement selectionnees
+        $categoriesCurr = new ArrayCollection();
+        foreach ($rubrique->getCategories() as $categorie) {
+            $categoriesCurr->add($categorie);
+        }
+
         $form = $this->createForm(RubriqueType::class, $rubrique);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            // supprime les categories decochees
+            foreach ($categoriesCurr as $categorie) {
+                if (!$rubrique->getCategories()->contains($categorie)) {
+                    $categorie->removeRubrique($rubrique);
+                    $entityManager->persist($categorie);
+                }
+            }
+
+            // ajoute les nouvelles
+            foreach ($rubrique->getCategories() as $categorie) {
+                $categorie->addRubrique($rubrique);
+                $entityManager->persist($categorie);
+            }
+
+            $entityManager->persist($rubrique);
+            $entityManager->flush();
 
             return $this->redirectToRoute('rubrique_index');
         }
@@ -83,10 +113,19 @@ class RubriqueController extends AbstractController
     /**
      * @Route("/{id}", name="rubrique_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Rubrique $rubrique): Response
+    public function delete(Request $request, Rubrique $rubrique, CategorieRepository $rep): Response
     {
         if ($this->isCsrfTokenValid('delete'.$rubrique->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            // many to many
+            foreach ($rep->findAll() as $categorie) {
+                if ($categorie->getRubriques()->contains($rubrique)) {
+                    $categorie->removeRubrique($rubrique);
+                    $entityManager->persist($categorie);
+                }
+            }
+
             $entityManager->remove($rubrique);
             $entityManager->flush();
         }
