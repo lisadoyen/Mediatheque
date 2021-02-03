@@ -28,6 +28,11 @@ class Annonce
     private $contenu;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $vignette;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $dateCreation;
@@ -87,6 +92,18 @@ class Annonce
     public function setStaff(?User $staff): self
     {
         $this->staff = $staff;
+
+        return $this;
+    }
+
+    public function getVignette(): ?string
+    {
+        return $this->vignette;
+    }
+
+    public function setVignette(?string $vignette): self
+    {
+        $this->vignette = $vignette;
 
         return $this;
     }

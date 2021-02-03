@@ -25,6 +25,11 @@ class Categorie
     private $libelle;
 
     /**
+     * @ORM\Column(type="decimal", precision=6, scale=2)
+     */
+    private $montantVenteDefaut;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $dureeEmpruntMax;
@@ -55,6 +60,11 @@ class Categorie
     private $genres;
 
     /**
+     * @ORM\ManyToMany(targetEntity=Rubrique::class, inversedBy="categories")
+     */
+    private $rubriques;
+
+    /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="categorie")
      */
     private $articles;
@@ -63,6 +73,7 @@ class Categorie
     {
         $this->genres = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->rubriques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -202,6 +213,44 @@ class Categorie
     public function __toString()
     {
         return $this->getLibelle();
+    }
+
+    public function getMontantVenteDefaut(): ?string
+    {
+        return $this->montantVenteDefaut;
+    }
+
+    public function setMontantVenteDefaut(string $montantVenteDefaut): self
+    {
+        $this->montantVenteDefaut = $montantVenteDefaut;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rubrique[]
+     */
+    public function getRubriques(): Collection
+    {
+        return $this->rubriques;
+    }
+
+    public function addRubrique(Rubrique $rubrique): self
+    {
+        if (!$this->rubriques->contains($rubrique)) {
+            $this->rubriques[] = $rubrique;
+        }
+
+        return $this;
+    }
+
+    public function removeRubrique(Rubrique $rubrique): self
+    {
+        if ($this->rubriques->contains($rubrique)) {
+            $this->rubriques->removeElement($rubrique);
+        }
+
+        return $this;
     }
 
 

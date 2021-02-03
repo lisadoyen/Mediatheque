@@ -30,10 +30,9 @@ class Rubrique
     private $tags;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="rurbiques")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity=Categorie::class, mappedBy="genres")
      */
-    private $genre;
+    private $categories;
 
     /**
      * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="rubriques")
@@ -44,6 +43,7 @@ class Rubrique
     {
         $this->tags = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,6 +132,34 @@ class Rubrique
     public function __toString()
     {
         return $this->getLibelle();
+    }
+
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categorie $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addGenre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            $category->removeGenre($this);
+        }
+
+        return $this;
     }
 
 

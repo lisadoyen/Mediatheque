@@ -25,11 +25,6 @@ class Genre
     private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity=Rubrique::class, mappedBy="genre", orphanRemoval=true)
-     */
-    private $rurbiques;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Categorie::class, mappedBy="genres")
      */
     private $categories;
