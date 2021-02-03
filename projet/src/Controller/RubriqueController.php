@@ -7,6 +7,7 @@ use App\Form\RubriqueType;
 use App\Repository\CategorieRepository;
 use App\Repository\RubriqueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/rubrique")
+ * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_BENEVOLE')")
  */
 class RubriqueController extends AbstractController
 {
