@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-
-<title>New Genre</title>
-
+{% extends "layout.html.twig" %}
 {% block body %}
-    <h1>Create new Genre</h1>
+    <div class="container cadre">
 
-    {{ include('genre/_form.html.twig') }}
+        <h1>Ajouter un Genre</h1>
 
-    <a href="{{ path('genre_index') }}">back to list</a>
+        {{ include('genre/_form.html.twig') }}
+
+        <a href="{{ path('genre_index') }}">revenir a la liste</a>
+    </div>
 {% endblock %}

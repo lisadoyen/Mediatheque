@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-
-<title>Edit Genre</title>
-
+{% extends "layout.html.twig" %}
 {% block body %}
-    <h1>Edit Genre</h1>
+    <div class="container cadre">
 
-    {{ include('genre/_form.html.twig', {'button_label': 'Update'}) }}
+        <h1>Modifier le Genre</h1>
 
-    <a href="{{ path('genre_index') }}">back to list</a>
+        {{ include('genre/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    {{ include('genre/_delete_form.html.twig') }}
+
+        <div class="row">
+            <div class="col">{{ include('genre/_delete_form.html.twig') }}</div>
+        </div>
+
+        <a href="{{ path('genre_index') }}">revenir a la liste</a>
+
+    </div>
 {% endblock %}
