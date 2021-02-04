@@ -3,6 +3,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('assets/css/article-form.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/datepicker.css') }}">
 {% endblock %}
 {% block body %}
     <div class="container cadre">
@@ -11,4 +12,9 @@
     {{ include('article/_form.html.twig', {'button_label': 'Ajouter l\'article'}) }}
     <a href="{{ path('article_index') }}">back to list</a>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/datepicker.js') }}"></script>
 {% endblock %}

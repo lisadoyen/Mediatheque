@@ -1,17 +1,17 @@
 {# Permet de mettre le style de formulaire a toutes les entites ajoutées#}
 {% import _self as formMacros %}
 {% macro printEntiteSubForm(entite) %}
-        <div class="row">
-            <div class="col">
-                {{ form_row(entite.typeEntite, {'label': 'Type'}) }}
-            </div>
-            <div class="col">
-                {{ form_row(entite.nom) }}
-            </div>
-            <div class="col">
-                {{ form_row(entite.prenom) }}
-            </div>
+    <div class="row">
+        <div class="col">
+            {{ form_row(entite.typeEntite, {'label': 'Type'}) }}
         </div>
+        <div class="col">
+            {{ form_row(entite.nom) }}
+        </div>
+        <div class="col">
+            {{ form_row(entite.prenom) }}
+        </div>
+    </div>
 {% endmacro %}
 
 {# Formulaire #}
@@ -36,8 +36,7 @@
 </div>
 <button type="button" class="add_item_link" data-collection-holder-class="entites">+</button>
 
-
-<br><hr >
+<br><hr>
 {{ form_row(form.statut) }}
 {{ form_row(form.montantObtention) }}
 {{ form_row(form.dateObtention) }}
@@ -48,9 +47,6 @@
 
 <br>
 <button class="edit-btn">{{ button_label|default('Appliquer') }}</button>
-
-
-
 {{ form_end(form) }}
 
 

@@ -7,6 +7,8 @@ use App\Entity\Categorie;
 use App\Entity\Genre;
 use App\Entity\Statut;
 use App\Entity\TrancheAge;
+use App\Repository\ActionRepository;
+use App\Repository\TypeActionRepository;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -28,15 +30,17 @@ class ArticleType extends AbstractType
             ->add('description', CKEditorType::class, ['required' => true])
             ->add('vignette', TextType::class, ['required' => false])
             ->add('datePublication', DateType::class, [
-                'placeholder' => ['year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'],
-                'years' => range(date('Y'), date('Y') - 100, -1),
-                'required' => false
+                'widget' => 'single_text',
+                'attr' => ['data-provide' => 'datepicker'],
+                'html5' => false,
+                'format' => 'MM/dd/yyyy'
             ])
             ->add('dateObtention', DateType::class, [
-                'placeholder' => ['year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'],
-                'years' => range(date('Y'), date('Y') - 100, -1),
-                'required' => true,
-                'mapped' => false
+                'widget' => 'single_text',
+                'attr' => ['data-provide' => 'datepicker'],
+                'html5' => false,
+                'mapped' => false,
+                'format' => 'MM/dd/yyyy'
             ])
             ->add('montantObtention', NumberType::class, ['required' => true, 'label' => 'Montant d\'achat'])
             ->add('montantCaution', NumberType::class, ['required' => true, 'label' => 'Montant de caution'])
