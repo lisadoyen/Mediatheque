@@ -20,7 +20,7 @@ class Enregistrement
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
     private $noCommande;
 
@@ -88,12 +88,12 @@ class Enregistrement
         return $this->id;
     }
 
-    public function getNoCommande(): ?int
+    public function getNoCommande(): ?string
     {
         return $this->noCommande;
     }
 
-    public function setNoCommande(int $noCommande): self
+    public function setNoCommande(string $noCommande): self
     {
         $this->noCommande = $noCommande;
 

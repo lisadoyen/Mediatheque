@@ -35,7 +35,7 @@ class EmpruntController extends AbstractController
      */
     public function empruntActif(EnregistrementRepository $enregistrementRepository,StatutEnregistrementRepository $statutEnregistrementRepository, PaginatorInterface $paginator, Request $request)
     {
-        $emprunts = $enregistrementRepository->findBy(['utilisateur'=>$this->getUser(), 'statutEnregistrement'=>$statutEnregistrementRepository->findActif()]);
+        $emprunts = $enregistrementRepository->findBy(['utilisateur'=>$this->getUser(), 'statutEnregistrement'=>$statutEnregistrementRepository->findActif()],['dateEnregistrement'=>'DESC','dateRenduTheorique'=>'DESC']);
         $empruntsPages = $paginator ->paginate(
             $emprunts,
             $request->query->getInt('page',1),

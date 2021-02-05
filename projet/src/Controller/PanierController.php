@@ -2,14 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Enregistrement;
 use App\Entity\Favoris;
 use App\Entity\Panier;
+use App\Entity\StatutEnregistrement;
 use App\Repository\ArticleRepository;
+use App\Repository\EnregistrementRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\PanierRepository;
+use App\Repository\StatutEnregistrementRepository;
+use App\Repository\StatutRepository;
 use App\Repository\TypeEnregistrementRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use phpDocumentor\Reflection\Types\Boolean;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -134,10 +141,14 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/recap", name="recap_panier")
      */
-    public function recapPanier(PanierRepository $panierRepository)
+    public function recapPanier(PanierRepository $panierRepository, EnregistrementRepository $enregistrementRepository)
     {
         $user = $this->getUser();
         $panier = $panierRepository->findBy(['utilisateur'=>$user]);
+        $dernierEnregistrements = $enregistrementRepository->findOneBy([],['dateEnregistrement'=>'DESC']);
+        $dateDerniereCommande = $dernierEnregistrements->getDateEnregistrement();
+        $dernierArticlesCommande = $enregistrementRepository->findBy(['dateEnregistrement'=>$dateDerniereCommande]);
+
         $totalAchat = 0;
         foreach ($panier as $article){
             if ($article->getTypeEnregistrement()->getLibelle() =="achat" and $article->getArticle()->getStatut()->getLibelle() != "vendu"){
@@ -160,22 +171,72 @@ class PanierController extends AbstractController
         $dompdf->setHttpContext($context);
 
         $html = $this->renderView('users/profil/panier_recap_pdf.html.twig', [
-            'panier'=>$panier,
+            'enregistrement' => $dernierArticlesCommande,
             'total' => $totalAchat,
-            'date' => new \DateTime(),
-            'commande' => 12345 //Récup le num de la commande lors de la validation
         ]);
 
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4','portrait');
         $dompdf->render();
-        $file = 'panier-'.date('Y-m-d-H-i').'.pdf';
+        $file = 'panier-'.date('Y-m-d-H-i-s').'.pdf';
 
         $dompdf->stream($file,[
             'Attachement' => true
         ]);
 
         return new Response();
+    }
+
+    /**
+     * @Route("/panier/valider", name="valider_panier")
+     */
+    public function validerPanier(PanierRepository $panierRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository, Request $request)
+    {
+        if(!$this->isCsrfTokenValid('valider_panier', $request->get('token'))) {
+            throw new  InvalidCsrfTokenException('Invalid CSRF token valider panier');
+        }
+
+       $user = $this->getUser();
+       $panier = $panierRepository->findBy(['utilisateur'=>$user]);
+       $date = new \DateTime('now');
+
+       //TODO vérifier le nombre d'emprunt, règle d'emprunt
+       foreach ($panier as $ligne){
+
+           if (($ligne->getTypeEnregistrement()->getLibelle() == "achat" and $user->getDroitAchat()) or ($ligne->getTypeEnregistrement()->getLibelle() =="emprunt" and $user->getDroitEmprunt())) {
+
+               $enregistrement = new Enregistrement();
+               $idCommande = $date->format("YmdHis").$user->getId().$ligne->getArticle()->getId().$ligne->getArticle()->getCategorie()->getId().$ligne->getTypeEnregistrement()->getId();
+               $enregistrement->setNoCommande($idCommande);
+               $enregistrement->setArticle($ligne->getArticle());
+               $enregistrement->setUtilisateur($user);
+               $enregistrement->setTypeEnregistrement($ligne->getTypeEnregistrement());
+               $enregistrement->setStatutEnregistrement($statutEnregistrementRepository->findOneBy(['libelle'=>'en attente']));
+               $enregistrement->setDateEnregistrement($date);
+               $enregistrement->setDateRendu(null);
+               $enregistrement->setDatePreparationFini(null);
+               $dateRendu = new \DateTime('now');
+               $dateRendu->add(new \DateInterval('P15D')); // + 15 day
+               $enregistrement->setDateRenduTheorique($dateRendu);
+
+               if ($ligne->getTypeEnregistrement()->getLibelle() == "achat") {
+                   $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle' => 'vendu']));
+               }
+               if ($ligne->getTypeEnregistrement()->getLibelle() == "emprunt"){
+                   $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle'=>'emprunte']));
+               }
+
+               $this->getDoctrine()->getManager()->persist($enregistrement);
+           }
+       }
+       foreach ($panier as $article){
+           $this->getDoctrine()->getManager()->remove($article);
+       }
+       $this->getDoctrine()->getManager()->flush();
+
+       $this->addFlash('success',"Votre panier a bien été validé !");
+
+       return $this->redirectToRoute('emprunts_actif');
     }
 }
 

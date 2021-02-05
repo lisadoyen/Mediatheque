@@ -3,7 +3,15 @@
 
     <div class="container mt-5">
         <h1 class="mt-2">Vos emprunts ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
+        <div class="row">
+            <div class="col-sm">
+                <a href="{{ path('profil') }}" class="edit-btn float-left">Retour</a>
+            </div>
+            <div class="col-sm">
+                <a href="{{ path('recap_panier') }}" class="edit-btn float-right">Récapitulatif de la dernière commande</a>
+            </div>
 
+        </div>
         {% if emprunts is not empty %}
             <table class="table">
                 <thead>
@@ -48,10 +56,18 @@
                             {{ emprunt.dateEnregistrement | date('d/m/Y') }}
                         </td>
                         <td>
+                            {% if emprunt.datePreparationFini is not null %}
                             {{ emprunt.datePreparationFini | date('d/m/Y') }}
+                            {% else %}
+                                <span>-</span>
+                            {% endif %}
                         </td>
                         <td>
-                            {{ emprunt.dateRendu | date('d/m/Y') }}
+                            {% if emprunt.dateRendu is not null %}
+                                {{ emprunt.dateRendu | date('d/m/Y') }}
+                            {% else %}
+                                <span>-</span>
+                            {% endif %}
                         </td>
                         <td>
                             {{ emprunt.dateRenduTheorique | date('d/m/Y') }}

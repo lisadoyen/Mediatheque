@@ -5,7 +5,6 @@
         <div class="row">
             <div class="col-sm">
                 <h1>Votre Panier ({{ totalPanier }})</h1>
-                <a href="{{ path('recap_panier') }}" class="btn btn-secondary">Facture (temporaire)</a>
             </div>
             <div class="col-sm">
                 {% if achat is not empty or emprunt is not empty %}
@@ -247,26 +246,18 @@
                                     Voulez-vous vraiment valider votre panier ?
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="{#{ path('') }#}" method="POST" style="width: 100%;display: inline">
-                                        <div class="row">
-                                            <div class="col-sm">
-                                                <label for="recap">Générer un récapitulatif:</label>
-                                                <input type="checkbox" id="recap">
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm">
-                                                <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Non</button>
-                                            </div>
-                                            <div class="col-sm">
-                                                <input type="hidden" name="token" value="{# { csrf_token('') }#}">
-                                                <input type="hidden" name="_method" value="POST">
-                                                <button type="submit" class="btn btn-success float-left">Oui</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <div class="col-sm">
+                                        <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Non</button>
+                                    </div>
+                                    <div class="col-sm">
+                                        <form action="{{ path('valider_panier') }}" method="POST" style="display:inline">
+                                            <input type="hidden" name="token" value="{{ csrf_token('valider_panier') }}">
+                                            <input type="hidden" name="_method" value="GET">
+                                            <button type="submit" class="btn btn-success float-left">Oui</button>
+                                        </form>
+                                    </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
