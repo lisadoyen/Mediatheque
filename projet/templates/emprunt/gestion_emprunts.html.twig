@@ -60,7 +60,11 @@
                             {{ emprunt.dateRendu | date('d/m/Y') }}
                         </td>
                         <td>
-                            {{ emprunt.dateRenduTheorique | date('d/m/Y') }}
+                            {% if emprunt.dateRenduTheorique | date('d/m/Y') <= "now"|date('d/m/Y') %}
+                                <span class="text-danger"><b>{{ emprunt.dateRenduTheorique | date('d/m/Y') }}</b></span>
+                            {% else %}
+                                <span class="text-success">{{ emprunt.dateRenduTheorique | date('d/m/Y') }}</span>
+                            {% endif %}
                         </td>
                         <td>
                             {{ emprunt.typeEnregistrement.libelle }}
