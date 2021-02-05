@@ -25,7 +25,6 @@
                     <th scope="col">Date de rendu théorique</th>
                     <th scope="col">Type</th>
                     <th scope="col">Statut</th>
-                    <th scope="col">Opération</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -65,9 +64,6 @@
                         </td>
                         <td>
                             {{ emprunt.typeEnregistrement.libelle }}
-                        </td>
-                        <td>
-                            {{ emprunt.statutEnregistrement.libelle }}
                         </td>
                         <td>
                             <a href="{{ path('article_edit', {id: emprunt.article.id}) }}" class="btn edit-btn">Modifier</a>
