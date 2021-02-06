@@ -79,7 +79,7 @@
                         <td>
                             {{ emprunt.typeEnregistrement.libelle }}
                         </td>
-                        <td>
+                        <td {% if emprunt.statutEnregistrement.libelle == "pret" or emprunt.statutEnregistrement.libelle == "emprunte" %} class="table-success"{% endif %}>
                             {{ emprunt.statutEnregistrement.libelle }}
                         </td>
                         <td>

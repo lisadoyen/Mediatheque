@@ -1,13 +1,23 @@
-<!DOCTYPE html>
-
-<title>Edit Categorie</title>
-
+{% extends "layout.html.twig" %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/article-form.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/datepicker.css') }}">
+{% endblock %}
 {% block body %}
-    <h1>Edit Categorie</h1>
+<div class="container mt-5">
+    <h1>Modifier la catégorie</h1>
 
-    {{ include('categorie/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('categorie/_form.html.twig', {'button_label': 'Valider'}) }}
 
-    <a href="{{ path('categorie_index') }}">back to list</a>
+    <a href="{{ path('categorie_index') }}" class="edit-btn ml-0">Retourner à la liste</a>
 
-    {{ include('categorie/_delete_form.html.twig') }}
+    {#{ include('categorie/_delete_form.html.twig') }#}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/datepicker.js') }}"></script>
 {% endblock %}

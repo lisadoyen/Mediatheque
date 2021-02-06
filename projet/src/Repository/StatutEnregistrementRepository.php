@@ -20,22 +20,6 @@ class StatutEnregistrementRepository extends ServiceEntityRepository
     }
 
 
-    /**
-     * retourne les articles en cours d'emprunts
-     * @return int|mixed|string
-     */
-    public function findActif()
-    {
-        $query = $this->getEntityManager()
-            ->createQuery("
-                SELECT s.id, s.libelle
-                FROM App:StatutEnregistrement AS s
-                WHERE s.id = 1 or s.id = 2 or s.id = 4 or s.id = 5"
-            );
-        return $query->getResult();
-    }
-
-
     /*
     public function findOneBySomeField($value): ?StatutEnregistrement
     {

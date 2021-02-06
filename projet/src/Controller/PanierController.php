@@ -6,13 +6,17 @@ use App\Entity\Enregistrement;
 use App\Entity\Favoris;
 use App\Entity\Panier;
 use App\Entity\StatutEnregistrement;
+use App\Entity\TypeAction;
+use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\EnregistrementRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\PanierRepository;
 use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
+use App\Repository\TypeActionRepository;
 use App\Repository\TypeEnregistrementRepository;
+use App\Service\Article\Nouveaute;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -190,7 +194,8 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/valider", name="valider_panier")
      */
-    public function validerPanier(PanierRepository $panierRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository, Request $request)
+    public function validerPanier(PanierRepository $panierRepository, StatutEnregistrementRepository  $statutEnregistrementRepository,
+                                  StatutRepository $statutRepository, ActionRepository $actionRepository,TypeActionRepository $typeActionRepository,Request $request)
     {
         if(!$this->isCsrfTokenValid('valider_panier', $request->get('token'))) {
             throw new  InvalidCsrfTokenException('Invalid CSRF token valider panier');
@@ -198,26 +203,40 @@ class PanierController extends AbstractController
 
        $user = $this->getUser();
        $panier = $panierRepository->findBy(['utilisateur'=>$user]);
-       $date = new \DateTime('now');
+       $dateAjd = new \DateTime('now');
 
        //TODO vérifier le nombre d'emprunt, règle d'emprunt
        foreach ($panier as $ligne){
-
+           $categorie = $ligne->getArticle()->getCategorie();
            if (($ligne->getTypeEnregistrement()->getLibelle() == "achat" and $user->getDroitAchat()) or ($ligne->getTypeEnregistrement()->getLibelle() =="emprunt" and $user->getDroitEmprunt())) {
 
                $enregistrement = new Enregistrement();
-               $idCommande = $date->format("YmdHis").$user->getId().$ligne->getArticle()->getId().$ligne->getArticle()->getCategorie()->getId().$ligne->getTypeEnregistrement()->getId();
+               $idCommande = $dateAjd->format("YmdHis").$user->getId().$ligne->getArticle()->getId().$ligne->getArticle()->getCategorie()->getId().$ligne->getTypeEnregistrement()->getId();
                $enregistrement->setNoCommande($idCommande);
                $enregistrement->setArticle($ligne->getArticle());
                $enregistrement->setUtilisateur($user);
                $enregistrement->setTypeEnregistrement($ligne->getTypeEnregistrement());
                $enregistrement->setStatutEnregistrement($statutEnregistrementRepository->findOneBy(['libelle'=>'en attente']));
-               $enregistrement->setDateEnregistrement($date);
+               $enregistrement->setDateEnregistrement($dateAjd);
                $enregistrement->setDateRendu(null);
                $enregistrement->setDatePreparationFini(null);
+
+
+               $action = $actionRepository->findOneBy(['article'=>$ligne->getArticle(), 'typeAction'=>$typeActionRepository->findOneBy(['libelle'=>'creation'])]);
+               $dateCreation = $action->getDate();
+               $finNouveaute = $dateCreation->add(new \DateInterval('P'.$categorie->getDureeNouveaute().'D'));
                $dateRendu = new \DateTime('now');
-               $dateRendu->add(new \DateInterval('P15D')); // + 15 day
+               if ($finNouveaute >= $dateAjd){
+                   //nouveauté
+                   $nbJours = $categorie->getDureeEmpruntMaxNouveaute();
+               } else {
+                   // pas nouveauté
+                   $nbJours = $categorie->getDureeEmpruntMax();
+               }
+               $dateRendu->add(new \DateInterval('P'.$nbJours.'D')); // + $nbJours
                $enregistrement->setDateRenduTheorique($dateRendu);
+
+
 
                if ($ligne->getTypeEnregistrement()->getLibelle() == "achat") {
                    $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle' => 'vendu']));

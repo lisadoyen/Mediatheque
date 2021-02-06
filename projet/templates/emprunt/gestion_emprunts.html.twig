@@ -1,7 +1,7 @@
 {% extends "layout.html.twig" %}
 {% block body %}
 
-    <div class="container mt-5">
+    <div class="m-5">
         <h1 class="mt-2">Les emprunts ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
         <div class="row">
             <div class="col-sm">
@@ -18,6 +18,7 @@
                     <th scope="col">Vignette article</th>
                     <th scope="col">Titre article</th>
                     <th scope="col">Catégorie article</th>
+                    <th scope="col">Utilisateur</th>
                     <th scope="col">no Commande</th>
                     <th scope="col">Date d'enregitrement</th>
                     <th scope="col">Date de préparation</th>
@@ -48,6 +49,9 @@
                             {{ emprunt.article.categorie.libelle }}
                         </td>
                         <td>
+                            {{ emprunt.utilisateur.nom }} {{ emprunt.utilisateur.prenom }}
+                        </td>
+                        <td>
                             {{ emprunt.noCommande }}
                         </td>
                         <td>
@@ -70,7 +74,20 @@
                             {{ emprunt.typeEnregistrement.libelle }}
                         </td>
                         <td>
-                            <a href="{{ path('article_edit', {id: emprunt.article.id}) }}" class="btn edit-btn">Modifier</a>
+                            {% if emprunt.statutEnregistrement.libelle =="en attente" %}
+                                <a href="{{ path('changer_statut_pret',{id:emprunt.id} ) }}" class="btn edit-btn">Prêt</a>
+                            {% elseif emprunt.statutEnregistrement.libelle =="pret" %}
+                                {% if emprunt.typeEnregistrement.libelle =="emprunt" %}
+                                    <a href="{{ path('changer_statut_emprunte',{id:emprunt.id} ) }}" class="btn edit-btn">Emprunté</a>
+                                {% elseif emprunt.typeEnregistrement.libelle =="achete" %}
+                                    <a href="{{ path('changer_statut_achete',{id:emprunt.id} ) }}" class="btn edit-btn">Acheté</a>
+                                {% endif %}
+                            {% elseif emprunt.statutEnregistrement.libelle =="emprunte" %}
+                                <a href="{{ path('changer_statut_rendu',{id:emprunt.id} ) }}" class="btn edit-btn">Rendu</a>
+                                <a href="{{ path('changer_statut_perdu',{id:emprunt.id} ) }}" class="btn edit-btn">Perdu</a>
+                            {% else %}
+                                <span>{{ emprunt.statutEnregistrement.libelle }}</span>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
@@ -78,7 +95,7 @@
             </table>
         {% else %}
             <div class="col-sm m-2">
-                <b>Aucun Emprunt</b>
+                <b>Aucun emprunt en cour</b>
             </div>
         {% endif %}
         <hr class="mb-5">

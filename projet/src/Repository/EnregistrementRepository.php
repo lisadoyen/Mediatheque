@@ -33,6 +33,25 @@ class EnregistrementRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * récupère tous les emprunts actifs : en attente, pret, emprunté
+     * @return int|mixed|string
+     */
+    public function findActif(){
+        $qb = $this->createQueryBuilder('e');
+        $qb ->select()
+            ->join('App:StatutEnregistrement', 's')
+            ->where('s.id = e.statutEnregistrement')
+            ->andWhere("s.libelle !='rendu'")
+            ->andWhere("s.libelle !='perdu'")
+            ->andWhere("s.libelle !='achete'")
+            ->andWhere("s.libelle !='telecharge'")
+            ->addOrderBy('e.dateRendu','ASC');
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Enregistrement[] Returns an array of Enregistrement objects
     //  */

@@ -1,45 +1,42 @@
-<!DOCTYPE html>
-
-<title>Categorie index</title>
-
+{% extends "layout.html.twig" %}
 {% block body %}
-    <h1>Categorie index</h1>
+<div class="container mt-5">
+    <h1>Règle d'emprunt par catégorie</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>DureeEmpruntMax</th>
-                <th>DureeEmpruntMaxNouveaute</th>
-                <th>NbEmpruntMax</th>
-                <th>NbEmpruntMaxNouveaute</th>
-                <th>DureeNouveaute</th>
-                <th>actions</th>
+                <th>Libellé</th>
+                <th>Durée Emprunt Max.</th>
+                <th>Durée Emprunt Max. (Nouveautés)</th>
+                <th>Nombre d'emprunt Max.</th>
+                <th>Nombre d'emprunt Max. (Nouveautés)</th>
+                <th>Durée d'une nouveauté</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for categorie in categories %}
             <tr>
-                <td>{{ categorie.id }}</td>
-                <td>{{ categorie.libelle }}</td>
+                <td>{{ categorie.libelle|capitalize }}</td>
                 <td>{{ categorie.dureeEmpruntMax }}</td>
                 <td>{{ categorie.dureeEmpruntMaxNouveaute }}</td>
                 <td>{{ categorie.nbEmpruntMax }}</td>
                 <td>{{ categorie.nbEmpruntMaxNouveaute }}</td>
                 <td>{{ categorie.dureeNouveaute }}</td>
                 <td>
-                    <a href="{{ path('categorie_show', {'id': categorie.id}) }}">show</a>
-                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}">edit</a>
+                    <!--<a href="{#{ path('categorie_show', {'id': categorie.id}) }#}">show</a>-->
+                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}" class="edit-btn">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucune catégorie trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('categorie_new') }}">Create new</a>
+    <a href="{{ path('categorie_new') }}" class="edit-btn ml-0">Ajouter une catégorie</a>
+</div>
 {% endblock %}
