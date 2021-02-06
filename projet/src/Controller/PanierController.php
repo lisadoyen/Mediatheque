@@ -54,7 +54,8 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/add/{id}", name="add_article_panier")
      */
-    public function addArticlePanier(ArticleRepository $articleRepository, TypeEnregistrementRepository $typeEnregistrementRepository,PanierRepository $panierRepository,$id = 1)
+    public function addArticlePanier(ArticleRepository $articleRepository, TypeEnregistrementRepository $typeEnregistrementRepository,
+                                     PanierRepository $panierRepository,StatutRepository $statutRepository, $id= 1)
     {
         $user = $this->getUser();
         $article = $articleRepository->findOneBy(['id' => $id]);
@@ -67,11 +68,14 @@ class PanierController extends AbstractController
             $lignePanier->setUtilisateur($user);
             $lignePanier->setArticle($article);
 
-            if ($statut == "empruntable" or $statut == "emprunte") {
+            if ($statut == "empruntable") {
                 $lignePanier->setTypeEnregistrement($typeEnregistrementRepository->findOneBy(['libelle' => 'emprunt']));
-            } else if ($statut == "vendable" or $statut == "vendu") {
+                $article->setStatut($statutRepository->findOneBy(['libelle'=>'emprunte']));
+            } else if ($statut == "vendable") {
                 $lignePanier->setTypeEnregistrement($typeEnregistrementRepository->findOneBy(['libelle' => 'achat']));
+                $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendu']));
             }
+            $this->getDoctrine()->getManager()->persist($article);
             $this->getDoctrine()->getManager()->persist($lignePanier);
             $this->getDoctrine()->getManager()->flush();
 
@@ -83,10 +87,19 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/remove/{id}", name="remove_article_panier")
      */
-    public function removeArticlePanier(PanierRepository $panierRepository, $id=1){
+    public function removeArticlePanier(PanierRepository $panierRepository,TypeEnregistrementRepository $typeEnregistrementRepository, StatutRepository $statutRepository, $id=1){
         $user = $this->getUser();
         $lignePanier = $panierRepository->findOneBy(['article' => $id, 'utilisateur'=>$user]);
+        $article = $lignePanier->getArticle();
+        $statut = $lignePanier->getArticle()->getStatut()->getLibelle();
 
+        if ($statut == "emprunte") {
+            $article->setStatut($statutRepository->findOneBy(['libelle'=>'empruntable']));
+        } else if ($statut == "vendu") {
+            $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendable']));
+        }
+
+        $this->getDoctrine()->getManager()->persist($article);
         $this->getDoctrine()->getManager()->remove($lignePanier);
         $this->getDoctrine()->getManager()->flush();
 
@@ -98,7 +111,7 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/move/{id}/favoris", name="move_article_panier_favoris")
      */
-    public function moveArticlePanierFavoris(PanierRepository $panierRepository, FavorisRepository $favorisRepository, $id = 1)
+    public function moveArticlePanierFavoris(PanierRepository $panierRepository, FavorisRepository $favorisRepository,StatutRepository $statutRepository, $id = 1)
     {
         $user = $this->getUser();
         $lignePanier = $panierRepository->findOneBy(['article' => $id, 'utilisateur' => $user]);
@@ -110,11 +123,21 @@ class PanierController extends AbstractController
             $favoris->setUtilisateur($user);
             $favoris->setArticle($lignePanier->getArticle());
 
-            $this->getDoctrine()->getManager()->persist($favoris);
+            $article = $lignePanier->getArticle();
+            $statut = $lignePanier->getArticle()->getStatut()->getLibelle();
 
+            if ($statut == "emprunte") {
+                $article->setStatut($statutRepository->findOneBy(['libelle'=>'empruntable']));
+            } else if ($statut == "vendu") {
+                $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendable']));
+            }
+
+            $this->getDoctrine()->getManager()->persist($favoris);
+            $this->getDoctrine()->getManager()->persist($article);
 
             $this->addFlash('success', "L'article \"" . $lignePanier->getArticle()->getTitre() . "\" a bien été supprimé de votre panier et ajouté à vos favoris !");
         }
+
         $this->getDoctrine()->getManager()->remove($lignePanier);
         $this->getDoctrine()->getManager()->flush();
 
@@ -124,7 +147,7 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/vider", name="vider_panier", methods={"DELETE"})
      */
-    public function viderPanier(PanierRepository $panierRepository, Request $request)
+    public function viderPanier(PanierRepository $panierRepository,StatutRepository $statutRepository, Request $request)
     {
         if(!$this->isCsrfTokenValid('panier_delete', $request->get('token'))) {
             throw new  InvalidCsrfTokenException('Invalid CSRF token delete panier');
@@ -132,8 +155,18 @@ class PanierController extends AbstractController
         $user = $this->getUser();
         $panier = $panierRepository->findBy(['utilisateur'=>$user]);
 
-        foreach ($panier as $article){
-            $this->getDoctrine()->getManager()->remove($article);
+        foreach ($panier as $lignePanier){
+            $article = $lignePanier->getArticle();
+            $statut = $lignePanier->getArticle()->getStatut()->getLibelle();
+
+            if ($statut == "emprunte") {
+                $article->setStatut($statutRepository->findOneBy(['libelle'=>'empruntable']));
+            } else if ($statut == "vendu") {
+                $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendable']));
+            }
+
+            $this->getDoctrine()->getManager()->persist($article);
+            $this->getDoctrine()->getManager()->remove($lignePanier);
             $this->getDoctrine()->getManager()->flush();
         }
 
@@ -205,11 +238,64 @@ class PanierController extends AbstractController
        $panier = $panierRepository->findBy(['utilisateur'=>$user]);
        $dateAjd = new \DateTime('now');
 
-       //TODO vérifier le nombre d'emprunt, règle d'emprunt
+        // Règle d'emprunt : Nombre d'emprunt
+       $nbLivre = 0;
+       $nbVideo = 0;
+       $nbMusique = 0;
+       $nbJeu = 0;
+
        foreach ($panier as $ligne){
            $categorie = $ligne->getArticle()->getCategorie();
-           if (($ligne->getTypeEnregistrement()->getLibelle() == "achat" and $user->getDroitAchat()) or ($ligne->getTypeEnregistrement()->getLibelle() =="emprunt" and $user->getDroitEmprunt())) {
+           $libelleType = $ligne->getTypeEnregistrement()->getLibelle();
 
+           if ($categorie->getLibelle() =="livre") {
+               if ($nbLivre+1 <= $categorie->getNbEmpruntMax()){
+                   $nbLivre++;
+               } else {
+                   $this->addFlash(
+                       'danger',
+                       "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les livres.\nSi vous voulez valider cette commande, suprimer un livre de votre panier."
+                   );
+                   return $this->redirectToRoute('panier');
+               }
+           }
+           if ($categorie->getLibelle() =="video") {
+               if ($nbVideo+1 <= $categorie->getNbEmpruntMax()){
+                   $nbVideo++;
+               } else {
+                   $this->addFlash(
+                       'danger',
+                       "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les videos.\nSi vous voulez valider cette commande, suprimer une video de votre panier."
+                   );
+                   return $this->redirectToRoute('panier');
+               }
+           }
+           if ($categorie->getLibelle() =="musique") {
+               if ($nbMusique+1 <= $categorie->getNbEmpruntMax()){
+                   $nbMusique++;
+               } else {
+                   $this->addFlash(
+                       'danger',
+                       "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les musiques.\nSi vous voulez valider cette commande, suprimer une musique de votre panier."
+                   );
+                   return $this->redirectToRoute('panier');
+               }
+           }
+           if ($categorie->getLibelle() =="jeu") {
+               if ($nbJeu+1 <= $categorie->getNbEmpruntMax()){
+                   $nbJeu++;
+               } else {
+                   $this->addFlash(
+                       'danger',
+                       "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les jeux.\nSi vous voulez valider cette commande, suprimer un jeu de votre panier."
+                   );
+                   return $this->redirectToRoute('panier');
+               }
+           }
+
+           if (($libelleType == "achat" and $user->getDroitAchat()) or ($libelleType =="emprunt" and $user->getDroitEmprunt())) {
+                if ($categorie)
+               // contruction de l'enregistrement / emprunt
                $enregistrement = new Enregistrement();
                $idCommande = $dateAjd->format("YmdHis").$user->getId().$ligne->getArticle()->getId().$ligne->getArticle()->getCategorie()->getId().$ligne->getTypeEnregistrement()->getId();
                $enregistrement->setNoCommande($idCommande);
@@ -221,7 +307,7 @@ class PanierController extends AbstractController
                $enregistrement->setDateRendu(null);
                $enregistrement->setDatePreparationFini(null);
 
-
+               // Règle d'emprunt : Durée de l'emprunt
                $action = $actionRepository->findOneBy(['article'=>$ligne->getArticle(), 'typeAction'=>$typeActionRepository->findOneBy(['libelle'=>'creation'])]);
                $dateCreation = $action->getDate();
                $finNouveaute = $dateCreation->add(new \DateInterval('P'.$categorie->getDureeNouveaute().'D'));
@@ -236,8 +322,7 @@ class PanierController extends AbstractController
                $dateRendu->add(new \DateInterval('P'.$nbJours.'D')); // + $nbJours
                $enregistrement->setDateRenduTheorique($dateRendu);
 
-
-
+               // défini le statut de l'emprunt
                if ($ligne->getTypeEnregistrement()->getLibelle() == "achat") {
                    $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle' => 'vendu']));
                }
@@ -246,6 +331,9 @@ class PanierController extends AbstractController
                }
 
                $this->getDoctrine()->getManager()->persist($enregistrement);
+           } else {
+               $this->addFlash('danger',"Vous n'avez pas le droit d'acheter ou d'emprunter un article. Veuillez contacter un responsable pour plus de renseignements.");
+               return $this->redirectToRoute('panier');
            }
        }
        foreach ($panier as $article){

@@ -12,7 +12,6 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle')
             ->add('dureeEmpruntMax')
             ->add('dureeEmpruntMaxNouveaute')
             ->add('nbEmpruntMax')
