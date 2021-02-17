@@ -34,6 +34,15 @@ class ArticleRepository extends ServiceEntityRepository
         return [(int)$results[0]['min'], (int)$results[0]['max']];
     }
 
+    public function findByISBN(){
+        $query = $this
+            ->createQueryBuilder('a')
+            ->andWhere("a.gencode != ''")
+            ->andWhere("a.categorie = 1")
+            ->andWhere("a.gencode != 0");
+        return $query->getQuery()->getResult();
+    }
+
     /**
      * @param SearchData $search
      * @return int|mixed|string
