@@ -72,10 +72,9 @@ class StatistiquesController extends AbstractController
         $allArticles =  $enregistrementRepository->getNbEmpruntByArticle();
         $articles = $paginator->paginate(
             $allArticles,
-            $request->query->getInt('page', 1),
-            10
+            $request->query->getInt('page', 1)
         );
-        $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,30);
+        $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500,  2); // TODO : changer l'idCategorie en fonction du filtre
 
         return $this->render('statistiques/statistiques.html.twig', [
             'articles'=>$articles,
