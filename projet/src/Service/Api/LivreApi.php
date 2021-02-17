@@ -29,18 +29,20 @@ class LivreApi
      * récupère des données
      * @param $isbn -isbn du livre
      */
-    public function getDataFromIsbn($isbn){
+    public function getDataFromIsbn($isbn): array
+    {
         $this->isbn = $isbn;
         $this->getGoogleIsbn(); // récupère les infos de google
         $this->infosEbay = $this->getEbayIsbn($this->isbn); // récupère les infos de ebay
         $this->getOlIsbn(); // recupère les infos de Open Library
         $this->getGoodReadIsbn(); // recupère les infos de goodReads
-        $this->verifyResponseIsbn();
+        return $this->verifyResponseIsbn();
         //return $this->json($this->verifyResponseIsbn($articleGoogle,$articleEbay,$this->infosOpenLibrary,$articleSurf),200, []);
     }
 
     /**
      * récupure les infos de google
+     * @throws \Exception
      */
     private function getGoogleIsbn(){
         $response = @file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:' . $this->isbn) ?? null;
@@ -50,6 +52,22 @@ class LivreApi
         }
         $article = $this->serializer->decode($response,'json');
         $this->infosGoogle = $article["items"][0]["volumeInfo"] ?? null;
+        $keywords = '';
+        $date = '';
+        // transforme la date de publication de google en objet datetime
+        if(!empty($this->infosGoogle['publishedDate'])){
+            $keywords = str_split($this->infosGoogle['publishedDate']) ?? '';
+        }
+        if($keywords != ''){
+            if(!empty($keywords[4])){
+                $date = DateTime::createFromFormat('Y-m-j',$this->infosGoogle['publishedDate']);
+            }else{
+                $date = new DateTime($keywords[0].$keywords[1].$keywords[2].$keywords[3]."-01-01");
+            }
+        }
+        $this->infosGoogle['publishedDate'] = $date;
+
+
     }
 
     /**
@@ -76,6 +94,7 @@ class LivreApi
 
     /**
      * récupère les infos de open Library
+     * @throws \Exception
      */
     private function getOlIsbn(){
         $response = @file_get_contents('https://openlibrary.org/api/books?bibkeys=ISBN:'.$this->isbn.'&jscmd=data&format=json') ?? null;
@@ -86,6 +105,12 @@ class LivreApi
         // transforme les données en tableau
         $article = $this->serializer->decode($response,'json');
         $this->infosOpenLibrary = array_shift($article) ?? null;
+
+
+        // transforme la date de openlibrary en format datetime
+        if(!empty($this->infosOpenLibrary['publish_date'])){
+            $this->infosOpenLibrary['publish_date'] = new DateTime(date('Y-m-d', strtotime($this->infosOpenLibrary['publish_date'])));
+        }
     }
 
     /**
@@ -189,24 +214,16 @@ class LivreApi
 
         $infos['editeurs'] = $this->getEditeurs();
 
-        $infos['publication'] = [];
-        array_push($infos['publication'], $this->infosGoogle['publishedDate'] ?? '');
-        array_push($infos['publication'], $this->infosGoodRead['publication'] ?? '');
-        array_push($infos['publication'], $this->infosOpenLibrary['publish_date'] ?? '');
+        $infos['publications'] = $this->getDatePublication();
 
-        $infos['description'] = [];
-        array_push($infos['description'],$this->infosGoogle['description'] ?? '');
-        array_push($infos['description'],$this->infosGoodRead['description'] ?? '');
+        $infos['descriptions'] = [];
+        array_push($infos['descriptions'],$this->infosGoogle['description'] ?? '');
+        array_push($infos['descriptions'],$this->infosGoodRead['description'] ?? '');
 
-        dd($infos);
+        $infos['images'] = $this->getImages();
 
-        $infos['image'] =   $this->infosGoogle['imageLinks']['thumbnail'] ??
-            $this->infosOpenLibrary['cover']['large'] ?? $this->infosOpenLibrary['cover']['medium'] ?? $this->infosOpenLibrary['cover']['small']??
-            $this->infosGoodRead['image'] ?? array_shift($this->infosEbay['galleryURL']) ?? '';
-        // $infos['image'] = $this->getImages($this->infosGoogle,$articleEbay,$this->infosOpenLibrary,$this->infosOpenLibrary);
-        if(is_array($infos['titre'])){
-            $infos['titre'] = array_shift($infos['titre']);
-        }
+        $infos['erreurs'] = $this->getErreurs();
+
 
         return $infos;
     }
@@ -233,7 +250,7 @@ class LivreApi
         $infos['auteurs'] = [];
         $infos['auteurs'] = $this->remplirTableauAuteur($this->infosGoogle["authors"] ?? null,$infos['auteurs']);
         $infos['auteurs'] = $this->remplirTableauAuteur($this->infosGoodRead['auteurs'] ?? null,$infos['auteurs']);
-        $infos['auteurs'] = $this->remplirTableauAuteur($this->infosOpenLibrary['authors'] ?? null,$infos['auteurs']);
+        array_push($infos['auteurs'], $this->infosOpenLibrary['authors'][0]["name"] ?? '');
         return $infos['auteurs'];
     }
 
@@ -250,6 +267,15 @@ class LivreApi
         array_push($infos['publication'], $this->infosGoogle['publishedDate'] ?? '');
         array_push($infos['publication'], $this->infosGoodRead['publication'] ?? '');
         array_push($infos['publication'], $this->infosOpenLibrary['publish_date'] ?? '');
+        return $infos['publication'];
+    }
+    private function getErreurs():array{
+        $infos['erreurs'] = [];
+        array_push($infos['erreurs'], $this->infosGoogle['erreur'] ?? '');
+        array_push($infos['erreurs'], $this->infosGoodRead['erreur'] ?? '');
+        array_push($infos['erreurs'], $this->infosOpenLibrary['erreur'] ?? '');
+        array_push($infos['erreurs'], $this->infosEbay['erreur'] ?? '');
+        return $infos['erreurs'];
     }
 
     private function remplirTableauAuteur($entree,$sortie){
@@ -271,8 +297,8 @@ class LivreApi
             if(!empty($this->infosOpenLibrary['cover']['medium'])) array_push($images,$this->infosOpenLibrary['cover']['medium']);
             if(!empty($this->infosOpenLibrary['cover']['small'])) array_push($images,$this->infosOpenLibrary['cover']['small']);
         }
-        if(!empty($articleSurf['image'])) array_push($images,$articleSurf['image']);
-        if(!empty($articleEbay['galleryURL'])) array_push($images,$articleEbay['galleryURL']);
+        if(!empty($this->infosGoodRead['image'])) array_push($images,$this->infosGoodRead['image']);
+        if(!empty($this->infosEbay['galleryURL'][0])) array_push($images,$this->infosEbay['galleryURL'][0]);
         return $images;
     }
 
