@@ -2,6 +2,7 @@
 namespace App\Service\Article;
 
 use App\Repository\ActionRepository;
+use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -40,19 +41,15 @@ class Nouveaute
      * @param int $max nombre de nouveaute max a recherche
      * @return int|mixed|string
      */
-    function findArticleNouveaute(CategorieRepository $categorieRepo,ActionRepository $actionsRepo, $max){
+    function findArticleNouveaute(CategorieRepository $categorieRepo,ActionRepository $actionsRepo,
+                                  $max, $idCategorie){
 
         $dateTodayConvert=\DateTime::createFromFormat('d/m/Y', \date("d/m/Y"));
         $today = $dateTodayConvert->format('Y-m-d');
-
-        $categorie = $categorieRepo->findAll(); // selection de toutes les catégories
-        $nbJourNouveaute = null; // variable pour la durée de la nouveauté
-        foreach ($categorie as $cat){
-            $nbJourNouveaute = $cat->getDureeNouveaute(); // récupération nb nouveauté
-        }
-        $dateDureeMax = $this->transformDate($today, 812); // TODO 812 pour test => mettre nbJourNouveaute normalement
+        $categorie = $categorieRepo->find($idCategorie); // selection de la catégorie
+        $nbJourNouveaute = $categorie->getDureeNouveaute(); // récupération nb nouveauté en fonction de l'id de la catégorie
+        $dateDureeMax = $this->transformDate($today, 500); // TODO 500 pour test => mettre nbJourNouveaute normalement
         $nouveaute = $actionsRepo->findIsNouveaute($dateDureeMax,$max);
-
         return $nouveaute;
     }
 

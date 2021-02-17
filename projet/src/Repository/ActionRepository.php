@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Action;
+use App\Service\Article\Nouveaute;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Validator\Constraints\Date;
@@ -20,24 +21,25 @@ class ActionRepository extends ServiceEntityRepository
         parent::__construct($registry, Action::class);
     }
 
+
     public function findIsNouveaute($donnees,$max){
         $dateTodayConvert=\DateTime::createFromFormat('d/m/Y', \date("d/m/Y"));
         $dateDureeMaxConvert=\DateTime::createFromFormat('d/m/Y',$donnees);
         $today = $dateTodayConvert->format('Y-m-d');
         $dateDureeMax = $dateDureeMaxConvert->format('Y-m-d');
         $qb = $this->createQueryBuilder('ac');
-        $qb ->select(' distinct ac.date as dateCreation, ar.titre as titre, ar.id as id, ar.vignette')
-            ->setMaxResults($max)
+        $qb ->select("distinct ac.date as dateCreation, ar.titre as titre, ar.id as id, ar.vignette")
+            //->setMaxResults($max)
             ->join( 'App:Article', 'ar')
             ->where('ar.id=ac.article')
             ->join( 'App:Statut', 's')
             ->andWhere('s.id=ar.statut')
             ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'")
-            ->andWhere("ac.date BETWEEN '$dateDureeMax' AND '$today'");
+            ->andWhere("ac.date BETWEEN '$dateDureeMax' AND '$today'")
+            ->groupBy('ar.titre');
 
         return $qb->getQuery()->getResult();
     }
-
     // /**
     //  * @return Action[] Returns an array of Action objects
     //  */

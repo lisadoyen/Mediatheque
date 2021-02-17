@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Data\SearchData;
 use App\Entity\Article;
+use App\Service\Article\Nouveaute;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -51,7 +52,8 @@ class ArticleRepository extends ServiceEntityRepository
             ->join('a.actions', 'ac')
             ->join('a.statut', 's')
             ->join('a.trancheAge', 'age')
-            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'");
+            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'")
+            ->groupBy('a.titre');
             // selection des articles avec le statut vendable ou empruntable
 
         if(!empty($search->date)){
@@ -102,10 +104,16 @@ class ArticleRepository extends ServiceEntityRepository
         }
 
         if(!empty($search->nouveaute)){
+            $nouveaute = new Nouveaute();
+            $dateTodayConvert=\DateTime::createFromFormat('d/m/Y', \date("d/m/Y"));
+            $today = $dateTodayConvert->format('Y-m-d');
+            $dateDureeMaxConvert=\DateTime::createFromFormat('d/m/Y',$nouveaute->transformDate($today, 500)); // TODO : 500 => récupérer la(les) durée(s) de(s) nouveauté(s) de(s) catégorie(s) du filtre
+            $dateDureeMax = $dateDureeMaxConvert->format('Y-m-d');
             $query=$query
-                ->andWhere('');
+                ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'")
+                ->andWhere("ac.date BETWEEN '$dateDureeMax' AND '$today'")
+                ->groupBy('a.titre');
         }
-
         return $query;
     }
 

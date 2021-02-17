@@ -37,16 +37,18 @@ class Filtre
         $statuts = $statutRepository->findAll();
         $data->statut = $statuts;
         $donnees['statuts'] = $statuts;
-        $donnees['date'] = null;
-        $donnees['min'] = null;
-        $donnees['max'] = null;
-        $donnees['ages'] = null;
+        //$data->date = null;
+        //$donnees['date'] = null;
+        //$donnees['min'] = 0;
+        //$donnees['max'] = 100000;
+        //$donnees['ages'] = null;
         $session->set('donnees', $donnees);
         if (!empty($donnees)) {
             $donnees = $session->get('donnees');
             if($idGenre != null) $data->genre = $donnees['genres'];
             if($idCategorie != null) $data->categorie = $donnees['categories'];
         }
+        //dd($donnees);
         if($bool == true)
             return $ar->findSearch($data);
         else
@@ -73,10 +75,13 @@ class Filtre
                 $newDate = $test->format('Y-m-d');*/
                 $data->date = $donnees['date'];
             }
-
-            $donnees['min']=$_POST['min'];
-            $donnees['max']=$_POST['max'];
-            $erreurs = $this->validatorArticle($donnees);
+            if(isset($_POST['min'])) {
+                $donnees['min'] = $_POST['min'];
+                $erreurs = $this->validatorArticle($donnees);
+            }if(isset($_POST['max'])) {
+                $donnees['max'] = $_POST['max'];
+                $erreurs = $this->validatorArticle($donnees);
+            }
 
             if(!empty($_POST['genres'])){
                 $donnees['genres'] = $_POST['genres'];

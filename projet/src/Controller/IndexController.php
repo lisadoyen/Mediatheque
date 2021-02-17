@@ -45,7 +45,7 @@ class IndexController extends AbstractController
 
         return $this->render('accueil.html.twig', [
             'annonces' => $ar->findAll(),
-            'nouveaute' => $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,3)
+            'nouveaute' => $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,3, 2) // TODO : changer idCategorie
         ]);
     }
 
