@@ -47,7 +47,31 @@
     <script src="{{ asset('assets/js/visibility.js') }}" ></script>
     <script src="{{ asset('assets/js/chart.js') }}" ></script>
     <script src="{{ asset('assets/js/lire-plus.js') }}"></script>
-
+    <script type="text/javascript">
+        function confirmMessageList() {
+            if (confirm("Voulez-vous changer le mode d'affichage ?")) {
+                // Clic sur OK
+                var icone = document.getElementById("icone")
+                icone.style.visibility="hidden"
+                icone.style.position="absolute"
+                var liste = document.getElementById("liste")
+                liste.style.visibility="visible"
+                liste.style.position="relative"
+            }
+        }
+        function confirmMessageIcone() {
+            if (confirm("Voulez-vous changer le mode d'affichage ?")) {
+                // Clic sur OK
+                var icone = document.getElementById("icone")
+                icone.style.visibility="visible"
+                icone.style.position="relative"
+                icone.style.paddingBottom="-10000px"
+                var liste = document.getElementById("liste")
+                liste.style.visibility="hidden"
+                liste.style.position="absolute"
+            }
+        }
+    </script>
 {% endblock %}
 </body>
 {% include "_footer.html.twig" %}
