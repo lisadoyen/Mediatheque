@@ -1,0 +1,74 @@
+<div class="row">
+    {% if articles is defined %}
+        {% for article in articles | slice(0, 30) %}
+            <div class="col-4 pt-4 pb-4 float-left">
+                <div class="pl-2">
+                    {% if nouveaute is defined %}
+                        {% for new in nouveaute %}
+                            {% if new.id == article.id %}
+                                <span class="text-size text-bold text-size-title text-nouveaute"> nouveau !</span>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="row p-2">
+                    <div class="col-lg-4">
+                        {% if article.vignette == NULL %}
+                            <input type="hidden" name="id" value="{{ article.id }}">
+                            <a href="{{ path('article_details', {id: article.id}) }}">
+                                <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120"></a>
+                        {% else %}
+                            <input type="hidden" name="id" value="{{ article.id }}">
+                            <a href="{{ path('article_details', {id: article.id}) }}">
+                                <img src="{{ article.vignette }}" alt="{{ article.vignette }}" width="120" height="120"></a>
+                        {% endif %}
+                        <div class="p-4">
+                            <input type="hidden" name="id" value="{{ article.id }}">
+                            {%  if article.statut.libelle == "empruntable" %}
+                                <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-emprunt">
+                                    Emprunter</a>
+                            {% else %}
+                                <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-achat">
+                                    Acheter</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="text-size-title"><span class="text-bold">{{article.titre | capitalize }}</span></div>
+                        <div class="text-size pt-2">
+                            {% if article.categorie.libelle == 'video' %}
+                                <span class="text-orange">réalisateur : </span>
+                            {% elseif article.categorie.libelle == 'livre' %}
+                                <span class="text-orange">auteur : </span>
+                            {% elseif article.categorie.libelle == 'jeux' %}
+                                <span class="text-orange">éditeur : </span>
+                            {% elseif article.categorie.libelle == 'musique' %}
+                                <span class="text-orange">artiste : </span>
+                            {% endif %}
+                            <!-- changer quand on aura une liste des entités par article, pour l'instant il n'y a qu'une entité par article -->
+                            {% if article.entites[0] is defined %}
+                                {{ article.entites[0].prenom | capitalize }}
+                                {{article.entites[0].nom is empty ? "inconnu" : article.entites[0].nom | capitalize }}
+                            {% else %}
+                                inconnu
+                            {% endif %}
+                        </div>
+                        <div class="text-size pt-1"><span class="text-orange">date de publication : </span>{{article.datePublication is empty ? "inconnu" : article.datePublication|date("d/m/Y")}}</div>
+                        <div class="text-size pt-3"><span class="text-orange">moyenne : </span>moyenne (étoile)</div>
+                        {%  if article.statut.libelle == "vendable" %}
+                            <hr>
+                            <div class="text-size"><span class="text-orange">prix : </span><span style="color: red">{{ article.montantVente }}€</span></div>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-1"> <!-- pour tablette : p-4-->
+                        {% if article.favoris is empty %}
+                            <a href="{{ path('add_article_favoris', {id: article.id, page: "list"}) }}"><i class="far fa-star text-danger fa-2x"></i></a>
+                        {% else %}
+                            <a href="{{ path('remove_article_favoris', {id: article.id, page: "list"}) }}"><i class="fas fa-star text-danger fa-2x"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

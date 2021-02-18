@@ -41,7 +41,7 @@ class Nouveaute
      * @param int $max nombre de nouveaute max a recherche
      * @return int|mixed|string
      */
-    function findArticleNouveaute(CategorieRepository $categorieRepo,ActionRepository $actionsRepo,
+    function findArticleNouveaute_AvecIdCategorie(CategorieRepository $categorieRepo,ActionRepository $actionsRepo,
                                   $max, $idCategorie){
 
         $dateTodayConvert=\DateTime::createFromFormat('d/m/Y', \date("d/m/Y"));
@@ -53,4 +53,25 @@ class Nouveaute
         return $nouveaute;
     }
 
+    /**
+     * fonctions qui permet de déterminer si un article est nouveau ou non
+     * @param CategorieRepository $categorieRepo
+     * @param ActionRepository $actionsRepo
+     * @param int $max nombre de nouveaute max a recherche
+     * @return int|mixed|string
+     */
+    function findArticleNouveaute(CategorieRepository $categorieRepo,ActionRepository $actionsRepo,
+                                  $max){
+
+        $dateTodayConvert=\DateTime::createFromFormat('d/m/Y', \date("d/m/Y"));
+        $today = $dateTodayConvert->format('Y-m-d');
+        $categorie = $categorieRepo->findAll(); // selection de la catégorie
+        foreach ($categorie as $cat){
+            $nbJourNouveaute = $cat->getDureeNouveaute(); // récupération nb nouveauté en fonction de l'id de la catégorie
+
+        }
+        $dateDureeMax = $this->transformDate($today, 500); // TODO 500 pour test => mettre nbJourNouveaute normalement
+        $nouveaute = $actionsRepo->findIsNouveaute($dateDureeMax,$max);
+        return $nouveaute;
+    }
 }

@@ -54,5 +54,3 @@ Array.prototype.forEach.call(hiders, function (hider) {
         hiderTarget.classList.toggle('-visible');
     });
 });
-
-

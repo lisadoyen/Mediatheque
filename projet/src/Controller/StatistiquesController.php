@@ -74,7 +74,7 @@ class StatistiquesController extends AbstractController
             $allArticles,
             $request->query->getInt('page', 1)
         );
-        $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500,  2); // TODO : changer l'idCategorie en fonction du filtre
+        $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500);
 
         return $this->render('statistiques/statistiques.html.twig', [
             'articles'=>$articles,

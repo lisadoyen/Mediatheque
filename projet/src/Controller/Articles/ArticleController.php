@@ -86,7 +86,7 @@ class ArticleController extends AbstractController
                 $request->query->getInt('page',1),
                 30
             );
-            $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500,  $idCategorie);
+            $nouveaute = $new->findArticleNouveaute_AvecIdCategorie($categorieRepo, $actionsRepo,500,  $idCategorie);
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
                 'statuts' => $statutRepository->findAll(),
@@ -104,7 +104,7 @@ class ArticleController extends AbstractController
                 $request->query->getInt('page', 1),
                 30
             );
-            $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500,  1); // TODO : changer l'idCategorie en fonction du filtre
+            $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500);
 
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
@@ -209,7 +209,7 @@ class ArticleController extends AbstractController
 
         $livre = $articleRepository->findOneBy(['id' => $id]);
         $fav = $favorisRepository->findOneBy(['utilisateur'=>$this->getUser(), 'article'=>$livre]);
-        $nouveaute = $new->findArticleNouveaute($categorieRepository,$actionRepository,500, $livre->getCategorie()->getId());
+        $nouveaute = $new->findArticleNouveaute_AvecIdCategorie($categorieRepository,$actionRepository,500, $livre->getCategorie()->getId());
         $nouveau = null;
         foreach($nouveaute as $new){
             if($new['id'] == $livre->getId()){
