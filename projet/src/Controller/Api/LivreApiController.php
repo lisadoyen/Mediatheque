@@ -66,7 +66,7 @@ class LivreApiController extends AbstractController
 
             $author = "";
             foreach ($infos['auteurs'] as $auteur) {
-                if($auteur != "" && !array($auteur)){
+                if($auteur != ""){
                     $author = $auteur;
                     break;
                 }
@@ -74,7 +74,7 @@ class LivreApiController extends AbstractController
 
             $editor = "";
             foreach ($infos['editeurs'] as $editeur) {
-                if($editeur != "" && !array($auteur)){
+                if($editeur != ""){
                     $editor = $editeur;
                     break;
                 }
@@ -104,21 +104,30 @@ class LivreApiController extends AbstractController
                 }
             }
 
-            if($author != "" && !$entiteRepository->findBy(['nom' => $author])){
+            /** @var Entite $findEntite */
+            $findEntite = $entiteRepository->findOneBy(['nom' => $author]);
+            if($author != "" && !$findEntite){
                 $auteur = new Entite();
                 $auteur->setTypeEntite($typeAuteur);
                 $auteur->setNom($author);
                 $em->persist($auteur);
                 $em->flush();
                 $livre->addEntite($auteur);
+            }elseif ($findEntite){
+                $livre->addEntite($findEntite);
             }
-            if($editor != "" && !$entiteRepository->findBy(['nom' => $editor])){
+            /** @var Entite $findEntite */
+            $findEntite = $entiteRepository->findOneBy(['nom' => $editor]);
+            if($editor != "" && !$findEntite){
                 $editeur = new Entite();
                 $editeur->setTypeEntite($typeEditeur);
                 $editeur->setNom($editor);
                 $em->persist($editeur);
                 $em->flush();
                 $livre->addEntite($editeur);
+            }
+            elseif ($findEntite){
+                $livre->addEntite($findEntite);
             }
             if($date != "") $livre->setDatePublication($date);
             if($image != "") $livre->setVignette($image);
