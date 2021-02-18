@@ -17,13 +17,38 @@
                         <button value="liste" onclick="confirmMessageList('liste', this.value)"><img src="{{asset('assets/images/article/list.png')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage liste détaillée" alt="mode affichage liste détaillée" width="20" height="20"></button>
                         <span class="pl-4 pt-4 text-trier">trier par</span>
                         <button id="navbarDropdown" data-toggle="dropdown" class="edit-btn">
-                            <i class="fas fa-arrow-up"></i></button>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">titre</a>
-                                <a class="dropdown-item" href="#">date d'aquisition</a>
-                                <a class="dropdown-item" href="#">prix</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">popularité</a>
+                            <i class="fas fa-arrow-down"></i></button>
+                            <div class="dropdown-menu">
+                                <div class="dropdown">
+                                    <div style="padding:1vh;color:white;background-color: var(--second-color)">Titre <i class="fas fa-arrow-down"></i></div>
+                                    <div class="dropdown-submenu" style="padding: 2vh;">
+                                        <a class="dropdown-item" href="{{ path('articles_show_order', {order:"ASC"}) }}">Croissant</a>
+                                        <a class="dropdown-item" href="{{ path('articles_show_order', {order:"DESC"}) }}">Décroissant</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <div style="padding:1vh;color:white;background-color: var(--second-color)">Date d'aquisition <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="dropdown-submenu" style="padding: 2vh;">
+                                        <a class="dropdown-item" href="#">Croissant</a>
+                                        <a class="dropdown-item" href="#">Décroissant</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <div style="padding:1vh;color:white;background-color: var(--second-color)">Prix <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="dropdown-submenu" style="padding: 2vh;">
+                                        <a class="dropdown-item" href="#">Croissant</a>
+                                        <a class="dropdown-item" href="#">Décroissant</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <div style="padding:1vh;color:white;background-color: var(--second-color)">Popularité <i class="fas fa-arrow-down"></i></div>
+                                    <div class="dropdown-submenu"  style="padding: 2vh;">
+                                        <a class="dropdown-item" href="#">Croissant</a>
+                                        <a class="dropdown-item" href="#">Décroissant</a>
+                                    </div>
+                                </div>
                             </div>
                     </div>
                 </div>

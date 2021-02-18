@@ -55,9 +55,11 @@ class ArticleController extends AbstractController
 {
     /**
      * @Route("/articles/show", name="articles_show", methods={"GET", "POST"})
+     * * @Route("/articles/{order}/show", name="articles_show_order", methods={"GET", "POST"})
      * @Route("/articles/categorie/{idCategorie}/show", name="categories_id_articles_show", methods={"GET", "POST"})
      * @Route("/articles/genres/{idGenre}/show", name="genres_id_articles_show", methods={"GET", "POST"})
      * @Route("/articles/categorie/{idCategorie}/genres/{idGenre}/show", name="categories_id_genres_id_articles_show", methods={"GET", "POST"})
+     * @param $order
      * @param null $idGenre
      * @param null $idCategorie
      * @param SessionInterface $session
@@ -73,7 +75,7 @@ class ArticleController extends AbstractController
      * @param TrancheAgeRepository $ageRepository
      * @return Response
      */
-    public function showAll($idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
+    public function showAll($order=null, $idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
                             Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository)
@@ -81,9 +83,9 @@ class ArticleController extends AbstractController
 
         // Menu genre et/ou catégorie
         if($idGenre != null || $idCategorie != null) {
-            $livres = $paginator ->paginate(
-                $filtre->filtreAvecCategorie_Genre($idGenre,$idCategorie, true, $genreRepository,$statutRepository, $categorieRepo, $session, $ar),
-                $request->query->getInt('page',1),
+            $livres = $paginator->paginate(
+                $filtre->filtreAvecCategorie_Genre($order,$idGenre, $idCategorie, true, $genreRepository, $statutRepository, $categorieRepo, $session, $ar),
+                $request->query->getInt('page', 1),
                 30
             );
             $nouveaute = $new->findArticleNouveaute_AvecIdCategorie($categorieRepo, $actionsRepo,500,  $idCategorie);
@@ -93,14 +95,14 @@ class ArticleController extends AbstractController
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
                 'ages' =>$ageRepository ->findAll(),
-                'donnees' => $filtre->filtreAvecCategorie_Genre($idGenre,$idCategorie, false, $genreRepository, $statutRepository, $categorieRepo, $session, $ar),
+                'donnees' => $filtre->filtreAvecCategorie_Genre($order,$idGenre,$idCategorie, false, $genreRepository, $statutRepository, $categorieRepo, $session, $ar),
                 'nouveaute' => $nouveaute
             ]);
         }
         // filtre
         else {
             $livres = $paginator->paginate(
-                $filtre->filtre($request, true, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                $filtre->filtre($request, $order, true, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
                 $request->query->getInt('page', 1),
                 30
             );
@@ -112,9 +114,9 @@ class ArticleController extends AbstractController
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
                 'ages' =>$ageRepository ->findAll(),
-                'donnees' => $filtre->filtre($request, false, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
-                'min' => $filtre->filtre($request, false, true, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
-                'max' => $filtre->filtre($request, false, false, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                'donnees' => $filtre->filtre($request,$order, false, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                'min' => $filtre->filtre($request,$order, false, true, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                'max' => $filtre->filtre($request,$order, false, false, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
                 'nouveaute' => $nouveaute,
             ]);
         }

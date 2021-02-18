@@ -45,6 +45,7 @@
                             {% elseif article.categorie.libelle == 'musique' %}
                                 <span class="text-orange">artiste : </span>
                             {% endif %}
+
                             <!-- changer quand on aura une liste des entités par article, pour l'instant il n'y a qu'une entité par article -->
                             {% if article.entites[0] is defined %}
                                 {{ article.entites[0].prenom | capitalize }}

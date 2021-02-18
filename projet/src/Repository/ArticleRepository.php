@@ -26,8 +26,8 @@ class ArticleRepository extends ServiceEntityRepository
      * @param SearchData $search
      * @return int[]
      */
-    public function findMinMax(SearchData $search):array{
-        $results = $this->getSearchQuery($search, true)
+    public function findMinMax(SearchData $search, $order):array{
+        $results = $this->getSearchQuery($order,$search, true)
             ->select('MIN(a.montantVente) as min','MAX(a.montantVente) as max')
             ->getQuery()
             ->getScalarResult();
@@ -47,11 +47,11 @@ class ArticleRepository extends ServiceEntityRepository
      * @param SearchData $search
      * @return int|mixed|string
      */
-    public function findSearch(SearchData $search){
-        return $this->getSearchQuery($search)->getQuery()->getResult();
+    public function findSearch(SearchData $search, $order){
+        return $this->getSearchQuery($order,$search)->getQuery()->getResult();
     }
 
-    public function getSearchQuery(SearchData $search, $ignorePrice = false): \Doctrine\ORM\QueryBuilder
+    public function getSearchQuery($order,SearchData $search, $ignorePrice = false): \Doctrine\ORM\QueryBuilder
     {
         $query = $this
             ->createQueryBuilder('a') // a = article
@@ -62,7 +62,8 @@ class ArticleRepository extends ServiceEntityRepository
             ->join('a.statut', 's')
             ->join('a.trancheAge', 'age')
             ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'")
-            ->groupBy('a.titre');
+            ->groupBy('a.titre')
+            ->addOrderBy('a.titre',$order);
             // selection des articles avec le statut vendable ou empruntable
 
         if(!empty($search->date)){
