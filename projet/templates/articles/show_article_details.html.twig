@@ -5,7 +5,7 @@
             {% if article is not empty %}
             <div class="col-lg-3 float-left">
                 {%  if article.vignette is not empty %}
-                    <img src="{{ article.vignette }}" alt="image de {{ article.titre }}" width="350" height="350">
+                    <img src="{{ article.vignette }}" alt="image de {{ article.titre }}" width="350" height="400">
                 {% else %}
                     <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="350" height="350">
                 {% endif %}

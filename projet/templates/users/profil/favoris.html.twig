@@ -54,7 +54,7 @@
                 <tr>
                     <td>
                         {%  if fav.article.vignette is not empty %}
-                            <img src="{{ fav.article.vignette }}" alt="image de {{ fav.article.titre }}" width="120" height="120">
+                            <img src="{{ fav.article.vignette }}" alt="image de {{ fav.article.titre }}" width="120" height="150">
                         {% else %}
                             <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120">
                         {% endif %}
