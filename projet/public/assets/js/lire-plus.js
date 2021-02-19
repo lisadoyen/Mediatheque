@@ -1,13 +1,14 @@
 $(document).ready(function() {
-    var max = 450;
+    var max = 400;
     $(".readMore").each(function() {
         var str = $(this).text();
-        if ($.trim(str).length > max) {
+        if (str.length > max) {
             var subStr = str.substring(0, max);
-            var hiddenStr = str.substring(max, $.trim(str).length);
+            var hiddenStr = str.substring(max);
+            console.log(hiddenStr);
             $(this).empty().html(subStr);
             $(this).append(' <a href="javascript:void(0);" class="lire-plus">lire la suite...</a>');
-            $(this).append('<span class="addText">' + hiddenStr + '</span>');
+            $(this).append('<div class="addText">' + hiddenStr + '</div>');
         }
     });
     $(".lire-plus").click(function() {

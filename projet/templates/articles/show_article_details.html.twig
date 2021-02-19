@@ -65,11 +65,18 @@
                             <span class="text-orange">description : </span>
                         {% endif %}
                         <p class="readMore"> <!--changer description en article.description-->
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non metus diam. Nunc placerat ante at iaculis egestas. Pellentesque risus mauris, interdum vitae
-                            tellus eu, pellentesque dignissim urna. Nulla mattis enim mauris, quis aliquam nisi placerat imperdiet. Morbi consequat leo vel ante varius finibus.
-                            Pellentesque vitae ante vitae turpis maximus volutpat porta vitae orci. Donec tincidunt felis at tortor tincidunt, quis porta ipsum dignissim. Vivamus
-                            imperdiet est augue, eu ultricies elit pulvinar ornare. Pellentesque nulla nulla, congue facilisis aliquam id, ultricies id nibh. Pellentesque sed nibh
-                            eget sapien mollis malesuada. Vivamus eget congue sem, id da
+                            {% if article.description is not empty %}
+                                {{ article.description | raw }}
+                            {% else %}
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas risus turpis, cursus
+                                a aliquet non, lacinia eget nibh. Donec massa enim, placerat nec imperdiet ac, convallis
+                                et neque. Sed arcu turpis, facilisis at orci quis, mollis malesuada augue. Donec in
+                                nulla et turpis hendrerit sollicitudin et in elit. Vivamus fermentum erat purus, a
+                                fringilla arcu faucibus convallis. Vestibulum commodo eu mi vitae ultricies. Ut
+                                sollicitudin risus eget ipsum elementum hendrerit. Donec fringilla massa sodales
+                                erat suscipit, quis maximus enim tincidunt. Nam vehicula leo nec eros dictum malesuada.
+                                Suspendisse volutpat quam eget rhoncus porttitor.
+                            {% endif %}
                         </p>
                     </div>
                 </div>
