@@ -26,8 +26,8 @@ class ArticleRepository extends ServiceEntityRepository
      * @param SearchData $search
      * @return int[]
      */
-    public function findMinMax(SearchData $search, $order):array{
-        $results = $this->getSearchQuery($order,$search, true)
+    public function findMinMax(SearchData $search, $order, $type):array{
+        $results = $this->getSearchQuery($order,$type,$search, true)
             ->select('MIN(a.montantVente) as min','MAX(a.montantVente) as max')
             ->getQuery()
             ->getScalarResult();
@@ -43,28 +43,42 @@ class ArticleRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    public function findNbArticleTotal(){
+        $query = $this
+            ->createQueryBuilder('a')
+            ->select('count(a.id)')
+            ->join('a.statut', 's')
+            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte'");
+        return $query->getQuery()->getResult();
+    }
+
     /**
      * @param SearchData $search
      * @return int|mixed|string
      */
-    public function findSearch(SearchData $search, $order){
-        return $this->getSearchQuery($order,$search)->getQuery()->getResult();
+    public function findSearch(SearchData $search, $order,$type){
+        return $this->getSearchQuery($order,$type,$search)->getQuery()->getResult();
     }
 
-    public function getSearchQuery($order,SearchData $search, $ignorePrice = false): \Doctrine\ORM\QueryBuilder
+    public function getSearchQuery($order,$type,SearchData $search, $ignorePrice = false): \Doctrine\ORM\QueryBuilder
     {
+        if($type == null)
+            $type = "titre"; // TODO : changer en date d'acquisition
+        if($order == null)
+            $order = "ASC"; // TODO : changer en DESC
+
         $query = $this
             ->createQueryBuilder('a') // a = article
-            ->select('g', 's', 'a') // g = genre , s = statut
+            ->select('g', 's', 'a', 'age') // g = genre , s = statut
             ->join('a.genre', 'g')
             ->join('a.categorie', 'c')
             ->join('a.actions', 'ac')
             ->join('a.statut', 's')
             ->join('a.trancheAge', 'age')
-            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'")
-            ->groupBy('a.titre')
-            ->addOrderBy('a.titre',$order);
-            // selection des articles avec le statut vendable ou empruntable
+            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte'")
+            ->groupBy("a.titre")
+            ->addOrderBy("a.$type",$order);
+            // selection des articles avec le statut vendable ou empruntable et emprunté
 
         if(!empty($search->date)){
             $query = $query
@@ -120,7 +134,6 @@ class ArticleRepository extends ServiceEntityRepository
             $dateDureeMaxConvert=\DateTime::createFromFormat('d/m/Y',$nouveaute->transformDate($today, 500)); // TODO : 500 => récupérer la(les) durée(s) de(s) nouveauté(s) de(s) catégorie(s) du filtre
             $dateDureeMax = $dateDureeMaxConvert->format('Y-m-d');
             $query=$query
-                ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'")
                 ->andWhere("ac.date BETWEEN '$dateDureeMax' AND '$today'")
                 ->groupBy('a.titre');
         }

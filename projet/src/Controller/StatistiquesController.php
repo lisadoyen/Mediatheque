@@ -77,16 +77,17 @@ class StatistiquesController extends AbstractController
         $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500);
 
         $order = 'ASC'; //TODO : à changer
+        $type = 'titre';
         return $this->render('statistiques/statistiques.html.twig', [
             'articles'=>$articles,
             'allArticles'=>$allArticles,
-            'donnees' => $filtre->filtre($request, $order,false, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+            'donnees' => $filtre->filtre($request, $order,$type,false, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
             'genres' => $genreRepository->findAll(),
             'categories' => $categorieRepo->findAll(),
             'statuts' => $statutRepository->findAll(),
             'ages' =>$ageRepository ->findAll(),
-            'min' => $filtre->filtre($request, $order,false, true, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
-            'max' => $filtre->filtre($request, $order,false, false, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+            'min' => $filtre->filtre($request, $order,$type,false, true, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+            'max' => $filtre->filtre($request, $order,$type,false, false, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
             'nouveaute' => $nouveaute,
         ]);
     }

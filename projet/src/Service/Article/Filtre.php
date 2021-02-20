@@ -17,7 +17,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class Filtre
 {
 
-    function filtreAvecCategorie_Genre($order, $idGenre, $idCategorie,  $bool, GenreRepository $genreRepository, StatutRepository $statutRepository,
+    function filtreAvecCategorie_Genre($order,$type, $idGenre, $idCategorie,  $bool, GenreRepository $genreRepository, StatutRepository $statutRepository,
                            CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar) {
 
         $data = new SearchData();
@@ -50,12 +50,12 @@ class Filtre
         }
         //dd($donnees);
         if($bool == true)
-            return $ar->findSearch($data, $order);
+            return $ar->findSearch($data, $order, $type);
         else
             return $donnees;
     }
 
-    function filtre(Request $request,$order, $bool, $prixMin, $prixMax, GenreRepository $genreRepository,
+    function filtre(Request $request,$order,$type, $bool, $prixMin, $prixMax, GenreRepository $genreRepository,
                     CategorieRepository $categorieRepo, SessionInterface $session,
                     ArticleRepository $ar, StatutRepository $statutRepository, TrancheAgeRepository $ageRepository){
 
@@ -170,7 +170,7 @@ class Filtre
             $data->max = 10000000;
             $data->min = 0;
         }
-        [$min, $max] = $ar->findMinMax($data, $order);
+        [$min, $max] = $ar->findMinMax($data, $order, $type);
         if($prixMin == true){
             return $min;
         }
@@ -178,7 +178,7 @@ class Filtre
             return $max;
         }
         if($bool == true)
-            return $ar->findSearch($data, $order);
+            return $ar->findSearch($data, $order, $type);
         else
             return $donnees;
     }

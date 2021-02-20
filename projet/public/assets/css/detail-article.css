@@ -47,6 +47,23 @@ span.text-detail-size-nouveaute{
     color:#9f5811 !important;
 }
 
+.style-button-article-emprunte-detail{
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex;
+    padding: 7px;
+    width: auto;
+    height: auto;
+    border-radius: 25px;
+    border: 2px solid #d9dbdb;
+    font-size: 2rem;
+    background-color:#d9dbdb;
+    color: black !important;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
 .style-button-article-achat-detail{
     text-decoration: none;
     text-align: center;

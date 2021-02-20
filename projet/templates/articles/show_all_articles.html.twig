@@ -12,24 +12,40 @@
             -->
             <div class="col-lg-9 p-4">
                 <div class="row">
-                    <div class="col-lg-6 float-left">
-                        <button value="icone" onclick="confirmMessageIcone('icone', this.value)"><img src="{{asset('assets/images/article/icone.jpg')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage en icone" alt="mode affichage en icones" width="20" height="20"></button>
-                        <button value="liste" onclick="confirmMessageList('liste', this.value)"><img src="{{asset('assets/images/article/list.png')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage liste détaillée" alt="mode affichage liste détaillée" width="20" height="20"></button>
-                        <span class="pl-4 pt-4 text-trier">trier par</span>
-                        <button id="navbarDropdown" data-toggle="dropdown" class="edit-btn">
-                            <i class="fas fa-arrow-down"></i></button>
+                    <div class="col-lg-8 float-left">
+                        <div class="row">
+                            <button value="icone" onclick="confirmMessageIcone('icone', this.value)"><img src="{{asset('assets/images/article/icone.jpg')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage en icone" alt="mode affichage en icones" width="20" height="20"></button>
+                            <button value="liste" onclick="confirmMessageList('liste', this.value)"><img src="{{asset('assets/images/article/list.png')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage liste détaillée" alt="mode affichage liste détaillée" width="20" height="20"></button>
+                            <span class="pl-4 pt-4 text-trier">trier par</span>
+                            <button id="navbarDropdown" data-toggle="dropdown" class="edit-btn">
+                                <i class="fas fa-arrow-down"></i>
+                            </button>
                             <div class="dropdown-menu">
                                 <div class="dropdown">
+                                    <div class="dropdown">
+                                        <div style="padding:1vh;color:white;background-color: var(--second-color)">Date d'aquisition <i class="fas fa-arrow-down"></i>
+                                        </div>
+                                        <div class="dropdown-submenu" style="padding: 1vh;">
+                                            <a class="dropdown-item" href="#">Croissant</a>
+                                            <a class="dropdown-item" href="#">Décroissant</a>
+                                        </div>
+                                    </div>
                                     <div style="padding:1vh;color:white;background-color: var(--second-color)">Titre <i class="fas fa-arrow-down"></i></div>
-                                    <div class="dropdown-submenu" style="padding: 2vh;">
-                                        <a class="dropdown-item" href="{{ path('articles_show_order', {order:"ASC"}) }}">Croissant</a>
-                                        <a class="dropdown-item" href="{{ path('articles_show_order', {order:"DESC"}) }}">Décroissant</a>
+                                    <div class="dropdown-submenu" style="padding: 1vh;">
+                                        <a class="dropdown-item" href="{{ path('articles_show_order', {type:"titre", order:"ASC" }) }}">Croissant</a>
+                                        <a class="dropdown-item" href="{{ path('articles_show_order', { type:"titre", order:"DESC"}) }}">Décroissant</a>
                                     </div>
                                 </div>
                                 <div class="dropdown">
-                                    <div style="padding:1vh;color:white;background-color: var(--second-color)">Date d'aquisition <i class="fas fa-arrow-down"></i>
+                                    <div style="padding:1vh;color:white;background-color: var(--second-color)">Popularité <i class="fas fa-arrow-down"></i></div>
+                                    <div class="dropdown-submenu"  style="padding: 1vh;">
+                                        <a class="dropdown-item" href="#">Croissant</a>
+                                        <a class="dropdown-item" href="#">Décroissant</a>
                                     </div>
-                                    <div class="dropdown-submenu" style="padding: 2vh;">
+                                </div>
+                                <div class="dropdown">
+                                    <div style="padding:1vh;color:white;background-color: var(--second-color)">Note <i class="fas fa-arrow-down"></i></div>
+                                    <div class="dropdown-submenu"  style="padding: 1vh;">
                                         <a class="dropdown-item" href="#">Croissant</a>
                                         <a class="dropdown-item" href="#">Décroissant</a>
                                     </div>
@@ -37,19 +53,35 @@
                                 <div class="dropdown">
                                     <div style="padding:1vh;color:white;background-color: var(--second-color)">Prix <i class="fas fa-arrow-down"></i>
                                     </div>
-                                    <div class="dropdown-submenu" style="padding: 2vh;">
-                                        <a class="dropdown-item" href="#">Croissant</a>
-                                        <a class="dropdown-item" href="#">Décroissant</a>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                    <div style="padding:1vh;color:white;background-color: var(--second-color)">Popularité <i class="fas fa-arrow-down"></i></div>
-                                    <div class="dropdown-submenu"  style="padding: 2vh;">
-                                        <a class="dropdown-item" href="#">Croissant</a>
-                                        <a class="dropdown-item" href="#">Décroissant</a>
+                                    <div class="dropdown-submenu" style="padding: 1vh;">
+                                        <a class="dropdown-item" href="{{ path('articles_show_order', {type:"montantVente", order:"ASC" }) }}">Croissant</a>
+                                        <a class="dropdown-item" href="{{ path('articles_show_order', {type:"montantVente", order:"DESC" }) }}">Décroissant</a>
                                     </div>
                                 </div>
                             </div>
+                            <div class="p-4 text-size">
+                                {% if ordre is defined and type is defined %}
+                                    {% if type == "montantVente" %}
+                                        {% if ordre == "ASC" %}
+                                            <span class="text-bold">prix : </span> croissant
+                                        {% else %}
+                                            <span class="text-bold">prix : </span> décroissant
+                                        {% endif %}
+                                    {% elseif type == "titre" %}
+                                        {% if ordre == "ASC" %}
+                                            <span class="text-bold">{{ type }} : </span> croissant
+                                        {% else %}
+                                            <span class="text-bold">{{ type }} </span> décroissant
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-bold">{{ type | default("date d'aquisition") }} : </span> {{ ordre | default('décroissant') }}
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-size">
+                        Légende : ...
                     </div>
                 </div>
                 <div style="position:relative">

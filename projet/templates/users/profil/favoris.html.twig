@@ -76,7 +76,9 @@
                         {{ fav.article.statut.libelle }}
                     </td>
                     <td>
-                        <a href="{{ path('add_article_panier',{id:fav.article.id}) }}" class="btn edit-btn">Ajouter au panier</a>
+                        {% if fav.article.statut.libelle == "vendable" or fav.article.statut.libelle == "empruntable" %}
+                            <a href="{{ path('add_article_panier',{id:fav.article.id}) }}" class="btn edit-btn">Ajouter au panier</a>
+                        {% endif %}
                         <a href="{{ path('article_details', {id: fav.article.id}) }}" class="btn edit-btn">Voir plus de détails</a>
                     </td>
                     <td class="align-content-center">

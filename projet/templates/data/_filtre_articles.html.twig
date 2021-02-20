@@ -1,4 +1,10 @@
 <div id="1" style="visibility: visible">
+    <div>
+        {% if nbArticles is defined and nbArticlesTotal is defined %}
+            <span class="text-bold">{{ nbArticles }} </span> / {{ nbArticlesTotal }} articles
+        {% endif %}
+    </div>
+    <hr>
     <form action="{{ path('filter_clear') }}" method="post">
         <input type="hidden" name="_method" value="GET">
         <button type="submit" class="edit-btn float-left" onclick="return confirm('Voulez-vous vraiment vider le filtre ?')">Vider</button>
