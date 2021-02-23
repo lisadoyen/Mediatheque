@@ -44,7 +44,6 @@ class EnregistrementRepository extends ServiceEntityRepository
             ->where('s.id = e.statutEnregistrement')
             ->andWhere("s.libelle !='rendu'")
             ->andWhere("s.libelle !='perdu'")
-            ->andWhere("s.libelle !='achete'")
             ->andWhere("s.libelle !='telecharge'")
             ->addOrderBy('e.dateRendu','ASC');
         ;

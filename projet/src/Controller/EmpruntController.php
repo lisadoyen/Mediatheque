@@ -89,6 +89,25 @@ class EmpruntController extends AbstractController
     }
 
     /**
+     * @Route("/commande/gestion/achat", name="gestion_commande")
+     */
+    public function commandeGestion(EnregistrementRepository $enregistrementRepository,StatutEnregistrementRepository $statutEnregistrementRepository,PaginatorInterface $paginator, Request $request)
+    {
+        $emprunts = $enregistrementRepository->findBy(['statutEnregistrement'=>$statutEnregistrementRepository->findOneBy(['libelle'=>'ache
+        te'])]);
+        $empruntsPages = $paginator ->paginate(
+            $emprunts,
+            $request->query->getInt('page',1),
+            10
+        );
+
+        return $this->render('emprunt/commandes.html.twig', [
+            'emprunts' => $empruntsPages,
+            'nbEmprunt' => count($emprunts)
+        ]);
+    }
+
+    /**
      * @Route("/emprunts/{id}/statut/pret", name="changer_statut_pret")
      */
     public function empruntChangerPret(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository)

@@ -2,15 +2,7 @@
 {% block body %}
 
     <div class="m-5">
-        <h1 class="mt-2">Les emprunts ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
-        <div class="row">
-            <div class="col-sm">
-                <a href="{{ path('gestion_actif_emprunts') }}" class="edit-btn float-left">Emprunts Actifs</a>
-            </div>
-            <div class="col-sm">
-                <a href="{{ path('gestion_historique_emprunts') }}" class="edit-btn float-right">Tous les emprunts (historiques)</a>
-            </div>
-        </div>
+        <h1 class="mt-2">Les commandes ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
         {% if emprunts is not empty %}
             <table class="table">
                 <thead>
@@ -22,8 +14,6 @@
                     <th scope="col">no Commande</th>
                     <th scope="col">Date d'enregitrement</th>
                     <th scope="col">Date de préparation</th>
-                    <th scope="col">Date de rendu</th>
-                    <th scope="col">Date de rendu théorique</th>
                     <th scope="col">Type</th>
                     <th scope="col">Statut</th>
                 </tr>
@@ -61,28 +51,13 @@
                             {{ emprunt.datePreparationFini | date('d/m/Y') }}
                         </td>
                         <td>
-                            {{ emprunt.dateRendu | date('d/m/Y') }}
-                        </td>
-                        <td>
-                            {% if emprunt.dateRenduTheorique | date('d/m/Y') <= "now"|date('d/m/Y') %}
-                                <span class="text-danger"><b>{{ emprunt.dateRenduTheorique | date('d/m/Y') }}</b></span>
-                            {% else %}
-                                <span class="text-success">{{ emprunt.dateRenduTheorique | date('d/m/Y') }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
                             {{ emprunt.typeEnregistrement.libelle }}
                         </td>
                         <td>
                             {% if emprunt.statutEnregistrement.libelle =="en attente" %}
                                 <a href="{{ path('changer_statut_pret',{id:emprunt.id} ) }}" class="btn edit-btn">Prêt</a>
                             {% elseif emprunt.statutEnregistrement.libelle =="pret" %}
-                                {% if emprunt.typeEnregistrement.libelle =="emprunt" %}
-                                    <a href="{{ path('changer_statut_emprunte',{id:emprunt.id} ) }}" class="btn edit-btn">Emprunté</a>
-                                {% endif %}
-                            {% elseif emprunt.statutEnregistrement.libelle =="emprunte" %}
-                                <a href="{{ path('changer_statut_rendu',{id:emprunt.id} ) }}" class="btn edit-btn">Rendu</a>
-                                <a href="{{ path('changer_statut_perdu',{id:emprunt.id} ) }}" class="btn edit-btn">Perdu</a>
+                                    <a href="{{ path('changer_statut_achete',{id:emprunt.id} ) }}" class="btn edit-btn">Acheté</a>
                             {% else %}
                                 <span>{{ emprunt.statutEnregistrement.libelle }}</span>
                             {% endif %}
@@ -93,7 +68,7 @@
             </table>
         {% else %}
             <div class="col-sm m-2">
-                <b>Aucun emprunt en cours</b>
+                <b>Aucune commande en cours</b>
             </div>
         {% endif %}
         <hr class="mb-5">
