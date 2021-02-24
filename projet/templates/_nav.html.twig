@@ -18,19 +18,19 @@
     <div class="container">
         <div class="row">
             <div class="col-sm sub-dropdown container">
-                <a href="{{ path('categories_id_articles_show', {idCategorie : 1}) }}" class="media-item dropbtn">Livres</a>
+                <a href="{{ path('articles_idCategorie', {idCategorie : 1}) }}" class="media-item dropbtn">Livres</a>
                 {{ render(controller('App\\Controller\\GenreController::getLivreGenres')) }}
             </div>
             <div class="col-sm sub-dropdown container" >
-                <a href="{{ path('categories_id_articles_show',  {idCategorie : 2}) }}" class="media-item dropbtn">Videos</a>
+                <a href="{{ path('articles_idCategorie',  {idCategorie : 2}) }}" class="media-item dropbtn">Videos</a>
                 {{ render(controller('App\\Controller\\GenreController::getVideoGenres')) }}
             </div>
             <div class="col-sm sub-dropdown container">
-                <a href="{{ path('categories_id_articles_show',  {idCategorie : 4}) }}" class="media-item dropbtn">Musiques</a>
+                <a href="{{ path('articles_idCategorie',  {idCategorie : 4}) }}" class="media-item dropbtn">Musiques</a>
                 {{ render(controller('App\\Controller\\GenreController::getMusiqueGenres')) }}
             </div>
             <div class="col-sm sub-dropdown container">
-                <a href="{{ path('categories_id_articles_show',  {idCategorie : 3}) }}" class="media-item dropbtn">Jeux</a>
+                <a href="{{ path('articles_idCategorie',  {idCategorie : 3}) }}" class="media-item dropbtn">Jeux</a>
                 {{ render(controller('App\\Controller\\GenreController::getJeuGenres')) }}
             </div>
         </div>

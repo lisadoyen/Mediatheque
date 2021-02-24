@@ -17,7 +17,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class Filtre
 {
 
-    function filtreAvecCategorie_Genre($order,$type, $idGenre, $idCategorie,  $bool, GenreRepository $genreRepository, StatutRepository $statutRepository,
+    function filtreAvecCategorie_Genre($order, $type, $idGenre, $idCategorie,  $bool, GenreRepository $genreRepository, StatutRepository $statutRepository,
                            CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar) {
 
         $data = new SearchData();
@@ -37,25 +37,19 @@ class Filtre
         $statuts = $statutRepository->findAll();
         $data->statut = $statuts;
         $donnees['statuts'] = $statuts;
-        //$data->date = null;
-        //$donnees['date'] = null;
-        //$donnees['min'] = 0;
-        //$donnees['max'] = 100000;
-        //$donnees['ages'] = null;
         $session->set('donnees', $donnees);
         if (!empty($donnees)) {
             $donnees = $session->get('donnees');
             if($idGenre != null) $data->genre = $donnees['genres'];
             if($idCategorie != null) $data->categorie = $donnees['categories'];
         }
-        //dd($donnees);
         if($bool == true)
             return $ar->findSearch($data, $order, $type);
         else
             return $donnees;
     }
 
-    function filtre(Request $request,$order,$type, $bool, $prixMin, $prixMax, GenreRepository $genreRepository,
+    function filtre(Request $request,$order, $type, $bool, GenreRepository $genreRepository,
                     CategorieRepository $categorieRepo, SessionInterface $session,
                     ArticleRepository $ar, StatutRepository $statutRepository, TrancheAgeRepository $ageRepository){
 
@@ -67,22 +61,8 @@ class Filtre
             }
             if(isset($_POST['date'])) {
                 $donnees['date'] = $_POST['date'];
-                //$donnees['date'] = $donnees['date']['year'].'-'.$donnees['date']['month'].'-'.$donnees['date']['day'];
-                /*try {
-                    $test = new \DateTime($donnees['date']);
-                } catch (\Exception $e) {
-                }
-                $newDate = $test->format('Y-m-d');*/
                 $data->date = $donnees['date'];
             }
-            if(isset($_POST['min'])) {
-                $donnees['min'] = $_POST['min'];
-                $erreurs = $this->validatorArticle($donnees);
-            }if(isset($_POST['max'])) {
-                $donnees['max'] = $_POST['max'];
-                $erreurs = $this->validatorArticle($donnees);
-            }
-
             if(!empty($_POST['genres'])){
                 $donnees['genres'] = $_POST['genres'];
                 $genres = [];
@@ -123,17 +103,6 @@ class Filtre
                     $donnees['statuts'] = $statuts;
                 }
             }
-            if(empty($erreurs)) {
-                if(isset( $_POST['max']) && isset( $_POST['min'])){
-                    $data->max = $_POST['max'];
-                    $data->min = $_POST['min'];
-                }
-            }else{
-                // afficher la page avec erreur à faire
-                dd('test');
-            }
-            //dd($donnees);
-
             if(isset($donnees))
                 $session->set('donnees', $donnees);
             else
@@ -161,35 +130,12 @@ class Filtre
                 if(!empty($donnees['nouveaute'])){
                     $data->nouveaute = true;
                 }
-                if (!empty($donnees['max'])) { $data->max = $donnees['max'];}
-                if (!empty($donnees['min'])) $data->min = $donnees['min'];
             }
-        }
-        // permet d'appliquer le prix min max uniquement lorsque vendable se coche
-        if(!isset($data->statut[2])){
-            $data->max = 10000000;
-            $data->min = 0;
-        }
-        [$min, $max] = $ar->findMinMax($data, $order, $type);
-        if($prixMin == true){
-            return $min;
-        }
-        if($prixMax == true){
-            return $max;
         }
         if($bool == true)
             return $ar->findSearch($data, $order, $type);
         else
             return $donnees;
-    }
-
-
-    public function validatorArticle($donnees)
-    {
-        $erreurs = array();
-        if(!is_numeric($donnees['min']) && $donnees['min'] != "") $erreurs['min'] = 'saisir une valeur numérique';
-        if(!is_numeric($donnees['max']) && $donnees['max'] != "") $erreurs['max'] = 'saisir une valeur numérique';
-        return $erreurs;
     }
 
 }

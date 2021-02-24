@@ -53,29 +53,13 @@ use Symfony\Component\Validator\Constraints\Date;
 
 class ArticleController extends AbstractController
 {
+
     /**
-     * @Route("/articles/show", name="articles_show", methods={"GET", "POST"})
-     * @Route("/articles/{type}/{order}/show", name="articles_show_order", methods={"GET", "POST"})
-     * @Route("/articles/categorie/{idCategorie}/show", name="categories_id_articles_show", methods={"GET", "POST"})
-     * @Route("/articles/genres/{idGenre}/show", name="genres_id_articles_show", methods={"GET", "POST"})
-     * @Route("/articles/categorie/{idCategorie}/genres/{idGenre}/show", name="categories_id_genres_id_articles_show", methods={"GET", "POST"})
-     * @param $order
-     * @param null $idGenre
-     * @param null $idCategorie
-     * @param SessionInterface $session
-     * @param ArticleRepository $ar
-     * @param CategorieRepository $categorieRepo
-     * @param GenreRepository $genreRepository
-     * @param ActionRepository $actionsRepo
-     * @param Filtre $filtre
-     * @param StatutRepository $statutRepository
-     * @param Request $request
-     * @param PaginatorInterface $paginator
-     * @param Nouveaute $new
-     * @param TrancheAgeRepository $ageRepository
+     * @Route ("/articles/{idCategorie}/show", name="articles_idCategorie", methods={"GET", "POST"})
+     * @param $idCategorie
      * @return Response
      */
-    public function showAll($order=null, $type=null, $idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
+    public function articles($order=null, $type=null, $idGenre=null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
                             Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository)
@@ -107,21 +91,94 @@ class ArticleController extends AbstractController
         // filtre
         else {
             $livres = $paginator->paginate(
-                $filtre->filtre($request, $order, $type,true, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                $filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
                 $request->query->getInt('page', 1),
                 30
             );
             $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500);
-            $nbArticles = count($filtre->filtre($request, $order, $type,true, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository));
+            $nbArticles = count($filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository));
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
                 'statuts' => $statutRepository->findAll(),
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
                 'ages' =>$ageRepository ->findAll(),
-                'donnees' => $filtre->filtre($request,$order,$type, false, false, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
-                'min' => $filtre->filtre($request,$order,$type, false, true, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
-                'max' => $filtre->filtre($request,$order, $type,false, false, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                'donnees' => $filtre->filtre($request,$order,$type, false,  $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                'nouveaute' => $nouveaute,
+                'ordre' =>$order,
+                'type' =>$type,
+                'nbArticlesTotal'=> $nbArticlesTotal[0][1],
+                'nbArticles' => $nbArticles
+            ]);
+        }
+    }
+
+    /**
+     * @Route("/articles/show", name="articles_show", methods={"GET", "POST"})
+     * @Route("/articles/{type}/{order}/show", name="articles_show_order", methods={"GET", "POST"})
+     * @Route("/articles/categorie/{idCategorie}/genres/{idGenre}/show", name="categories_id_genres_id_articles_show", methods={"GET", "POST"})
+     * @param $order
+     * @param null $idGenre
+     * @param null $idCategorie
+     * @param SessionInterface $session
+     * @param ArticleRepository $ar
+     * @param CategorieRepository $categorieRepo
+     * @param GenreRepository $genreRepository
+     * @param ActionRepository $actionsRepo
+     * @param Filtre $filtre
+     * @param StatutRepository $statutRepository
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param Nouveaute $new
+     * @param TrancheAgeRepository $ageRepository
+     * @return Response
+     */
+    public function showAll($order=null, $type=null, $idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
+                            CategorieRepository $categorieRepo, GenreRepository $genreRepository,
+                            ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
+                            Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository)
+    {
+        $nbArticlesTotal = $ar->findNbArticleTotal();
+        // Menu genre et/ou catégorie
+        //dd($idCategorie);
+        if($idGenre != null || $idCategorie != null) {
+            $livres = $paginator->paginate(
+                $filtre->filtreAvecCategorie_Genre($order,$type, $idGenre, $idCategorie, true, $genreRepository, $statutRepository, $categorieRepo, $session, $ar),
+                $request->query->getInt('page', 1),
+                30
+            );
+            $nbArticles = count($filtre->filtreAvecCategorie_Genre($order,$type, $idGenre, $idCategorie, true, $genreRepository, $statutRepository, $categorieRepo, $session, $ar));
+            $nouveaute = $new->findArticleNouveaute_AvecIdCategorie($categorieRepo, $actionsRepo,500,  $idCategorie);
+            return $this->render('articles/show_all_articles.html.twig', [
+                'articles' => $livres,
+                'statuts' => $statutRepository->findAll(),
+                'genres' => $genreRepository->findAll(),
+                'categories' => $categorieRepo->findAll(),
+                'ages' =>$ageRepository ->findAll(),
+                'donnees' => $filtre->filtreAvecCategorie_Genre($order,$type,$idGenre,$idCategorie, false, $genreRepository, $statutRepository, $categorieRepo, $session, $ar),
+                'nouveaute' => $nouveaute,
+                'ordre' =>$order,
+                'type' =>$type,
+                'nbArticlesTotal'=> $nbArticlesTotal[0][1],
+                'nbArticles' => $nbArticles
+            ]);
+        }
+        // filtre
+        else {
+            $livres = $paginator->paginate(
+                $filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                $request->query->getInt('page', 1),
+                30
+            );
+            $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500);
+            $nbArticles = count($filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository));
+            return $this->render('articles/show_all_articles.html.twig', [
+                'articles' => $livres,
+                'statuts' => $statutRepository->findAll(),
+                'genres' => $genreRepository->findAll(),
+                'categories' => $categorieRepo->findAll(),
+                'ages' =>$ageRepository ->findAll(),
+                'donnees' => $filtre->filtre($request,$order,$type, false,  $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
                 'nouveaute' => $nouveaute,
                 'ordre' =>$order,
                 'type' =>$type,

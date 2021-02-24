@@ -27,14 +27,6 @@ class SearchData{
      */
     public $categorie = [];
     /**
-     * @var null|integer
-     */
-    public $max;
-    /**
-     * @var null|integer
-     */
-    public $min;
-    /**
      * @var boolean
      * @ORM\Column(type="boolean")
      */

@@ -10,15 +10,15 @@
             <!--
                 Récup les infos dans entite via article_entite
             -->
+
             <div class="col-lg-9 p-4">
                 <div class="row">
                     <div class="col-lg-8 float-left">
                         <div class="row">
                             <button value="icone" onclick="confirmMessageIcone('icone', this.value)"><img src="{{asset('assets/images/article/icone.jpg')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage en icone" alt="mode affichage en icones" width="20" height="20"></button>
                             <button value="liste" onclick="confirmMessageList('liste', this.value)"><img src="{{asset('assets/images/article/list.png')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage liste détaillée" alt="mode affichage liste détaillée" width="20" height="20"></button>
-                            <span class="pl-4 pt-4 text-trier">trier par</span>
                             <button id="navbarDropdown" data-toggle="dropdown" class="edit-btn">
-                                <i class="fas fa-arrow-down"></i>
+                                <div class=" text-trier">trier par &nbsp;</div><i class="fas fa-arrow-down"></i>
                             </button>
                             <div class="dropdown-menu">
                                 <div class="dropdown">
@@ -99,3 +99,4 @@
         </div>
     </div>
 {% endblock %}
+

@@ -21,19 +21,6 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    /**
-     * Récupère le prix minimum et maximum correspondant à une recherche
-     * @param SearchData $search
-     * @return int[]
-     */
-    public function findMinMax(SearchData $search, $order, $type):array{
-        $results = $this->getSearchQuery($order,$type,$search, true)
-            ->select('MIN(a.montantVente) as min','MAX(a.montantVente) as max')
-            ->getQuery()
-            ->getScalarResult();
-        return [(int)$results[0]['min'], (int)$results[0]['max']];
-    }
-
     public function findByISBN(){
         $query = $this
             ->createQueryBuilder('a')
@@ -60,16 +47,18 @@ class ArticleRepository extends ServiceEntityRepository
         return $this->getSearchQuery($order,$type,$search)->getQuery()->getResult();
     }
 
-    public function getSearchQuery($order,$type,SearchData $search, $ignorePrice = false): \Doctrine\ORM\QueryBuilder
+    public function getSearchQuery($order,$type,SearchData $search): \Doctrine\ORM\QueryBuilder
     {
         if($type == null)
             $type = "titre"; // TODO : changer en date d'acquisition
         if($order == null)
             $order = "ASC"; // TODO : changer en DESC
 
+        //dd($type);
+
         $query = $this
             ->createQueryBuilder('a') // a = article
-            ->select('g', 's', 'a', 'age') // g = genre , s = statut
+            ->select('g', 's', 'a', 'age', 'c') // g = genre , s = statut
             ->join('a.genre', 'g')
             ->join('a.categorie', 'c')
             ->join('a.actions', 'ac')
@@ -90,17 +79,6 @@ class ArticleRepository extends ServiceEntityRepository
             $query = $query
                 ->andWhere('a.titre LIKE :q')
                 ->setParameter('q', "%{$search->q}%");
-        }
-
-        if(!empty($search->min) && $ignorePrice == false){
-            $query=$query
-                ->andWhere('a.montantVente >= :min')
-                ->setParameter('min', $search->min);
-        }
-        if(!empty($search->max)&& $ignorePrice == false){
-            $query=$query
-                ->andWhere('a.montantVente <= :max')
-                ->setParameter('max', $search->max);
         }
 
         if(!empty($search->genre)) {

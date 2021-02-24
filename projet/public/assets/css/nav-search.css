@@ -26,6 +26,7 @@
     border-radius: 6vh;
     padding: 1vh;
 }
+
 .fa-search{
     font-size: 5vh!important;
 }
@@ -71,6 +72,7 @@
 ::-webkit-input-placeholder {
     color:var(--placeholder);
 }
+
 *:-moz-placeholder {
     /* FF 4-18 */
     color:var(--placeholder);
