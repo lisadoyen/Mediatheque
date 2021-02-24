@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\ArticleSearch;
 use App\Data\SearchData;
 use App\Entity\Article;
 use App\Service\Article\Nouveaute;
@@ -121,6 +122,7 @@ class ArticleRepository extends ServiceEntityRepository
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */
+
     /*
     public function findByExampleField($value)
     {
@@ -134,7 +136,6 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
-
     /*
     public function findOneBySomeField($value): ?Article
     {
