@@ -109,6 +109,11 @@ class Filtre
                 $donnees['statuts'] = $_POST['statuts'];
                 $statuts = [];
                 foreach ($donnees['statuts'] as $id) {
+                    if($id == 1){
+                        array_push($donnees['statuts'], 6);
+                    }
+                }
+                foreach ($donnees['statuts'] as $id) {
                     $statuts[$id] = $statutRepository->find($id);
                     $data->statut = $statuts;
                     $donnees['statuts'] = $statuts;
