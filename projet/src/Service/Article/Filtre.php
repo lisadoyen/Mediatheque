@@ -6,6 +6,7 @@ use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\GenreRepository;
+use App\Repository\RubriqueRepository;
 use App\Repository\StatutRepository;
 use App\Repository\TrancheAgeRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -51,7 +52,8 @@ class Filtre
 
     function filtre(Request $request,$order, $type, $bool, GenreRepository $genreRepository,
                     CategorieRepository $categorieRepo, SessionInterface $session,
-                    ArticleRepository $ar, StatutRepository $statutRepository, TrancheAgeRepository $ageRepository){
+                    ArticleRepository $ar, StatutRepository $statutRepository, TrancheAgeRepository $ageRepository,
+                    RubriqueRepository $rubriqueRepository){
 
         $data = new SearchData();
         if ($request->getMethod() == 'POST') {
@@ -94,6 +96,15 @@ class Filtre
                     $donnees['ages'] = $ages;
                 }
             }
+            if(!empty($_POST['rubriques'])) {
+                $donnees['rubriques'] = $_POST['rubriques'];
+                $rubriques = [];
+                foreach ($donnees['rubriques'] as $id) {
+                    $rubriques[$id] = $rubriqueRepository->find($id);
+                    $data->rubrique = $rubriques;
+                    $donnees['rubriques'] = $rubriques;
+                }
+            }
             if(!empty($_POST['statuts'])) {
                 $donnees['statuts'] = $_POST['statuts'];
                 $statuts = [];
@@ -120,6 +131,9 @@ class Filtre
                 }
                 if (!empty($donnees['categories'])) {
                     $data->categorie = $donnees['categories'];
+                }
+                if (!empty($donnees['rubriques'])) {
+                    $data->rubrique = $donnees['rubriques'];
                 }
                 if (!empty($donnees['statuts'])) {
                     $data->statut = $donnees['statuts'];

@@ -24,6 +24,7 @@ use App\Repository\EnregistrementRepository;
 use App\Repository\EntiteRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\GenreRepository;
+use App\Repository\RubriqueRepository;
 use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
 use App\Repository\TrancheAgeRepository;
@@ -67,7 +68,7 @@ class StatistiquesController extends AbstractController
      */
     public function statistiques(Request $request, EnregistrementRepository $enregistrementRepository, StatutRepository $statutRepository,
                                  PaginatorInterface $paginator, Filtre $filtre, GenreRepository $genreRepository, TrancheAgeRepository $ageRepository,
-                                 CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar,  Nouveaute $new, ActionRepository $actionsRepo)
+                                 CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar,  Nouveaute $new, ActionRepository $actionsRepo, RubriqueRepository $rubriqueRepository)
     {
         $allArticles =  $enregistrementRepository->getNbEmpruntByArticle();
         $articles = $paginator->paginate(
@@ -81,10 +82,11 @@ class StatistiquesController extends AbstractController
         return $this->render('statistiques/statistiques.html.twig', [
             'articles'=>$articles,
             'allArticles'=>$allArticles,
-            'donnees' => $filtre->filtre($request, $order,$type,false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+            'donnees' => $filtre->filtre($request, $order,$type,false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository, $rubriqueRepository),
             'genres' => $genreRepository->findAll(),
             'categories' => $categorieRepo->findAll(),
             'statuts' => $statutRepository->findAll(),
+            'rubriques' => $rubriqueRepository->findAll(),
             'ages' =>$ageRepository ->findAll(),
             'nouveaute' => $nouveaute,
         ]);

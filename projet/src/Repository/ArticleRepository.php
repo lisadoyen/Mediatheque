@@ -59,7 +59,6 @@ class ArticleRepository extends ServiceEntityRepository
 
         $query = $this
             ->createQueryBuilder('a') // a = article
-            ->select('g', 's', 'a', 'age', 'c') // g = genre , s = statut
             ->join('a.genre', 'g')
             ->join('a.categorie', 'c')
             ->join('a.actions', 'ac')
@@ -76,9 +75,17 @@ class ArticleRepository extends ServiceEntityRepository
                 ->setParameter('date', "%{$search->date}%");
         }
 
+        if(!empty($search->rubrique)){
+            $query = $query
+                ->join('a.rubriques', 'r')
+                ->andWhere('r.id IN (:rubrique)')
+                ->setParameter('rubrique', $search->rubrique);
+        }
+
         if(!empty($search->q)){
             $query = $query
-                ->andWhere('a.titre LIKE :q')
+                ->join('a.entites', 'e')
+                ->andWhere('a.titre LIKE :q OR e.nom LIKE :q OR e.prenom LIKE :q')
                 ->setParameter('q', "%{$search->q}%");
         }
 

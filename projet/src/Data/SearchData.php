@@ -3,6 +3,7 @@ namespace App\Data;
 
 use App\Entity\Categorie;
 use App\Entity\Genre;
+use App\Entity\Rubrique;
 use App\Entity\Statut;
 use App\Entity\TrancheAge;
 use DateTime;
@@ -39,5 +40,9 @@ class SearchData{
      * @var TrancheAge[]
      */
     public $age = [];
+    /**
+     * @var Rubrique[]
+     */
+    public $rubrique = [];
 
 }

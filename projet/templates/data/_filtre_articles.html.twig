@@ -53,6 +53,13 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
+                    {% if donnees.rubriques is defined and rubriques is not empty %}
+                        {% for rubrique in rubriques %}
+                            {% if donnees.rubriques[rubrique.id] is defined %}
+                                <li> rubrique : <strong>{{ rubrique.libelle|capitalize }}</strong></li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                     {% if donnees.date is defined and donnees.date is not empty %}
                         <li> date : <strong>{{ donnees.date| date('d/m/Y') }}</strong></li>
                     {% endif %}
@@ -62,7 +69,6 @@
                 </u>
            </div>
 
-
         <hr>
         <div class="form-group">
             <div class="sub-menu-filtre">
@@ -71,16 +77,16 @@
             <div id="mon-bloc-1" class="hide-box p-2">
                 <div class="filtre">
                     {% for categorie in categories|slice(0, categories|length/2) %}
-                        <input  type="checkbox" name="categories[]" value="{{ categorie.id }}"{% if donnees.categories[categorie.id] is defined %} checked {% endif %}>
+                        <input onclick="visible_genre()" type="checkbox" name="categories[]" value="{{ categorie.id }}"{% if donnees.categories[categorie.id] is defined %} checked {% endif %}>
                         {{ categorie.libelle|capitalize }}
                         <br/>
                     {% endfor %}
                 </div>
-                {% for categorie in categories|slice(categories|length/2, categories|length) %}
-                    <input type="checkbox" name="categories[]" value="{{ categorie.id}}"{% if donnees.categories[categorie.id] is defined %} checked {% endif %}>
-                    {{ categorie.libelle|capitalize }}
-                    <br/>
-                {% endfor %}
+                    {% for categorie in categories|slice(categories|length/2, categories|length) %}
+                        <input onclick="visible_genre()" type="checkbox" name="categories[]" value="{{ categorie.id}}"{% if donnees.categories[categorie.id] is defined %} checked {% endif %}>
+                        {{ categorie.libelle|capitalize }}
+                        <br/>
+                    {% endfor %}
             </div>
         </div>
 
@@ -89,28 +95,26 @@
                 <a href="#mon-bloc-2" data-js="hide"><h5>Genres</h5></a>
             </div>
             <div id="mon-bloc-2" class="hide-box p-2">
-                <div class="filtre">
-                {% for genre in genres|slice(0, genres|length/2) %}
-                    <input  type="checkbox" name="genres[]" value="{{ genre.id }}"{% if donnees.genres[genre.id] is defined %} checked {% endif %}>
-                    {{ genre.libelle|capitalize }}
-                    <br/>
-                {% endfor %}
+                <div id="livre_genre">
+                    {% include 'data/livre_genre.html.twig' %}
                 </div>
-                {% for genre in genres|slice(genres|length/2, genres|length) %}
-                    <input type="checkbox" name="genres[]" value="{{ genre.id}}"{% if donnees.genres[genre.id] is defined %} checked {% endif %}>
-                    {{ genre.libelle|capitalize }}
-                    <br/>
-                {% endfor %}
+                <div id="video_genre">
+                    {% include 'data/video_genre.html.twig' %}
+                </div>
             </div>
         </div>
+
 
         <div class="form-group">
             <div class="sub-menu-filtre">
                 <a href="#mon-bloc-3" data-js="hide"><h5>Rubriques</h5></a>
             </div>
             <div id="mon-bloc-3" class="hide-box p-2">
-                <div class="filtre">
-                    filtre à ajouter
+                <div id="livre_rubrique">
+                    {% include 'data/livre_rubriques.html.twig' %}
+                </div>
+                <div id="video_rubrique">
+                    {% include 'data/video_rubriques.html.twig' %}
                 </div>
             </div>
         </div>

@@ -48,8 +48,12 @@
                             {{article.genre.libelle}}
                         </div>
                         <div class="text-detail-size">
-                            <span class="text-orange">rubrique : </span>
-                            rubrique
+                            <span class="text-orange">rubrique(s) : </span>
+                            {% if article.rubriques[0].libelle is defined %}
+                                {{ article.rubriques[0].libelle }} <!-- mettre la liste quand plusieurs rubriques -->
+                            {% else %}
+                                aucune
+                            {% endif %}
                         </div>
                     </div>
                 </div>

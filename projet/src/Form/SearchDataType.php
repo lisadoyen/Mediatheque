@@ -4,6 +4,7 @@ namespace App\Form;
 use App\Data\SearchData;
 use App\Entity\Categorie;
 use App\Entity\Genre;
+use App\Entity\Rubrique;
 use App\Entity\Statut;
 use App\Entity\TrancheAge;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -39,20 +40,6 @@ class SearchDataType extends AbstractType
                 'expanded' => true,
                 'multiple' => true
             ])
-            ->add('min',NumberType::class,[
-                'label' => false,
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'prix Min'
-                ]
-            ])
-            ->add('max',NumberType::class,[
-                'label' => false,
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'prix Max'
-                ]
-            ])
             ->add('nouveaute',CheckboxType::class,[
                 'label' => 'nouveaute',
                 'required' => false,
@@ -68,6 +55,13 @@ class SearchDataType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'class' =>TrancheAge::class,
+                'expanded' => true,
+                'multiple' => true
+            ])
+            ->add('rubrique', EntityType::class,[
+                'label' => false,
+                'required' => false,
+                'class' =>Rubrique::class,
                 'expanded' => true,
                 'multiple' => true
             ])

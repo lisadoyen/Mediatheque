@@ -26,6 +26,7 @@ use App\Repository\EnregistrementRepository;
 use App\Repository\EntiteRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\GenreRepository;
+use App\Repository\RubriqueRepository;
 use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
 use App\Repository\TrancheAgeRepository;
@@ -62,7 +63,7 @@ class ArticleController extends AbstractController
     public function articles($order=null, $type=null, $idGenre=null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
-                            Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository)
+                            Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository, RubriqueRepository $rubriqueRepository)
     {
         $nbArticlesTotal = $ar->findNbArticleTotal();
         // Menu genre et/ou catégorie
@@ -77,6 +78,7 @@ class ArticleController extends AbstractController
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
                 'statuts' => $statutRepository->findAll(),
+                'rubriques' => $rubriqueRepository->findAll(),
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
                 'ages' =>$ageRepository ->findAll(),
@@ -91,19 +93,20 @@ class ArticleController extends AbstractController
         // filtre
         else {
             $livres = $paginator->paginate(
-                $filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                $filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository, $rubriqueRepository),
                 $request->query->getInt('page', 1),
                 30
             );
             $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500);
-            $nbArticles = count($filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository));
+            $nbArticles = count($filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository,$rubriqueRepository));
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
                 'statuts' => $statutRepository->findAll(),
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
+                'rubriques' => $rubriqueRepository->findAll(),
                 'ages' =>$ageRepository ->findAll(),
-                'donnees' => $filtre->filtre($request,$order,$type, false,  $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                'donnees' => $filtre->filtre($request,$order,$type, false,  $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository,$rubriqueRepository),
                 'nouveaute' => $nouveaute,
                 'ordre' =>$order,
                 'type' =>$type,
@@ -136,11 +139,10 @@ class ArticleController extends AbstractController
     public function showAll($order=null, $type=null, $idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
-                            Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository)
+                            Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository, RubriqueRepository $rubriqueRepository)
     {
         $nbArticlesTotal = $ar->findNbArticleTotal();
         // Menu genre et/ou catégorie
-        //dd($idCategorie);
         if($idGenre != null || $idCategorie != null) {
             $livres = $paginator->paginate(
                 $filtre->filtreAvecCategorie_Genre($order,$type, $idGenre, $idCategorie, true, $genreRepository, $statutRepository, $categorieRepo, $session, $ar),
@@ -154,6 +156,7 @@ class ArticleController extends AbstractController
                 'statuts' => $statutRepository->findAll(),
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
+                'rubriques' => $rubriqueRepository->findAll(),
                 'ages' =>$ageRepository ->findAll(),
                 'donnees' => $filtre->filtreAvecCategorie_Genre($order,$type,$idGenre,$idCategorie, false, $genreRepository, $statutRepository, $categorieRepo, $session, $ar),
                 'nouveaute' => $nouveaute,
@@ -166,19 +169,20 @@ class ArticleController extends AbstractController
         // filtre
         else {
             $livres = $paginator->paginate(
-                $filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                $filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository,$rubriqueRepository),
                 $request->query->getInt('page', 1),
                 30
             );
             $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500);
-            $nbArticles = count($filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository));
+            $nbArticles = count($filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository,$rubriqueRepository));
             return $this->render('articles/show_all_articles.html.twig', [
                 'articles' => $livres,
                 'statuts' => $statutRepository->findAll(),
                 'genres' => $genreRepository->findAll(),
                 'categories' => $categorieRepo->findAll(),
+                'rubriques' => $rubriqueRepository->findAll(),
                 'ages' =>$ageRepository ->findAll(),
-                'donnees' => $filtre->filtre($request,$order,$type, false,  $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository),
+                'donnees' => $filtre->filtre($request,$order,$type, false,  $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository,$rubriqueRepository),
                 'nouveaute' => $nouveaute,
                 'ordre' =>$order,
                 'type' =>$type,
