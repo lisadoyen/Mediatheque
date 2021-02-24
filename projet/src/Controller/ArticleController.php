@@ -109,7 +109,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $article = $articleRepository->findOneBy([$data->type => $data->value]);
             if ($article) return $this->redirectToRoute('article_edit', ['id' => $article->getId()]);
-            else $this->addFlash('danger', 'Aucune article ne correspond à cette recherche.');
+            else $this->addFlash('danger', 'Aucun article ne correspond à cette recherche.');
         }
 
         return $this->render('article/search.html.twig', [
