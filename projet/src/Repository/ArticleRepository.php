@@ -141,29 +141,6 @@ class ArticleRepository extends ServiceEntityRepository
         return $query;
     }
 
-    public function articleSearch(ArticleSearch $search)
-    {
-        $query = $this
-            ->createQueryBuilder('a') // a = article
-            ->select('a.id')
-            ->setMaxResults(1);
-
-            if ($search->type == "gencode") {
-                $query = $query
-                    ->andWhere("a.gencode = :value")
-                    ->setParameter('value', $search->value);
-            }
-            if ($search->type == "code_article") {
-                $query = $query
-                    ->andWhere("a.codeArticle = :value")
-                    ->setParameter('value', $search->value);
-            }
-
-        $query = $query->getQuery();
-        return $query->setMaxResults(1)->getOneOrNullResult();
-    }
-
-
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */

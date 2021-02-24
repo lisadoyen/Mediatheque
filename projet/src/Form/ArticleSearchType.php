@@ -18,15 +18,16 @@ class php extends AbstractType {
                 'label' => false,
                 'required' => true,
                 'choices' => [
+                    'Identifiant' => 'id',
                     'Gencode' => 'gencode',
-                    'Code d\'article' => 'code_article',
+                    'Code d\'article' => 'codeArticle',
                 ],
                 'placeholder' => 'Comment cherchez-vous l\'article ?'
             ])
             ->add('value', TextType::class, [
                 'label' => false,
                 'required' => true,
-                'attr' => ['placeholder' => 'ISBN/code d\'article']
+                'attr' => ['placeholder' => 'Identifiant ou ISBN ou code d\'article...']
             ]);
     }
 
