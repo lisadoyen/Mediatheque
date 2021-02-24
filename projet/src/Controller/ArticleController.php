@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Data\ArticleSearch;
 use App\Entity\Action;
 use App\Entity\Article;
 use App\Entity\Entite;
+use App\Form\php;
 use App\Form\ArticleType;
 use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
@@ -92,6 +94,28 @@ class ArticleController extends AbstractController
         return $this->render('article/new.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Formulaire de recherche rapide d'un article
+     * @Route("/search", name="article_search", methods={"GET"})
+     */
+    public function search(Request $request, ArticleRepository $articleRepository) {
+        $data = new ArticleSearch();
+        $form = $this->createForm(php::class, $data);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $id = $articleRepository->articleSearch($data);
+            if ($id) {
+                $id = $id['id'];
+                return $this->redirectToRoute('article_edit', ['id' => $id]);
+            }
+        }
+
+        return $this->render('article/search.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 
