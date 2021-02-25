@@ -6,26 +6,34 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Id</th>
+                {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
+                    <th>Id</th>
+                {% endif %}
                 <th>Titre</th>
                 <th>Contenu</th>
-                <th>DateCreation</th>
-                <th>créée par</th>
-                <th>actions</th>
+                <th>Date de publication</th>
+                <th>publiée par</th>
+                {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
+                    <th>actions</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
             {% for annonce in annonces %}
                 <tr>
-                    <td>{{ annonce.id }}</td>
+                    {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
+                        <td>{{ annonce.id }}</td>
+                    {% endif %}
                     <td>{{ annonce.titre }}</td>
                     <td>{{ annonce.contenu|raw }}</td>
                     <td>{{ annonce.dateCreation ? annonce.dateCreation|date('d/m/Y') : '' }}</td>
                     <td>{{ annonce.staff.nom|upper }} {{ annonce.staff.prenom|capitalize }}</td>
-                    <td>
-                        <a href="{{ path('annonce_show', {'id': annonce.id}) }}" >details</a>
-                        <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" >modifier</a>
-                    </td>
+                    {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
+                        <td>
+                            <a href="{{ path('annonce_show', {'id': annonce.id}) }}" >details</a>
+                            <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" >modifier</a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% else %}
                 <tr>
@@ -35,6 +43,8 @@
             </tbody>
         </table>
 
-        <a href="{{ path('annonce_new') }}" class="edit-btn">Nouvelle annonce</a>
+        {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
+            <a href="{{ path('annonce_new') }}" class="edit-btn">Nouvelle annonce</a>
+        {% endif %}
     </div>
 {% endblock %}

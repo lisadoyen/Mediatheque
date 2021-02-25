@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-
-<title>Rubrique index</title>
-
+{% extends "layout.html.twig" %}
 {% block body %}
-    <h1>Rubrique index</h1>
+<div class="container cadre">
+    <h1>Liste des rubrique</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Libelle</th>
+                <th>Categories</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,17 +18,23 @@
                 <td>{{ rubrique.id }}</td>
                 <td>{{ rubrique.libelle }}</td>
                 <td>
-                    <a href="{{ path('rubrique_show', {'id': rubrique.id}) }}">show</a>
-                    <a href="{{ path('rubrique_edit', {'id': rubrique.id}) }}">edit</a>
+                    {% for cat in rubrique.categories %}
+                        <span class="alert-info rounded p-1">{{ cat.libelle }}</span>
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('rubrique_show', {'id': rubrique.id}) }}">details</a>
+                    <a href="{{ path('rubrique_edit', {'id': rubrique.id}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">pas de rubriques dans la base de données</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('rubrique_new') }}">Create new</a>
+    <a href="{{ path('rubrique_new') }}" class="edit-btn">Nouvelle rubrique</a>
+</div>
 {% endblock %}
