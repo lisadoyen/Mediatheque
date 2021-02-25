@@ -14,7 +14,12 @@
                 <div class="carousel-item {% if act == annonce.id %}active{% endif %}">
                     <h3>{{ annonce.titre }}</h3>
                     <div class="row">
-                        <div class="col-sm">
+                        {% if annonce.vignette != NULL %}
+                            <div class="col-2">
+                                <img src="{{asset('assets/images/account/')}}{{ annonce.vignette }}" alt="{{ annonce.vignette }}" width="150" height="180">
+                            </div>
+                        {% endif %}
+                        <div class="col-lg">
                             <p class="text-justify"> {{ annonce.contenu|raw }} </p>
                         </div>
                     </div>

@@ -11,6 +11,7 @@
                 {% endif %}
                 <th>Titre</th>
                 <th>Contenu</th>
+                <th>Image</th>
                 <th>Date de publication</th>
                 <th>publiée par</th>
                 {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
@@ -26,6 +27,13 @@
                     {% endif %}
                     <td>{{ annonce.titre }}</td>
                     <td>{{ annonce.contenu|raw }}</td>
+                    <td>
+                        {% if annonce.vignette == NULL %}
+                            <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="150" height="150">
+                        {% else %}
+                            <img src="{{asset('assets/images/account/')}}{{ annonce.vignette }}" alt="{{ annonce.vignette }}" width="150" height="180">
+                        {% endif %}
+                    </td>
                     <td>{{ annonce.dateCreation ? annonce.dateCreation|date('d/m/Y') : '' }}</td>
                     <td>{{ annonce.staff.nom|upper }} {{ annonce.staff.prenom|capitalize }}</td>
                     {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}

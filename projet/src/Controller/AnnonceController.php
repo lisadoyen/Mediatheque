@@ -6,6 +6,7 @@ use App\Entity\Annonce;
 use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use App\Repository\UserRepository;
+use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class AnnonceController extends AbstractController
     /**
      * @Route("/new", name="annonce_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
         $annonce = new Annonce();
         $form = $this->createForm(AnnonceType::class, $annonce);
@@ -42,6 +43,13 @@ class AnnonceController extends AbstractController
             $date = new \DateTime();
             $annonce->setDateCreation($date);
             $annonce->setStaff($this->getUser());
+
+            $vignette = $form->get('vignette')->getData();
+            if ($vignette){
+                $photoName = $fileUploader->upload($vignette);
+                $annonce->setVignette($photoName);
+            }
+
             $entityManager->persist($annonce);
             $entityManager->flush();
 
@@ -67,13 +75,22 @@ class AnnonceController extends AbstractController
     /**
      * @Route("/{id}/edit", name="annonce_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Annonce $annonce): Response
+    public function edit(Request $request, Annonce $annonce, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $vignette = $form->get('vignette')->getData();
+            if ($vignette){
+                $photoName = $fileUploader->upload($vignette);
+                $annonce->setVignette($photoName);
+            }
+
+            $entityManager->persist($annonce);
+            $entityManager->flush();
 
             return $this->redirectToRoute('annonce_index');
         }
