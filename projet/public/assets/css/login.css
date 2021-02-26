@@ -149,50 +149,86 @@ h2{
     color: var(--second-color);
 }
 
-
-@media screen and (max-width: 1050px){
-    .container{
-        grid-gap: 5rem;
-    }
-}
-
-@media screen and (max-width: 1000px){
-    form{
-        width: 290px;
-    }
-
-    .login-content h2{
-        font-size: 2.4rem;
-        margin: 8px 0;
-    }
-
-    .img img{
-        width: 400px;
-    }
-
-    .container{
-        margin: 0;
-    }
-}
-
 .error {
     color:rgb(204, 0, 0);
 }
 
-@media screen and (max-width: 900px){
-    .container{
-        grid-template-columns: 1fr;
+/* petit écran */
+@media screen and (max-width: 1700px){
+    .img-logo{
+        width: 79.2vh;
+        margin-left: 3vh;
+        padding: 3vh;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .img-logo{
+        width: 65vh;
+        margin-left: 3vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: 87vh;
+    }
+}
+
+
+@media screen and (max-width: 990px){
+    .img-logo{
+        width: 50vh;
+        margin-left: 15vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .img-logo{
+        width: 50vh;
+        margin-left: 5vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .img-logo{
+        width: 40vh;
+        margin-left: 5vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .img-logo{
+        width: 40vh;
+        margin-left: 1vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .img-logo{
+        width: 40vh;
+        margin-left: 1vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
     }
 
-    .img{
-        display: none;
-    }
-
-    .wave{
-        display: none;
-    }
-
-    .login-content{
-        justify-content: center;
+    .edit-btn{
+        font-size: 1.5em;
     }
 }
