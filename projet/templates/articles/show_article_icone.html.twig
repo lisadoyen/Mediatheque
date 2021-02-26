@@ -40,7 +40,7 @@
                                 <div class="col">
                                     {#edit si admin/benevole#}
                                     {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
-                                        <a href="{{ path('article_edit', {'id': article.id}) }}" class="edit-btn">modifier</a>
+                                        <a href="{{ path('article_edit', {'id': article.id}) }}" class="edit-btn">Modifier</a>
                                     {% endif %}
                                 </div>
                             </div>
