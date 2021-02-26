@@ -21,14 +21,28 @@ class EnregistrementRepository extends ServiceEntityRepository
 
     public function getNbEmpruntByArticle(){
         $qb = $this->createQueryBuilder('e');
-        $qb ->select('distinct count(a.id) as nbEmpruntParArticle, a.titre')
+        $qb ->select('distinct count(a.id) as nbEmpruntParArticle')
             ->join('App:Article', 'a')
             ->where('a.id=e.article')
             ->join('App:TypeEnregistrement', 'te')
             ->andWhere('te.id=e.typeEnregistrement')
             ->andWhere("te.libelle='emprunt'")
             ->groupBy('a.id')
-            ->addOrderBy('nbEmpruntParArticle','DESC');
+            ->addOrderBy('nbEmpruntParArticle');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getNbEmpruntByArticleTrierPar($order){
+        $qb = $this->createQueryBuilder('e');
+        $qb ->select("distinct count(a.id) as nbEmpruntParArticle")
+            ->join('App:Article', 'a')
+            ->where('a.id=e.article')
+            ->join('App:TypeEnregistrement', 'te')
+            ->andWhere('te.id=e.typeEnregistrement')
+            ->andWhere("te.libelle='emprunt'")
+            ->groupBy('a.id')
+            ->addOrderBy('nbEmpruntParArticle',$order);
 
         return $qb->getQuery()->getResult();
     }

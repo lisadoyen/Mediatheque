@@ -5,6 +5,7 @@ use App\Data\SearchData;
 use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
+use App\Repository\EnregistrementRepository;
 use App\Repository\GenreRepository;
 use App\Repository\RubriqueRepository;
 use App\Repository\StatutRepository;
@@ -19,7 +20,7 @@ class Filtre
 {
 
     function filtreAvecCategorie_Genre($order, $type, $idGenre, $idCategorie,  $bool, GenreRepository $genreRepository, StatutRepository $statutRepository,
-                           CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar) {
+                           CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar, EnregistrementRepository $enregistrementRepository) {
 
         $data = new SearchData();
         $genres = [];
@@ -45,7 +46,7 @@ class Filtre
             if($idCategorie != null) $data->categorie = $donnees['categories'];
         }
         if($bool == true)
-            return $ar->findSearch($data, $order, $type);
+            return $ar->findSearch($data, $order, $type, $enregistrementRepository);
         else
             return $donnees;
     }
@@ -53,7 +54,7 @@ class Filtre
     function filtre(Request $request,$order, $type, $bool, GenreRepository $genreRepository,
                     CategorieRepository $categorieRepo, SessionInterface $session,
                     ArticleRepository $ar, StatutRepository $statutRepository, TrancheAgeRepository $ageRepository,
-                    RubriqueRepository $rubriqueRepository){
+                    RubriqueRepository $rubriqueRepository, EnregistrementRepository $enregistrementRepository){
 
         $data = new SearchData();
         if ($request->getMethod() == 'POST') {
@@ -152,7 +153,7 @@ class Filtre
             }
         }
         if($bool == true)
-            return $ar->findSearch($data, $order, $type);
+            return $ar->findSearch($data, $order, $type, $enregistrementRepository);
         else
             return $donnees;
     }

@@ -20,14 +20,14 @@
                             <button id="navbarDropdown" data-toggle="dropdown" class="edit-btn">
                                 <div class=" text-trier">trier par &nbsp;</div><i class="fas fa-arrow-down"></i>
                             </button>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu" style="z-index: 1">
                                 <div class="dropdown">
                                     <div class="dropdown">
                                         <div style="padding:1vh;color:white;background-color: var(--second-color)">Date d'aquisition <i class="fas fa-arrow-down"></i>
                                         </div>
                                         <div class="dropdown-submenu" style="padding: 1vh;">
-                                            <a class="dropdown-item" href="#">Croissant</a>
-                                            <a class="dropdown-item" href="#">Décroissant</a>
+                                            <a class="dropdown-item" href="{{ path('articles_show_order', {type:"date", order:"ASC" }) }}">Croissant</a>
+                                            <a class="dropdown-item" href="{{ path('articles_show_order', {type:"date", order:"DESC" }) }}">Décroissant</a>
                                         </div>
                                     </div>
                                     <div style="padding:1vh;color:white;background-color: var(--second-color)">Titre <i class="fas fa-arrow-down"></i></div>
@@ -39,8 +39,8 @@
                                 <div class="dropdown">
                                     <div style="padding:1vh;color:white;background-color: var(--second-color)">Popularité <i class="fas fa-arrow-down"></i></div>
                                     <div class="dropdown-submenu"  style="padding: 1vh;">
-                                        <a class="dropdown-item" href="#">Croissant</a>
-                                        <a class="dropdown-item" href="#">Décroissant</a>
+                                        <a class="dropdown-item" href="{{path('articles_show_order', {type:"popularite", order:"ASC" })}}">Croissant</a>
+                                        <a class="dropdown-item" href="{{path('articles_show_order', {type:"popularite", order:"DESC"})}}">Décroissant</a>
                                     </div>
                                 </div>
                                 <div class="dropdown">
@@ -71,7 +71,13 @@
                                         {% if ordre == "ASC" %}
                                             <span class="text-bold">{{ type }} : </span> croissant
                                         {% else %}
-                                            <span class="text-bold">{{ type }} </span> décroissant
+                                            <span class="text-bold">{{ type }} : </span> décroissant
+                                        {% endif %}
+                                    {% elseif type == "date" %}
+                                        {% if ordre == "ASC" %}
+                                            <span class="text-bold">date d'acquisition : </span> croissant
+                                        {% else %}
+                                            <span class="text-bold">date d'acquisition : </span> décroissant
                                         {% endif %}
                                     {% else %}
                                         <span class="text-bold">{{ type | default("date d'aquisition") }} : </span> {{ ordre | default('décroissant') }}

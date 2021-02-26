@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Data\ArticleSearch;
 use App\Data\SearchData;
 use App\Entity\Article;
+use App\Entity\Enregistrement;
 use App\Service\Article\Nouveaute;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -31,6 +32,10 @@ class ArticleRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    /** requete permettant de compter le nombre d'articles total (vendable, empruntable et emprunté)
+     * -> qui peuvent être affiché sur le site
+     * @return int|mixed|string
+     */
     public function findNbArticleTotal(){
         $query = $this
             ->createQueryBuilder('a')
@@ -42,32 +47,45 @@ class ArticleRepository extends ServiceEntityRepository
 
     /**
      * @param SearchData $search
+     * @param $order
+     * @param $type
+     * @param EnregistrementRepository $enregistrementRepository
      * @return int|mixed|string
      */
-    public function findSearch(SearchData $search, $order,$type){
-        return $this->getSearchQuery($order,$type,$search)->getQuery()->getResult();
+    public function findSearch(SearchData $search, $order,$type, EnregistrementRepository $enregistrementRepository){
+        return $this->getSearchQuery($enregistrementRepository, $order,$type,$search)->getQuery()->getResult();
     }
 
-    public function getSearchQuery($order,$type,SearchData $search): \Doctrine\ORM\QueryBuilder
+    public function getSearchQuery(EnregistrementRepository $enregistrementRepository, $order,$type,SearchData $search): \Doctrine\ORM\QueryBuilder
     {
-        if($type == null)
-            $type = "titre"; // TODO : changer en date d'acquisition
-        if($order == null)
-            $order = "ASC"; // TODO : changer en DESC
+        if($type == null) // si pas de selection du type
+            $type = "date"; // rangement par date d'acquisition par défault
+        if($order == null) // si pas de selection de l'ordre
+            $order = "DESC"; // rangement par décroissant par défault
 
-        //dd($type);
+            $query = $this
+                ->createQueryBuilder('a') // a = article
+                ->join('a.genre', 'g')
+                ->join('a.categorie', 'c')
+                ->join('a.actions', 'ac')
+                ->join('a.statut', 's')
+                ->join('a.trancheAge', 'age')
+                ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte'")
+                ->groupBy("a.titre");
+                // selection des articles avec le statut vendable ou empruntable ou emprunté
 
-        $query = $this
-            ->createQueryBuilder('a') // a = article
-            ->join('a.genre', 'g')
-            ->join('a.categorie', 'c')
-            ->join('a.actions', 'ac')
-            ->join('a.statut', 's')
-            ->join('a.trancheAge', 'age')
-            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte'")
-            ->groupBy("a.titre")
-            ->addOrderBy("a.$type",$order);
-            // selection des articles avec le statut vendable ou empruntable et emprunté
+        if($type == "popularite") { // si le type (pour bouton trier par) est popularite
+            $test = $enregistrementRepository->getNbEmpruntByArticleTrierPar($order);
+            dd("test");
+        }elseif ($type == "date"){ // si le type (pour bouton trier par) est date d'acqisistion
+            $query = $query
+                ->join('ac.typeAction', 't') // inner join sur la table TypeAction
+                ->andWhere("t.libelle ='obtention'") // trier uniquement sur le type : obtention
+                ->addOrderBy("ac.date", $order); // attribuer l'ordre et trier par date
+        } else{
+            $query = $query
+                ->addOrderBy("a.$type", $order); // pour prix et titre
+        }
 
         if(!empty($search->date)){
             $query = $query
@@ -75,44 +93,51 @@ class ArticleRepository extends ServiceEntityRepository
                 ->setParameter('date', "%{$search->date}%");
         }
 
+        // filtre rubrique
         if(!empty($search->rubrique)){
             $query = $query
-                ->join('a.rubriques', 'r')
+                ->join('a.rubriques', 'r') // join sur les rubriques ici car tous les articles non pas forcément de rubriques associés
                 ->andWhere('r.id IN (:rubrique)')
                 ->setParameter('rubrique', $search->rubrique);
         }
 
+        // filtre sur la barre de recherche
         if(!empty($search->q)){
             $query = $query
-                ->join('a.entites', 'e')
-                ->andWhere('a.titre LIKE :q OR e.nom LIKE :q OR e.prenom LIKE :q')
+                ->join('a.entites', 'e') // join sur la table entites (pour les champs : prenom et nom)
+                ->andWhere('a.titre LIKE :q OR e.nom LIKE :q OR e.prenom LIKE :q') // permet de cherche le titre de l'article, le nom ou le prenom de l'auteur/éditeur...
                 ->setParameter('q', "%{$search->q}%");
         }
 
+        // filtre par genre
         if(!empty($search->genre)) {
             $query = $query
                 ->andWhere('g.id IN (:genre)')
                 ->setParameter('genre', $search->genre);
         }
 
+        // filtre pas categorie
         if(!empty($search->categorie)) {
             $query = $query
                 ->andWhere('c.id IN (:categorie)')
                 ->setParameter('categorie', $search->categorie);
         }
 
+        // filtre par statut
         if(!empty($search->statut)) {
             $query = $query
                 ->andWhere("s.id IN (:statut)")
                 ->setParameter('statut', $search->statut);
         }
 
+        // filtre par tranche d'age
         if(!empty($search->age)) {
             $query = $query
                 ->andWhere("age.id IN (:age)")
                 ->setParameter('age', $search->age);
         }
 
+        // filtre par nouveaute
         if(!empty($search->nouveaute)){
             $nouveaute = new Nouveaute();
             $dateTodayConvert=\DateTime::createFromFormat('d/m/Y', \date("d/m/Y"));
@@ -123,6 +148,8 @@ class ArticleRepository extends ServiceEntityRepository
                 ->andWhere("ac.date BETWEEN '$dateDureeMax' AND '$today'")
                 ->groupBy('a.titre');
         }
+
+        // retourne la requete
         return $query;
     }
 
