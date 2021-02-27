@@ -34,7 +34,10 @@ class ActionRepository extends ServiceEntityRepository
             ->where('ar.id=ac.article')
             ->join( 'App:Statut', 's')
             ->andWhere('s.id=ar.statut')
-            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable'")
+            ->join( 'App:TypeAction', 't')
+            ->andWhere('t.id=ac.typeAction')
+            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte'")
+            ->andWhere("t.libelle='creation'")
             ->andWhere("ac.date BETWEEN '$dateDureeMax' AND '$today'")
             ->groupBy('ar.titre');
 

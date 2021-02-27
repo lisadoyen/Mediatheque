@@ -74,18 +74,6 @@ class ArticleRepository extends ServiceEntityRepository
                 ->groupBy("a.titre");
                 // selection des articles avec le statut vendable ou empruntable ou emprunté
 
-        if($type == "popularite") { // si le type (pour bouton trier par) est popularite
-            $test = $enregistrementRepository->getNbEmpruntByArticleTrierPar($order);
-            dd("test");
-        }elseif ($type == "date"){ // si le type (pour bouton trier par) est date d'acqisistion
-            $query = $query
-                ->join('ac.typeAction', 't') // inner join sur la table TypeAction
-                ->andWhere("t.libelle ='obtention'") // trier uniquement sur le type : obtention
-                ->addOrderBy("ac.date", $order); // attribuer l'ordre et trier par date
-        } else{
-            $query = $query
-                ->addOrderBy("a.$type", $order); // pour prix et titre
-        }
 
         if(!empty($search->date)){
             $query = $query
@@ -145,9 +133,28 @@ class ArticleRepository extends ServiceEntityRepository
             $dateDureeMaxConvert=\DateTime::createFromFormat('d/m/Y',$nouveaute->transformDate($today, 500)); // TODO : 500 => récupérer la(les) durée(s) de(s) nouveauté(s) de(s) catégorie(s) du filtre
             $dateDureeMax = $dateDureeMaxConvert->format('Y-m-d');
             $query=$query
+                ->join( 'ac.typeAction', 'ty')
                 ->andWhere("ac.date BETWEEN '$dateDureeMax' AND '$today'")
+                ->andWhere("ty.libelle='creation'")
                 ->groupBy('a.titre');
         }
+
+        if($type == "popularite") { // si le type (pour bouton trier par) est popularite
+            $test = $enregistrementRepository->getNbEmpruntByArticleTrierPar($order);
+            dd("test");
+        }elseif ($type == "date"){ // si le type (pour bouton trier par) est date d'acqisistion
+            $query = $query
+                ->join('ac.typeAction', 't') // inner join sur la table TypeAction
+                //->andWhere("t.libelle ='obtention'") // trier uniquement sur le type : obtention
+                ->addSelect("(CASE WHEN t.libelle='obtention' THEN ac.date ELSE 0 END) AS HIDDEN date")
+                //->andWhere("t.libelle = 'obtention'")
+                ->addOrderBy("date", $order); // attribuer l'ordre et trier par date
+            //dd($query->getQuery()->getResult());
+        }else{
+            $query = $query
+                ->addOrderBy("a.$type", $order); // pour prix et titre
+        }
+
 
         // retourne la requete
         return $query;
