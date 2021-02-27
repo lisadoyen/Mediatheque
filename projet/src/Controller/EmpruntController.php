@@ -110,13 +110,17 @@ class EmpruntController extends AbstractController
     /**
      * @Route("/emprunts/{id}/statut/pret", name="changer_statut_pret")
      */
-    public function empruntChangerPret(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository)
+    public function empruntChangerPret(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository)
     {
         $id = $request->get('id');
         $emprunts = $enregistrementRepository->find($id);
         $emprunts->setStatutEnregistrement($statutEnregistrementRepository->findOneBy(['libelle'=>'pret']));
         $date = new \DateTime('now');
         $emprunts->setDatePreparationFini($date);
+        $article = $emprunts->getArticle();
+        if($article->getStatut() == "reserve_achat"){
+            $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendu']));
+        }
 
         $this->getDoctrine()->getManager()->persist($emprunts);
         $this->getDoctrine()->getManager()->flush();
@@ -127,13 +131,17 @@ class EmpruntController extends AbstractController
     /**
      * @Route("/emprunts/{id}/statut/emprunte", name="changer_statut_emprunte")
      */
-    public function empruntChangerEmprunt(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository)
+    public function empruntChangerEmprunt(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository)
     {
         $id = $request->get('id');
         $emprunts = $enregistrementRepository->find($id);
         $emprunts->setStatutEnregistrement($statutEnregistrementRepository->findOneBy(['libelle'=>'emprunte']));
-
+        $article = $emprunts->getArticle();
+        if($article->getStatut() == "reserve_emprunt"){
+            $article->setStatut($statutRepository->findOneBy(['libelle'=>'emprunte']));
+        }
         $this->getDoctrine()->getManager()->persist($emprunts);
+        $this->getDoctrine()->getManager()->persist($article);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('gestion_actif_emprunts');
@@ -148,7 +156,9 @@ class EmpruntController extends AbstractController
         $emprunts = $enregistrementRepository->find($id);
         $emprunts->setStatutEnregistrement($statutEnregistrementRepository->findOneBy(['libelle'=>'achete']));
         $article = $emprunts->getArticle();
-        $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendu']));
+        if($article->getStatut() == "reserve_achat"){
+            $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendu']));
+        }
 
         $this->getDoctrine()->getManager()->persist($article);
         $this->getDoctrine()->getManager()->persist($emprunts);
@@ -168,8 +178,9 @@ class EmpruntController extends AbstractController
         $date = new \DateTime('now');
         $emprunts->setDateRendu($date);
         $article = $emprunts->getArticle();
-        $article->setStatut($statutRepository->findOneBy(['libelle'=>'empruntable']));
-
+        if($article->getStatut() == "reserve_emprunt") {
+            $article->setStatut($statutRepository->findOneBy(['libelle' => 'empruntable']));
+        }
         $this->getDoctrine()->getManager()->persist($article);
         $this->getDoctrine()->getManager()->persist($emprunts);
         $this->getDoctrine()->getManager()->flush();
@@ -187,8 +198,9 @@ class EmpruntController extends AbstractController
         $date = new \DateTime('now');
         $emprunts->setDateRendu($date);
         $article = $emprunts->getArticle();
-        $article->setStatut($statutRepository->findOneBy(['libelle'=>'perdu']));
-
+        if($article->getStatut() == "reserve_emprunt") {
+            $article->setStatut($statutRepository->findOneBy(['libelle' => 'perdu']));
+        }
         $this->getDoctrine()->getManager()->persist($article);
         $this->getDoctrine()->getManager()->persist($emprunts);
         $this->getDoctrine()->getManager()->flush();

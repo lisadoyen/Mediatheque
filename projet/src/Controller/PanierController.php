@@ -66,10 +66,10 @@ class PanierController extends AbstractController
 
             if ($statut == "empruntable") {
                 $lignePanier->setTypeEnregistrement($typeEnregistrementRepository->findOneBy(['libelle' => 'emprunt']));
-                $article->setStatut($statutRepository->findOneBy(['libelle'=>'emprunte']));
+                $article->setStatut($statutRepository->findOneBy(['libelle'=>'reserve_emprunt']));
             } else if ($statut == "vendable") {
                 $lignePanier->setTypeEnregistrement($typeEnregistrementRepository->findOneBy(['libelle' => 'achat']));
-                $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendu']));
+                $article->setStatut($statutRepository->findOneBy(['libelle'=>'reserve_achat']));
             }
             $this->getDoctrine()->getManager()->persist($article);
             $this->getDoctrine()->getManager()->persist($lignePanier);
@@ -89,9 +89,9 @@ class PanierController extends AbstractController
         $article = $lignePanier->getArticle();
         $statut = $lignePanier->getArticle()->getStatut()->getLibelle();
 
-        if ($statut == "emprunte") {
+        if ($statut == "reserve_emprunt") {
             $article->setStatut($statutRepository->findOneBy(['libelle'=>'empruntable']));
-        } else if ($statut == "vendu") {
+        } else if ($statut == "reserve_achat") {
             $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendable']));
         }
 
@@ -122,9 +122,9 @@ class PanierController extends AbstractController
             $article = $lignePanier->getArticle();
             $statut = $lignePanier->getArticle()->getStatut()->getLibelle();
 
-            if ($statut == "emprunte") {
+            if ($statut == "reserve_emprunt") {
                 $article->setStatut($statutRepository->findOneBy(['libelle'=>'empruntable']));
-            } else if ($statut == "vendu") {
+            } else if ($statut == "reserve_achat") {
                 $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendable']));
             }
 
@@ -155,9 +155,9 @@ class PanierController extends AbstractController
             $article = $lignePanier->getArticle();
             $statut = $lignePanier->getArticle()->getStatut()->getLibelle();
 
-            if ($statut == "emprunte") {
+            if ($statut == "reserve_emprunt") {
                 $article->setStatut($statutRepository->findOneBy(['libelle'=>'empruntable']));
-            } else if ($statut == "vendu") {
+            } else if ($statut == "reserve_achat") {
                 $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendable']));
             }
 
@@ -330,10 +330,10 @@ class PanierController extends AbstractController
 
                // défini le statut de l'emprunt
                if ($ligne->getTypeEnregistrement()->getLibelle() == "achat") {
-                   $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle' => 'vendu']));
+                   $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle' => 'reserve_achat']));
                }
                if ($ligne->getTypeEnregistrement()->getLibelle() == "emprunt"){
-                   $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle'=>'emprunte']));
+                   $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle'=>'reserve_emprunt']));
                }
 
                $this->getDoctrine()->getManager()->persist($enregistrement);

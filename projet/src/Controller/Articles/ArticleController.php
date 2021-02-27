@@ -26,6 +26,7 @@ use App\Repository\EnregistrementRepository;
 use App\Repository\EntiteRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\GenreRepository;
+use App\Repository\PanierRepository;
 use App\Repository\RubriqueRepository;
 use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
@@ -64,9 +65,8 @@ class ArticleController extends AbstractController
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository, EnregistrementRepository $enregistrementRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
                             Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository,
-                             RubriqueRepository $rubriqueRepository)
+                             RubriqueRepository $rubriqueRepository, PanierRepository $panierRepository)
     {
-
         $nbArticlesTotal = $ar->findNbArticleTotal();
         // Menu genre et/ou catégorie
         if($idGenre != null || $idCategorie != null) {
@@ -142,7 +142,7 @@ class ArticleController extends AbstractController
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
                             Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository, RubriqueRepository $rubriqueRepository,
-                            EnregistrementRepository $enregistrementRepository)
+                            EnregistrementRepository $enregistrementRepository, PanierRepository $panierRepository)
     {
         $nbArticlesTotal = $ar->findNbArticleTotal();
         // Menu genre et/ou catégorie

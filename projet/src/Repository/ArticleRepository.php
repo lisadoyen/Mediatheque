@@ -41,7 +41,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->createQueryBuilder('a')
             ->select('count(a.id)')
             ->join('a.statut', 's')
-            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte'");
+            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte'  or s.libelle = 'reserve_emprunt' or s.libelle = 'reserve_achat'");
         return $query->getQuery()->getResult();
     }
 
@@ -70,10 +70,24 @@ class ArticleRepository extends ServiceEntityRepository
                 ->join('a.actions', 'ac')
                 ->join('a.statut', 's')
                 ->join('a.trancheAge', 'age')
-                ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte'")
+                ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte' or s.libelle = 'reserve_emprunt' or s.libelle = 'reserve_achat'")
                 ->groupBy("a.titre");
-                // selection des articles avec le statut vendable ou empruntable ou emprunté
+                // selection des articles avec le statut vendable ou empruntable ou emprunté ou réservé soit achat soit emprunt
 
+
+        if($type == "popularite") { // si le type (pour bouton trier par) est popularite
+            $test = $enregistrementRepository->getNbEmpruntByArticleTrierPar($order);
+            dd("test");
+        }elseif ($type == "date"){ // si le type (pour bouton trier par) est date d'acqisistion
+            $query = $query
+                ->join('ac.typeAction', 't') // inner join sur la table TypeAction
+                //->andWhere("t.libelle ='obtention'") // trier uniquement sur le type : obtention
+                ->addSelect("(CASE WHEN t.libelle='obtention' THEN ac.date ELSE 0 END) AS HIDDEN date")
+                ->addOrderBy("date", $order); // attribuer l'ordre et trier par date
+        }else{
+            $query = $query
+                ->addOrderBy("a.$type", $order); // pour prix et titre
+        }
 
         if(!empty($search->date)){
             $query = $query
@@ -137,22 +151,6 @@ class ArticleRepository extends ServiceEntityRepository
                 ->andWhere("ac.date BETWEEN '$dateDureeMax' AND '$today'")
                 ->andWhere("ty.libelle='creation'")
                 ->groupBy('a.titre');
-        }
-
-        if($type == "popularite") { // si le type (pour bouton trier par) est popularite
-            $test = $enregistrementRepository->getNbEmpruntByArticleTrierPar($order);
-            dd("test");
-        }elseif ($type == "date"){ // si le type (pour bouton trier par) est date d'acqisistion
-            $query = $query
-                ->join('ac.typeAction', 't') // inner join sur la table TypeAction
-                //->andWhere("t.libelle ='obtention'") // trier uniquement sur le type : obtention
-                ->addSelect("(CASE WHEN t.libelle='obtention' THEN ac.date ELSE 0 END) AS HIDDEN date")
-                //->andWhere("t.libelle = 'obtention'")
-                ->addOrderBy("date", $order); // attribuer l'ordre et trier par date
-            //dd($query->getQuery()->getResult());
-        }else{
-            $query = $query
-                ->addOrderBy("a.$type", $order); // pour prix et titre
         }
 
 

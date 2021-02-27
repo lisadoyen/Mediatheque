@@ -32,9 +32,15 @@
                                     {% elseif article.statut.libelle == "vendable" %}
                                         <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-achat">
                                             Acheter</a>
-                                    {% else %}
+                                    {% elseif article.statut.libelle == "emprunte" %}
                                         <a role="button" data-role="disabled" class="style-button-article-emprunte">
                                             Emprunté</a>
+                                    {% elseif article.statut.libelle == "reserve_achat" %}
+                                        <a role="button" data-role="disabled" class="style-button-article-reserve_achat">
+                                            Réservé - achat</a>
+                                    {% elseif article.statut.libelle == "reserve_emprunt" %}
+                                        <a role="button" data-role="disabled" class="style-button-article-reserve_emprunt">
+                                            Réservé - emprunt</a>
                                     {% endif %}
                                 </div>
                                 <div class="col">

@@ -39,6 +39,7 @@ span.text-nouveaute{
 }
 
 .style-button-article-emprunt:hover{
+    text-decoration: none;
     background-color:white;
     color:#9f5811 !important;
 }
@@ -54,6 +55,40 @@ span.text-nouveaute{
     border: 2px solid #d9dbdb;
     font-size: 1rem;
     background-color:#d9dbdb;
+    color: black !important;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.style-button-article-reserve_achat{
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex;
+    padding: 7px;
+    width: auto;
+    height: auto;
+    border-radius: 25px;
+    border: 2px solid #B0C4DE;
+    font-size: 1rem;
+    background-color:#B0C4DE;
+    color: black !important;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.style-button-article-reserve_emprunt{
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex;
+    padding: 7px;
+    width: auto;
+    height: auto;
+    border-radius: 25px;
+    border: 2px solid #B0E0E6;
+    font-size: 1rem;
+    background-color: #B0E0E6;
     color: black !important;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
@@ -78,6 +113,7 @@ span.text-nouveaute{
 }
 
 .style-button-article-achat:hover{
+    text-decoration: none;
     background-color:white;
     color:#ebb986 !important;
 }

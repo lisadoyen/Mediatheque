@@ -111,7 +111,10 @@ class Filtre
                 $statuts = [];
                 foreach ($donnees['statuts'] as $id) {
                     if($id == 1){
-                        array_push($donnees['statuts'], 6);
+                        array_push($donnees['statuts'], 6, 7);
+                    }
+                    if($id == 2){
+                        array_push($donnees['statuts'], 8);
                     }
                 }
                 foreach ($donnees['statuts'] as $id) {
