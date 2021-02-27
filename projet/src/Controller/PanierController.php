@@ -5,8 +5,6 @@ namespace App\Controller;
 use App\Entity\Enregistrement;
 use App\Entity\Favoris;
 use App\Entity\Panier;
-use App\Entity\StatutEnregistrement;
-use App\Entity\TypeAction;
 use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\EnregistrementRepository;
@@ -16,11 +14,9 @@ use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
 use App\Repository\TypeActionRepository;
 use App\Repository\TypeEnregistrementRepository;
-use App\Service\Article\Nouveaute;
+use App\Service\MailerService;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-use phpDocumentor\Reflection\Types\Boolean;
-use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -226,9 +222,19 @@ class PanierController extends AbstractController
 
     /**
      * @Route("/panier/valider", name="valider_panier")
+     * @param PanierRepository $panierRepository
+     * @param StatutEnregistrementRepository $statutEnregistrementRepository
+     * @param StatutRepository $statutRepository
+     * @param ActionRepository $actionRepository
+     * @param TypeActionRepository $typeActionRepository
+     * @param Request $request
+     * @param MailerService $mailerService
+     * @param $enregistrementRepository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function validerPanier(PanierRepository $panierRepository, StatutEnregistrementRepository  $statutEnregistrementRepository,
-                                  StatutRepository $statutRepository, ActionRepository $actionRepository,TypeActionRepository $typeActionRepository,Request $request)
+                                  StatutRepository $statutRepository, ActionRepository $actionRepository, TypeActionRepository $typeActionRepository,
+                                  Request $request, MailerService $mailerService,EnregistrementRepository $enregistrementRepository)
     {
         if(!$this->isCsrfTokenValid('valider_panier', $request->get('token'))) {
             throw new  InvalidCsrfTokenException('Invalid CSRF token valider panier');
@@ -336,14 +342,68 @@ class PanierController extends AbstractController
                return $this->redirectToRoute('panier');
            }
        }
-       foreach ($panier as $article){
-           $this->getDoctrine()->getManager()->remove($article);
-       }
-       $this->getDoctrine()->getManager()->flush();
 
-       $this->addFlash('success',"Votre panier a bien été validé !");
+        $totalAchat = 0;
+        foreach ($panier as $article){
+            if ($article->getTypeEnregistrement()->getLibelle() =="achat" and $article->getArticle()->getStatut()->getLibelle() != "vendu"){
+                $totalAchat = $totalAchat + $article->getArticle()->getMontantVente();
+            }
+        }
+        foreach ($panier as $article){
+            $this->getDoctrine()->getManager()->remove($article);
+        }
+        $this->getDoctrine()->getManager()->flush();
+        $enregistrements = $enregistrementRepository->findBy(['dateEnregistrement'=>$dateAjd]);
 
-       return $this->redirectToRoute('emprunts_actif');
+        if ($user->getEmailPro() == null and $user->getEmailPerso() == null){
+            if ($user->getNotificationPro()){
+                $mailerService->send(
+                    "test",
+                    "Commande du ".date('Y-m-d-H-i-s'),
+                    "no-reply@mediathalesbrest.com",
+                    $user->getEmailRecup()."",
+                    "users/profil/mail/commande_recap.html.twig",
+                    [
+                        'enregistrement' => $enregistrements,
+                        'total' => $totalAchat,
+
+                    ]
+                );
+            }
+        } else {
+            if ($user->getNotificationPro()){
+                $mailerService->send(
+                    "test",
+                    "Commande du ".date('Y-m-d-H-i-s'),
+                    "no-reply@mediathalesbrest.com",
+                    $user->getEmailPro()."",
+                    "users/profil/mail/commande_recap.html.twig",
+                    [
+                        'enregistrement' => $enregistrements,
+                        'total' => $totalAchat,
+
+                    ]
+                );
+            }
+            if ($user->getNotificationPerso()){
+                $mailerService->send(
+                    "test",
+                    "Commande du ".date('Y-m-d-H-i-s'),
+                    "no-reply@mediathalesbrest.com",
+                    $user->getEmailPerso(),
+                    "users/profil/mail/commande_recap.html.twig",
+                    [
+                        'enregistrement' => $enregistrements,
+                        'total' => $totalAchat,
+
+                    ]
+                );
+            }
+        }
+
+        $this->addFlash('success',"Votre panier a bien été validé !");
+
+        return $this->redirectToRoute('emprunts_actif');
     }
 }
 
