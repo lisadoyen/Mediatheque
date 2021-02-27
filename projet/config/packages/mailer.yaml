@@ -1,3 +1,9 @@
 framework:
     mailer:
-        dsn: '%env(MAILER_DSN)%'
+        transports:
+            main: '%env(MAILER_DSN)%'
+            test: '%env(MAILER_TEST)%'
+            #livre: '%env(MAILER_LIVRE)%'
+            #musique: '%env(MAILER_MUSIQUE)%'
+            #jeu: '%env(MAILER_JEU)%'
+            #video: '%env(MAILER_VIDEO)%'
