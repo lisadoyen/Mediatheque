@@ -74,7 +74,7 @@ class EmpruntController extends AbstractController
      */
     public function empruntGestionHistorique(EnregistrementRepository $enregistrementRepository,PaginatorInterface $paginator, Request $request)
     {
-        $emprunts = $enregistrementRepository->findAll();
+        $emprunts = $enregistrementRepository->findBy([],['dateEnregistrement'=>'DESC']);
         $empruntsPages = $paginator ->paginate(
             $emprunts,
             $request->query->getInt('page',1),

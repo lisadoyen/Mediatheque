@@ -59,7 +59,7 @@ class EnregistrementRepository extends ServiceEntityRepository
             ->andWhere("s.libelle !='rendu'")
             ->andWhere("s.libelle !='perdu'")
             ->andWhere("s.libelle !='telecharge'")
-            ->addOrderBy('e.dateRendu','ASC');
+            ->addOrderBy('e.dateEnregistrement','DESC');
         ;
 
         return $qb->getQuery()->getResult();
