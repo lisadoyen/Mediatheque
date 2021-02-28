@@ -9,6 +9,7 @@ use App\Repository\AnnonceRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use App\Service\Article\Nouveaute;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DependencyInjection\ControllerArgumentValueResolverPass;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,6 +47,22 @@ class IndexController extends AbstractController
         return $this->render('accueil.html.twig', [
             'annonces' => $ar->findAll(),
             'nouveaute' => $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,3)
+        ]);
+    }
+
+    /**
+     * @Route("/nouveautes", name="nouveautes")
+     */
+    public function nouveaute(CategorieRepository $categorieRepo, ActionRepository $actionsRepo, Nouveaute $new, PaginatorInterface $paginator, Request $request)
+    {
+        $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,3);
+        $nouveautePages = $paginator ->paginate(
+            $nouveaute,
+            $request->query->getInt('page',1),
+            10
+        );
+        return $this->render('articles/nouveaute.html.twig', [
+            'nouveaute' => $nouveautePages
         ]);
     }
 
