@@ -7,6 +7,7 @@ use App\Entity\Favoris;
 use App\Entity\Panier;
 use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\CategorieRepository;
 use App\Repository\EnregistrementRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\PanierRepository;
@@ -234,7 +235,7 @@ class PanierController extends AbstractController
      */
     public function validerPanier(PanierRepository $panierRepository, StatutEnregistrementRepository  $statutEnregistrementRepository,
                                   StatutRepository $statutRepository, ActionRepository $actionRepository, TypeActionRepository $typeActionRepository,
-                                  Request $request, MailerService $mailerService,EnregistrementRepository $enregistrementRepository)
+                                  Request $request, MailerService $mailerService,EnregistrementRepository $enregistrementRepository, CategorieRepository  $categorieRepository)
     {
         if(!$this->isCsrfTokenValid('valider_panier', $request->get('token'))) {
             throw new  InvalidCsrfTokenException('Invalid CSRF token valider panier');
@@ -353,53 +354,61 @@ class PanierController extends AbstractController
             $this->getDoctrine()->getManager()->remove($article);
         }
         $this->getDoctrine()->getManager()->flush();
+
         $enregistrements = $enregistrementRepository->findBy(['dateEnregistrement'=>$dateAjd]);
 
-        if ($user->getEmailPro() == null and $user->getEmailPerso() == null){
-            if ($user->getNotificationPro()){
-                $mailerService->send(
-                    "test",
-                    "Commande du ".date('Y-m-d-H-i-s'),
-                    "no-reply@mediathalesbrest.com",
-                    $user->getEmailRecup()."",
-                    "users/profil/mail/commande_recap.html.twig",
-                    [
-                        'enregistrement' => $enregistrements,
-                        'total' => $totalAchat,
 
-                    ]
-                );
-            }
-        } else {
-            if ($user->getNotificationPro()){
-                $mailerService->send(
-                    "test",
-                    "Commande du ".date('Y-m-d-H-i-s'),
-                    "no-reply@mediathalesbrest.com",
-                    $user->getEmailPro()."",
-                    "users/profil/mail/commande_recap.html.twig",
-                    [
-                        'enregistrement' => $enregistrements,
-                        'total' => $totalAchat,
+        //  regrouper par catégorie
+        $livres = $enregistrementRepository->findByCategorie($categorieRepository->findOneBy(['libelle'=>'livre']),$dateAjd);
+        $musiques = $enregistrementRepository->findByCategorie($categorieRepository->findOneBy(['libelle'=>'musique']),$dateAjd);
+        $jeux = $enregistrementRepository->findByCategorie($categorieRepository->findOneBy(['libelle'=>'jeu']),$dateAjd);
+        $videos = $enregistrementRepository->findByCategorie($categorieRepository->findOneBy(['libelle'=>'video']),$dateAjd);
 
-                    ]
-                );
+        $enregistrements = [$livres, $musiques, $jeux, $videos];
+        // pour chaque catégorie
+        foreach ($enregistrements as $enregistrement){
+            // vérifier sur quelles adresses envoyer au client
+            // envoyer le mail au client selon la catégorie et ses adresses
+            // TODO catégorie mail
+            if ($enregistrement != null){
+                if ($user->getEmailPro() == null and $user->getEmailPerso() == null){
+                    if ($user->getNotificationPro()){
+                        $mailerService->send(
+                            'test',
+                            "Commande du ".date('Y-m-d-H-i-s'),
+                            "no-reply@mediathalesbrest.com",
+                            $user->getEmailRecup()."",
+                            "users/profil/mail/commande_recap.html.twig",
+                            ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+                        );
+                    }
+                } else {
+                    if ($user->getNotificationPro()){
+                        $mailerService->send(
+                            "test",
+                            "Commande du ".date('Y-m-d-H-i-s'),
+                            "no-reply@mediathalesbrest.com",
+                            $user->getEmailPro()."",
+                            "users/profil/mail/commande_recap.html.twig",
+                            ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+                        );
+                    }
+                    if ($user->getNotificationPerso()){
+                        $mailerService->send(
+                            "test",
+                            "Commande du ".date('Y-m-d-H-i-s'),
+                            "no-reply@mediathalesbrest.com",
+                            $user->getEmailPerso(),
+                            "users/profil/mail/commande_recap.html.twig",
+                            ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+                        );
+                    }
+                }
             }
-            if ($user->getNotificationPerso()){
-                $mailerService->send(
-                    "test",
-                    "Commande du ".date('Y-m-d-H-i-s'),
-                    "no-reply@mediathalesbrest.com",
-                    $user->getEmailPerso(),
-                    "users/profil/mail/commande_recap.html.twig",
-                    [
-                        'enregistrement' => $enregistrements,
-                        'total' => $totalAchat,
 
-                    ]
-                );
-            }
         }
+
+        //TODO envoyer a tous les bénévoles
 
         $this->addFlash('success',"Votre panier a bien été validé !");
 

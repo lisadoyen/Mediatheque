@@ -65,22 +65,24 @@ class EnregistrementRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    // /**
-    //  * @return Enregistrement[] Returns an array of Enregistrement objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+    * @return Enregistrement[] Returns an array of Enregistrement objects
+     */
+
+    public function findByCategorie($categorie, $date)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+            ->join('App:Article', 'a')
+            ->where('a.id = e.article')
+            ->andWhere('a.categorie = :categorie')
+            ->setParameter('categorie', $categorie)
+            ->andWhere('e.dateEnregistrement = :date')
+            ->setParameter('date', $date)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Enregistrement

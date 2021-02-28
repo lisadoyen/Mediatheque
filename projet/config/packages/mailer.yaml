@@ -3,6 +3,7 @@ framework:
         transports:
             main: '%env(MAILER_DSN)%'
             test: '%env(MAILER_TEST)%'
+            livre: '%env(MAILER_TEST)%'
             #livre: '%env(MAILER_LIVRE)%'
             #musique: '%env(MAILER_MUSIQUE)%'
             #jeu: '%env(MAILER_JEU)%'
