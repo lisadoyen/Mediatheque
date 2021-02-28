@@ -67,6 +67,11 @@ class ArticleController extends AbstractController
                             Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository,
                              RubriqueRepository $rubriqueRepository, PanierRepository $panierRepository)
     {
+        $paniers = $panierRepository->findBy(['utilisateur'=>$this->getUser()]);
+        $panierUser = [];
+        foreach ($paniers as $panier){
+            array_push($panierUser, $panier->getArticle()->getId());
+        }
         $nbArticlesTotal = $ar->findNbArticleTotal();
         // Menu genre et/ou catégorie
         if($idGenre != null || $idCategorie != null) {
@@ -89,7 +94,8 @@ class ArticleController extends AbstractController
                 'ordre' =>$order,
                 'type' =>$type,
                 'nbArticlesTotal'=> $nbArticlesTotal[0][1],
-                'nbArticles' => $nbArticles
+                'nbArticles' => $nbArticles,
+                'panierUser' => $panierUser
             ]);
         }
         // filtre
@@ -113,7 +119,8 @@ class ArticleController extends AbstractController
                 'ordre' =>$order,
                 'type' =>$type,
                 'nbArticlesTotal'=> $nbArticlesTotal[0][1],
-                'nbArticles' => $nbArticles
+                'nbArticles' => $nbArticles,
+                'panierUser' => $panierUser
             ]);
         }
     }
@@ -145,6 +152,11 @@ class ArticleController extends AbstractController
                             EnregistrementRepository $enregistrementRepository, PanierRepository $panierRepository)
     {
         $nbArticlesTotal = $ar->findNbArticleTotal();
+        $paniers = $panierRepository->findBy(['utilisateur'=>$this->getUser()]);
+        $panierUser = [];
+        foreach ($paniers as $panier){
+            array_push($panierUser, $panier->getArticle()->getId());
+        }
         // Menu genre et/ou catégorie
         if($idGenre != null || $idCategorie != null) {
             $livres = $paginator->paginate(
@@ -166,7 +178,8 @@ class ArticleController extends AbstractController
                 'ordre' =>$order,
                 'type' =>$type,
                 'nbArticlesTotal'=> $nbArticlesTotal[0][1],
-                'nbArticles' => $nbArticles
+                'nbArticles' => $nbArticles,
+                'panierUser' =>$panierUser
             ]);
         }
         // filtre
@@ -190,7 +203,8 @@ class ArticleController extends AbstractController
                 'ordre' =>$order,
                 'type' =>$type,
                 'nbArticlesTotal'=> $nbArticlesTotal[0][1],
-                'nbArticles' => $nbArticles
+                'nbArticles' => $nbArticles,
+                'panierUser' =>$panierUser
             ]);
         }
     }
@@ -279,9 +293,13 @@ class ArticleController extends AbstractController
                                  FavorisRepository $favorisRepository,
                                  CategorieRepository $categorieRepository,
                                  ActionRepository $actionRepository, $id=1,
-                                Nouveaute $new): Response
+                                Nouveaute $new, PanierRepository $panierRepository): Response
     {
-
+        $paniers = $panierRepository->findBy(['utilisateur'=>$this->getUser()]);
+        $panierUser = [];
+        foreach ($paniers as $panier){
+            array_push($panierUser, $panier->getArticle()->getId());
+        }
         $livre = $articleRepository->findOneBy(['id' => $id]);
         $fav = $favorisRepository->findOneBy(['utilisateur'=>$this->getUser(), 'article'=>$livre]);
         $nouveaute = $new->findArticleNouveaute_AvecIdCategorie($categorieRepository,$actionRepository,500, $livre->getCategorie()->getId());
@@ -320,6 +338,7 @@ class ArticleController extends AbstractController
             'idNouveaute' => $nouveau,
             'avis' => $avis,
             'test'=> $test,
+            'panierUser' =>$panierUser,
             'form' => $form->createView()
         ]);
     }

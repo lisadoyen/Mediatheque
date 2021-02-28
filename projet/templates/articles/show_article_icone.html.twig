@@ -86,6 +86,9 @@
                         {% else %}
                             <a href="{{ path('remove_article_favoris', {id: article.id, page: "list"}) }}"><i class="fas fa-star text-danger fa-2x"></i></a>
                         {% endif %}
+                        {% if article.id in panierUser %}
+                            <img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" width="30" height="30">
+                        {% endif %}
                     </div>
                 </div>
             </div>

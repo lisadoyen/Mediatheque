@@ -96,8 +96,11 @@
                 </div>
                 <div class="row p-4">
                     <div class="row col-lg-5"></div>
-                    <div class="col-lg-7">
+                    <div class="row col-lg-7">
                         {{ render(controller('App\\Controller\\FavorisController::isFavourite',{ 'idArticle': article.id })) }}
+                        {% if article.id in panierUser %}
+                            <img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" width="80" height="80">
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row p-4">
