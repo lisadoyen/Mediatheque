@@ -178,7 +178,7 @@ class EmpruntController extends AbstractController
         $date = new \DateTime('now');
         $emprunts->setDateRendu($date);
         $article = $emprunts->getArticle();
-        if($article->getStatut() == "reserve_emprunt") {
+        if($article->getStatut() == "emprunte") {
             $article->setStatut($statutRepository->findOneBy(['libelle' => 'empruntable']));
         }
         $this->getDoctrine()->getManager()->persist($article);
@@ -198,7 +198,7 @@ class EmpruntController extends AbstractController
         $date = new \DateTime('now');
         $emprunts->setDateRendu($date);
         $article = $emprunts->getArticle();
-        if($article->getStatut() == "reserve_emprunt") {
+        if($article->getStatut() == "emprunte") {
             $article->setStatut($statutRepository->findOneBy(['libelle' => 'perdu']));
         }
         $this->getDoctrine()->getManager()->persist($article);
