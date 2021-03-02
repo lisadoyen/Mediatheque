@@ -30,11 +30,11 @@
                                         {% if nouveaute[0].vignette == NULL %}
                                             <input type="hidden" name="id" value="{{ nouveaute[0].id }}">
                                             <a href="{{ path('article_details', {id: nouveaute[0].id}) }}">
-                                                <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="auto" height="500"></a>
+                                                <img class="photo-nouveaute" src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image"></a>
                                         {% else %}
                                             <input type="hidden" name="id" value="{{ nouveaute[0].id }}">
                                             <a href="{{ path('article_details', {id: nouveaute[0].id}) }}">
-                                                <img src="{{ nouveaute[0].vignette }}" alt="{{ nouveaute[0].vignette }}" width="auto" height="500"></a>
+                                                <img class="photo-nouveaute" src="{{ nouveaute[0].vignette }}" alt="{{ nouveaute[0].vignette }}"></a>
                                         {% endif %}
                                     </div>
                                 </div>

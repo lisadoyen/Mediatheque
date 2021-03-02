@@ -1,17 +1,17 @@
 <nav class="main-menu">
     <h1 id="main-title">Médiathèque</h1>
-    <a href="{{ path('accueil') }}" data-toggle="tooltip" data-placement="bottom" title="Accueil"><img src="{{asset('assets/images/yellow/home.png')}}" class="icon home" alt="Accueil"></a>
+    <a href="{{ path('accueil') }}" data-toggle="tooltip" data-placement="bottom" title="Accueil"><img src="{{asset('assets/images/logo/logo_site.png')}}" class="icon home" alt="Accueil"></a>
     {% if app.request.pathInfo != '/accueil' %}
     <form action="{{ path('articles_show') }}" id="search" method="post" class="search-in-nav">
         {% include '_search_bar.html.twig' %}
     </form>
     {% endif %}
-    <a href="{{ path('panier') }}" data-toggle="tooltip" data-placement="bottom" title="Panier"><img src="{{asset('assets/images/yellow/shopping-cart.png')}}" class="icon  shopCar" alt="Panier"></a>
+    <a href="{{ path('panier') }}" data-toggle="tooltip" data-placement="bottom" title="Panier"><img src="{{asset('assets/images/yellow/shopping-cart.png')}}" class="icon shopCar" alt="Panier"></a>
     <a href="{{ path('favoris') }}" data-toggle="tooltip" data-placement="bottom" title="Favoris"><img src="{{asset('assets/images/yellow/star.png')}}" class="icon  fav" alt="Favories"></a>
     {% for notif in app.flashes('notif') %}
         <span style="position: absolute;height: 2.5vh;width: 2.5vh;top: 5.5vh;right: 28vh;background-color: #dc3545;border-radius: 50px;color: white;overflow: hidden;padding: 0.2vh;font-weight: bold;font-size: 1.3vh;text-align: center">{{ notif }}</span>
     {% endfor %}
-    <a href="{{ path('profil') }}" data-toggle="tooltip" data-placement="bottom" title="Profil"><img src="{{asset('assets/images/yellow/user.png')}}" class="icon  account" alt="Profile"></a>
+    <a href="{{ path('profil') }}" data-toggle="tooltip" data-placement="bottom" title="Profil"><img src="{{asset('assets/images/yellow/user.png')}}" class="icon account" alt="Profile"></a>
     <a href="{{ path('security_logout') }}" data-toggle="tooltip" data-placement="bottom" title="Déconnexion"><img src="{{asset('assets/images/yellow/logout.png')}}" class="icon  logout" alt="Déconnexion"></a>
 </nav>
 <nav class="sub-menu">

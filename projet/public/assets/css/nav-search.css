@@ -16,7 +16,7 @@
 /* BARRE RECHERCHE */
 .search-in-nav{
     top: 2vh;
-    left: 35vh;
+    left: 40vh;
     position: fixed;
 }
 .searchbar{
@@ -38,13 +38,25 @@
     outline: 0;
     background: none;
     width: 0;
-    caret-color:transparent;
+    caret-color:white;
     line-height: 4vh;
     transition: width 0.4s linear;
     font-size: 3vh!important;
     height: 3.2vh;
 }
 
+.search-value{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width:50vh;
+    caret-color:white;
+    line-height: 4vh;
+    transition: width 0.4s linear;
+    font-size: 3vh!important;
+    height: 3.2vh;
+}
 
 @media (hover:hover) {
     .searchbar:hover > .search_input {

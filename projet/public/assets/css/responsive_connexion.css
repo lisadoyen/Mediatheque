@@ -1,0 +1,428 @@
+/* petit écran de + en + petit */
+@media screen and (max-width: 1700px){
+    .img-logo{
+        width: 79.2vh;
+        margin-left: 3vh;
+        padding: 3vh;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .img-logo{
+        width: 65vh;
+        margin-left: 3vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: 87vh;
+    }
+}
+
+
+@media screen and (max-width: 990px){
+    .img-logo{
+        width: 50vh;
+        margin-left: 15vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .img-logo{
+        width: 50vh;
+        margin-left: 5vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .img-logo{
+        width: 40vh;
+        margin-left: 5vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .img-logo{
+        width: 40vh;
+        margin-left: 1vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+}
+
+/* Téléphones (du plus petit au plus grand) */
+
+/* Nokia 8110 4G */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 240px)
+and (max-device-width: 320px){
+    .img-logo{
+        width: 40vh;
+        margin-left: 1vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+
+    .edit-btn{
+        font-size: 4em;
+    }
+
+    h2{
+        font-size: 7em;
+        padding: 1vh;
+    }
+
+    .input-div > div > h5{
+        font-size: 40px;
+    }
+
+    .input-div.focus > div > h5{
+        top: -15px;
+        font-size: 30px;
+    }
+
+    .mdp-oublie{
+        font-size: 1.7em;
+    }
+
+    .input-div > div > input{
+        font-size: 2em;
+    }
+
+    .login-content .input-div{
+        padding : 12px 0;
+    }
+
+    .i i{
+        font-size: 170%;
+    }
+}
+
+
+/* LG Optymus */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 384px)
+and (max-device-width: 640px){
+    .img-logo{
+        width: 40vh;
+        margin-left: 1vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+
+    .edit-btn{
+        font-size: 4em;
+    }
+
+    h2{
+        font-size: 7em;
+        padding: 1vh;
+    }
+
+    .input-div > div > h5{
+        font-size: 40px;
+    }
+
+    .input-div.focus > div > h5{
+        top: -15px;
+        font-size: 30px;
+    }
+
+    .mdp-oublie{
+        font-size: 1.7em;
+    }
+
+    .input-div > div > input{
+        font-size: 2em;
+    }
+
+    .login-content .input-div{
+        padding : 12px 0;
+    }
+
+    .i i{
+        font-size: 170%;
+    }
+}
+
+/* iPhone 5/5S/5E */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .img-logo{
+        width: 40vh;
+        margin-left: 1vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+
+    .edit-btn{
+        font-size: 4em;
+    }
+
+    h2{
+        font-size: 7em;
+        padding: 1vh;
+    }
+
+    .input-div > div > h5{
+        font-size: 40px;
+    }
+
+    .input-div.focus > div > h5{
+        top: -15px;
+        font-size: 30px;
+    }
+
+    .mdp-oublie{
+        font-size: 1.7em;
+    }
+
+    .input-div > div > input{
+        font-size: 2em;
+    }
+
+    .login-content .input-div{
+        padding : 15px 0;
+    }
+
+    .i i{
+        font-size: 170%;
+    }
+}
+
+/* Microsoft Lumia 550 Windows Phone 10 */
+/* Samsung Galaxy S5 */
+/* Samsung Note 3 */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 360px)
+and (max-device-width: 640px){
+    .img-logo {
+        width: 40vh;
+        margin-left: 1vh;
+        padding: 3vh;
+    }
+
+    .logo {
+        height: auto;
+    }
+
+    .edit-btn {
+        font-size: 4em;
+    }
+
+    h2 {
+        font-size: 7em;
+        padding: 1vh;
+    }
+
+    .input-div > div > h5 {
+        font-size: 40px;
+    }
+
+    .input-div.focus > div > h5 {
+        top: -15px;
+        font-size: 30px;
+    }
+
+    .mdp-oublie {
+        font-size: 1.7em;
+    }
+
+    .input-div > div > input {
+        font-size: 2em;
+    }
+
+    .login-content .input-div {
+        padding: 13px 0;
+    }
+
+    .i i {
+        font-size: 170%;
+    }
+}
+
+
+/* iPhone 6/6S/7/8 */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .img-logo{
+        width: 40vh;
+        margin-left: 1vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+
+    .edit-btn{
+        font-size: 4em;
+    }
+
+    h2{
+        font-size: 7em;
+        padding: 1vh;
+    }
+
+    .input-div > div > h5{
+        font-size: 40px;
+    }
+
+    .input-div.focus > div > h5{
+        top: -15px;
+        font-size: 30px;
+    }
+
+    .mdp-oublie{
+        font-size: 1.7em;
+    }
+
+    .input-div > div > input{
+        font-size: 2em;
+    }
+
+    .login-content .input-div{
+        padding : 15px 0;
+    }
+
+    .i i{
+        font-size: 170%;
+    }
+}
+
+
+/* iphone 6/7/8 + 11 */
+/* iphone X/XS 11 */
+/* nexus 5S Android 8.0 */
+/* nexus 6P Android 8.0 */
+/* pixel 2 Android 8.0 */
+
+/* Portrait and Landscape */
+@media screen and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3){
+
+    .img-logo{
+        width: 40vh;
+        margin-left: 1vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+
+    .edit-btn{
+        font-size: 4em;
+    }
+
+    h2{
+        font-size: 7em;
+        padding: 1vh;
+    }
+
+    .input-div > div > h5{
+        font-size: 40px;
+    }
+
+    .input-div.focus > div > h5{
+        top: -15px;
+        font-size: 30px;
+    }
+
+    .mdp-oublie{
+        font-size: 1.7em;
+    }
+
+    .input-div > div > input{
+        font-size: 2em;
+    }
+
+    .login-content .input-div{
+        padding : 15px 0;
+    }
+
+    .i i{
+        font-size: 170%;
+    }
+}
+
+/* iphone XS Max */
+/* iphone XR IOS 12 */
+/* Samsung Galaxy note 9 */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 846px){
+
+    .img-logo{
+        width: 40vh;
+        margin-left: 1vh;
+        padding: 3vh;
+    }
+    .logo{
+        height: auto;
+    }
+
+    .edit-btn{
+        font-size: 4em;
+    }
+
+    h2{
+        font-size: 7em;
+        padding: 1vh;
+    }
+
+    .input-div > div > h5{
+        font-size: 40px;
+    }
+
+    .input-div.focus > div > h5{
+        top: -15px;
+        font-size: 30px;
+    }
+
+    .mdp-oublie{
+        font-size: 1.7em;
+    }
+
+    .input-div > div > input{
+        font-size: 2em;
+    }
+
+    .login-content .input-div{
+        padding : 13px 0;
+    }
+
+    .i i{
+        font-size: 170%;
+    }
+}

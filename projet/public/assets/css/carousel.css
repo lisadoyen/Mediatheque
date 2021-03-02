@@ -6,8 +6,8 @@ h2.carousel-title, h3.carousel-title {
     position: relative;
     margin: 40px 70px;
     text-transform: uppercase;
-
 }
+
 h2.carousel-title::after  {
     content: "";
     width: 100%;
@@ -30,6 +30,16 @@ h2.carousel-title span {
 
 h3 {
     font-size: 22px;
+}
+
+.img-annonce{
+    width: 30vh;
+    height: 40vh;
+}
+
+.photo-nouveaute{
+    width: auto;
+    height: 500px;
 }
 
 .carousel {

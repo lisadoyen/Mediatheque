@@ -1,0 +1,450 @@
+/* en dessous de 1160 px */
+@media screen and (max-width: 1110px) {
+
+    .content-desktop {display: none !important;}
+    
+    .background-home {
+        height: 90vh;
+    }
+    .titre{
+        font-size: 4vh!important;
+        padding-left: 1vh !important;
+    }
+   .navbar-toggler{
+        font-size: 3rem;
+    }
+    .navbar-collapse{
+        font-size: 3rem;
+        letter-spacing: 0.5vh;
+    }
+    .dropdown-menu{
+        font-size: 2.5rem;
+    }
+
+    /* BARRE RECHERCHE */
+    .searchbar{
+        margin-bottom: auto;
+        background-color:#858991;
+        border-radius: 3vh;
+        padding: 1vh;
+    }
+    .fa-search{
+        font-size: 2.5vh!important;
+    }
+
+    .search_input{
+        color: white;
+        border: 0;
+        outline: 0;
+        background: none;
+        width: 0;
+        caret-color:transparent;
+        line-height: 4vh;
+        transition: width 0.4s linear;
+        font-size: 3vh!important;
+    }
+
+    .searchbar > .search_input{
+        padding: 0 1vh;
+        width: 35vh;
+        caret-color:var(--second-color);
+    }
+
+}
+
+
+/* demi écran */
+/* PAGE D'ACCUEIL */
+@media screen and (max-width: 700px){
+    h1#main-title{
+        font-size: 0vh;
+        left: 0vh;
+        top : 0vh;
+    }
+
+    body{
+        display: block;
+    }
+
+    .photo-nouveaute{
+        width: 40vh;
+        height: 40vh;
+    }
+
+}
+
+@media screen and (max-width: 600px){
+    .photo-nouveaute{
+        width: 30vh;
+        height: 30vh;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .photo-nouveaute{
+        width: 20vh;
+        height: 20vh;
+    }
+}
+
+
+/* TELEPHONE */
+/* iphone XS Max */
+/* iphone XR IOS 12 */
+/* Samsung Galaxy note 9 */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 846px){
+
+    /* PAGE D'ACCUEIL */
+    .content-mobile {display: none !important;}
+
+    h2.carousel-title, h3.carousel-title {
+        font-size: 60px;
+    }
+
+    h3{
+        font-size: 40px;
+    }
+
+    p{
+        font-size: 40px;
+    }
+
+    .container-carousel{
+        padding: 60px;
+    }
+
+    .text-center > .edit-btn{
+        font-size: 2.5rem;
+    }
+
+    .carousel-indicators {
+        bottom: 120px;
+    }
+
+    h1#main-title{
+        font-size: 0vh;
+        left: 0vh;
+        top : 0vh;
+    }
+
+    img.home{
+        height: 6vh;
+        width:  6vh;
+        top: 1vh;
+    }
+    /* FIN PAGE D'ACCUEIL */
+}
+
+/* iphone X/XS 11 */
+
+/* Portrait and Landscape */
+@media screen and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3) {
+
+    /* PAGE D'ACCUEIL */
+    .content-mobile {display: none !important;}
+
+    h2.carousel-title, h3.carousel-title {
+        font-size: 60px;
+    }
+
+    h3{
+        font-size: 40px;
+    }
+
+    p{
+        font-size: 40px;
+    }
+
+    .container-carousel{
+        padding: 60px;
+    }
+
+    .text-center > .edit-btn{
+        font-size: 2.5rem;
+    }
+
+    .carousel-indicators {
+        bottom: 120px;
+    }
+
+    h1#main-title{
+        font-size: 0vh;
+        left: 0vh;
+        top : 0vh;
+    }
+
+    img.home{
+        height: 6vh;
+        width:  6vh;
+        top: 1vh;
+    }
+
+    /* FIN PAGE D'ACCUEIL */
+}
+
+/* iphone 6/7/8 + 11 */
+/* nexus 5S Android 8.0 */
+/* nexus 6P Android 8.0 */
+/* pixel 2 Android 8.0 */
+
+/* Portrait and Landscape */
+@media screen and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3) {
+
+    /* PAGE D'ACCUEIL */
+    .content-mobile {display: none !important;}
+
+    h2.carousel-title, h3.carousel-title {
+        font-size: 60px;
+    }
+
+    h3{
+        font-size: 40px;
+    }
+
+    p{
+        font-size: 40px;
+    }
+
+    .container-carousel{
+        padding: 60px;
+    }
+
+    .text-center > .edit-btn{
+        font-size: 2.5rem;
+    }
+
+    .carousel-indicators {
+        bottom: 120px;
+    }
+
+    h1#main-title{
+        font-size: 0vh;
+        left: 0vh;
+        top : 0vh;
+    }
+
+    /* FIN PAGE D'ACCUEIL */
+}
+
+/* iPhone 6/6S/7/8 */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2) {
+
+
+    /* PAGE D'ACCUEIL */
+    .content-mobile {display: none !important;}
+
+    h2.carousel-title, h3.carousel-title {
+        font-size: 60px;
+    }
+
+    h3{
+        font-size: 40px;
+    }
+
+    p{
+        font-size: 40px;
+    }
+
+    .container-carousel{
+        padding: 60px;
+    }
+
+    .text-center > .edit-btn{
+        font-size: 2.5rem;
+    }
+
+    .carousel-indicators {
+        bottom: 120px;
+    }
+
+    h1#main-title{
+        font-size: 0vh;
+        left: 0vh;
+        top : 0vh;
+    }
+
+
+    /* FIN PAGE D'ACCUEIL */
+}
+
+/* Microsoft Lumia 550 Windows Phone 10 */
+/* Samsung Galaxy S5 */
+/* Samsung Note 3 */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 360px)
+and (max-device-width: 640px) {
+
+    /* PAGE D'ACCUEIL */
+    .content-mobile {display: none !important;}
+
+    h2.carousel-title, h3.carousel-title {
+        font-size: 60px;
+    }
+
+    h3{
+        font-size: 40px;
+    }
+
+    p{
+        font-size: 40px;
+    }
+
+    .container-carousel{
+        padding: 60px;
+    }
+
+    .text-center > .edit-btn{
+        font-size: 2.5rem;
+    }
+
+    .carousel-indicators {
+        bottom: 120px;
+    }
+
+    h1#main-title{
+        font-size: 0vh;
+        left: 0vh;
+        top : 0vh;
+    }
+
+    /* FIN PAGE D'ACCUEIL */
+}
+
+/* iPhone 5/5S/5E */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    /* PAGE D'ACCUEIL */
+    .content-mobile {display: none !important;}
+
+    h2.carousel-title, h3.carousel-title {
+        font-size: 60px;
+    }
+
+    h3{
+        font-size: 40px;
+    }
+
+    p{
+        font-size: 40px;
+    }
+
+    .container-carousel{
+        padding: 60px;
+    }
+
+    .text-center > .edit-btn{
+        font-size: 2.5rem;
+    }
+
+    .carousel-indicators {
+        bottom: 120px;
+    }
+
+    h1#main-title{
+        font-size: 0vh;
+        left: 0vh;
+        top : 0vh;
+    }
+
+
+    /* FIN PAGE D'ACCUEIL */
+}
+
+/* LG Optymus */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 384px)
+and (max-device-width: 640px){
+    /* PAGE D'ACCUEIL */
+    .content-mobile {display: none !important;}
+
+    h2.carousel-title, h3.carousel-title {
+        font-size: 60px;
+    }
+
+    h3{
+        font-size: 40px;
+    }
+
+    p{
+        font-size: 40px;
+    }
+
+    .container-carousel{
+        padding: 60px;
+    }
+
+    .text-center > .edit-btn{
+        font-size: 2.5rem;
+    }
+
+    .carousel-indicators {
+        bottom: 120px;
+    }
+
+    h1#main-title{
+        font-size: 0vh;
+        left: 0vh;
+        top : 0vh;
+    }
+
+    /* FIN PAGE D'ACCUEIL */
+}
+
+/* Nokia 8110 4G */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 240px)
+and (max-device-width: 320px) {
+    /* PAGE D'ACCUEIL */
+    .content-mobile {display: none !important;}
+
+    h2.carousel-title, h3.carousel-title {
+        font-size: 60px;
+    }
+
+    h3{
+        font-size: 40px;
+    }
+
+    p{
+        font-size: 40px;
+    }
+
+    .container-carousel{
+        padding: 60px;
+    }
+
+    .text-center > .edit-btn{
+        font-size: 2.5rem;
+    }
+
+    .carousel-indicators {
+        bottom: 120px;
+    }
+
+    h1#main-title{
+        font-size: 0vh;
+        left: 0vh;
+        top : 0vh;
+    }
+
+    /* FIN PAGE D'ACCUEIL */
+}

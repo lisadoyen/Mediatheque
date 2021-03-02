@@ -11,6 +11,7 @@ body{
     height: 100%;
     width: 100%;
 }
+
 nav.main-menu{
 	position: sticky;
 	top: 0;
@@ -20,6 +21,7 @@ nav.main-menu{
     background-color:var(--main-color);
     box-shadow: rgba(0, 0, 0, 0.15) 1.25px 1.25px 2.6px;
 }
+
 img.icon{
 	height: 4vh;
 	width:  4vh;
@@ -36,12 +38,21 @@ img.icon:hover{
 h1#main-title {
     color:black;
     text-decoration: none;
-    left: 8vh;
+    left: 10vh;
     top : 2.2vh;
     font-size: 4vh;
     position: absolute;
 }
-img.home{left: 2vh;}
+img.home{
+    left: 1vh;
+    height: 8vh;
+    width:  8vh;
+    top : 0.5vh;
+    position: absolute;
+    transition: 0s;
+    filter: brightness(0%);
+}
+
 img.shopCar{right: 33.5vh;top: 2.6vh;}
 img.fav{right: 28vh;}
 img.account{right: 23vh;}
