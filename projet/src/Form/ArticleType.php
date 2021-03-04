@@ -78,7 +78,7 @@ class ArticleType extends AbstractType
             $form->add('rubriques', EntityType::class, [
                 'class' => Rubrique::class,
                 'multiple' => true,
-//                'expanded' => true,
+                'expanded' => true,
                 'placeholder' => 'Choisissez une ou plusieurs rubrique(s) ...',
                 'choices' => $rubriques,
             ]);
