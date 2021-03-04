@@ -27,6 +27,7 @@ class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+//        dd($options);
         $builder
             ->add('gencode', TextType::class, ['required' => false])
             ->add('codeArticle', TextType::class, ['required' => true])
@@ -41,7 +42,7 @@ class ArticleType extends AbstractType
             ])
             ->add('dateObtention', DateType::class, [
                 'widget' => 'single_text',
-                'attr' => ['data-provide' => 'datepicker'],
+                'attr' => ['data-provide' => 'datepicker', 'value' => $options['dateObtention']],
                 'html5' => false,
                 'mapped' => false,
                 'format' => 'MM/dd/yyyy'
@@ -111,6 +112,8 @@ class ArticleType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Article::class,
+            'dateObtention' => ''
         ]);
+        $resolver->setAllowedTypes('dateObtention', 'string');
     }
 }
