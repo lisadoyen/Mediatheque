@@ -3,7 +3,7 @@
         {% for article in articles | slice(0, 30) %}
             <div class="col-lg-12 p-2">
                 <div class="row">
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 article-img-responsive-liste">
                         {% if nouveaute is defined %}
                             {% for new in nouveaute %}
                                 {% if new.id == article.id %}
@@ -14,14 +14,14 @@
                         {% if article.vignette == NULL %}
                             <input type="hidden" name="id" value="{{ article.id }}">
                             <a href="{{ path('article_details', {id: article.id}) }}">
-                                <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="150" height="150"></a>
+                                <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-liste-no"></a>
                         {% else %}
                             <input type="hidden" name="id" value="{{ article.id }}">
                             <a href="{{ path('article_details', {id: article.id}) }}">
-                                <img src="{{ article.vignette }}" alt="{{ article.vignette }}" width="150" height="180"></a>
+                                <img src="{{ article.vignette }}" alt="{{ article.vignette }}" class="img-liste"></a>
                         {% endif %}
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-lg-10 article-info-responsive-liste">
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="text-size-title"><span class="text-bold">{{article.titre | capitalize }}</span></div>
@@ -125,20 +125,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-1 pt-4">
+                            <div class="col-lg-1 pt-4 article-logo-responsive-liste">
                                 {% if article.favoris is empty %}
-                                    <a href="{{ path('add_article_favoris', {id: article.id, page: "list"}) }}"><i class="far fa-star text-danger fa-2x"></i></a>
+                                    <a href="{{ path('add_article_favoris', {id: article.id, page: "list"}) }}"><i class="far fa-star text-danger fa-2x etoile"></i></a>
                                 {% else %}
-                                    <a href="{{ path('remove_article_favoris', {id: article.id, page: "list"}) }}"><i class="fas fa-star text-danger fa-2x"></i></a>
+                                    <a href="{{ path('remove_article_favoris', {id: article.id, page: "list"}) }}"><i class="fas fa-star text-danger fa-2x etoile"></i></a>
                                 {% endif %}
                                 {% if article.id in panierUser %}
-                                    <img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" width="30" height="30">
+                                    <img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" class="kadis-bleu">
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
-                <hr>
+                <hr class="hr-liste">
             </div>
         {% endfor %}
     {% endif %}

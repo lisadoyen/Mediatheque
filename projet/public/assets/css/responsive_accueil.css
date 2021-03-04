@@ -21,35 +21,6 @@
         font-size: 2.5rem;
     }
 
-    /* BARRE RECHERCHE */
-    .searchbar{
-        margin-bottom: auto;
-        background-color:#858991;
-        border-radius: 3vh;
-        padding: 1vh;
-    }
-    .fa-search{
-        font-size: 2.5vh!important;
-    }
-
-    .search_input{
-        color: white;
-        border: 0;
-        outline: 0;
-        background: none;
-        width: 0;
-        caret-color:transparent;
-        line-height: 4vh;
-        transition: width 0.4s linear;
-        font-size: 3vh!important;
-    }
-
-    .searchbar > .search_input{
-        padding: 0 1vh;
-        width: 35vh;
-        caret-color:var(--second-color);
-    }
-
 }
 
 
@@ -118,7 +89,7 @@ and (max-device-width: 846px){
     }
 
     .text-center > .edit-btn{
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .carousel-indicators {
@@ -166,7 +137,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
     }
 
     .text-center > .edit-btn{
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .carousel-indicators {
@@ -218,7 +189,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
     }
 
     .text-center > .edit-btn{
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .carousel-indicators {
@@ -262,7 +233,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .text-center > .edit-btn{
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .carousel-indicators {
@@ -308,7 +279,7 @@ and (max-device-width: 640px) {
     }
 
     .text-center > .edit-btn{
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .carousel-indicators {
@@ -350,7 +321,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .text-center > .edit-btn{
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .carousel-indicators {
@@ -392,7 +363,7 @@ and (max-device-width: 640px){
     }
 
     .text-center > .edit-btn{
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .carousel-indicators {
@@ -433,7 +404,7 @@ and (max-device-width: 320px) {
     }
 
     .text-center > .edit-btn{
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .carousel-indicators {

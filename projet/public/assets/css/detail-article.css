@@ -142,3 +142,14 @@ a:hover {
 
 
 .tde {cursor:pointer;}
+
+
+.img-liste{
+    width: 150px;
+    height: 180px;
+}
+
+.img-liste-no{
+    width:150px;
+    height:150px;
+}

@@ -12,6 +12,10 @@ body{
     width: 100%;
 }
 
+.search-in-nav-responsive{
+    display: none;
+}
+
 nav.main-menu{
 	position: sticky;
 	top: 0;
@@ -242,28 +246,9 @@ input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-me
     filter: brightness(100%);
 }
 
-@media (max-width: 800px){
-	input#burger:checked ~ nav#lateral-menu {
-		width: 100%;
-    	height: 100%;
-        font-size:2.5vh ;
-    }
-    
-    input#burger:checked ~ nav#lateral-menu > ul#lateral-menu{
-        top: 3%;
-        left: 3%;
-        right: 3%;
-        bottom: 3%;
-    }
-
-	input#burger:checked ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu{
-        text-align: center;
-	}
-
-	input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-menu {
-        padding: 2vh;
-	}
-
+/* Menu plus petit écran */
+/* Sandwich et menu nav */
+@media (max-width: 1350px){
     .sub-dropdown-content {
         columns : 3;
         width: 100%;
@@ -286,6 +271,28 @@ input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-me
         min-width:auto;
         text-align: center;
     }
+}
+@media (max-width: 800px){
+	input#burger:checked ~ nav#lateral-menu {
+		width: 100%;
+    	height: 100%;
+        font-size:2vh ;
+    }
+    
+    input#burger:checked ~ nav#lateral-menu > ul#lateral-menu{
+        top: 3%;
+        left: 3%;
+        right: 3%;
+        bottom: 3%;
+    }
+
+	input#burger:checked ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu{
+        text-align: center;
+	}
+
+	input#burger ~ nav#lateral-menu > ul#lateral-menu >li.lateral-menu> a.lateral-menu {
+        padding: 2vh;
+	}
 
     img.shopCar{right: 23.5vh;top: 2.6vh;}
     img.fav{right: 18vh;}

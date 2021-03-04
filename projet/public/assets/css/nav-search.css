@@ -31,6 +31,9 @@
     font-size: 5vh!important;
 }
 
+.search-in-nav-responsive{
+    display: none;
+}
 
 .search_input{
     color: white;

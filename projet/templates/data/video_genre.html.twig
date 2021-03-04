@@ -7,7 +7,7 @@
         {% endfor %}
     </div>
     {% for genre in categories[1].genres|slice(categories[1].genres|length/2, categories[1].genres|length) %}
-        <input  type="checkbox" name="genres[]" value="{{ genre.id}}"{% if donnees.genres[genre.id] is defined %} checked {% endif %}>
+        <input type="checkbox" name="genres[]" value="{{ genre.id}}"{% if donnees.genres[genre.id] is defined %} checked {% endif %}>
         {{ genre.libelle|capitalize }}
         <br/>
     {% endfor %}

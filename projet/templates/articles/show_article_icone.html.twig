@@ -1,7 +1,7 @@
 <div class="row">
     {% if articles is defined %}
         {% for article in articles | slice(0, 30) %}
-            <div class="col-4 pt-4 pb-4 float-left">
+            <div  class="col-lg-4 pt-4 pb-4 float-left article-responsive-icone">
                 <div class="pl-2">
                     {% if nouveaute is defined %}
                         {% for new in nouveaute %}
@@ -12,15 +12,15 @@
                     {% endif %}
                 </div>
                 <div class="row p-2">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 article-img-responsive-icone">
                         {% if article.vignette == NULL %}
                             <input type="hidden" name="id" value="{{ article.id }}">
                             <a href="{{ path('article_details', {id: article.id}) }}">
-                                <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120"></a>
+                                <img class="img-icone-no" src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image"></a>
                         {% else %}
                             <input type="hidden" name="id" value="{{ article.id }}">
                             <a href="{{ path('article_details', {id: article.id}) }}">
-                                <img src="{{ article.vignette }}" alt="{{ article.vignette }}" width="120" height="150"></a>
+                                <img class="img-icone" src="{{ article.vignette }}" alt="{{ article.vignette }}" ></a>
                         {% endif %}
                         <div class="pt-4 pl-2">
                             <div class="row">
@@ -46,13 +46,13 @@
                                 <div class="col">
                                     {#edit si admin/benevole#}
                                     {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
-                                        <a href="{{ path('article_edit', {'id': article.id}) }}" class="edit-btn">Modifier</a>
+                                        <a href="{{ path('article_edit', {'id': article.id}) }}" class="edit-btn btn-responsive"> Modifier</a>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 article-info-responsive-icone">
                         <div class="text-size-title"><span class="text-bold">{{article.titre | capitalize }}</span></div>
                         <div class="text-size pt-2">
                             {% if article.categorie.libelle == 'video' %}
@@ -82,15 +82,16 @@
                     </div>
                     <div class="col-lg-1"> <!-- pour tablette : p-4-->
                         {% if article.favoris is empty %}
-                            <a href="{{ path('add_article_favoris', {id: article.id, page: "list"}) }}"><i class="far fa-star text-danger fa-2x"></i></a>
+                            <a href="{{ path('add_article_favoris', {id: article.id, page: "list"}) }}"><i class="far fa-star text-danger etoile"></i></a>
                         {% else %}
-                            <a href="{{ path('remove_article_favoris', {id: article.id, page: "list"}) }}"><i class="fas fa-star text-danger fa-2x"></i></a>
+                            <a href="{{ path('remove_article_favoris', {id: article.id, page: "list"}) }}"><i class="fas fa-star text-danger etoile"></i></a>
                         {% endif %}
                         {% if article.id in panierUser %}
-                            <img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" width="30" height="30">
+                            <img class="kadis-bleu" src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu">
                         {% endif %}
                     </div>
                 </div>
+                <hr class="hr-responsive">
             </div>
         {% endfor %}
     {% endif %}

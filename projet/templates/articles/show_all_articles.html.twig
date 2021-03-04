@@ -2,9 +2,9 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3">
-                <h2 class="center p-4">Filtre
-                <button class="edit-btn" onclick="toggle_visibility(1)"><i onclick="btn_icone(this)" class="fas fa-arrow-up"></i></button></h2>
+            <div class="col-lg-3 div-filtre">
+                <h2 class="center p-4 text-title-filtre-responsive">Filtre
+                <button class="edit-btn button-filtre" onclick="toggle_visibility(1)"><i onclick="btn_icone(this)" class="fas fa-arrow-up"></i></button></h2>
                 {% include 'data/_filtre_articles.html.twig' %}
             </div>
             <!--
@@ -14,13 +14,13 @@
                 <div class="row">
                     <div class="col-lg-8 float-left">
                         <div class="row">
-                            <button value="icone" onclick="confirmMessageIcone('icone', this.value)"><img src="{{asset('assets/images/article/icone.jpg')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage en icone" alt="mode affichage en icones" width="20" height="20"></button>
-                            <button value="liste" onclick="confirmMessageList('liste', this.value)"><img src="{{asset('assets/images/article/list.png')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage liste détaillée" alt="mode affichage liste détaillée" width="20" height="20"></button>
-                            <button id="navbarDropdown" data-toggle="dropdown" class="edit-btn">
-                                <div class=" text-trier">trier par &nbsp;</div><i class="fas fa-arrow-down"></i>
+                            <button value="icone" onclick="confirmMessageIcone('icone', this.value)"><img src="{{asset('assets/images/article/icone.jpg')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage en icone" alt="mode affichage en icones" class="mode-icone"></button>
+                            <button value="liste" onclick="confirmMessageList('liste', this.value)"><img src="{{asset('assets/images/article/list.png')}}" data-toggle="tooltip" data-placement="bottom" title="mode affichage liste détaillée" alt="mode affichage liste détaillée" class="mode-liste"></button>
+                            <button id="navbarDropdown" data-toggle="dropdown" class="edit-btn boutton-trier-par-responsive">
+                                <div class="text-trier">trier par &nbsp;</div><i class="fas fa-arrow-down"></i>
                             </button>
-                            <div class="dropdown-menu" style="z-index: 1">
-                                <div class="dropdown">
+                            <div class="dropdown-menu menu-trier-responsive" style="z-index: 1">
+                                <div class="dropdown  menu-responsive">
                                     <div class="dropdown">
                                         <div style="padding:1vh;color:white;background-color: var(--second-color)">Date d'acquisition <i class="fas fa-arrow-down"></i>
                                         </div>
@@ -87,11 +87,12 @@
                     </div>
                     <i class="col-lg-4 text-size">
                         Légende :
-                        <div><img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" width="30" height="30">
+                        <div><img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" class="kadis-bleu">
                             : produit actuellement dans votre panier
                         </div>
                     </i>
                 </div>
+                <hr class="hr-responsive">
                 <div style="position:relative">
                     <div id="icone">
                         {% include 'articles/show_article_icone.html.twig' %}
