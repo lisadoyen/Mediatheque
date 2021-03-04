@@ -12,12 +12,7 @@
 
     .menu-trier-responsive{
         font-size: 1.8vh;
-        position: fixed;
     }
-
-    .menu-responsive{
-        display: contents;
-
 
     .search-in-nav{
         display: none;
@@ -126,6 +121,14 @@
 @media only screen
 and (min-device-width: 414px)
 and (max-device-width: 846px){
+
+    /* search bar */
+    .search-in-nav-responsive{
+        display: block;
+        margin-top:2vh;
+        margin-left :0vh;
+        padding: 1vh;
+    }
 
     /* filtre */
     .button-filtre{
