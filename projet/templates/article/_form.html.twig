@@ -48,5 +48,6 @@
 <button class="edit-btn">{{ button_label|default('Appliquer') }}</button>
 {{ form_end(form) }}
 
-
-<script src="{{ asset('assets/js/add-entite-subform.js') }}"></script>
+{# jquery complet necessaire pour ajax, jquery slim (donne avec bootstrap?) ne suffit pas#}
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/article_form.js') }}"></script>
