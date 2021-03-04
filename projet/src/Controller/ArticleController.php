@@ -130,9 +130,10 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Article $article): Response
+    public function edit(Request $request, Article $article, ActionRepository $actionRepository): Response
     {
-        $form = $this->createForm(ArticleType::class, $article);
+        $dateObtention = $actionRepository->findOneBy(['article' => $article, 'typeAction' => 1])->getDate()->format('m/d/Y');
+        $form = $this->createForm(ArticleType::class, $article, ['dateObtention'=> $dateObtention]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

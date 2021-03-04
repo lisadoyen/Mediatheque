@@ -30,7 +30,7 @@ class Rubrique
     private $tags;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Categorie::class, mappedBy="genres")
+     * @ORM\ManyToMany(targetEntity=Categorie::class, mappedBy="rubriques")
      */
     private $categories;
 
@@ -146,7 +146,7 @@ class Rubrique
     {
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
-            $category->addGenre($this);
+            $category->addRubrique($this);
         }
 
         return $this;
@@ -156,7 +156,7 @@ class Rubrique
     {
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
-            $category->removeGenre($this);
+            $category->removeRubrique($this);
         }
 
         return $this;

@@ -15,9 +15,11 @@ use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
 use App\Repository\TypeActionRepository;
 use App\Repository\TypeEnregistrementRepository;
+use App\Repository\UserRepository;
 use App\Service\MailerService;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -230,132 +232,137 @@ class PanierController extends AbstractController
      * @param TypeActionRepository $typeActionRepository
      * @param Request $request
      * @param MailerService $mailerService
-     * @param $enregistrementRepository
+     * @param EnregistrementRepository $enregistrementRepository
+     * @param CategorieRepository $categorieRepository
+     * @param $userRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function validerPanier(PanierRepository $panierRepository, StatutEnregistrementRepository  $statutEnregistrementRepository,
                                   StatutRepository $statutRepository, ActionRepository $actionRepository, TypeActionRepository $typeActionRepository,
-                                  Request $request, MailerService $mailerService,EnregistrementRepository $enregistrementRepository, CategorieRepository  $categorieRepository)
+                                  Request $request, MailerService $mailerService, EnregistrementRepository $enregistrementRepository,
+                                  CategorieRepository  $categorieRepository,UserRepository $userRepository)
     {
         if(!$this->isCsrfTokenValid('valider_panier', $request->get('token'))) {
             throw new  InvalidCsrfTokenException('Invalid CSRF token valider panier');
         }
 
-       $user = $this->getUser();
-       $panier = $panierRepository->findBy(['utilisateur'=>$user]);
-       $dateAjd = new \DateTime('now');
+        $user = $this->getUser();
+        $panier = $panierRepository->findBy(['utilisateur'=>$user]);
+        $dateAjd = new \DateTime('now');
 
         // Règle d'emprunt : Nombre d'emprunt
-       $nbLivre = 0;
-       $nbVideo = 0;
-       $nbMusique = 0;
-       $nbJeu = 0;
+        $nbLivre = 0;
+        $nbVideo = 0;
+        $nbMusique = 0;
+        $nbJeu = 0;
 
-       foreach ($panier as $ligne){
-           $categorie = $ligne->getArticle()->getCategorie();
-           $libelleType = $ligne->getTypeEnregistrement()->getLibelle();
+        foreach ($panier as $ligne){
+            $categorie = $ligne->getArticle()->getCategorie();
+            $libelleType = $ligne->getTypeEnregistrement()->getLibelle();
 
-           if ($categorie->getLibelle() =="livre") {
-               if ($nbLivre+1 <= $categorie->getNbEmpruntMax()){
-                   $nbLivre++;
-               } else {
-                   $this->addFlash(
-                       'danger',
-                       "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les livres.\nSi vous voulez valider cette commande, suprimer un livre de votre panier."
-                   );
-                   return $this->redirectToRoute('panier');
-               }
-           }
-           if ($categorie->getLibelle() =="video") {
-               if ($nbVideo+1 <= $categorie->getNbEmpruntMax()){
-                   $nbVideo++;
-               } else {
-                   $this->addFlash(
-                       'danger',
-                       "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les videos.\nSi vous voulez valider cette commande, suprimer une video de votre panier."
-                   );
-                   return $this->redirectToRoute('panier');
-               }
-           }
-           if ($categorie->getLibelle() =="musique") {
-               if ($nbMusique+1 <= $categorie->getNbEmpruntMax()){
-                   $nbMusique++;
-               } else {
-                   $this->addFlash(
-                       'danger',
-                       "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les musiques.\nSi vous voulez valider cette commande, suprimer une musique de votre panier."
-                   );
-                   return $this->redirectToRoute('panier');
-               }
-           }
-           if ($categorie->getLibelle() =="jeu") {
-               if ($nbJeu+1 <= $categorie->getNbEmpruntMax()){
-                   $nbJeu++;
-               } else {
-                   $this->addFlash(
-                       'danger',
-                       "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les jeux.\nSi vous voulez valider cette commande, suprimer un jeu de votre panier."
-                   );
-                   return $this->redirectToRoute('panier');
-               }
-           }
+            if ($categorie->getLibelle() =="livre") {
+                if ($nbLivre+1 <= $categorie->getNbEmpruntMax()){
+                    $nbLivre++;
+                } else {
+                    $this->addFlash(
+                        'danger',
+                        "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les livres.\nSi vous voulez valider cette commande, suprimer un livre de votre panier."
+                    );
+                    return $this->redirectToRoute('panier');
+                }
+            }
+            if ($categorie->getLibelle() =="video") {
+                if ($nbVideo+1 <= $categorie->getNbEmpruntMax()){
+                    $nbVideo++;
+                } else {
+                    $this->addFlash(
+                        'danger',
+                        "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les videos.\nSi vous voulez valider cette commande, suprimer une video de votre panier."
+                    );
+                    return $this->redirectToRoute('panier');
+                }
+            }
+            if ($categorie->getLibelle() =="musique") {
+                if ($nbMusique+1 <= $categorie->getNbEmpruntMax()){
+                    $nbMusique++;
+                } else {
+                    $this->addFlash(
+                        'danger',
+                        "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les musiques.\nSi vous voulez valider cette commande, suprimer une musique de votre panier."
+                    );
+                    return $this->redirectToRoute('panier');
+                }
+            }
+            if ($categorie->getLibelle() =="jeu") {
+                if ($nbJeu+1 <= $categorie->getNbEmpruntMax()){
+                    $nbJeu++;
+                } else {
+                    $this->addFlash(
+                        'danger',
+                        "Votre panier dépasse le nombre  d'articles par commande qui est de ".$categorie->getNbEmpruntMax()." pour les jeux.\nSi vous voulez valider cette commande, suprimer un jeu de votre panier."
+                    );
+                    return $this->redirectToRoute('panier');
+                }
+            }
 
-           if (($libelleType == "achat" and $user->getDroitAchat()) or ($libelleType =="emprunt" and $user->getDroitEmprunt())) {
-                if ($categorie)
-               // contruction de l'enregistrement / emprunt
-               $enregistrement = new Enregistrement();
-               $idCommande = $dateAjd->format("YmdHis").$user->getId().$ligne->getArticle()->getId().$ligne->getArticle()->getCategorie()->getId().$ligne->getTypeEnregistrement()->getId();
-               $enregistrement->setNoCommande($idCommande);
-               $enregistrement->setArticle($ligne->getArticle());
-               $enregistrement->setUtilisateur($user);
-               $enregistrement->setTypeEnregistrement($ligne->getTypeEnregistrement());
-               $enregistrement->setStatutEnregistrement($statutEnregistrementRepository->findOneBy(['libelle'=>'en attente']));
-               $enregistrement->setDateEnregistrement($dateAjd);
-               $enregistrement->setDateRendu(null);
-               $enregistrement->setDatePreparationFini(null);
+            if (($libelleType == "achat" and $user->getDroitAchat()) or ($libelleType =="emprunt" and $user->getDroitEmprunt())) {
+                if ($categorie){
+                    // contruction de l'enregistrement / emprunt
+                    $enregistrement = new Enregistrement();
+                    $idCommande = $dateAjd->format("YmdHis") . $user->getId() . $ligne->getArticle()->getId() . $ligne->getArticle()->getCategorie()->getId() . $ligne->getTypeEnregistrement()->getId();
+                    $enregistrement->setNoCommande($idCommande);
+                    $enregistrement->setArticle($ligne->getArticle());
+                    $enregistrement->setUtilisateur($user);
+                    $enregistrement->setTypeEnregistrement($ligne->getTypeEnregistrement());
+                    $enregistrement->setStatutEnregistrement($statutEnregistrementRepository->findOneBy(['libelle' => 'en attente']));
+                    $enregistrement->setDateEnregistrement($dateAjd);
+                    $enregistrement->setDateRendu(null);
+                    $enregistrement->setDatePreparationFini(null);
 
-               // Règle d'emprunt : Durée de l'emprunt
-               $action = $actionRepository->findOneBy(['article'=>$ligne->getArticle(), 'typeAction'=>$typeActionRepository->findOneBy(['libelle'=>'creation'])]);
-               $dateCreation = $action->getDate();
-               $finNouveaute = $dateCreation->add(new \DateInterval('P'.$categorie->getDureeNouveaute().'D'));
-               $dateRendu = new \DateTime('now');
-               if ($finNouveaute >= $dateAjd){
-                   //nouveauté
-                   $nbJours = $categorie->getDureeEmpruntMaxNouveaute();
-               } else {
-                   // pas nouveauté
-                   $nbJours = $categorie->getDureeEmpruntMax();
-               }
-               $dateRendu->add(new \DateInterval('P'.$nbJours.'D')); // + $nbJours
-               $enregistrement->setDateRenduTheorique($dateRendu);
+                    // Règle d'emprunt : Durée de l'emprunt
+                    $action = $actionRepository->findOneBy(['article' => $ligne->getArticle(), 'typeAction' => $typeActionRepository->findOneBy(['libelle' => 'creation'])]);
+                    $dateCreation = $action->getDate();
+                    $finNouveaute = $dateCreation->add(new \DateInterval('P' . $categorie->getDureeNouveaute() . 'D'));
+                    $dateRendu = new \DateTime('now');
+                    if ($finNouveaute >= $dateAjd) {
+                        //nouveauté
+                        $nbJours = $categorie->getDureeEmpruntMaxNouveaute();
+                    } else {
+                        // pas nouveauté
+                        $nbJours = $categorie->getDureeEmpruntMax();
+                    }
+                    $dateRendu->add(new \DateInterval('P' . $nbJours . 'D')); // + $nbJours
+                    $enregistrement->setDateRenduTheorique($dateRendu);
 
-               // défini le statut de l'emprunt
-               if ($ligne->getTypeEnregistrement()->getLibelle() == "achat") {
-                   $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle' => 'reserve_achat']));
-               }
-               if ($ligne->getTypeEnregistrement()->getLibelle() == "emprunt"){
-                   $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle'=>'reserve_emprunt']));
-               }
+                    // défini le statut de l'emprunt
+                    if ($ligne->getTypeEnregistrement()->getLibelle() == "achat") {
+                        $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle' => 'reserve_achat']));
+                    }
+                    if ($ligne->getTypeEnregistrement()->getLibelle() == "emprunt") {
+                        $enregistrement->getArticle()->setStatut($statutRepository->findOneBy(['libelle' => 'reserve_emprunt']));
+                    }
 
-               $this->getDoctrine()->getManager()->persist($enregistrement);
-           } else {
-               $this->addFlash('danger',"Vous n'avez pas le droit d'acheter ou d'emprunter un article. Veuillez contacter un responsable pour plus de renseignements.");
-               return $this->redirectToRoute('panier');
-           }
-       }
+                    $this->getDoctrine()->getManager()->persist($enregistrement);
+                }
+            } else {
+                $this->addFlash('danger',"Vous n'avez pas le droit d'acheter ou d'emprunter un article. Veuillez contacter un responsable pour plus de renseignements.");
+                return $this->redirectToRoute('panier');
+            }
+        }
 
+        // Calculer le prix totale du panier
         $totalAchat = 0;
         foreach ($panier as $article){
             if ($article->getTypeEnregistrement()->getLibelle() =="achat" and $article->getArticle()->getStatut()->getLibelle() != "vendu"){
                 $totalAchat = $totalAchat + $article->getArticle()->getMontantVente();
             }
         }
+
+        // Vider le panier
         foreach ($panier as $article){
             $this->getDoctrine()->getManager()->remove($article);
         }
         $this->getDoctrine()->getManager()->flush();
-
-        $enregistrements = $enregistrementRepository->findBy(['dateEnregistrement'=>$dateAjd]);
 
 
         //  regrouper par catégorie
@@ -364,69 +371,73 @@ class PanierController extends AbstractController
         $jeux = $enregistrementRepository->findByCategorie($categorieRepository->findOneBy(['libelle'=>'jeu']),$dateAjd);
         $videos = $enregistrementRepository->findByCategorie($categorieRepository->findOneBy(['libelle'=>'video']),$dateAjd);
 
+        $benevoles = $userRepository->findByRole("ROLE_BENEVOLE");
+
         $enregistrements = [$livres, $musiques, $jeux, $videos];
-        // pour chaque catégorie
+
+        // Pour chaque catégorie
         foreach ($enregistrements as $enregistrement){
-            // vérifier sur quelles adresses envoyer au client
-            // envoyer le mail au client selon la catégorie et ses adresses
-            // TODO catégorie mail
-            if ($enregistrement != null){
-                if ($user->getEmailPro() == null and $user->getEmailPerso() == null){
-                    if ($user->getNotificationPro()){
-                        $mailerService->send(
-                            'test',
-                            "Commande du ".date('Y-m-d-H-i-s'),
-                            "no-reply@mediathalesbrest.com",
-                            $user->getEmailRecup()."",
-                            "users/profil/mail/commande_recap.html.twig",
-                            ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
-                        );
-                    }
-                } else {
-                    if ($user->getNotificationPro()){
-                        $mailerService->send(
-                            "test",
-                            "Commande du ".date('Y-m-d-H-i-s'),
-                            "no-reply@mediathalesbrest.com",
-                            $user->getEmailPro()."",
-                            "users/profil/mail/commande_recap.html.twig",
-                            ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
-                        );
-                    }
-                    if ($user->getNotificationPerso()){
-                        $mailerService->send(
-                            "test",
-                            "Commande du ".date('Y-m-d-H-i-s'),
-                            "no-reply@mediathalesbrest.com",
-                            $user->getEmailPerso(),
-                            "users/profil/mail/commande_recap.html.twig",
-                            ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
-                        );
-                    }
-                }
+            // Envoyer un mail au client
+            $this->sendMail($mailerService, $user, $enregistrement, $totalAchat, $dateAjd);
+            // Envoyer un mail à tous les bénévoles
+            foreach ($benevoles as $benevole){
+                $this->sendMail($mailerService, $benevole, $enregistrement, $totalAchat, $dateAjd);
             }
 
         }
-
-        //TODO envoyer a tous les bénévoles
 
         $this->addFlash('success',"Votre panier a bien été validé !");
 
         return $this->redirectToRoute('emprunts_actif');
     }
+
+    /**
+     * Envoier un mail au client
+     * @param MailerService $mailerService
+     * @param $user
+     * @param $categorie
+     * @param $enregistrement
+     * @param $totalAchat
+     * @param $dateAjd
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    private function sendMail(MailerService $mailerService, $user, $enregistrement, $totalAchat, $dateAjd){
+        if ($enregistrement != null){
+            $categorie = $enregistrement[0]->getArticle()->getCategorie()->getLibelle();
+            if ($user->getEmailPro() == null and $user->getEmailPerso() == null){
+                $mailerService->send(
+                    $categorie."",
+                    "Commande du ".date('Y-m-d-H-i-s'),
+                    "no-reply@mediathalesbrest.com",
+                    $user->getEmailRecup()."",
+                    "users/profil/mail/commande_recap.html.twig",
+                    ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+                );
+            } else {
+                if ($user->getNotificationPro()){
+                    $mailerService->send(
+                        $categorie."",
+                        "Commande du ".date('Y-m-d-H-i-s'),
+                        "no-reply@mediathalesbrest.com",
+                        $user->getEmailPro()."",
+                        "users/profil/mail/commande_recap.html.twig",
+                        ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+                    );
+                }
+                if ($user->getNotificationPerso()){
+                    $mailerService->send(
+                        $categorie."",
+                        "Commande du ".date('Y-m-d-H-i-s'),
+                        "no-reply@mediathalesbrest.com",
+                        $user->getEmailPerso()."",
+                        "users/profil/mail/commande_recap.html.twig",
+                        ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+                    );
+                }
+            }
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
