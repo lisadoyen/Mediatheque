@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Repository\EnregistrementRepository;
 use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
+use App\Repository\UserRepository;
+use App\Service\MailerService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,7 +112,8 @@ class EmpruntController extends AbstractController
     /**
      * @Route("/emprunts/{id}/statut/pret", name="changer_statut_pret")
      */
-    public function empruntChangerPret(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository)
+    public function empruntChangerPret(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository,
+                                       UserRepository $userRepository, MailerService $mailerService)
     {
         $id = $request->get('id');
         $emprunts = $enregistrementRepository->find($id);
@@ -125,13 +128,22 @@ class EmpruntController extends AbstractController
         $this->getDoctrine()->getManager()->persist($emprunts);
         $this->getDoctrine()->getManager()->flush();
 
+        $benevoles = $userRepository->findByRole("ROLE_BENEVOLE");
+
+        $this->sendMail($mailerService, $emprunts->getUtilisateur(), $emprunts );
+        // Envoyer un mail à tous les bénévoles
+        foreach ($benevoles as $benevole){
+            $this->sendMail($mailerService, $benevole, $emprunts);
+        }
+
         return $this->redirectToRoute('gestion_actif_emprunts');
     }
 
     /**
      * @Route("/emprunts/{id}/statut/emprunte", name="changer_statut_emprunte")
      */
-    public function empruntChangerEmprunt(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository)
+    public function empruntChangerEmprunt(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository,
+                                       UserRepository $userRepository, MailerService $mailerService)
     {
         $id = $request->get('id');
         $emprunts = $enregistrementRepository->find($id);
@@ -144,13 +156,22 @@ class EmpruntController extends AbstractController
         $this->getDoctrine()->getManager()->persist($article);
         $this->getDoctrine()->getManager()->flush();
 
+        $benevoles = $userRepository->findByRole("ROLE_BENEVOLE");
+
+        $this->sendMail($mailerService, $emprunts->getUtilisateur(), $emprunts );
+        // Envoyer un mail à tous les bénévoles
+        foreach ($benevoles as $benevole){
+            $this->sendMail($mailerService, $benevole, $emprunts);
+        }
+
         return $this->redirectToRoute('gestion_actif_emprunts');
     }
 
     /**
      * @Route("/emprunts/{id}/statut/achete", name="changer_statut_achete")
      */
-    public function empruntChangerAchete(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository)
+    public function empruntChangerAchete(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository,
+                                       UserRepository $userRepository, MailerService $mailerService)
     {
         $id = $request->get('id');
         $emprunts = $enregistrementRepository->find($id);
@@ -164,13 +185,22 @@ class EmpruntController extends AbstractController
         $this->getDoctrine()->getManager()->persist($emprunts);
         $this->getDoctrine()->getManager()->flush();
 
+        $benevoles = $userRepository->findByRole("ROLE_BENEVOLE");
+
+        $this->sendMail($mailerService, $emprunts->getUtilisateur(), $emprunts );
+        // Envoyer un mail à tous les bénévoles
+        foreach ($benevoles as $benevole){
+            $this->sendMail($mailerService, $benevole, $emprunts);
+        }
+
         return $this->redirectToRoute('gestion_actif_emprunts');
     }
 
     /**
      * @Route("/emprunts/{id}/statut/rendu", name="changer_statut_rendu")
      */
-    public function empruntChangerRendu(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository)
+    public function empruntChangerRendu(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository,
+                                       UserRepository $userRepository, MailerService $mailerService)
     {
         $id = $request->get('id');
         $emprunts = $enregistrementRepository->find($id);
@@ -185,12 +215,21 @@ class EmpruntController extends AbstractController
         $this->getDoctrine()->getManager()->persist($emprunts);
         $this->getDoctrine()->getManager()->flush();
 
+        $benevoles = $userRepository->findByRole("ROLE_BENEVOLE");
+
+        $this->sendMail($mailerService, $emprunts->getUtilisateur(), $emprunts );
+        // Envoyer un mail à tous les bénévoles
+        foreach ($benevoles as $benevole){
+            $this->sendMail($mailerService, $benevole, $emprunts);
+        }
+
         return $this->redirectToRoute('gestion_actif_emprunts');
     }
     /**
      * @Route("/emprunts/{id}/statut/perdu", name="changer_statut_perdu")
      */
-    public function empruntChangerPerdu(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository)
+    public function empruntChangerPerdu(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository,
+                                       UserRepository $userRepository, MailerService $mailerService)
     {
         $id = $request->get('id');
         $emprunts = $enregistrementRepository->find($id);
@@ -205,6 +244,65 @@ class EmpruntController extends AbstractController
         $this->getDoctrine()->getManager()->persist($emprunts);
         $this->getDoctrine()->getManager()->flush();
 
+        $benevoles = $userRepository->findByRole("ROLE_BENEVOLE");
+
+        $this->sendMail($mailerService, $emprunts->getUtilisateur(), $emprunts );
+        // Envoyer un mail à tous les bénévoles
+        foreach ($benevoles as $benevole){
+            $this->sendMail($mailerService, $benevole, $emprunts);
+        }
+
         return $this->redirectToRoute('gestion_actif_emprunts');
+    }
+
+    /**
+     * Envoier un mail au client
+     * @param MailerService $mailerService
+     * @param $user
+     * @param $categorie
+     * @param $enregistrement
+     * @param $totalAchat
+     * @param $dateAjd
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    private function sendMail(MailerService $mailerService, $user, $enregistrement){
+        if ($enregistrement != null){
+            $categorie = $enregistrement->getArticle()->getCategorie()->getLibelle();
+            $statut = $enregistrement->getStatutEnregistrement()->getLibelle();
+            if ($user->getEmailPro() == null and $user->getEmailPerso() == null){
+                $mailerService->send(
+                    $categorie."",
+                    $enregistrement->getArticle()->getTitre()." est ".$statut,
+                    "no-reply@mediathalesbrest.com",
+                    $user->getEmailRecup()."",
+                    "users/profil/mail/mail_statut_enregistrement.html.twig",
+                    ['enregistrement' => $enregistrement, 'statut'=>$statut]
+                );
+            } else {
+                if ($user->getNotificationPro()){
+                    $mailerService->send(
+                        $categorie."",
+                        $enregistrement->getArticle()->getTitre()." est ".$statut,
+                        "no-reply@mediathalesbrest.com",
+                        $user->getEmailPro()."",
+                        "users/profil/mail/mail_statut_enregistrement.html.twig",
+                        ['enregistrement' => $enregistrement, 'statut'=>$statut]
+                    );
+                }
+                if ($user->getNotificationPerso()){
+                    $mailerService->send(
+                        $categorie."",
+                        $enregistrement->getArticle()->getTitre()." est ".$statut,
+                        "no-reply@mediathalesbrest.com",
+                        $user->getEmailPerso()."",
+                        "users/profil/mail/mail_statut_enregistrement.html.twig",
+                        ['enregistrement' => $enregistrement, 'statut'=>$statut]
+                    );
+                }
+            }
+        }
     }
 }
