@@ -23,6 +23,14 @@
 
 }
 
+@media screen and (max-width: 1700px){
+    .responsive-annonce{
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
 
 /* demi écran */
 /* PAGE D'ACCUEIL */
@@ -60,16 +68,9 @@
 
 
 /* TELEPHONE */
-/* iphone XS Max */
-/* iphone XR IOS 12 */
-/* Samsung Galaxy note 9 */
-
-/* Portrait and Landscape */
 @media only screen
-and (min-device-width: 414px)
-and (max-device-width: 846px){
-
-    /* PAGE D'ACCUEIL */
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
     .content-mobile {display: none !important;}
 
     h2.carousel-title, h3.carousel-title {
@@ -102,320 +103,10 @@ and (max-device-width: 846px){
         top : 0vh;
     }
 
+    /* logo mediatheque pour home */
     img.home{
         height: 6vh;
         width:  6vh;
         top: 1vh;
     }
-    /* FIN PAGE D'ACCUEIL */
-}
-
-/* iphone X/XS 11 */
-
-/* Portrait and Landscape */
-@media screen and (min-device-width: 375px)
-and (max-device-width: 812px)
-and (-webkit-min-device-pixel-ratio: 3) {
-
-    /* PAGE D'ACCUEIL */
-    .content-mobile {display: none !important;}
-
-    h2.carousel-title, h3.carousel-title {
-        font-size: 60px;
-    }
-
-    h3{
-        font-size: 40px;
-    }
-
-    p{
-        font-size: 40px;
-    }
-
-    .container-carousel{
-        padding: 60px;
-    }
-
-    .text-center > .edit-btn{
-        font-size: 3rem;
-    }
-
-    .carousel-indicators {
-        bottom: 120px;
-    }
-
-    h1#main-title{
-        font-size: 0vh;
-        left: 0vh;
-        top : 0vh;
-    }
-
-    img.home{
-        height: 6vh;
-        width:  6vh;
-        top: 1vh;
-    }
-
-    /* FIN PAGE D'ACCUEIL */
-}
-
-/* iphone 6/7/8 + 11 */
-/* nexus 5S Android 8.0 */
-/* nexus 6P Android 8.0 */
-/* pixel 2 Android 8.0 */
-
-/* Portrait and Landscape */
-@media screen and (min-device-width: 414px)
-and (max-device-width: 736px)
-and (-webkit-min-device-pixel-ratio: 3) {
-
-    /* PAGE D'ACCUEIL */
-    .content-mobile {display: none !important;}
-
-    h2.carousel-title, h3.carousel-title {
-        font-size: 60px;
-    }
-
-    h3{
-        font-size: 40px;
-    }
-
-    p{
-        font-size: 40px;
-    }
-
-    .container-carousel{
-        padding: 60px;
-    }
-
-    .text-center > .edit-btn{
-        font-size: 3rem;
-    }
-
-    .carousel-indicators {
-        bottom: 120px;
-    }
-
-    h1#main-title{
-        font-size: 0vh;
-        left: 0vh;
-        top : 0vh;
-    }
-
-    /* FIN PAGE D'ACCUEIL */
-}
-
-/* iPhone 6/6S/7/8 */
-/* Portrait and Landscape */
-@media only screen
-and (min-device-width: 375px)
-and (max-device-width: 667px)
-and (-webkit-min-device-pixel-ratio: 2) {
-
-
-    /* PAGE D'ACCUEIL */
-    .content-mobile {display: none !important;}
-
-    h2.carousel-title, h3.carousel-title {
-        font-size: 60px;
-    }
-
-    h3{
-        font-size: 40px;
-    }
-
-    p{
-        font-size: 40px;
-    }
-
-    .container-carousel{
-        padding: 60px;
-    }
-
-    .text-center > .edit-btn{
-        font-size: 3rem;
-    }
-
-    .carousel-indicators {
-        bottom: 120px;
-    }
-
-    h1#main-title{
-        font-size: 0vh;
-        left: 0vh;
-        top : 0vh;
-    }
-
-
-    /* FIN PAGE D'ACCUEIL */
-}
-
-/* Microsoft Lumia 550 Windows Phone 10 */
-/* Samsung Galaxy S5 */
-/* Samsung Note 3 */
-
-/* Portrait and Landscape */
-@media only screen
-and (min-device-width: 360px)
-and (max-device-width: 640px) {
-
-    /* PAGE D'ACCUEIL */
-    .content-mobile {display: none !important;}
-
-    h2.carousel-title, h3.carousel-title {
-        font-size: 60px;
-    }
-
-    h3{
-        font-size: 40px;
-    }
-
-    p{
-        font-size: 40px;
-    }
-
-    .container-carousel{
-        padding: 60px;
-    }
-
-    .text-center > .edit-btn{
-        font-size: 3rem;
-    }
-
-    .carousel-indicators {
-        bottom: 120px;
-    }
-
-    h1#main-title{
-        font-size: 0vh;
-        left: 0vh;
-        top : 0vh;
-    }
-
-    /* FIN PAGE D'ACCUEIL */
-}
-
-/* iPhone 5/5S/5E */
-/* Portrait and Landscape */
-@media only screen
-and (min-device-width: 320px)
-and (max-device-width: 568px)
-and (-webkit-min-device-pixel-ratio: 2) {
-    /* PAGE D'ACCUEIL */
-    .content-mobile {display: none !important;}
-
-    h2.carousel-title, h3.carousel-title {
-        font-size: 60px;
-    }
-
-    h3{
-        font-size: 40px;
-    }
-
-    p{
-        font-size: 40px;
-    }
-
-    .container-carousel{
-        padding: 60px;
-    }
-
-    .text-center > .edit-btn{
-        font-size: 3rem;
-    }
-
-    .carousel-indicators {
-        bottom: 120px;
-    }
-
-    h1#main-title{
-        font-size: 0vh;
-        left: 0vh;
-        top : 0vh;
-    }
-
-
-    /* FIN PAGE D'ACCUEIL */
-}
-
-/* LG Optymus */
-/* Portrait and Landscape */
-@media only screen
-and (min-device-width: 384px)
-and (max-device-width: 640px){
-    /* PAGE D'ACCUEIL */
-    .content-mobile {display: none !important;}
-
-    h2.carousel-title, h3.carousel-title {
-        font-size: 60px;
-    }
-
-    h3{
-        font-size: 40px;
-    }
-
-    p{
-        font-size: 40px;
-    }
-
-    .container-carousel{
-        padding: 60px;
-    }
-
-    .text-center > .edit-btn{
-        font-size: 3rem;
-    }
-
-    .carousel-indicators {
-        bottom: 120px;
-    }
-
-    h1#main-title{
-        font-size: 0vh;
-        left: 0vh;
-        top : 0vh;
-    }
-
-    /* FIN PAGE D'ACCUEIL */
-}
-
-/* Nokia 8110 4G */
-/* Portrait and Landscape */
-@media only screen
-and (min-device-width: 240px)
-and (max-device-width: 320px) {
-    /* PAGE D'ACCUEIL */
-    .content-mobile {display: none !important;}
-
-    h2.carousel-title, h3.carousel-title {
-        font-size: 60px;
-    }
-
-    h3{
-        font-size: 40px;
-    }
-
-    p{
-        font-size: 40px;
-    }
-
-    .container-carousel{
-        padding: 60px;
-    }
-
-    .text-center > .edit-btn{
-        font-size: 3rem;
-    }
-
-    .carousel-indicators {
-        bottom: 120px;
-    }
-
-    h1#main-title{
-        font-size: 0vh;
-        left: 0vh;
-        top : 0vh;
-    }
-
-    /* FIN PAGE D'ACCUEIL */
 }

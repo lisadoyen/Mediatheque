@@ -24,9 +24,9 @@
                             <div class="row">
                                 <div class="col-lg-1">
                                     {% if av.utilisateur.avatar == NULL %}
-                                        <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="40" height="40">
+                                        <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-pseudo-responsive">
                                     {% else  %}
-                                        <img src="{{asset('assets/images/account/')}}{{av.utilisateur.avatar}}" alt="Image {{av.utilisateur.avatar}}" width="40" height="40">
+                                        <img src="{{asset('assets/images/account/')}}{{av.utilisateur.avatar}}" alt="Image {{av.utilisateur.avatar}}" class="img-pseudo-responsive">
                                     {% endif %}
                                 </div>
                                 <div class="col-lg-11">
@@ -72,7 +72,7 @@
             <p>Veuillez saisir une note :{{ form_widget(form.note) }}</p>
             <p>Veuillez saisir un commentaire :</p>
             {{ form_row(form.texte) }}
-            <button type="submit" class="edit-btn">{{ action|default('Valider') }}</button>
+            <button type="submit" class="edit-btn btn-responsive-detail">{{ action|default('Valider') }}</button>
             {{ form_end(form) }}
         </div>
     </div>

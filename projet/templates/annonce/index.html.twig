@@ -1,10 +1,10 @@
 {% extends "layout.html.twig" %}
 {% block body %}
     <div class="container cadre">
-        <h1>Liste des annonces</h1>
+        <h1 class="titre-responsive">Liste des annonces</h1>
 
-        <table class="table">
-            <thead>
+        <table class="table table-responsive">
+            <thead class="text-responsive">
             <tr>
                 {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
                     <th>Id</th>
@@ -19,7 +19,7 @@
                 {% endif %}
             </tr>
             </thead>
-            <tbody>
+            <tbody class="text-responsive">
             {% for annonce in annonces %}
                 <tr>
                     {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
@@ -38,8 +38,8 @@
                     <td>{{ annonce.staff.nom|upper }} {{ annonce.staff.prenom|capitalize }}</td>
                     {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
                         <td>
-                            <a href="{{ path('annonce_show', {'id': annonce.id}) }}" >details</a>
-                            <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" >modifier</a>
+                            <a href="{{ path('annonce_show', {'id': annonce.id}) }}" class="edit-btn btn-responsive-annonce">details</a>
+                            <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" class="edit-btn btn-responsive-annonce">modifier</a>
                         </td>
                     {% endif %}
                 </tr>

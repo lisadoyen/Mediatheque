@@ -3,14 +3,14 @@
     <div class="container-fluid">
         <div class="row p-4">
             {% if article is not empty %}
-            <div class="col-lg-3 float-left">
+            <div class="col-lg-3 float-left img-detail-responsive">
                 {%  if article.vignette is not empty %}
-                    <img src="{{ article.vignette }}" alt="image de {{ article.titre }}" width="350" height="400">
+                    <img src="{{ article.vignette }}" alt="image de {{ article.titre }}" class="vignette-responsive">
                 {% else %}
-                    <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="350" height="350">
+                    <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="vignette-responsive-no">
                 {% endif %}
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 text-description-responsive">
                 <div class="row">
                     <div class="text-detail-size-title">
                         <span class="text-orange"> titre : </span>
@@ -99,7 +99,7 @@
                     <div class="row col-lg-7">
                         {{ render(controller('App\\Controller\\FavorisController::isFavourite',{ 'idArticle': article.id })) }}
                         {% if article.id in panierUser %}
-                            <img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" width="80" height="80">
+                            <img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" class="kadis-bleu">
                         {% endif %}
                     </div>
                 </div>
@@ -113,19 +113,19 @@
                     <div class="col-lg-8">
                         <input type="hidden" name="id" value="{{ article.id }}">
                         {%  if article.statut.libelle == "empruntable" %}
-                            <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-emprunt-detail">
+                            <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-emprunt-detail btn-responsive-detail">
                                 Emprunter</a>
                         {% elseif article.statut.libelle == "vendable" %}
-                            <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-achat-detail">
+                            <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-achat-detail btn-responsive-detail">
                                 Acheter</a>
                         {% elseif article.statut.libelle == "emprunte" %}
-                            <a role="button" data-role="disabled" class="style-button-article-emprunte-detail">
+                            <a role="button" data-role="disabled" class="style-button-article-emprunte-detail btn-responsive-detail">
                                 Emprunté</a>
                         {% elseif article.statut.libelle == "reserve_achat" %}
-                            <a role="button" data-role="disabled" class="style-button-article-reserve_achat-detail">
+                            <a role="button" data-role="disabled" class="style-button-article-reserve_achat-detail btn-responsive-detail">
                                 Réservé - achat</a>
                         {% elseif article.statut.libelle == "reserve_emprunt" %}
-                            <a role="button" data-role="disabled" class="style-button-article-reserve_emprunt-detail">
+                            <a role="button" data-role="disabled" class="style-button-article-reserve_emprunt-detail btn-responsive-detail">
                                 Réservé - emprunt</a>
                         {% endif %}
                     </div>
@@ -140,26 +140,26 @@
                <div class="row">
                    <div class="col-lg-6">
                        <div class="text-detail-size-subtitle p-2"><span class="text-bold">Informations supplémentaires : </span></div>
-                       <div class="p-2"> <span class="text-orange">format :</span>
+                       <div class="p-2 text-responsive-detail"> <span class="text-orange">format :</span>
                        {% if article.numerique == 0 %}
                            <span>papier</span>
                        {% else %}
                            <span>numérique</span>
                        {% endif %}
                        </div>
-                       <div class="p-2"> <span class="text-orange">code ISBN :</span>
+                       <div class="p-2 text-responsive-detail"> <span class="text-orange">code ISBN :</span>
                            {% if article.genCode is empty %}
                                 aucun
                            {% else %}
                                 {{ article.genCode }}
                            {% endif %}
                        </div>
-                       <div class="p-2"> <span class="text-orange">entite :</span> entite</div>
-                       <div class="p-2"> <span class="text-orange">liens :</span> liens</div>
+                       <div class="p-2 text-responsive-detail"> <span class="text-orange">entite :</span> entite</div>
+                       <div class="p-2 text-responsive-detail"> <span class="text-orange">liens :</span> liens</div>
                    </div>
                    <div class="col-lg-6">
                        <div class="text-detail-size-subtitle p-2"><span class="text-bold"> Vidéo Youtube : </span></div>
-                       <div><img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="400" height="400"></div>
+                       <div><img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-detail-responsive"></div>
                    </div>
                </div>
            </div>
