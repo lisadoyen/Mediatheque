@@ -1,12 +1,12 @@
 {% extends "layout.html.twig" %}
 {% block body %}
     <div class="container cadre">
-    <h1>Liste des nouveautés</h1><br>
+    <h1 class="titre-responsive">Liste des nouveautés</h1><br>
 
         {% if nouveaute is not empty %}
             <div class="row mb-5">
-                <table class="table">
-                    <thead>
+                <table class="table table-responsive">
+                    <thead  class="text-show-responsive-detail">
                     <tr>
                         <th scope="col">Vignette</th>
                         <th scope="col">Titre</th>
@@ -14,14 +14,14 @@
                         <th scope="col">Consulter</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-show-responsive-detail">
                     {% for nouv in nouveaute %}
                         <tr>
                             <td>
                                 {%  if nouv.vignette is not empty %}
-                                    <img src="{{ nouv.vignette }}" alt="image de {{ nouv.titre }}" width="120" height="150">
+                                    <img src="{{ nouv.vignette }}" alt="image de {{ nouv.titre }}" class="img-nouveaute">
                                 {% else %}
-                                    <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120">
+                                    <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-nouveaute-no">
                                 {% endif %}
                             </td>
                             <td>
@@ -31,7 +31,7 @@
                                 {{ nouv.dateCreation | date('d/m/Y') }}
                             </td>
                             <td class="col-3">
-                                <a href="{{ path('article_details', {id: nouv.id}) }}" class="btn edit-btn">Voir plus de détails</a>
+                                <a href="{{ path('article_details', {id: nouv.id}) }}" class="btn edit-btn btn-responsive-annonce">Voir plus de détails</a>
                             </td>
                         </tr>
                     {% endfor %}

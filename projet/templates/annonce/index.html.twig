@@ -4,7 +4,7 @@
         <h1 class="titre-responsive">Liste des annonces</h1>
 
         <table class="table table-responsive">
-            <thead class="text-responsive">
+            <thead class="text-show-responsive-detail">
             <tr>
                 {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
                     <th>Id</th>
@@ -19,7 +19,7 @@
                 {% endif %}
             </tr>
             </thead>
-            <tbody class="text-responsive">
+            <tbody class="text-show-responsive-detail">
             {% for annonce in annonces %}
                 <tr>
                     {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
@@ -29,17 +29,17 @@
                     <td>{{ annonce.contenu|raw }}</td>
                     <td>
                         {% if annonce.vignette == NULL %}
-                            <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="150" height="150">
+                            <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-annonce-no">
                         {% else %}
-                            <img src="{{asset('assets/images/account/')}}{{ annonce.vignette }}" alt="{{ annonce.vignette }}" width="150" height="180">
+                            <img src="{{asset('assets/images/account/')}}{{ annonce.vignette }}" alt="{{ annonce.vignette }}" class="img-annonce">
                         {% endif %}
                     </td>
                     <td>{{ annonce.dateCreation ? annonce.dateCreation|date('d/m/Y') : '' }}</td>
                     <td>{{ annonce.staff.nom|upper }} {{ annonce.staff.prenom|capitalize }}</td>
                     {% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_BENEVOLE'))  %}
                         <td>
-                            <a href="{{ path('annonce_show', {'id': annonce.id}) }}" class="edit-btn btn-responsive-annonce">details</a>
-                            <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" class="edit-btn btn-responsive-annonce">modifier</a>
+                            <a href="{{ path('annonce_show', {'id': annonce.id}) }}" class="edit-btn btn-responsive-annonce">Details</a>
+                            <a href="{{ path('annonce_edit', {'id': annonce.id}) }}" class="edit-btn btn-responsive-annonce">Modifier</a>
                         </td>
                     {% endif %}
                 </tr>

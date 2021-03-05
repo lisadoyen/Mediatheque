@@ -1,4 +1,4 @@
-/* PAGE DETAIL ARTICLES */
+/* PAGE SHOW ANNONCES */
 
 /* TELEPHONE */
 /* Nokia 8110 4G */
@@ -6,12 +6,36 @@
 @media only screen
 and (min-device-width: 240px)
 and (max-device-width: 320px) {
+    .container.cadre{
+        padding: 1em;
+    }
+
+    /* page index */
     a.btn-responsive-annonce{
         font-size: 2.5vh;
     }
 
     .titre-responsive{
         font-size: 3vh;
+    }
+
+    .text-show-responsive-detail{
+        font-size: 2.3vh;
+    }
+
+    .img-annonce-no{
+        width: 400px;
+        height: 400px;
+    }
+
+    .img-annonce{
+        width:400px;
+        height: 460px;
+    }
+
+    /* page show */
+    .btn-responsive-annonce{
+        font-size: 2.5vh;
     }
 
 }
@@ -20,12 +44,36 @@ and (max-device-width: 320px) {
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
-    /* Styles pour cette Media Queries */
+
+    .container.cadre{
+        padding: 1em;
+    }
+
+    /* page index */
     a.btn-responsive-annonce{
         font-size: 2.5vh;
     }
 
     .titre-responsive{
         font-size: 3vh;
+    }
+
+    .text-show-responsive-detail{
+        font-size: 2.3vh;
+    }
+
+    .img-annonce-no{
+        width: 400px;
+        height: 400px;
+    }
+
+    .img-annonce{
+        width:400px;
+        height: 460px;
+    }
+
+    /* page show */
+    .btn-responsive-annonce{
+        font-size: 2.5vh;
     }
 }

@@ -2,10 +2,12 @@
 {% block body %}
     <div class="container cadre">
 
-        <h1>Ajouter une annonce</h1>
+        <h1 class="titre-responsive">Ajouter une annonce</h1>
 
-        {{ include('annonce/_form.html.twig') }}
+        <div class="text-show-responsive-detail">
+            {{ include('annonce/_form.html.twig') }}
+        </div>
 
-        <a href="{{ path('annonce_index') }}">revenir a la liste</a>
+        <a class="edit-btn btn-responsive-annonce" href="{{ path('annonce_index') }}">Revenir a la liste</a>
     </div>
 {% endblock %}
