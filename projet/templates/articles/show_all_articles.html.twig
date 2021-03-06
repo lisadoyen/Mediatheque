@@ -87,8 +87,15 @@
                     </div>
                     <i class="col-lg-4 text-size">
                         Légende :
-                        <div><img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" class="kadis-bleu">
+                        <div><div>
+                            <img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" class="kadis-bleu">
                             : produit actuellement dans votre panier
+                            </div>
+                            <div>
+                            <img class="rounded-circle rond-vert" src="{{asset('assets/images/article/rond_vert.png')}}"  data-toggle="tooltip" alt="rond-vert"
+                                title="dernier emprunt le [jj/mm/aaaa] à [H:m:s]">
+                            : produit déjà emprunté (survoler pour voir la date)
+                            </div>
                         </div>
                     </i>
                 </div>

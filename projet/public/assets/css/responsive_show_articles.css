@@ -235,6 +235,11 @@ and (max-device-width: 320px) {
         height: 100px;
     }
 
+    .rond-vert{
+        width: 110px;
+        height: 100px;
+    }
+
     .etoile{
         font-size: 7em!important;
     }
@@ -406,6 +411,11 @@ and (max-device-width : 480px) {
 
     .kadis-bleu{
         width: 100px;
+        height: 100px;
+    }
+
+    .rond-vert{
+        width: 110px;
         height: 100px;
     }
 

@@ -81,6 +81,17 @@ and (max-device-width: 320px) {
         width: 570px;
         height: 570px;
     }
+
+    .kadis-bleu-detail{
+        width: 100px;
+        height: 100px;
+    }
+
+    .rond-vert-detail{
+        margin: 0.5vh;
+        width:110px;
+        height: 100px;
+    }
 }
 
 /* téléphone standard */
@@ -120,5 +131,16 @@ and (max-device-width : 480px) {
     .vignette-responsive-no{
         width: 570px;
         height: 570px;
+    }
+
+    .kadis-bleu-detail{
+        width: 100px;
+        height: 100px;
+    }
+
+    .rond-vert-detail{
+        margin: 0.5vh;
+        width:110px;
+        height: 100px;
     }
 }

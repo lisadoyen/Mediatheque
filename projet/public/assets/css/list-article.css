@@ -161,3 +161,9 @@ span.text-nouveaute{
     color:#aeb3b9;
     background-color:#aeb3b9;
 }
+
+.rond-vert{
+    margin: 0.5vh;
+    width: 3.5vh;
+    height: 3vh;
+}

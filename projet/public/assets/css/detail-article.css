@@ -168,3 +168,14 @@ a:hover {
     width: 380px;
     height: 380px;
 }
+
+.kadis-bleu-detail{
+    width: 75px;
+    height: 75px;
+}
+
+.rond-vert-detail{
+    margin: 0.5vh;
+    width:85px;
+    height: 75px;
+}

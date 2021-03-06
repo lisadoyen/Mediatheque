@@ -89,6 +89,10 @@
                         {% if article.id in panierUser %}
                             <img class="kadis-bleu" src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu">
                         {% endif %}
+                        {% if enregistrements[article.id] is defined %}
+                            <img class="rounded-circle rond-vert" src="{{asset('assets/images/article/rond_vert.png')}}"  data-toggle="tooltip"
+                                 data-placement="bottom" title="dernier emprunt le {{ enregistrements[article.id] | date("d/m/Y") }} à {{ enregistrements[article.id] | date("H:m:s") }}">
+                        {% endif %}
                     </div>
                 </div>
                 <hr class="hr-responsive">

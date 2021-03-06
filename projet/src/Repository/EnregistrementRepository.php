@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Enregistrement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -45,6 +47,50 @@ class EnregistrementRepository extends ServiceEntityRepository
             ->addOrderBy('nbEmpruntParArticle',$order);
 
         return $qb->getQuery()->getResult();
+
+    }
+
+    /**
+     * récupérer tous les articles empruntable, emprunté, réservé_emprunt
+     * @param $user
+     * @return int|mixed|string
+     */
+    public function findEnregistrementByUser($user){
+        $qb = $this->createQueryBuilder('e');
+        $qb ->select('a.id')
+            ->join('e.article', 'a')
+            ->join('a.statut', 's')
+            ->andWhere("e.utilisateur=$user")
+            ->andWhere("s.libelle='emprunte' or s.libelle='reserve_emprunt' or s.libelle='empruntable'");
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findDerniereDateEnregistrement($user, $id){
+        $qb = $this->createQueryBuilder('e');
+        $qb ->select("max(e.dateEnregistrement)")
+            ->andWhere("e.utilisateur='$user'")
+            ->andWhere("e.article='$id'")
+            ->groupBy('e.article');
+
+        try {
+            return $qb->getQuery()->getSingleScalarResult();
+        } catch (NoResultException | NonUniqueResultException $e) {
+            return null;
+        }
+    }
+
+    public function findDateEnregistrementByArticle($user){
+        $qb = $this->createQueryBuilder('e');
+        $qb ->select('a.id, max(e.dateEnregistrement) as date')
+            ->join('e.article', 'a')
+            ->join('a.statut', 's')
+            ->andWhere("e.utilisateur=$user")
+            ->andWhere("e.article=a.id")
+            ->andWhere("s.libelle='emprunte' or s.libelle='reserve_emprunt' or s.libelle='empruntable'")
+            ->groupBy('e.article');
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -60,7 +106,6 @@ class EnregistrementRepository extends ServiceEntityRepository
             ->andWhere("s.libelle !='perdu'")
             ->andWhere("s.libelle !='telecharge'")
             ->addOrderBy('e.dateEnregistrement','DESC');
-        ;
 
         return $qb->getQuery()->getResult();
     }

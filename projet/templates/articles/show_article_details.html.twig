@@ -99,7 +99,11 @@
                     <div class="row col-lg-7">
                         {{ render(controller('App\\Controller\\FavorisController::isFavourite',{ 'idArticle': article.id })) }}
                         {% if article.id in panierUser %}
-                            <img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" class="kadis-bleu">
+                            <img src="{{asset('assets/images/blue/shopping-cart.png')}}" alt="kadis bleu" class="kadis-bleu-detail">
+                        {% endif %}
+                        {% if enregistrements[article.id] is defined %}
+                            <img class="rounded-circle rond-vert-detail" src="{{asset('assets/images/article/rond_vert.png')}}"  data-toggle="tooltip"
+                                 data-placement="bottom" title="dernier emprunt le {{ enregistrements[article.id] | date("d/m/Y") }} à {{ enregistrements[article.id] | date("H:m:s") }}">
                         {% endif %}
                     </div>
                 </div>

@@ -65,9 +65,15 @@ class ArticleController extends AbstractController
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository, EnregistrementRepository $enregistrementRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
                             Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository,
-                             RubriqueRepository $rubriqueRepository, PanierRepository $panierRepository)
+                             RubriqueRepository $rubriqueRepository, PanierRepository $panierRepository, UserInterface $user)
     {
         $paniers = $panierRepository->findBy(['utilisateur'=>$this->getUser()]);
+        /* trouver les emprunts de l'utilisateur : la date du dernier emprunt pour chaque article */
+        $enregistrements = $enregistrementRepository->findDateEnregistrementByArticle($user->getId());
+        $enregistrementsIdDate = [];
+        foreach ($enregistrements as $enregistrement){
+            $enregistrementsIdDate[$enregistrement['id']] = $enregistrement['date'];
+        }
         $panierUser = [];
         foreach ($paniers as $panier){
             array_push($panierUser, $panier->getArticle()->getId());
@@ -95,7 +101,8 @@ class ArticleController extends AbstractController
                 'type' =>$type,
                 'nbArticlesTotal'=> $nbArticlesTotal[0][1],
                 'nbArticles' => $nbArticles,
-                'panierUser' => $panierUser
+                'panierUser' => $panierUser,
+                'enregistrements'=>$enregistrementsIdDate
             ]);
         }
         // filtre
@@ -120,7 +127,8 @@ class ArticleController extends AbstractController
                 'type' =>$type,
                 'nbArticlesTotal'=> $nbArticlesTotal[0][1],
                 'nbArticles' => $nbArticles,
-                'panierUser' => $panierUser
+                'panierUser' => $panierUser,
+                'enregistrements'=>$enregistrementsIdDate
             ]);
         }
     }
@@ -129,7 +137,8 @@ class ArticleController extends AbstractController
      * @Route("/articles/show", name="articles_show", methods={"GET", "POST"})
      * @Route("/articles/{type}/{order}/show", name="articles_show_order", methods={"GET", "POST"})
      * @Route("/articles/categorie/{idCategorie}/genres/{idGenre}/show", name="categories_id_genres_id_articles_show", methods={"GET", "POST"})
-     * @param $order
+     * @param null $order
+     * @param null $type
      * @param null $idGenre
      * @param null $idCategorie
      * @param SessionInterface $session
@@ -143,15 +152,24 @@ class ArticleController extends AbstractController
      * @param PaginatorInterface $paginator
      * @param Nouveaute $new
      * @param TrancheAgeRepository $ageRepository
+     * @param RubriqueRepository $rubriqueRepository
+     * @param EnregistrementRepository $enregistrementRepository
+     * @param PanierRepository $panierRepository
      * @return Response
      */
     public function showAll($order=null, $type=null, $idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
                             Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository, RubriqueRepository $rubriqueRepository,
-                            EnregistrementRepository $enregistrementRepository, PanierRepository $panierRepository)
+                            EnregistrementRepository $enregistrementRepository, PanierRepository $panierRepository, UserInterface $user)
     {
         $nbArticlesTotal = $ar->findNbArticleTotal();
+        /* trouver les emprunts de l'utilisateur : la date du dernier emprunt pour chaque article */
+        $enregistrements = $enregistrementRepository->findDateEnregistrementByArticle($user->getId());
+        $enregistrementsIdDate = [];
+        foreach ($enregistrements as $enregistrement){
+            $enregistrementsIdDate[$enregistrement['id']] = $enregistrement['date'];
+        }
         $paniers = $panierRepository->findBy(['utilisateur'=>$this->getUser()]);
         $panierUser = [];
         foreach ($paniers as $panier){
@@ -179,7 +197,8 @@ class ArticleController extends AbstractController
                 'type' =>$type,
                 'nbArticlesTotal'=> $nbArticlesTotal[0][1],
                 'nbArticles' => $nbArticles,
-                'panierUser' =>$panierUser
+                'panierUser' =>$panierUser,
+                'enregistrements'=>$enregistrementsIdDate
             ]);
         }
         // filtre
@@ -204,7 +223,8 @@ class ArticleController extends AbstractController
                 'type' =>$type,
                 'nbArticlesTotal'=> $nbArticlesTotal[0][1],
                 'nbArticles' => $nbArticles,
-                'panierUser' =>$panierUser
+                'panierUser' =>$panierUser,
+                'enregistrements'=>$enregistrementsIdDate
             ]);
         }
     }
@@ -293,7 +313,7 @@ class ArticleController extends AbstractController
                                  FavorisRepository $favorisRepository,
                                  CategorieRepository $categorieRepository,
                                  ActionRepository $actionRepository, $id=1,
-                                Nouveaute $new, PanierRepository $panierRepository): Response
+                                Nouveaute $new, PanierRepository $panierRepository, EnregistrementRepository $enregistrementRepository): Response
     {
         $paniers = $panierRepository->findBy(['utilisateur'=>$this->getUser()]);
         $panierUser = [];
@@ -308,6 +328,11 @@ class ArticleController extends AbstractController
             if($new['id'] == $livre->getId()){
                 $nouveau = $livre->getId();
             }
+        }
+        $enregistrements = $enregistrementRepository->findDateEnregistrementByArticle($user->getId());
+        $enregistrementsIdDate = [];
+        foreach ($enregistrements as $enregistrement){
+            $enregistrementsIdDate[$enregistrement['id']] = $enregistrement['date'];
         }
 
         $avis = $avisRepository->findBy(['article'=>$id]);
@@ -339,6 +364,7 @@ class ArticleController extends AbstractController
             'avis' => $avis,
             'test'=> $test,
             'panierUser' =>$panierUser,
+            'enregistrements'=>$enregistrementsIdDate,
             'form' => $form->createView()
         ]);
     }
