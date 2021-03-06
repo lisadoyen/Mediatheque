@@ -105,7 +105,7 @@
 
 /* Nokia 8110 4G */
 /* Portrait and Landscape */
-@media only screen
+@media screen
 and (min-device-width: 240px)
 and (max-device-width: 320px) {
 
@@ -147,7 +147,6 @@ and (max-device-width: 320px) {
         display: block;
         height:3px;
         border:none;
-        color:#aeb3b9;
         background-color:#aeb3b9;
     }
 
@@ -270,7 +269,6 @@ and (max-device-width: 320px) {
     .hr-liste{
         height:3px;
         border:none;
-        color:#9e9e9e;
         background-color:#9e9e9e;
     }
 
@@ -282,7 +280,7 @@ and (max-device-width: 320px) {
 }
 
 /* téléphone standard */
-@media only screen
+@media screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
     /* Styles pour cette Media Queries */
@@ -324,7 +322,6 @@ and (max-device-width : 480px) {
         display: block;
         height:3px;
         border:none;
-        color:#aeb3b9;
         background-color:#aeb3b9;
     }
     .article-responsive-icone{
@@ -446,7 +443,6 @@ and (max-device-width : 480px) {
     .hr-liste{
         height:3px;
         border:none;
-        color:#9e9e9e;
         background-color:#9e9e9e;
     }
 

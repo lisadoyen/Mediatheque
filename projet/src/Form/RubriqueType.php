@@ -7,6 +7,7 @@ use App\Entity\Rubrique;
 use App\Repository\CategorieRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,11 @@ class RubriqueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle')
+            ->add('libelle',  TextType::class, [
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
             ->add('categories', EntityType::class, [
                 'class' => Categorie::class,
                 'query_builder' => function (CategorieRepository $er) {
@@ -23,7 +28,10 @@ class RubriqueType extends AbstractType
                         ->orderBy('c.libelle', 'ASC');
                 },
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ])
         ;
     }

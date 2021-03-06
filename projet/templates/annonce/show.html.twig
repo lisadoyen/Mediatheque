@@ -37,10 +37,11 @@
 
 
         <div class="row">
-            <div class="col"><a href="{{ path('annonce_edit', {'id': annonce.id}) }}" class="edit-btn btn-responsive-annonce">Modifier</a></div>
+            <div class="col"><a href="{{ path('annonce_edit', {'id': annonce.id}) }}" class="edit-btn btn-responsive-maintenance">Modifier</a></div>
             <div class="col">{{ include('annonce/_delete_form.html.twig') }}</div>
         </div>
 
-        <a class="edit-btn btn-responsive-annonce" href="{{ path('annonce_index') }}">Revenir a la liste</a>
+        <a class="edit-btn btn-responsive-maintenance" href="{{ path('annonce_index') }}">Liste des annonces</a>
+        <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-maintenance ml-0">Menu</a>
     </div>
 {% endblock %}

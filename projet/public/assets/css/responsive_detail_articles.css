@@ -46,7 +46,7 @@
 
 /* Nokia 8110 4G */
 /* Portrait and Landscape */
-@media only screen
+@media screen
 and (min-device-width: 240px)
 and (max-device-width: 320px) {
     .img-detail-responsive{

@@ -1,7 +1,6 @@
 .pagination{
     color : var(--second-color);
     font-weight: bold;
-    position: center;
     margin-bottom: 1vh;
 }
 .pagination a {

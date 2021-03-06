@@ -8,6 +8,7 @@
             {{ include('annonce/_form.html.twig') }}
         </div>
 
-        <a class="edit-btn btn-responsive-annonce" href="{{ path('annonce_index') }}">Revenir a la liste</a>
+        <a class="edit-btn btn-responsive-maintenance" href="{{ path('annonce_index') }}">Liste des annonces</a>
+        <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-maintenance ml-0">Menu</a>
     </div>
 {% endblock %}

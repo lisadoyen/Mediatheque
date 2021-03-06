@@ -1,10 +1,10 @@
 {% extends "layout.html.twig" %}
 {% block body %}
 <div class="container mt-5">
-    <h1>Règle d'emprunt par catégorie</h1><br>
+    <h1 class="titre-responsive">Règle d'emprunt par catégorie</h1><br>
 
-    <table class="table">
-        <thead>
+    <table class="table table-responsive">
+        <thead class="text-show-responsive-detail">
             <tr>
                 <th>Libellé</th>
                 <th>Durée Emprunt Max.</th>
@@ -15,7 +15,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-show-responsive-detail">
         {% for categorie in categories %}
             <tr>
                 <td>{{ categorie.libelle|capitalize }}</td>
@@ -25,8 +25,8 @@
                 <td>{{ categorie.nbEmpruntMaxNouveaute }}</td>
                 <td>{{ categorie.dureeNouveaute }}</td>
                 <td>
-                    <!--<a href="{#{ path('categorie_show', {'id': categorie.id}) }#}">show</a>-->
-                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}" class="edit-btn">Modifier</a>
+                    <a href="{{ path('categorie_show', {'id': categorie.id}) }}"  class="edit-btn btn-responsive-maintenance">Détails</a>
+                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}" class="edit-btn btn-responsive-maintenance">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -37,6 +37,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('categorie_new') }}" class="edit-btn ml-0">Ajouter une catégorie</a>
+    <a href="{{ path('categorie_new') }}" class="edit-btn btn-responsive-maintenance ml-0">Ajouter une catégorie</a>
+    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-maintenance ml-0">Menu</a>
 </div>
 {% endblock %}

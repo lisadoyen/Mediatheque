@@ -1,10 +1,10 @@
 {% extends "layout.html.twig" %}
 {% block body %}
 <div class="container cadre">
-    <h1>Liste des rubrique</h1>
+    <h1 class="titre-responsive">Liste des rubrique</h1>
 
-    <table class="table">
-        <thead>
+    <table class="table table-responsive">
+        <thead class="text-show-responsive-detail">
             <tr>
                 <th>Id</th>
                 <th>Libelle</th>
@@ -12,7 +12,7 @@
                 <th>actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody  class="text-show-responsive-detail">
         {% for rubrique in rubriques %}
             <tr>
                 <td>{{ rubrique.id }}</td>
@@ -23,8 +23,8 @@
                     {% endfor %}
                 </td>
                 <td>
-                    <a href="{{ path('rubrique_show', {'id': rubrique.id}) }}">details</a>
-                    <a href="{{ path('rubrique_edit', {'id': rubrique.id}) }}">modifier</a>
+                    <a href="{{ path('rubrique_show', {'id': rubrique.id}) }}" class="edit-btn btn-responsive-maintenance">Details</a>
+                    <a href="{{ path('rubrique_edit', {'id': rubrique.id}) }}" class="edit-btn btn-responsive-maintenance">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -35,6 +35,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('rubrique_new') }}" class="edit-btn">Nouvelle rubrique</a>
+    <a href="{{ path('rubrique_new') }}" class="edit-btn btn-responsive-maintenance">Nouvelle rubrique</a>
+    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-maintenance ml-0">Menu</a>
 </div>
 {% endblock %}

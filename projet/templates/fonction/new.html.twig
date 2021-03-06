@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-
-<title>New Fonction</title>
-
+{% extends "layout.html.twig" %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
-    <h1>Create new Fonction</h1>
+<div class="container cadre">
+    <h1 class="titre-responsive">Créer une fonction</h1>
 
+    <div class="text-show-responsive-detail">
     {{ include('fonction/_form.html.twig') }}
-
-    <a href="{{ path('fonction_index') }}">back to list</a>
+    </div>
+    <a href="{{ path('fonction_index') }}" class="edit-btn btn-responsive-maintenance">Liste des fonctions</a>
+    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-maintenance ml-0">Menu</a>
+</div>
 {% endblock %}

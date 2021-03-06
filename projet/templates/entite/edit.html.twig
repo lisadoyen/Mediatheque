@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-
-<title>Edit Entite</title>
-
+{% extends "layout.html.twig" %}
 {% block body %}
-    <h1>Edit Entite</h1>
+<div class="container mt-5">
+    <h1 class="titre-responsive">Modifée une entite</h1>
 
     {{ include('entite/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('entite_index') }}">back to list</a>
+    <div class="text-show-responsive-detail">
+        <a href="{{ path('entite_index') }}">Retourne à la liste</a>
+    </div>
 
     {{ include('entite/_delete_form.html.twig') }}
+</div>
 {% endblock %}
