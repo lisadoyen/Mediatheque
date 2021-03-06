@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Repository\ActionRepository;
 use App\Repository\EnregistrementRepository;
 use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
+use App\Repository\TypeActionRepository;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
 use Knp\Component\Pager\PaginatorInterface;
@@ -143,7 +145,7 @@ class EmpruntController extends AbstractController
      * @Route("/emprunts/{id}/statut/emprunte", name="changer_statut_emprunte")
      */
     public function empruntChangerEmprunt(Request $request, EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository  $statutEnregistrementRepository, StatutRepository $statutRepository,
-                                       UserRepository $userRepository, MailerService $mailerService)
+                                       UserRepository $userRepository, MailerService $mailerService, ActionRepository $actionRepository, TypeActionRepository $typeActionRepository)
     {
         $id = $request->get('id');
         $emprunts = $enregistrementRepository->find($id);
@@ -152,6 +154,25 @@ class EmpruntController extends AbstractController
         if($article->getStatut() == "reserve_emprunt"){
             $article->setStatut($statutRepository->findOneBy(['libelle'=>'emprunte']));
         }
+
+
+        // Règle d'emprunt : re-calcule la date de rendu théorique
+        $action = $actionRepository->findOneBy(['article' => $emprunts->getArticle(), 'typeAction' => $typeActionRepository->findOneBy(['libelle' => 'creation'])]);
+        $categorie = $emprunts->getArticle()->getCategorie();
+        $dateAjd = new \DateTime('now');
+        $dateCreation = $action->getDate();
+        $finNouveaute = $dateCreation->add(new \DateInterval('P' . $categorie->getDureeNouveaute() . 'D'));
+        $dateRendu = new \DateTime('now');
+        if ($finNouveaute >= $dateAjd) {
+            //nouveauté
+            $nbJours = $categorie->getDureeEmpruntMaxNouveaute();
+        } else {
+            // pas nouveauté
+            $nbJours = $categorie->getDureeEmpruntMax();
+        }
+        $dateRendu->add(new \DateInterval('P' . $nbJours . 'D')); // + $nbJours
+        $emprunts->setDateRenduTheorique($dateRendu);
+
         $this->getDoctrine()->getManager()->persist($emprunts);
         $this->getDoctrine()->getManager()->persist($article);
         $this->getDoctrine()->getManager()->flush();
