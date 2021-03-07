@@ -47,7 +47,7 @@
         <ul id="lateral-menu">
                 <li class="lateral-menu"><a class="lateral-menu" href="{{ path('admin_statistiques')}}">Éditer les statistiques</a></li>
                 <li class="lateral-menu"><a class="lateral-menu" href="{{ path('gestion_actif_emprunts') }}">Gestion des emprunts/retours</a></li>
-                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('gestion_commande') }}">Gestion des commandes</a></li>
+                <li class="lateral-menu"><a class="lateral-menu" href="{{ path('gestion_actif_commande') }}">Gestion des commandes</a></li>
                 <li class="lateral-menu"><a class="lateral-menu" href="{{ path('annonce_index') }}">Gestion des annonces</a></li>
                 <li class="lateral-menu"><a class="lateral-menu" href="{{ path('operations_articles') }}">Opérations sur les articles</a></li>
             {% if is_granted('ROLE_BENEVOLE') and not is_granted('ROLE_ADMIN')%}

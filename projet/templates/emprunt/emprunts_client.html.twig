@@ -2,7 +2,7 @@
 {% block body %}
 
     <div class="container mt-5">
-        <h1 class="mt-2">Vos emprunts ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
+        <h1 class="mt-2">Vos emprunts / achats ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
         <div class="row">
             <div class="col-sm">
                 <a href="{{ path('profil') }}" class="edit-btn float-left">Retour</a>

@@ -2,7 +2,15 @@
 {% block body %}
 
     <div class="m-5">
-        <h1 class="mt-2">Les commandes ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
+        <h1 class="mt-2">Les commandes ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
+        <div class="row">
+            <div class="col-sm">
+                <a href="{{ path('gestion_actif_commande') }}" class="edit-btn float-left">Achats Actifs</a>
+            </div>
+            <div class="col-sm">
+                <a href="{{ path('gestion_historique_commande') }}" class="edit-btn float-right">Tous les Achats (historiques)</a>
+            </div>
+        </div>
         {% if emprunts is not empty %}
             <table class="table">
                 <thead>
@@ -68,7 +76,7 @@
             </table>
         {% else %}
             <div class="col-sm m-2">
-                <b>Aucune commande en cours</b>
+                <b>Aucune commande ({{ statut }})/b>
             </div>
         {% endif %}
         <hr class="mb-5">

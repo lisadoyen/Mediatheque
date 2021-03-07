@@ -7,6 +7,7 @@ use App\Repository\EnregistrementRepository;
 use App\Repository\StatutEnregistrementRepository;
 use App\Repository\StatutRepository;
 use App\Repository\TypeActionRepository;
+use App\Repository\TypeEnregistrementRepository;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
 use Knp\Component\Pager\PaginatorInterface;
@@ -17,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EmpruntController extends AbstractController
 {
     /**
+     * Histortique des emprunts du client
      * @Route("/emprunts/historique", name="emprunts_historique")
      */
     public function empruntHistorique(EnregistrementRepository $enregistrementRepository, StatutEnregistrementRepository $statutEnregistrementRepository, PaginatorInterface $paginator, Request $request)
@@ -36,11 +38,13 @@ class EmpruntController extends AbstractController
     }
 
     /**
+     * Les Emprunts en cours du client
      * @Route("/emprunts/actif", name="emprunts_actif")
      */
     public function empruntActif(EnregistrementRepository $enregistrementRepository, PaginatorInterface $paginator, Request $request)
     {
-        $emprunts = $enregistrementRepository->findActif();
+        $user = $this->getUser();
+        $emprunts = $enregistrementRepository->findEmpruntActifBy($user);
         $empruntsPages = $paginator ->paginate(
             $emprunts,
             $request->query->getInt('page',1),
@@ -59,7 +63,7 @@ class EmpruntController extends AbstractController
      */
     public function empruntGestionActif(EnregistrementRepository $enregistrementRepository, PaginatorInterface $paginator, Request $request)
     {
-        $emprunts = $enregistrementRepository->findActif();
+        $emprunts = $enregistrementRepository->findAllEmpruntActif();
         $empruntsPages = $paginator ->paginate(
             $emprunts,
             $request->query->getInt('page',1),
@@ -76,9 +80,9 @@ class EmpruntController extends AbstractController
     /**
      * @Route("/emprunts/gestion/historique", name="gestion_historique_emprunts")
      */
-    public function empruntGestionHistorique(EnregistrementRepository $enregistrementRepository,PaginatorInterface $paginator, Request $request)
+    public function empruntGestionHistorique(EnregistrementRepository $enregistrementRepository, TypeEnregistrementRepository $typeEnregistrementRepository, PaginatorInterface $paginator, Request $request)
     {
-        $emprunts = $enregistrementRepository->findBy([],['dateEnregistrement'=>'DESC']);
+        $emprunts = $enregistrementRepository->findHistoryEmprunt();
         $empruntsPages = $paginator ->paginate(
             $emprunts,
             $request->query->getInt('page',1),
@@ -93,23 +97,43 @@ class EmpruntController extends AbstractController
     }
 
     /**
-     * @Route("/commande/gestion/achat", name="gestion_commande")
+     * @Route("/commande/gestion/actif", name="gestion_actif_commande")
      */
-    public function commandeGestion(EnregistrementRepository $enregistrementRepository,StatutEnregistrementRepository $statutEnregistrementRepository,PaginatorInterface $paginator, Request $request)
+    public function commandeGestionActif(EnregistrementRepository $enregistrementRepository,PaginatorInterface $paginator, Request $request)
     {
-        $emprunts = $enregistrementRepository->findBy(['statutEnregistrement'=>$statutEnregistrementRepository->findOneBy(['libelle'=>'ache
-        te'])]);
+        $emprunts = $enregistrementRepository->findAllAchatActif();
         $empruntsPages = $paginator ->paginate(
             $emprunts,
             $request->query->getInt('page',1),
             10
         );
 
-        return $this->render('emprunt/commandes.html.twig', [
+        return $this->render('emprunt/gestion_commandes.html.twig', [
             'emprunts' => $empruntsPages,
-            'nbEmprunt' => count($emprunts)
+            'nbEmprunt' => count($emprunts),
+            'statut' => 'en cours'
         ]);
     }
+
+    /**
+     * @Route("/commande/gestion/historique", name="gestion_historique_commande")
+     */
+    public function commandeGestionHistorique(EnregistrementRepository $enregistrementRepository, PaginatorInterface $paginator, Request $request)
+    {
+        $emprunts = $enregistrementRepository->findHistoryCommande();
+        $empruntsPages = $paginator ->paginate(
+            $emprunts,
+            $request->query->getInt('page',1),
+            10
+        );
+
+        return $this->render('emprunt/gestion_commandes.html.twig', [
+            'emprunts' => $empruntsPages,
+            'nbEmprunt' => count($emprunts),
+            'statut' => 'historique'
+        ]);
+    }
+
 
     /**
      * @Route("/emprunts/{id}/statut/pret", name="changer_statut_pret")

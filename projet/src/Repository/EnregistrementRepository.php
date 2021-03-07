@@ -94,17 +94,103 @@ class EnregistrementRepository extends ServiceEntityRepository
     }
 
     /**
-     * récupère tous les emprunts actifs : en attente, pret, emprunté
+     * récupère tous les emprunts actifs : en attente, pret, emprunté selon un utilisateur
      * @return int|mixed|string
      */
-    public function findActif(){
+    public function findEmpruntActifBy($user){
         $qb = $this->createQueryBuilder('e');
         $qb ->select()
             ->join('App:StatutEnregistrement', 's')
             ->where('s.id = e.statutEnregistrement')
+            ->join('App:TypeEnregistrement', 't')
+            ->where('t.id = e.typeEnregistrement')
+            ->join('App:User', 'u')
+            ->where('u.id = e.utilisateur')
+            ->andWhere('e.utilisateur = :utilisateur')
+            ->setParameter('utilisateur', $user)
+            ->andWhere("t.libelle ='emprunt'")
             ->andWhere("s.libelle !='rendu'")
             ->andWhere("s.libelle !='perdu'")
             ->andWhere("s.libelle !='telecharge'")
+            ->addOrderBy('e.dateEnregistrement','DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * récupère tous les emprunts actifs : en attente, pret, emprunté pour tous les utilisateurs
+     * @return int|mixed|string
+     */
+    public function findAllEmpruntActif(){
+        $qb = $this->createQueryBuilder('e');
+        $qb ->select()
+            ->join('App:TypeEnregistrement', 't')
+            ->where('t.id = e.typeEnregistrement')
+            ->join('App:StatutEnregistrement', 's')
+            ->andWhere('s.id = e.statutEnregistrement')
+            ->andWhere("s.libelle !='rendu'")
+            ->andWhere("s.libelle !='perdu'")
+            ->andWhere("s.libelle !='telecharge'")
+            ->andWhere("t.libelle ='emprunt'")
+            ->addOrderBy('e.dateEnregistrement','DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+    /**
+     * récupère tous les achats actifs : en attente, pret, emprunté pour tous les utilisateurs
+     * @return int|mixed|string
+     */
+    public function findAllAchatActif(){
+        $qb = $this->createQueryBuilder('e');
+        $qb ->select()
+            ->join('App:TypeEnregistrement', 't')
+            ->where('t.id = e.typeEnregistrement')
+            ->join('App:StatutEnregistrement', 's')
+            ->andWhere('s.id = e.statutEnregistrement')
+            ->andWhere("s.libelle !='rendu'")
+            ->andWhere("s.libelle !='perdu'")
+            ->andWhere("s.libelle !='telecharge'")
+            ->andWhere("s.libelle !='achete'")
+            ->andWhere("t.libelle ='achat'")
+            ->addOrderBy('e.dateEnregistrement','DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * récupère tous l'historique de tous les emprunts : pour tous les utilisateurs
+     * @return int|mixed|string
+     */
+    public function findHistoryEmprunt(){
+        $qb = $this->createQueryBuilder('e');
+        $qb ->select()
+            ->join('App:TypeEnregistrement', 't')
+            ->where('t.id = e.typeEnregistrement')
+            ->join('App:StatutEnregistrement', 's')
+            ->andWhere('s.id = e.statutEnregistrement')
+            ->andWhere("s.libelle !='en attente'")
+            ->andWhere("s.libelle !='pret'")
+            ->andWhere("s.libelle !='telecharge'")
+            ->andWhere("t.libelle ='emprunt'")
+            ->addOrderBy('e.dateEnregistrement','DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+    /**
+     * récupère tous l'historique de tous les achats : pour tous les utilisateurs
+     * @return int|mixed|string
+     */
+    public function findHistoryCommande(){
+        $qb = $this->createQueryBuilder('e');
+        $qb ->select()
+            ->join('App:TypeEnregistrement', 't')
+            ->where('t.id = e.typeEnregistrement')
+            ->join('App:StatutEnregistrement', 's')
+            ->andWhere('s.id = e.statutEnregistrement')
+            ->andWhere("s.libelle !='en attente'")
+            ->andWhere("s.libelle !='pret'")
+            ->andWhere("s.libelle !='telecharge'")
+            ->andWhere("t.libelle ='achat'")
             ->addOrderBy('e.dateEnregistrement','DESC');
 
         return $qb->getQuery()->getResult();
