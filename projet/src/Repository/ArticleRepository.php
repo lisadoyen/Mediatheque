@@ -8,7 +8,9 @@ use App\Entity\Article;
 use App\Entity\Enregistrement;
 use App\Service\Article\Nouveaute;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
@@ -89,10 +91,15 @@ class ArticleRepository extends ServiceEntityRepository
                 ->addOrderBy("a.$type", $order); // pour prix et titre
         }
 
-        if(!empty($search->date)){
+
+        /* filtre date */
+        if(!empty($search->dateMin)){
             $query = $query
-                ->andWhere('a.datePublication LIKE :date')
-                ->setParameter('date', "%{$search->date}%");
+                ->andWhere("a.datePublication >= '$search->dateMin'");
+        }
+        if(!empty($search->dateMax)){
+            $query = $query
+                ->andWhere("a.datePublication <= '$search->dateMax'");
         }
 
         // filtre rubrique
@@ -113,6 +120,7 @@ class ArticleRepository extends ServiceEntityRepository
 
         // filtre par genre
         if(!empty($search->genre)) {
+            //dd("test");
             $query = $query
                 ->andWhere('g.id IN (:genre)')
                 ->setParameter('genre', $search->genre);
@@ -152,7 +160,6 @@ class ArticleRepository extends ServiceEntityRepository
                 ->andWhere("ty.libelle='creation'")
                 ->groupBy('a.titre');
         }
-
 
         // retourne la requete
         return $query;

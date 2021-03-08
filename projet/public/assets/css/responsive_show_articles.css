@@ -109,6 +109,9 @@
 and (min-device-width: 240px)
 and (max-device-width: 320px) {
 
+    .dropdown-menu{
+        font-size: 2.5rem;
+    }
     /* search bar */
     .search-in-nav-responsive{
         display: block;
@@ -119,15 +122,15 @@ and (max-device-width: 320px) {
 
     /* filtre */
     .button-filtre{
-        font-size: 2.5vh;
-    }
-
-    .text-title-filtre-responsive{
         font-size: 3vh;
     }
 
+    .text-title-filtre-responsive{
+        font-size: 5vh;
+    }
+
     .text-responsive{
-        font-size: 1.7vh;
+        font-size: 2.5vh;
     }
 
     input[type=checkbox]
@@ -169,7 +172,7 @@ and (max-device-width: 320px) {
     }
 
     .text-size{
-        font-size: 2vh;
+        font-size: 2.5vh;
     }
 
     .text-size-title{
@@ -177,7 +180,7 @@ and (max-device-width: 320px) {
     }
 
     .text-trier{
-        font-size: 2.4vh;
+        font-size: 2.5vh;
     }
 
     .boutton-trier-par-responsive{
@@ -288,6 +291,10 @@ and (max-device-width: 320px) {
 @media screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
+
+    .dropdown-menu{
+        font-size: 2.5rem;
+    }
     /* Styles pour cette Media Queries */
     /* search bar */
     .search-in-nav-responsive{
@@ -299,15 +306,15 @@ and (max-device-width : 480px) {
 
     /* filtre */
     .button-filtre{
-        font-size: 2.5vh;
-    }
-
-    .text-title-filtre-responsive{
         font-size: 3vh;
     }
 
+    .text-title-filtre-responsive{
+        font-size: 5vh;
+    }
+
     .text-responsive{
-        font-size: 1.7vh;
+        font-size: 2.5vh;
     }
 
     input[type=checkbox]
@@ -348,15 +355,15 @@ and (max-device-width : 480px) {
     }
 
     .text-size{
-        font-size: 2vh;
-    }
-
-    .text-size-title{
         font-size: 2.5vh;
     }
 
+    .text-size-title{
+        font-size: 3vh;
+    }
+
     .text-trier{
-        font-size: 2.4vh;
+        font-size: 2.5vh;
     }
 
     .boutton-trier-par-responsive{
@@ -441,13 +448,13 @@ and (max-device-width : 480px) {
     }
 
     .img-liste{
-        width: 630px;
-        height: 660px;
+        width: 700px;
+        height: 800px;
     }
 
     .img-liste-no{
-        width: 570px;
-        height: 570px;
+        width: 700px;
+        height: 700px;
     }
 
     .hr-liste{

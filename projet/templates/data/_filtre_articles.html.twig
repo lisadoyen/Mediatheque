@@ -60,11 +60,14 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
-                    {% if donnees.date is defined and donnees.date is not empty %}
-                        <li> date : <strong>{{ donnees.date| date('d/m/Y') }}</strong></li>
-                    {% endif %}
                     {% if donnees.nouveaute is defined and donnees.nouveaute is not empty %}
                         <li> nouveauté : <strong>activé</strong></li>
+                    {% endif %}
+                    {% if donnees.dateMin is defined and donnees.dateMin is not empty %}
+                        <li> date de publication min : <strong>{{ donnees.dateMin| default('-50years')|date('d/m/Y') }}</strong></li>
+                    {% endif %}
+                    {% if donnees.dateMax is defined and donnees.dateMax is not empty %}
+                        <li> date de publication max : <strong>{{ donnees.dateMax| default('now') |date('d/m/Y')}}</strong></li>
                     {% endif %}
                 </u>
            </div>
@@ -140,10 +143,9 @@
             </div>
 
         <div class="form-group">
-            {% if donnees.date is defined %}
-            <label> Date de publication :</label>
-            <input type="date" name="date" value="{{ donnees.date }}"/>
-            {% endif %}
+            <label> Date de publication :</label><br>
+            Min : <input id="min" type="date" name="dateMin" value="{{ donnees.dateMin | default('-50years')}}"/>
+            Max : <input id="max" type="date" name="dateMax" value="{{ donnees.dateMax |default('now')}}"/>
         </div>
         <hr>
 

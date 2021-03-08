@@ -62,9 +62,13 @@ class Filtre
                 $donnees['search'] = $_POST['search'];
                 $data->q = $donnees['search'];
             }
-            if(isset($_POST['date'])) {
-                $donnees['date'] = $_POST['date'];
-                $data->date = $donnees['date'];
+            if(isset($_POST['dateMin'])) {
+                $donnees['dateMin'] = $_POST['dateMin'];
+                $data->dateMin = $donnees['dateMin'];
+            }
+            if(isset($_POST['dateMax'])) {
+                $donnees['dateMax'] = $_POST['dateMax'];
+                $data->dateMax = $donnees['dateMax'];
             }
             if(!empty($_POST['genres'])){
                 $donnees['genres'] = $_POST['genres'];
@@ -133,8 +137,10 @@ class Filtre
             if (!empty($donnees)) {
                 if(isset($donnees['search']))
                     $data->q = $donnees['search'];
-                if(isset($donnees['date']))
-                    $data->date = $donnees['date'];
+                if(isset($donnees['dateMax']))
+                    $data->dateMax = $donnees['dateMax'];
+                if(isset($donnees['dateMin']))
+                    $data->dateMin = $donnees['dateMin'];
                 if (!empty($donnees['genres'])) {
                     $data->genre = $donnees['genres'];
                 }

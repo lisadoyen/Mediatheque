@@ -18,7 +18,11 @@ class SearchData{
     /**
      * @var string
      */
-    public $date = '';
+    public $dateMin = '';
+    /**
+     * @var string
+     */
+    public $dateMax = '';
     /**
      * @var Genre[]
      */

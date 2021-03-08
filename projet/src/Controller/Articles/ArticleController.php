@@ -161,7 +161,7 @@ class ArticleController extends AbstractController
                             CategorieRepository $categorieRepo, GenreRepository $genreRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
                             Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository, RubriqueRepository $rubriqueRepository,
-                            EnregistrementRepository $enregistrementRepository, PanierRepository $panierRepository, UserInterface $user)
+                            EnregistrementRepository $enregistrementRepository, PanierRepository $panierRepository, UserInterface $user, TypeEntiteRepository $typeEntiteRepository)
     {
         $nbArticlesTotal = $ar->findNbArticleTotal();
         /* trouver les emprunts de l'utilisateur : la date du dernier emprunt pour chaque article */
@@ -175,6 +175,7 @@ class ArticleController extends AbstractController
         foreach ($paniers as $panier){
             array_push($panierUser, $panier->getArticle()->getId());
         }
+
         // Menu genre et/ou catégorie
         if($idGenre != null || $idCategorie != null) {
             $livres = $paginator->paginate(
@@ -321,6 +322,25 @@ class ArticleController extends AbstractController
             array_push($panierUser, $panier->getArticle()->getId());
         }
         $livre = $articleRepository->findOneBy(['id' => $id]);
+
+        $premierEntite = null;
+        foreach ($livre->getEntites() as $entite){
+            if($livre->getCategorie()->getLibelle() == "livre") {
+                if ($entite->getTypeEntite()->getLibelle() == "auteur") {
+                    $premierEntite["prenom"] = $entite->getPrenom();
+                    $premierEntite["nom"] = $entite->getNom();
+                    break;
+                }
+            }
+            if($livre->getCategorie()->getLibelle() == "video") {
+                if ($entite->getTypeEntite()->getLibelle() == "realisateur") {
+                    $premierEntite["prenom"] = $entite->getPrenom();
+                    $premierEntite["nom"] = $entite->getNom(); // pas de réalisateur => tous mis dans auteur => remettre dans bdd réalisateur
+                    break;
+                }
+            }
+        }
+
         $fav = $favorisRepository->findOneBy(['utilisateur'=>$this->getUser(), 'article'=>$livre]);
         $nouveaute = $new->findArticleNouveaute_AvecIdCategorie($categorieRepository,$actionRepository,500, $livre->getCategorie()->getId());
         $nouveau = null;
@@ -365,6 +385,7 @@ class ArticleController extends AbstractController
             'test'=> $test,
             'panierUser' =>$panierUser,
             'enregistrements'=>$enregistrementsIdDate,
+            'premierEntite' =>$premierEntite,
             'form' => $form->createView()
         ]);
     }

@@ -29,10 +29,14 @@
                             {% elseif article.categorie.libelle == 'musique' %}
                                 <span class="text-orange">artiste : </span>
                             {% endif %}
-                            <!-- changer quand on aura une liste des entités par article, pour l'instant il n'y a qu'une entité par article -->
-                            {% if article.entites[0] is defined %}
-                                {{ article.entites[0].prenom | capitalize }}
-                                {{article.entites[0].nom is empty ? "inconnu" : article.entites[0].nom | capitalize }}
+
+                            {% if premierEntite is defined and premierEntite is not null %}
+                                    {% if premierEntite.prenom is not null %}
+                                        {{ premierEntite.prenom | capitalize }}
+                                    {% endif %}
+                                    {% if premierEntite.nom is not null %}
+                                        {{ premierEntite.nom | capitalize }}
+                                    {% endif %}
                             {% else %}
                                 inconnu
                             {% endif %}
@@ -48,7 +52,7 @@
                             {{article.genre.libelle}}
                         </div>
                         <div class="text-detail-size">
-                            <span class="text-orange">rubrique(s) : </span>
+                            <span class="text-orange">rubrique : </span>
                             {% if article.rubriques[0].libelle is defined %}
                                 {{ article.rubriques[0].libelle }} <!-- mettre la liste quand plusieurs rubriques -->
                             {% else %}
@@ -158,12 +162,38 @@
                                 {{ article.genCode }}
                            {% endif %}
                        </div>
-                       <div class="p-2 text-responsive-detail"> <span class="text-orange">entite :</span> entite</div>
+                       <div class="p-2 text-responsive-detail"> <span class="text-orange">contributeurs :</span>
+                           <!-- affiche tous les articles entités pour l'instant => changer pour ne pas afficher le premier peut etre -->
+                           {% if article.entites is not defined %}
+                               pas de contributeur
+                           {% elseif article.entites is empty %}
+                               pas de contributeur
+                           {% else %}
+                               {% for entite in article.entites %}
+                                   <span class="text-bold">{{ entite.typeEntite }}(s) :</span>
+                                   {{ entite.prenom | capitalize }}
+                                   {{ entite.nom is empty ? "inconnu" : entite.nom | capitalize }}
+                               {% endfor %}
+                           {% endif %}
+                       </div>
+                       <div class="p-2 text-responsive-detail"> <span class="text-orange">autres rubriques associées :</span>
+                           {% if article.rubrique is defined %}
+                                {% for rubrique in article.rubrique %}
+                                   {% if rubrique != article.rubrique[0] %}
+                                       {{ rubrique.libelle }} <!-- mettre la liste quand plusieurs rubriques -->
+                                   {% else %}
+                                       pas d'autre rubrique
+                                   {% endif %}
+                               {% endfor %}
+                           {% else %}
+                               aucune
+                           {% endif %}
+                       </div>
                        <div class="p-2 text-responsive-detail"> <span class="text-orange">liens :</span> liens</div>
                    </div>
                    <div class="col-lg-6">
                        <div class="text-detail-size-subtitle p-2"><span class="text-bold"> Vidéo Youtube : </span></div>
-                       <div><img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-detail-responsive"></div>
+                       <div><img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-detail-responsive vignette-responsive-no" ></div>
                    </div>
                </div>
            </div>

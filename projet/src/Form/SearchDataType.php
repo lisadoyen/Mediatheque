@@ -65,12 +65,8 @@ class SearchDataType extends AbstractType
                 'expanded' => true,
                 'multiple' => true
             ])
-            ->add('date', DateType::class,[
-                'placeholder' => ['year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'],
-                'years' => range(date('Y'), date('Y') - 100, -1),
-                'label' => false,
-                'required' => false,
-            ])
+            ->add('dateMin')
+            ->add('dateMax')
         ;
     }
 
