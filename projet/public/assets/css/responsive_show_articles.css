@@ -1,3 +1,5 @@
+/* utilisation de la classe .img-icone dans profil */
+
 /* demi écran */
 /* PAGE SHOW ARTICLES */
 @media screen and (max-width: 1550px){
@@ -127,10 +129,6 @@ and (max-device-width: 320px) {
 
     .text-title-filtre-responsive{
         font-size: 5vh;
-    }
-
-    .text-responsive{
-        font-size: 2.5vh;
     }
 
     input[type=checkbox]
@@ -311,10 +309,6 @@ and (max-device-width : 480px) {
 
     .text-title-filtre-responsive{
         font-size: 5vh;
-    }
-
-    .text-responsive{
-        font-size: 2.5vh;
     }
 
     input[type=checkbox]

@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-
-<title>Article index</title>
-
+{% extends "layout.html.twig" %}
 {% block body %}
-    <h1>Article index</h1>
-    <a href="{{ path('article_new') }}">Create new</a>
+<div class="container mt-5">
+    <h1 class="titre-responsive">liste des articles</h1><br>
 
-    <table class="table">
-        <thead>
+    <a href="{{ path('article_new') }}" class="edit-btn btn-responsive-global">Créer un article</a>
+
+    <table class="table table-responsive">
+        <thead class="text-responsive">
             <tr>
                 <th>Id</th>
                 <th>Gencode</th>
@@ -24,7 +23,7 @@
                 <th>actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody  class="text-responsive">
         {% for article in articles %}
             <tr>
                 <td>{{ article.id }}</td>
@@ -40,17 +39,16 @@
                 <td>{{ article.observation }}</td>
                 <td>{{ article.numerique ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+                    <a href="{{ path('article_show', {'id': article.id}) }}" class="edit-btn btn-responsive-global">Revenir à la liste</a>
+                    <a href="{{ path('article_edit', {'id': article.id}) }}" class="edit-btn btn-responsive-global">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="13">no records found</td>
+                <td colspan="13">pas d'article trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-
+</div>
 {% endblock %}

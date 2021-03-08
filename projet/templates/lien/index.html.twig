@@ -17,8 +17,8 @@
                 <td>{{ lien.id }}</td>
                 <td>{{ lien.adresse }}</td>
                 <td>
-                    <a href="{{ path('lien_show', {'id': lien.id}) }}" class="edit-btn btn-responsive-maintenance">Détails</a>
-                    <a href="{{ path('lien_edit', {'id': lien.id}) }}" class="edit-btn btn-responsive-maintenance">Modifier</a>
+                    <a href="{{ path('lien_show', {'id': lien.id}) }}" class="edit-btn btn-responsive-global">Détails</a>
+                    <a href="{{ path('lien_edit', {'id': lien.id}) }}" class="edit-btn btn-responsive-global">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -29,7 +29,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('lien_new') }}" class="edit-btn btn-responsive-maintenance">Nouveau lien</a>
-    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-maintenance ml-0">Menu</a>
+    <a href="{{ path('lien_new') }}" class="edit-btn btn-responsive-global">Nouveau lien</a>
+    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-global ml-0">Menu</a>
 </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {# Permet de mettre le style de formulaire a toutes les entites ajoutées#}
 {% import _self as formMacros %}
 {% macro printEntiteSubForm(entite) %}
-    <div class="row">
+    <div class="row text-responsive">
         <div class="col">
             {{ form_row(entite.typeEntite, {'label': 'Type'}) }}
         </div>
@@ -15,8 +15,8 @@
 {% endmacro %}
 
 {# Formulaire #}
-{{ form_start(form) }}
-{{ form_row(form.gencode) }}
+{{ form_start(form, { 'attr': { 'class' : 'form-maintenance-responsive' }}) }}
+{{ form_row(form.gencode ) }}
 {{ form_row(form.codeArticle) }}
 {{ form_row(form.categorie) }}
 {{ form_row(form.titre) }}
@@ -45,7 +45,7 @@
 {{ form_row(form.observation) }}
 {{ form_row(form.numerique) }}
 
-<button class="edit-btn">{{ button_label|default('Appliquer') }}</button>
+<button class="edit-btn btn-responsive-global">{{ button_label|default('Appliquer') }}</button>
 {{ form_end(form) }}
 
 {# jquery complet necessaire pour ajax, jquery slim (donne avec bootstrap?) ne suffit pas#}

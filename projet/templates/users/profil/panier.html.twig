@@ -1,10 +1,9 @@
 {% extends "layout.html.twig" %}
 {% block body %}
-
     <div class="container cadre">
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
-                <h1>Votre Panier ({{ totalPanier }})</h1>
+                <h1 class="text-title-filtre-responsive">Votre Panier ({{ totalPanier }})</h1>
             </div>
             <div class="col-sm">
                 {% if achat is not empty or emprunt is not empty %}
@@ -14,18 +13,18 @@
         </div><hr>
 
         {% if achat is not empty or emprunt is not empty %}
-            <div class="row justify-content-end">
-                <button type="button" class="btn btn-danger mr-6" data-toggle="modal" data-target="#viderPanier">
+            <div class="row justify-content-end ">
+                <button type="button" class="btn btn-danger mr-6 btn-responsive-global" data-toggle="modal" data-target="#viderPanier">
                     Vider le panier
                 </button>
             </div>
 
-            <div class="modal fade" id="viderPanier" tabindex="-1" role="dialog" aria-labelledby="viderPanierTitle" aria-hidden="true">
+            <div class="modal fade text-responsive" id="viderPanier" tabindex="-1" role="dialog" aria-labelledby="viderPanierTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="viderPanierTitle">Vider le panier</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title text-responsive" id="viderPanierTitle">Vider le panier</h5>
+                            <button type="button" class="close btn-responsive-global" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -34,13 +33,13 @@
                         </div>
                         <div class="modal-footer">
                             <div class="col-sm">
-                                <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Non</button>
+                                <button type="button" class="btn btn-danger float-right btn-responsive-global" data-dismiss="modal">Non</button>
                             </div>
                             <div class="col-sm">
                                 <form action="{{ path('vider_panier') }}" method="POST" style="display:inline">
                                     <input type="hidden" name="token" value="{{ csrf_token('panier_delete') }}">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="btn btn-success float-left">Oui</button>
+                                    <button type="submit" class="btn btn-success float-left btn-responsive-global">Oui</button>
                                 </form>
                             </div>
                         </div>
@@ -49,9 +48,9 @@
             </div>
             {% if achat is not empty %}
                 <div class="row mb-5">
-                    <h2>Vos Achats ({{ achat|length }})</h2>
-                    <table class="table">
-                        <thead>
+                    <h2 class="titre-responsive">Vos Achats ({{ achat|length }})</h2>
+                    <table class="table table-responsive">
+                        <thead class="text-responsive">
                         <tr>
                             <th scope="col">Vignette</th>
                             <th scope="col">Titre</th>
@@ -62,14 +61,14 @@
                             <th colspan="2"></th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-responsive">
                         {% for pan in achat %}
                             <tr>
                                 <td>
                                     {%  if pan.article.vignette is not empty %}
-                                        <img src="{{ pan.article.vignette }}" alt="image de {{ pan.article.titre }}" width="120" height="150">
+                                        <img src="{{ pan.article.vignette }}" alt="image de {{ pan.article.titre }}" class="img-icone">
                                     {% else %}
-                                        <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120">
+                                        <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-icone-no">
                                     {% endif %}
                                 </td>
                                 <td>
@@ -98,20 +97,20 @@
                                     {% endif %}
                                 </td>
                                 <td class="col-3">
-                                    <a href="{{ path('article_details', {id: pan.article.id}) }}" class="btn edit-btn">Voir plus de détails</a>
+                                    <a href="{{ path('article_details', {id: pan.article.id}) }}" class="btn edit-btn btn-responsive-global">Voir plus de détails</a>
                                 </td>
 
                                 <td class="align-content-center">
-                                    <button type="button" class="close p-4" aria-label="Close" data-toggle="modal" data-target="#supprArticlePanier{{ pan.article.id }}">
+                                    <button type="button" class="close p-4 btn-responsive-global" aria-label="Close" data-toggle="modal" data-target="#supprArticlePanier{{ pan.article.id }}">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
 
-                                    <div class="modal fade" id="supprArticlePanier{{ pan.article.id }}" tabindex="-1" role="dialog" aria-labelledby="supprArticlePanier{{ pan.article.id }}Title" aria-hidden="true">
+                                    <div class="modal fade text-responsive" id="supprArticlePanier{{ pan.article.id }}" tabindex="-1" role="dialog" aria-labelledby="supprArticlePanier{{ pan.article.id }}Title" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Supprimer cet article</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <h5 class="modal-title text-responsive" id="exampleModalLongTitle">Supprimer cet article</h5>
+                                                    <button type="button" class="close btn-responsive-global" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
@@ -120,10 +119,10 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div class="col-sm">
-                                                        <a href="{{ path('remove_article_panier', {id: pan.article.id}) }}" class="btn btn-danger float-right">Non</a>
+                                                        <a href="{{ path('remove_article_panier', {id: pan.article.id}) }}" class="btn btn-danger float-right btn-responsive-global">Non</a>
                                                     </div>
                                                     <div class="col-sm">
-                                                        <a href="{{ path('move_article_panier_favoris', {id: pan.article.id}) }}" class="btn btn-success float-left">Oui</a>
+                                                        <a href="{{ path('move_article_panier_favoris', {id: pan.article.id}) }}" class="btn btn-success float-left btn-responsive-global">Oui</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,14 +133,14 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    <div>Total des articles achetés : <b>{{ totalAchat }}€</b></div>
+                    <div class="text-responsive">Total des articles achetés : <b>{{ totalAchat }}€</b></div>
                 </div>
             {% endif %}
             {% if emprunt is not empty %}
                 <div class="row">
-                    <h2>Vos Emprunts ({{ emprunt|length }})</h2>
-                    <table class="table">
-                        <thead>
+                    <h2 class="titre-responsive">Vos Emprunts ({{ emprunt|length }})</h2>
+                    <table class="table table-responsive">
+                        <thead class="text-responsive">
                         <tr>
                             <th scope="col">Vignette</th>
                             <th scope="col">Titre</th>
@@ -152,14 +151,14 @@
                             <th colspan="2"></th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-responsive">
                         {% for pan in emprunt %}
                             <tr>
                                 <td>
                                     {%  if pan.article.vignette is not empty %}
-                                        <img src="{{ pan.article.vignette }}" alt="image de {{ pan.article.titre }}" width="120" height="150">
+                                        <img src="{{ pan.article.vignette }}" alt="image de {{ pan.article.titre }}" class="img-icone">
                                     {% else %}
-                                        <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120">
+                                        <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-icone-no">
                                     {% endif %}
                                 </td>
                                 <td>
@@ -188,20 +187,20 @@
                                     {% endif %}
                                 </td>
                                 <td class="col-3">
-                                    <a href="{{ path('article_details', {id: pan.article.id}) }}" class="btn edit-btn">Voir plus de détails</a>
+                                    <a href="{{ path('article_details', {id: pan.article.id}) }}" class="btn edit-btn btn-responsive-global">Voir plus de détails</a>
                                 </td>
 
                                 <td class="align-content-center">
-                                    <button type="button" class="close p-4" aria-label="Close" data-toggle="modal" data-target="#supprArticlePanier{{ pan.article.id }}">
+                                    <button type="button" class="close p-4 btn-responsive-global" aria-label="Close" data-toggle="modal" data-target="#supprArticlePanier{{ pan.article.id }}">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
 
-                                    <div class="modal fade" id="supprArticlePanier{{ pan.article.id }}" tabindex="-1" role="dialog" aria-labelledby="supprArticlePanier{{ pan.article.id }}Title" aria-hidden="true">
+                                    <div class="modal fade text-responsive" id="supprArticlePanier{{ pan.article.id }}" tabindex="-1" role="dialog" aria-labelledby="supprArticlePanier{{ pan.article.id }}Title" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Supprimer cet article</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <h5 class="modal-title text-responsive" id="exampleModalLongTitle">Supprimer cet article</h5>
+                                                    <button type="button" class="close btn-responsive-global" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
@@ -210,10 +209,10 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div class="col-sm">
-                                                        <a href="{{ path('remove_article_panier', {id: pan.article.id}) }}" class="btn btn-danger float-right">Non</a>
+                                                        <a href="{{ path('remove_article_panier', {id: pan.article.id}) }}" class="btn btn-danger float-right btn-responsive-global">Non</a>
                                                     </div>
                                                     <div class="col-sm">
-                                                        <a href="{{ path('move_article_panier_favoris', {id: pan.article.id}) }}" class="btn btn-success float-left">Oui</a>
+                                                        <a href="{{ path('move_article_panier_favoris', {id: pan.article.id}) }}" class="btn btn-success float-left btn-responsive-global">Oui</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -227,18 +226,18 @@
                 </div>
             {% endif %}
             <hr>
-            <div class="row justify-content-end">
+            <div class="row justify-content-end text-responsive">
                 <div class="col-sm">
-                    <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#validerCommande">
+                    <button type="button" class="btn btn-success float-right btn-responsive-global" data-toggle="modal" data-target="#validerCommande">
                         Valider la commande
                     </button>
 
-                    <div class="modal fade" id="validerCommande" tabindex="-1" role="dialog" aria-labelledby="validerCommandeTitle" aria-hidden="true">
+                    <div class="modal fade text-responsive" id="validerCommande" tabindex="-1" role="dialog" aria-labelledby="validerCommandeTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="validerCommandeTitle">Valider la commande</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <h5 class="modal-title text-responsive" id="validerCommandeTitle">Valider la commande</h5>
+                                    <button type="button" class="close btn-responsive-global" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -247,13 +246,13 @@
                                 </div>
                                 <div class="modal-footer">
                                     <div class="col-sm">
-                                        <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Non</button>
+                                        <button type="button" class="btn btn-danger float-right btn-responsive-global" data-dismiss="modal">Non</button>
                                     </div>
                                     <div class="col-sm">
                                         <form action="{{ path('valider_panier') }}" method="POST" style="display:inline">
                                             <input type="hidden" name="token" value="{{ csrf_token('valider_panier') }}">
                                             <input type="hidden" name="_method" value="GET">
-                                            <button type="submit" class="btn btn-success float-left">Oui</button>
+                                            <button type="submit" class="btn btn-success float-left btn-responsive-global">Oui</button>
                                         </form>
                                     </div>
                                 </div>
@@ -263,9 +262,9 @@
                     </div>
                 </div>
             </div>
-            <small class="text-danger">* Temps restant avant le vidage du panier</small>
+            <small class="text-danger text-responsive">* Temps restant avant le vidage du panier</small>
         {% else %}
-            <div class="col-sm m-2">
+            <div class="col-sm m-2 text-responsive">
                 <b>Vous n'avez pas d'article dans votre panier</b>
             </div>
         {% endif %}

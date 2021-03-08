@@ -1,21 +1,20 @@
 {% extends "layout.html.twig" %}
 {% block body %}
-
 <div class="container cadre">
-    <h1>Vos favoris ({{ favoris|length }})</h1><hr>
+    <h1 class="text-title-filtre-responsive">Vos favoris ({{ favoris|length }})</h1><hr>
     {% if favoris is not empty %}
         <div class="row justify-content-end">
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAllFavoris">
+            <button type="button" class="btn btn-danger btn-responsive-global" data-toggle="modal" data-target="#deleteAllFavoris">
                 Vider la liste
             </button>
         </div>
 
-        <div class="modal fade" id="deleteAllFavoris" tabindex="-1" role="dialog" aria-labelledby="deleteAllFavorisTitle" aria-hidden="true">
+        <div class="modal fade text-responsive" id="deleteAllFavoris" tabindex="-1" role="dialog" aria-labelledby="deleteAllFavorisTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteAllFavorisTitle">Supprimer tous les favoris</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <h5 class="modal-title text-responsive" id="deleteAllFavorisTitle">Supprimer tous les favoris</h5>
+                        <button type="button" class="close btn-responsive-global" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -24,13 +23,13 @@
                     </div>
                     <div class="modal-footer">
                         <div class="col-sm">
-                            <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Non</button>
+                            <button type="button" class="btn btn-danger float-right btn-responsive-global" data-dismiss="modal">Non</button>
                         </div>
                         <div class="col-sm">
                             <form action="{{ path('vider_favoris') }}" method="POST" style="display:inline">
                                 <input type="hidden" name="token" value="{{ csrf_token('favoris_delete') }}">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-success float-left">Oui</button>
+                                <button type="submit" class="btn btn-success float-left btn-responsive-global">Oui</button>
                             </form>
                         </div>
                     </div>
@@ -38,8 +37,8 @@
             </div>
         </div>
         
-        <table class="table">
-            <thead>
+        <table class="table table-responsive">
+            <thead class="text-responsive">
                 <tr>
                     <th scope="col">Illustration</th>
                     <th scope="col">Titre</th>
@@ -49,14 +48,14 @@
                     <th colspan="2"></th>
                 </tr>
             </thead>
-        <tbody>
+        <tbody class="text-responsive">
             {% for fav in favoris %}
                 <tr>
                     <td>
                         {%  if fav.article.vignette is not empty %}
-                            <img src="{{ fav.article.vignette }}" alt="image de {{ fav.article.titre }}" width="120" height="150">
+                            <img src="{{ fav.article.vignette }}" alt="image de {{ fav.article.titre }}" class="img-icone">
                         {% else %}
-                            <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120">
+                            <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-icone-no">
                         {% endif %}
                     </td>
                     <td>
@@ -77,22 +76,22 @@
                     </td>
                     <td>
                         {% if fav.article.statut.libelle == "vendable" or fav.article.statut.libelle == "empruntable" %}
-                            <a href="{{ path('add_article_panier',{id:fav.article.id}) }}" class="btn edit-btn">Ajouter au panier</a>
+                            <a href="{{ path('add_article_panier',{id:fav.article.id}) }}" class="btn edit-btn btn-responsive-global">Ajouter au panier</a>
                         {% endif %}
-                        <a href="{{ path('article_details', {id: fav.article.id}) }}" class="btn edit-btn">Voir plus de détails</a>
+                        <a href="{{ path('article_details', {id: fav.article.id}) }}" class="btn edit-btn btn-responsive-global">Voir plus de détails</a>
                     </td>
                     <td class="align-content-center">
-                        <button type="button" class="close p-4" aria-label="Close" data-toggle="modal" data-target="#deleteOneFavori{{ fav.article.id }}">
+                        <button type="button" class="close p-4 btn-responsive-global" aria-label="Close" data-toggle="modal" data-target="#deleteOneFavori{{ fav.article.id }}">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </td>
 
-                    <div class="modal fade" id="deleteOneFavori{{ fav.article.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteOneFavori{{ fav.article.id }}Title" aria-hidden="true">
+                    <div class="modal fade text-responsive" id="deleteOneFavori{{ fav.article.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteOneFavori{{ fav.article.id }}Title" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteOneFavori{{ fav.article.id }}Title">Supprimer un article</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <h5 class="modal-title text-responsive" id="deleteOneFavori{{ fav.article.id }}Title">Supprimer un article</h5>
+                                    <button type="button" class="close btn-responsive-global" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -101,10 +100,10 @@
                                 </div>
                                 <div class="modal-footer">
                                     <div class="col-sm">
-                                        <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Non</button>
+                                        <button type="button" class="btn btn-danger float-right btn-responsive-global" data-dismiss="modal">Non</button>
                                     </div>
                                     <div class="col-sm">
-                                        <a href="{{ path('remove_favoris', {id: fav.article.id}) }}" class="btn btn-success float-left">Oui</a>
+                                        <a href="{{ path('remove_favoris', {id: fav.article.id}) }}" class="btn btn-success float-left btn-responsive-global">Oui</a>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +114,7 @@
         </tbody>
     </table><hr>
     {% else %}
-        <div class="col-sm m-2">
+        <div class="col-sm m-2 text-responsive">
             <b>Vous n'avez pas d'article favori</b>
         </div>
     {% endif %}

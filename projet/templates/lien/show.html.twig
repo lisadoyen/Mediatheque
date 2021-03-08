@@ -16,9 +16,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('lien_index') }}" class="edit-btn btn-responsive-maintenance">Liste des liens</a>
-    <a href="{{ path('lien_edit', {'id': lien.id}) }}" class="edit-btn btn-responsive-maintenance">Modifier</a>
-    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-maintenance ml-0">Menu</a>
+    <a href="{{ path('lien_index') }}" class="edit-btn btn-responsive-global">Liste des liens</a>
+    <a href="{{ path('lien_edit', {'id': lien.id}) }}" class="edit-btn btn-responsive-global">Modifier</a>
+    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-global ml-0">Menu</a>
 
     {{ include('lien/_delete_form.html.twig') }}
 </div>

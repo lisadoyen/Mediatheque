@@ -17,8 +17,8 @@
                 <td>{{ type_entite.id }}</td>
                 <td>{{ type_entite.libelle }}</td>
                 <td>
-                    <a href="{{ path('type_entite_show', {'id': type_entite.id}) }}" class="edit-btn btn-responsive-maintenance">Détails</a>
-                    <a href="{{ path('type_entite_edit', {'id': type_entite.id}) }}" class="edit-btn btn-responsive-maintenance">Modifier</a>
+                    <a href="{{ path('type_entite_show', {'id': type_entite.id}) }}" class="edit-btn btn-responsive-global">Détails</a>
+                    <a href="{{ path('type_entite_edit', {'id': type_entite.id}) }}" class="edit-btn btn-responsive-global">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -29,8 +29,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('type_entite_new') }}" class="edit-btn btn-responsive-maintenance ml-0">Ajouter</a>
+    <a href="{{ path('type_entite_new') }}" class="edit-btn btn-responsive-global ml-0">Ajouter</a>
 
-    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-maintenance ml-0">Menu</a>
+    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-global ml-0">Menu</a>
 </div>
 {% endblock %}

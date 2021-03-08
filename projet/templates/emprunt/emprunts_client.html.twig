@@ -2,19 +2,18 @@
 {% block body %}
 
     <div class="container mt-5">
-        <h1 class="mt-2">Vos emprunts / achats ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
+        <h1 class="mt-2 titre-responsive">Vos emprunts / achats ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
         <div class="row">
             <div class="col-sm">
-                <a href="{{ path('profil') }}" class="edit-btn float-left">Retour</a>
+                <a href="{{ path('profil') }}" class="edit-btn float-left btn-responsive-global">Retour</a>
             </div>
             <div class="col-sm">
-                <a href="{{ path('recap_panier') }}" class="edit-btn float-right">Récapitulatif de la dernière commande</a>
+                <a href="{{ path('recap_panier') }}" class="edit-btn float-right btn-responsive-global">Récapitulatif de la dernière commande</a>
             </div>
-
         </div>
         {% if emprunts is not empty %}
-            <table class="table">
-                <thead>
+            <table class="table table-responsive">
+                <thead class="text-responsive">
                 <tr>
                     <th scope="col">Vignette article</th>
                     <th scope="col">Titre article</th>
@@ -29,14 +28,14 @@
                     <th scope="col">Opération</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-responsive">
                 {% for emprunt in emprunts %}
                     <tr>
                         <td>
                             {%  if emprunt.article.vignette is not empty %}
-                                <img src="{{ emprunt.article.vignette }}" alt="image de {{ emprunt.article.titre }}" width="120" height="120">
+                                <img src="{{ emprunt.article.vignette }}" alt="image de {{ emprunt.article.titre }}" class="img-icone">
                             {% else %}
-                                <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120">
+                                <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-icone-no">
                             {% endif %}
                         </td>
                         <td>
@@ -83,14 +82,14 @@
                             {{ emprunt.statutEnregistrement.libelle }}
                         </td>
                         <td>
-                            <a href="{{ path('article_details', {id: emprunt.article.id}) }}" class="btn edit-btn">Consulter</a>
+                            <a href="{{ path('article_details', {id: emprunt.article.id}) }}" class="btn edit-btn btn-responsive-global">Consulter</a>
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         {% else %}
-            <div class="col-sm m-2">
+            <div class="col-sm m-2 text-responsive">
                 <b>Vous n'avez aucune emprunt {{ statut }}</b>
             </div>
         {% endif %}

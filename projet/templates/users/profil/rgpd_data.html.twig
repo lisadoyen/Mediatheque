@@ -1,20 +1,20 @@
 {% extends "layout.html.twig" %}
 {% block body %}
     <div class="container cadre">
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 {% if app.user.avatar is not empty %}
-                    <img style="width:100px;height:100px" src="{{asset('assets/images/account/')}}{{app.user.avatar}}" alt="Image {{app.user.avatar}}" >
+                    <img class="img-profil" src="{{asset('assets/images/account/')}}{{app.user.avatar}}" alt="Image {{app.user.avatar}}" >
                 {% else %}
-                    <img style="width:100px;height:100px" src="{{asset('assets/images/account/account_yellow.png')}}" alt="Aucun avatar">
+                    <img class="img-profil" src="{{asset('assets/images/account/account_yellow.png')}}" alt="Aucun avatar">
                 {% endif %}
             </div>
             <div class="col-sm">
-                <h1>Vos données personnelles</h1>
+                <h1 class="titre-responsive">Vos données personnelles</h1>
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Matricule :
             </div>
@@ -23,7 +23,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Identifiant :
             </div>
@@ -32,7 +32,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Prenom :
             </div>
@@ -41,7 +41,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Nom :
             </div>
@@ -50,7 +50,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Sexe :
             </div>
@@ -59,7 +59,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Entreprise :
             </div>
@@ -68,7 +68,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Fonction :
             </div>
@@ -77,7 +77,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Email de récupération :
             </div>
@@ -86,7 +86,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Email personnel :
             </div>
@@ -95,7 +95,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Email Professionnel :
             </div>
@@ -104,7 +104,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Télephone personnel principal :
             </div>
@@ -112,7 +112,7 @@
                 {{  app.user.telPerso  }}
             </div>
         </div><hr>
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Télephone personnel secondaire :
             </div>
@@ -121,7 +121,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Télephone professionnel principal :
             </div>
@@ -130,7 +130,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Télephone professionnel secondaire :
             </div>
@@ -139,7 +139,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Notification personnel :
             </div>
@@ -162,7 +162,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Adresse de la rue :
             </div>
@@ -171,7 +171,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Compléments :
             </div>
@@ -180,7 +180,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Ville :
             </div>
@@ -189,7 +189,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Code postal :
             </div>
@@ -198,7 +198,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Droit Emprunt :
             </div>
@@ -221,7 +221,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Date de création :
             </div>
@@ -230,7 +230,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Date de modification :
             </div>
@@ -239,7 +239,7 @@
             </div>
         </div><hr>
 
-        <div class="row">
+        <div class="row text-responsive">
             <div class="col-sm">
                 Commentaire :
             </div>
@@ -249,10 +249,10 @@
         </div><hr>
         <div class="row">
             <div class="col-sm">
-                <a href="{{ path('profil') }}" class="edit-btn float-left">Revenir au profil</a>
+                <a href="{{ path('profil') }}" class="edit-btn float-left btn-responsive-global">Revenir au profil</a>
             </div>
             <div class="col-sm">
-                <a href="{{ path('mes_donnees_download') }}" class="edit-btn float-right">Exporter mes données</a>
+                <a href="{{ path('mes_donnees_download') }}" class="edit-btn float-right btn-responsive-global">Exporter mes données</a>
             </div>
         </div><hr>
     </div>

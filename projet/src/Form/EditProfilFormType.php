@@ -21,46 +21,99 @@ class EditProfilFormType extends AbstractType
                     new Assert\Length(['min' => 2, 'minMessage' => 'L\'identifiant doit faire au minimum 2 caractères']),
                 ],
                 'required' => true,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
-            ->add('email_perso')
-            ->add('email_recup')
-            ->add('tel_perso')
-            ->add('tel_perso2')
-            ->add('email_pro')
-            ->add('tel_pro')
-            ->add('tel_pro2')
+            ->add('email_perso', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],)
+            )
+            ->add('email_recup', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('tel_perso', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('tel_perso2', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('email_pro', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('tel_pro', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('tel_pro2', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
             ->add('notification_perso', CheckboxType::class, [
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ])
             ->add('notification_pro', CheckboxType::class, [
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ])
             ->add('ville', TextType::class, array(
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'La ville doit faire au minimum 2 caractères']),
                 ],
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('adresse_rue', TextType::class, array(
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'L\' adresse de doit faire au minimum 2 caractères']),
                 ],
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('adresse_rue_complement', TextType::class, array(
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'Le complement doit faire au minimum 2 caractères']),
                 ],
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
-            ->add('code_postal')
+            ->add('code_postal', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
             ->add('commentaire_utilisateur', TextType::class, array(
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'Le commentaire doit faire au minimum 2 caractères']),
                 ],
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
         ;
     }

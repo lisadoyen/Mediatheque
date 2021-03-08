@@ -4,13 +4,14 @@
         <div class="row">
             <div class="col-sm-0 col-md-2 col-lg-3"></div>
             <div class="col-sm-12 col-md-8 col-lg-6">
-                <h1>Barre de recherche</h1>
+                <h1 class="titre-responsive">Barre de recherche</h1>
                 <div class="form-group">
-                    <input class="form-control" type="text" id="search-isbn" value="" placeholder="Rechercher un isbn"/>
+                    <input class="form-control form-maintenance-responsive" type="text" id="search-isbn" value="" placeholder="Rechercher un isbn"/>
                 </div>
                 <div id="result-isbn" style="margin-top: 5em;"></div>
             </div>
         </div>
+        <a class="edit-btn btn-responsive-global" href="{{ path('operations_articles') }}">Retour</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>

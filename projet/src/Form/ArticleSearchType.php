@@ -22,12 +22,15 @@ class php extends AbstractType {
                     'Gencode' => 'gencode',
                     'Code d\'article' => 'codeArticle',
                 ],
-                'placeholder' => 'Comment cherchez-vous l\'article ?'
+                'placeholder' => 'Comment cherchez-vous l\'article ?',
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
             ])
             ->add('value', TextType::class, [
                 'label' => false,
                 'required' => true,
-                'attr' => ['placeholder' => 'Identifiant ou ISBN ou code d\'article...']
+                'attr' => ['placeholder' => 'Identifiant ou ISBN ou code d\'article...', 'class' => 'form-maintenance-responsive']
             ]);
     }
 

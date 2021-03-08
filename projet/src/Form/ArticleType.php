@@ -29,41 +29,127 @@ class ArticleType extends AbstractType
     {
 //        dd($options);
         $builder
-            ->add('gencode', TextType::class, ['required' => false])
-            ->add('codeArticle', TextType::class, ['required' => true])
-            ->add('titre', TextType::class, ['required' => true])
-            ->add('description', CKEditorType::class, ['required' => true])
-            ->add('vignette', TextType::class, ['required' => false])
+            ->add('gencode', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('codeArticle', TextType::class, [
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('titre', TextType::class, [
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('description', CKEditorType::class, [
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('vignette', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
             ->add('datePublication', DateType::class, [
                 'widget' => 'single_text',
-                'attr' => ['data-provide' => 'datepicker'],
+                'attr' => ['data-provide' => 'datepicker', 'class' => 'form-maintenance-responsive'],
                 'html5' => false,
                 'format' => 'MM/dd/yyyy'
             ])
             ->add('dateObtention', DateType::class, [
                 'widget' => 'single_text',
-                'attr' => ['data-provide' => 'datepicker', 'value' => $options['dateObtention']],
+                'attr' => ['data-provide' => 'datepicker', 'value' => $options['dateObtention'], 'class' => 'form-maintenance-responsive'],
                 'html5' => false,
                 'mapped' => false,
                 'format' => 'MM/dd/yyyy'
             ])
-            ->add('montantObtention', NumberType::class, ['required' => true, 'label' => 'Montant d\'achat'])
-            ->add('montantCaution', NumberType::class, ['required' => true, 'label' => 'Montant de caution'])
-            ->add('montantVente', NumberType::class, ['required' => true, 'label' => 'Montant de vente par défaut'])
-            ->add('observation', TextType::class, ['required' => false])
+            ->add('montantObtention', NumberType::class, [
+                'required' => true,
+                'label' => 'Montant d\'achat',
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('montantCaution', NumberType::class, [
+                'required' => true,
+                'label' => 'Montant de caution',
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('montantVente', NumberType::class, [
+                'required' => true,
+                'label' => 'Montant de vente par défaut',
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('observation', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
             ->add('numerique')
-            ->add('categorie', EntityType::class, ['class' => Categorie::class, 'required' => true, 'placeholder' => 'Choisissez une catégorie ...'])
-            ->add('trancheAge', EntityType::class, ['class' => TrancheAge::class, 'required' => true])
-            ->add('statut', EntityType::class, ['class' => Statut::class, 'required' => true])
-            ->add('genre', EntityType::class, ['class' => Genre::class, 'required' => true])
-            ->add('rubriques')
-            ->add('tags')
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
+                'required' => true,
+                'placeholder' => 'Choisissez une catégorie ...',
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('trancheAge', EntityType::class, [
+                'class' => TrancheAge::class,
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('statut', EntityType::class, [
+                'class' => Statut::class,
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('genre', EntityType::class, [
+                'class' => Genre::class,
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('rubriques', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
+            ->add('tags', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
+            ])
             ->add('entites', CollectionType::class, [
                 'entry_type' => EntiteType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
                 'allow_delete' => true,
-                'label' => 'Entités associées'
+                'label' => 'Entités associées',
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ]
             ])
         ;
 

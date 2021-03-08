@@ -34,6 +34,9 @@ class RegistrationType extends AbstractType
                         'mimeTypesMessage' => 'Insérer une image valide (png,jpg,jpeg)',
                     ])
                 ],
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ])
             ->add('username', TextType::class, array(
                 'label' => 'Identifiant',
@@ -41,6 +44,9 @@ class RegistrationType extends AbstractType
                     new Assert\Length(['min' => 2, 'minMessage' => 'L\'identifiant doit faire au minimum 2 caractères']),
                 ],
                 'required' => true,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('email_recup', TextType::class, array(
                 'label' => 'Email de récupération',
@@ -48,18 +54,44 @@ class RegistrationType extends AbstractType
                     new Assert\Length(['min' => 2, 'minMessage' => 'L\'email doit faire au minimum 2 caractères']),
                 ],
                 'required' => true,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
-            ->add('matricule')
-            ->add('nom')
-            ->add('prenom')
-            ->add('sexe')
-            ->add('password',PasswordType::class)
+            ->add('matricule', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('nom', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('prenom', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('sexe', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('password',PasswordType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
             ->add('email_perso', TextType::class, array(
                 'label' => 'Email Personnel',
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'L\'email doit faire au minimum 2 caractères']),
                 ],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('tel_perso', TextType::class, array(
                 'label' => 'Téléphone Personnel',
@@ -67,6 +99,9 @@ class RegistrationType extends AbstractType
                     new Assert\Length(['min' => 10, 'minMessage' => 'Le numéro de téléphone doit faire 10 chiffres']),
                 ],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('tel_perso2', TextType::class, array(
                 'label' => 'Téléphone Personnel secondaire',
@@ -74,6 +109,9 @@ class RegistrationType extends AbstractType
                     new Assert\Length(['min' => 10, 'minMessage' => 'Le numéro de téléphone doit faire 10 chiffres']),
                 ],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('email_pro', TextType::class, array(
                 'label' => 'Email Professionnel',
@@ -81,6 +119,9 @@ class RegistrationType extends AbstractType
                     new Assert\Length(['min' => 2, 'minMessage' => 'L\'email doit faire au minimum 2 caractères']),
                 ],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('tel_pro', TextType::class, array(
                 'label' => 'Téléphone Professionnel',
@@ -88,6 +129,9 @@ class RegistrationType extends AbstractType
                     new Assert\Length(['min' => 10, 'minMessage' => 'Le numéro de téléphone doit faire 10 chiffres']),
                 ],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('tel_pro2', TextType::class, array(
                 'label' => 'Téléphone Professionnel secondaire',
@@ -95,24 +139,39 @@ class RegistrationType extends AbstractType
                     new Assert\Length(['min' => 10, 'minMessage' => 'Le numéro de téléphone doit faire 10 chiffres']),
                 ],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('notification_perso', CheckboxType::class, [
                 'label' => 'Notification Personnel',
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ])
             ->add('notification_pro', CheckboxType::class, [
                 'label' => 'Notification Professionnel',
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ])
             ->add('droitEmprunt', CheckboxType::class, [
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ])
             ->add('droitAchat', CheckboxType::class, [
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ])
             ->add('ville', TextType::class, array(
                 'constraints' => [
@@ -124,28 +183,52 @@ class RegistrationType extends AbstractType
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'L\' adresse de doit faire au minimum 2 caractères']),
                 ],
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('adresse_rue_complement', TextType::class, array(
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'Le complement doit faire au minimum 2 caractères']),
                 ],
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
-            ->add('code_postal')
-            ->add('entreprise')
-            ->add('fonction')
+            ->add('code_postal', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('entreprise', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
+            ->add('fonction', TextType::class, array(
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
+            ))
             ->add('commentaire_utilisateur', TextareaType::class, array(
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'Le commentaire doit faire au minimum 2 caractères']),
                 ],
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
             ->add('commentaire_staff', TextareaType::class, array(
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'minMessage' => 'Le commentaire doit faire au minimum 2 caractères']),
                 ],
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
             ))
         ;
         ;

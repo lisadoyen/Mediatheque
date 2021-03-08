@@ -17,8 +17,8 @@
                 <td>{{ fonction.id }}</td>
                 <td>{{ fonction.libelle }}</td>
                 <td>
-                    <a href="{{ path('fonction_show', {'id': fonction.id}) }}" class="edit-btn btn-responsive-maintenance">Détails</a>
-                    <a href="{{ path('fonction_edit', {'id': fonction.id}) }}" class="edit-btn btn-responsive-maintenance">Modifier</a>
+                    <a href="{{ path('fonction_show', {'id': fonction.id}) }}" class="edit-btn btn-responsive-global">Détails</a>
+                    <a href="{{ path('fonction_edit', {'id': fonction.id}) }}" class="edit-btn btn-responsive-global">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -29,7 +29,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('fonction_new') }}" class="edit-btn btn-responsive-maintenance">Nouvelle fonction</a>
-    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-maintenance ml-0">Menu</a>
+    <a href="{{ path('fonction_new') }}" class="edit-btn btn-responsive-global">Nouvelle fonction</a>
+    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-global ml-0">Menu</a>
 </div>
 {% endblock %}

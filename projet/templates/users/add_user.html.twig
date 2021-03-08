@@ -6,17 +6,20 @@
 {% endblock %}
 {% block body %}
 <div class="container">
-    <h1 class="mt-5">Ajouter un utilisateur</h1><hr>
-    {{ form_start(form) }}
+    <h1 class="mt-5 titre-responsive">Ajouter un utilisateur</h1><hr>
+    {{ form_start(form, {'attr': { 'class' : 'form-maintenance-responsive' }}) }}
         {{ form_widget(form) }}
         <div class="row mb-5">
             <div class="col-sm">
-                <a href="{{path('users_accueil')}}" class="edit-btn">Annuler</a>
+                <a href="{{path('users_accueil')}}" class="edit-btn btn-responsive-global">Annuler</a>
             </div>
             <div class="col-sm">
-                <button type="submit" class="edit-btn">Valider</button>
+                <button type="submit" class="edit-btn btn-responsive-global">Valider</button>
             </div>
         </div>
     {{ form_end(form) }}
+    <a class="edit-btn btn-responsive-global" href="{{ path('users_accueil') }}">Retour</a>
+
 </div>
+
 {% endblock %}

@@ -23,8 +23,8 @@
                     {% endfor %}
                 </td>
                 <td>
-                    <a href="{{ path('rubrique_show', {'id': rubrique.id}) }}" class="edit-btn btn-responsive-maintenance">Details</a>
-                    <a href="{{ path('rubrique_edit', {'id': rubrique.id}) }}" class="edit-btn btn-responsive-maintenance">Modifier</a>
+                    <a href="{{ path('rubrique_show', {'id': rubrique.id}) }}" class="edit-btn btn-responsive-global">Details</a>
+                    <a href="{{ path('rubrique_edit', {'id': rubrique.id}) }}" class="edit-btn btn-responsive-global">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -35,7 +35,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('rubrique_new') }}" class="edit-btn btn-responsive-maintenance">Nouvelle rubrique</a>
-    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-maintenance ml-0">Menu</a>
+    <a href="{{ path('rubrique_new') }}" class="edit-btn btn-responsive-global">Nouvelle rubrique</a>
+    <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-global ml-0">Menu</a>
 </div>
 {% endblock %}

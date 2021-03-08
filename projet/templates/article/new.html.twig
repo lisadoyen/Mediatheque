@@ -7,9 +7,11 @@
 {% endblock %}
 {% block body %}
     <div class="container cadre">
-
-    <h1>Ajouter un article</h1>
-    {{ include('article/_form.html.twig', {'button_label': 'Ajouter l\'article'}) }}
+        <h1 class="titre-responsive">Ajouter un article</h1>
+        <div class="text-show-responsive-detail">
+            {{ include('article/_form.html.twig', {'button_label': 'Ajouter l\'article'}) }}
+        </div>
+        <a href="{{ path('crud_list') }}" class="edit-btn btn-responsive-global ml-0">Menu</a>
     </div>
 {% endblock %}
 

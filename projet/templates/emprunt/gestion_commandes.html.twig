@@ -1,19 +1,18 @@
 {% extends "layout.html.twig" %}
 {% block body %}
-
-    <div class="m-5">
-        <h1 class="mt-2">Les commandes ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
+    <div class="container">
+        <h1 class="mt-5 titre-responsive">Les commandes ({{ statut }}) ({{ nbEmprunt |number_format(0, '', ' ') }})</h1>
         <div class="row">
             <div class="col-sm">
-                <a href="{{ path('gestion_actif_commande') }}" class="edit-btn float-left">Achats Actifs</a>
+                <a href="{{ path('gestion_actif_commande') }}" class="edit-btn float-left btn-responsive-global">Achats Actifs</a>
             </div>
             <div class="col-sm">
-                <a href="{{ path('gestion_historique_commande') }}" class="edit-btn float-right">Tous les Achats (historiques)</a>
+                <a href="{{ path('gestion_historique_commande') }}" class="edit-btn float-right btn-responsive-global">Tous les Achats (historiques)</a>
             </div>
         </div>
         {% if emprunts is not empty %}
-            <table class="table">
-                <thead>
+            <table class="table table-responsive">
+                <thead class="text-responsive">
                 <tr>
                     <th scope="col">Vignette article</th>
                     <th scope="col">Titre article</th>
@@ -26,14 +25,14 @@
                     <th scope="col">Statut</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-responsive">
                 {% for emprunt in emprunts %}
                     <tr>
                         <td>
                             {%  if emprunt.article.vignette is not empty %}
-                                <img src="{{ emprunt.article.vignette }}" alt="image de {{ emprunt.article.titre }}" width="120" height="120">
+                                <img src="{{ emprunt.article.vignette }}" alt="image de {{ emprunt.article.titre }}" class="img-icone">
                             {% else %}
-                                <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" width="120" height="120">
+                                <img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-icone-no">
                             {% endif %}
                         </td>
                         <td>
@@ -63,9 +62,9 @@
                         </td>
                         <td>
                             {% if emprunt.statutEnregistrement.libelle =="en attente" %}
-                                <a href="{{ path('changer_statut_pret',{id:emprunt.id} ) }}" class="btn edit-btn">Prêt</a>
+                                <a href="{{ path('changer_statut_pret',{id:emprunt.id} ) }}" class="btn edit-btn btn-responsive-global">Prêt</a>
                             {% elseif emprunt.statutEnregistrement.libelle =="pret" %}
-                                    <a href="{{ path('changer_statut_achete',{id:emprunt.id} ) }}" class="btn edit-btn">Acheté</a>
+                                    <a href="{{ path('changer_statut_achete',{id:emprunt.id} ) }}" class="btn edit-btn btn-responsive-global">Acheté</a>
                             {% else %}
                                 <span>{{ emprunt.statutEnregistrement.libelle }}</span>
                             {% endif %}
@@ -75,8 +74,8 @@
                 </tbody>
             </table>
         {% else %}
-            <div class="col-sm m-2">
-                <b>Aucune commande ({{ statut }})/b>
+            <div class="col-sm m-2 text-responsive">
+                <b>Aucune commande ({{ statut }})</b>
             </div>
         {% endif %}
         <hr class="mb-5">

@@ -18,6 +18,9 @@ class AvatarProfilFormType extends AbstractType
             ->add('avatar', FileType::class, [
                 'mapped' => false,
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-maintenance-responsive'
+                ],
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
