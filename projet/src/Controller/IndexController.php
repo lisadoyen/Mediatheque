@@ -46,7 +46,8 @@ class IndexController extends AbstractController
 
         return $this->render('accueil.html.twig', [
             'annonces' => $ar->findAll(),
-            'nouveaute' => $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,3)
+            'nouveaute' => $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,3),
+            'vente' => $articleRepo->findArticleVendable()
         ]);
     }
 
@@ -63,6 +64,22 @@ class IndexController extends AbstractController
         );
         return $this->render('articles/nouveaute.html.twig', [
             'nouveaute' => $nouveautePages
+        ]);
+    }
+
+    /**
+     * @Route("/vente", name="vente")
+     */
+    public function vente(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request)
+    {
+        $vente = $articleRepository->findArticleVendable();
+        $ventePages = $paginator ->paginate(
+            $vente,
+            $request->query->getInt('page',1),
+            10
+        );
+        return $this->render('articles/vente.html.twig', [
+            'vente' => $ventePages
         ]);
     }
 

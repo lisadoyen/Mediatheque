@@ -47,6 +47,17 @@ class ArticleRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    /** requete permettant de trouver tous les articles vendables (pour accueil)
+     * @return int|mixed|string
+     */
+    public function findArticleVendable(){
+        $query = $this
+            ->createQueryBuilder('a')
+            ->join('a.statut', 's')
+            ->andWhere("s.libelle = 'vendable'");
+        return $query->getQuery()->getResult();
+    }
+
     /**
      * @param SearchData $search
      * @param $order

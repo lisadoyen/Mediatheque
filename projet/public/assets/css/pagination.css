@@ -6,10 +6,9 @@
 .pagination a {
     color: black;
     text-decoration: none;
-    padding: 1vh 1vh;
     text-align: center;
-    height: 5vh;
     width: 5vh;
+    padding: 1vh;
     display: block;
     border-radius:50%;
 }
