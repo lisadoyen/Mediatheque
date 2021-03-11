@@ -7,6 +7,7 @@ use App\Entity\Categorie;
 use App\Entity\Genre;
 use App\Entity\Rubrique;
 use App\Entity\Statut;
+use App\Entity\Tag;
 use App\Entity\TrancheAge;
 use App\Repository\ActionRepository;
 use App\Repository\TypeActionRepository;
@@ -27,7 +28,6 @@ class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-//        dd($options);
         $builder
             ->add('gencode', TextType::class, [
                 'required' => false,
@@ -129,14 +129,20 @@ class ArticleType extends AbstractType
                     'class' => 'form-maintenance-responsive'
                 ]
             ])
-            ->add('rubriques', TextType::class, [
+            ->add('rubriques', EntityType::class, [
+                'class' => Rubrique::class,
                 'required' => false,
+                'multiple' => true,
+                'expanded' => true,
                 'attr' => [
                     'class' => 'form-maintenance-responsive'
                 ]
             ])
-            ->add('tags', TextType::class, [
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
                 'required' => false,
+                'multiple' => true,
+                'expanded' => true,
                 'attr' => [
                     'class' => 'form-maintenance-responsive'
                 ]
