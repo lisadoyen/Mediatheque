@@ -14,6 +14,7 @@ use App\Repository\EntiteRepository;
 use App\Repository\StatutRepository;
 use App\Repository\TypeActionRepository;
 use App\Repository\TypeEntiteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -132,14 +133,45 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, Article $article, ActionRepository $actionRepository): Response
     {
-        $dateObtention = $actionRepository->findOneBy(['article' => $article, 'typeAction' => 1])->getDate()->format('m/d/Y');
-        $form = $this->createForm(ArticleType::class, $article, ['dateObtention'=> $dateObtention]);
+        // entites associees avant modification
+        $entitesCurr = new ArrayCollection();
+        foreach ($article->getEntites() as $entite) {
+            $entitesCurr->add($entite);
+        }
+
+        $actionObtention = $actionRepository->findOneBy(['article' => $article, 'typeAction' => 1]);
+        $form = $this->createForm(ArticleType::class, $article, ['dateObtention'=> $actionObtention->getDate()->format('m/d/Y')]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
 
-            return $this->redirectToRoute('article_index');
+            // modifier l'action date d'obtention
+            $actionObtention->setDate($form->get('dateObtention')->getData());
+
+            // modifier les entites
+            // supprime les entites de-associees
+            foreach ($entitesCurr as $entite) {
+                if (!$article->getEntites()->contains($entite)) {
+                    $article->removeEntite($entite);
+                }
+            }
+            // ajoute les nouvelles
+            foreach ($article->getEntites() as $entite) {
+                $find = $this->exists($entite);
+                // creer l'entite si elle n'existe pas
+                if (!$find) $entityManager->persist($entite);
+                // ou remplace par l'entite existante
+                else {
+                    $article->removeEntite($entite);
+                    $article->addEntite($find);
+                }
+            }
+
+            $entityManager->persist($article);
+            $entityManager->persist($actionObtention);
+            $entityManager->flush();
+            return $this->redirectToRoute('article_search');
         }
 
         return $this->render('article/edit.html.twig', [
@@ -169,8 +201,7 @@ class ArticleController extends AbstractController
         if (!empty($entite)) {
             $entiteRepository = $this->getDoctrine()->getRepository(Entite::class);
             $find = $entiteRepository->findOneBy(['nom' => $entite->getNom(), 'prenom' => $entite->getPrenom(), 'typeEntite' => $entite->getTypeEntite()]);
-            if($find)
-                return $find;
+            if($find) return $find;
         }
         return null;
     }
