@@ -362,15 +362,22 @@ class ArticleController extends AbstractController
             'method' => 'POST'
         ]);
         $form->handleRequest($request);
-        $test = $form->get('note')->getData();
-
+        if($request->getMethod() == 'POST') {
+            if(isset($_POST['note']))
+                $note = $_POST['note'];
+        }
+        else{
+            $note = 10;
+        }
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Avis $commentaire */
+            /* @var Avis $commentaire */
             $commentaire = $form->getData();
             $commentaire->setArticle($articleRepository->find($id));
             $commentaire->setSignale(0);
             $commentaire->setUtilisateur($user);
             $commentaire->setDate(\DateTime::createFromFormat('d-m-Y', date('d-m-Y')));
+            if(isset($note))
+                $commentaire->setNote($note);
             $this->getDoctrine()->getManager()->persist($commentaire);
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('article_details', ['id' => $id]);
@@ -382,7 +389,7 @@ class ArticleController extends AbstractController
             'nouveaute' => $nouveaute,
             'idNouveaute' => $nouveau,
             'avis' => $avis,
-            'test'=> $test,
+            'note'=> $note,
             'panierUser' =>$panierUser,
             'enregistrements'=>$enregistrementsIdDate,
             'premierEntite' =>$premierEntite,

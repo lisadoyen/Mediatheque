@@ -40,24 +40,14 @@
                             <div>
                                 {% if av.note is not empty %}
                                     note : {{ av.note }}
-                                    {% for i in  1..5 %}
-                                        {% set etoilevide = 0 %}
-                                        {% if 0 == av.note %}
-                                            <a href="#"><i id="{{ i }}" class="far fa-star fa-2x"></i></a>
-                                        {% elseif 5 == av.note %}
-                                            <a href="#"><i id="{{ i }}" class="fas fa-star fa-2x"></i></a>
-                                        {% elseif i == av.note and i != 0 %}
-                                            {% for j in 1..av.note %}
-                                                {% set etoilevide = j %}
-                                                <a href="#"><i id="{{ j }}" class="fas fa-star fa-2x"></i></a>
-                                            {% endfor %}
-                                            {% if etoilevide != 5 %}
-                                                {% for k in etoilevide+1..5 %}
-                                                    <a href="#"><i id="{{ k }}" class="far fa-star fa-2x"></i></a>
-                                                {% endfor %}
-                                            {% endif %}
-                                        {% endif %}
+                                    {% for note in 1..av.note %}
+                                            <a href="#"><i id="{{ note }}" class="fas fa-star fa-2x text-warning"></i></a>
                                     {% endfor %}
+                                    {% if av.note != 5 %}
+                                        {% for n in av.note..4 %}
+                                            <a href="#"><i id="{{ n }}" class="far fa-star fa-2x text-warning"></i></a>
+                                        {% endfor %}
+                                    {% endif %}
                                 {% endif %}
                             </div>
                         </div>
@@ -68,12 +58,23 @@
         </div>
         <div class="col-lg-4 text-center">
             {{ form_start(form) }}
-            <input type="hidden" name="token" value="{{ csrf_token('add_commentaire')}}">
-            <p>Veuillez saisir une note :{{ form_widget(form.note) }}</p>
+                <span>Veuillez saisir une note :</span>
+            <ul class="rating">
+                <li>
+                    <span class="ratingSelector">
+                        {% for i in 1..5 %}
+                            <input class="radio" name="note" value="{{ i }}" id="star{{ i }}" type="radio">
+                            <label class="full" for="star{{ i }}"></label>
+                        {% endfor %}
+                    </span>
+                </li>
+            </ul>
+            <input type="hidden" name="token" value="{{ csrf_token('add_commentaire')}}"/>
             <p>Veuillez saisir un commentaire :</p>
-            {{ form_row(form.texte) }}
+            {{ form_widget(form.texte) }}
             <button type="submit" class="edit-btn btn-responsive-detail">{{ action|default('Valider') }}</button>
             {{ form_end(form) }}
         </div>
     </div>
 </div>
+
