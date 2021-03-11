@@ -14,6 +14,7 @@ use App\Repository\EntiteRepository;
 use App\Repository\StatutRepository;
 use App\Repository\TypeActionRepository;
 use App\Repository\TypeEntiteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -130,16 +131,82 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Article $article, ActionRepository $actionRepository): Response
+    public function edit(Request $request, Article $article, ActionRepository $actionRepository, TypeActionRepository $typeActionRepository): Response
     {
-        $dateObtention = $actionRepository->findOneBy(['article' => $article, 'typeAction' => 1])->getDate()->format('m/d/Y');
-        $form = $this->createForm(ArticleType::class, $article, ['dateObtention'=> $dateObtention]);
+        // entites associees avant modification
+        $entitesCurr = new ArrayCollection();
+        foreach ($article->getEntites() as $entite) {
+            $entitesCurr->add($entite);
+        }
+        // statut avant modification
+        $statutCurr = $article->getStatut();
+
+        $actionObtention = $actionRepository->findOneBy(['article' => $article, 'typeAction' => 1]);
+        $form = $this->createForm(ArticleType::class, $article, ['dateObtention'=> $actionObtention->getDate()->format('m/d/Y')]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
 
-            return $this->redirectToRoute('article_index');
+            // modifier l'action date d'obtention
+            $actionObtention->setDate($form->get('dateObtention')->getData());
+
+            // modifier les entites
+            // supprime les entites de-associees
+            foreach ($entitesCurr as $entite) {
+                if (!$article->getEntites()->contains($entite)) {
+                    $article->removeEntite($entite);
+                }
+            }
+            // ajoute les nouvelles
+            foreach ($article->getEntites() as $entite) {
+                $find = $this->exists($entite);
+                // creer l'entite si elle n'existe pas
+                if (!$find) $entityManager->persist($entite);
+                // ou remplace par l'entite existante
+                else {
+                    $article->removeEntite($entite);
+                    $article->addEntite($find);
+                }
+            }
+
+            // ajout action reclassement (id 5) si necessaire
+            // si le statut etait 'vendable' (id 2) -> l'article etait declassé
+            // et que le nouveau statut est empruntable (id 1)
+            // il s'agit d'un reclassement
+            if ($statutCurr->getId() == 2 && $article->getStatut()->getId() == 1) {
+                $actionReclassement = new Action();
+                $actionReclassement->setDate(new \DateTime());
+                $actionReclassement->setStaff($this->getUser());
+                $actionReclassement->setTypeAction($typeActionRepository->findOneBy(['id' => 5]));
+                $actionReclassement->setArticle($article);
+                $entityManager->persist($actionReclassement);
+            }
+            // ajout action declassement (id 4) si necessaire
+            // si le statut passe a 'vendable' (id 2)
+            // il s'agit d'un reclassement
+            elseif ($statutCurr->getId() != 2 && $article->getStatut()->getId() == 2) {
+                $actionDeclassement = new Action();
+                $actionDeclassement->setDate(new \DateTime());
+                $actionDeclassement->setStaff($this->getUser());
+                $actionDeclassement->setTypeAction($typeActionRepository->findOneBy(['id' => 4]));
+                $actionDeclassement->setArticle($article);
+                $entityManager->persist($actionDeclassement);
+            }
+            // sinon ajout action modification (id 3)
+            else {
+                $actionModification = new Action();
+                $actionModification->setDate(new \DateTime());
+                $actionModification->setStaff($this->getUser());
+                $actionModification->setTypeAction($typeActionRepository->findOneBy(['id' => 3]));
+                $actionModification->setArticle($article);
+                $entityManager->persist($actionModification);
+            }
+
+            $entityManager->persist($article);
+            $entityManager->persist($actionObtention);
+            $entityManager->flush();
+            return $this->redirectToRoute('article_search');
         }
 
         return $this->render('article/edit.html.twig', [
@@ -152,16 +219,31 @@ class ArticleController extends AbstractController
      * Passe l'article en déclassé (statut 'vendable') (pas de suppression cf. cahier des charges)
      * @Route("/{id}", name="article_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Article $article, StatutRepository $statutRepository): Response
+    public function delete(Request $request, Article $article, StatutRepository $statutRepository, TypeActionRepository $typeActionRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $article->setStatut($statutRepository->findOneBy(['id' => 2]));
-            $entityManager->persist($article);
-            $entityManager->flush();
+
+            // si l'article n'est pas deja declasse -> le declasser
+            if ($article->getStatut()->getId() != 2) {
+                $article->setStatut($statutRepository->findOneBy(['id' => 2]));
+
+                // ajout de l'action declassement (id 4)
+                $actionDeclassement = new Action();
+                $actionDeclassement->setDate(new \DateTime());
+                $actionDeclassement->setStaff($this->getUser());
+                $actionDeclassement->setTypeAction($typeActionRepository->findOneBy(['id' => 4]));
+                $actionDeclassement->setArticle($article);
+
+                $entityManager->persist($actionDeclassement);
+                $entityManager->persist($article);
+                $entityManager->flush();
+            }
+            // sinon prevenir
+            $this->addFlash('danger', "L'article (id:".$article->getId().") est deja declassé");
         }
 
-        return $this->redirectToRoute('article_index');
+        return $this->redirectToRoute('article_search');
     }
 
     public function exists(Entite $entite): ?Entite
@@ -169,8 +251,7 @@ class ArticleController extends AbstractController
         if (!empty($entite)) {
             $entiteRepository = $this->getDoctrine()->getRepository(Entite::class);
             $find = $entiteRepository->findOneBy(['nom' => $entite->getNom(), 'prenom' => $entite->getPrenom(), 'typeEntite' => $entite->getTypeEntite()]);
-            if($find)
-                return $find;
+            if($find) return $find;
         }
         return null;
     }
