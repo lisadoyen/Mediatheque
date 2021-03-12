@@ -211,7 +211,69 @@ partiel
 
 
 
+**Semaine 17 (du 23/01 au 30/01) :**
+
+étudiant 1 : page show et détail article => correction de certains bugs
+
+étudiant 2 : rrecherche sur les ApiMusique , début de tri des APIs livre pour pouvoir intégrer les données dans la bdd actuelle
+
+étudiant 3 : page panier + gestion des emprunts et début des commandes
+
+étudiant 4 : correction de bugs du crud article et designe des autres crud
+
+
+**Semaine 18 (du 30/01 au 06/02) :**
+
+étudiant 1 : finition du filtre dans la page des articles
+
+étudiant 2 : récolte des images, éditeurs, auteurs, date de publications, titre des APIs Livre
+
+étudiant 3 : gestion des commandes
+
+étudiant 4 : début de modification du crud article
+
+
+**Semaine 19 (du 06/01 au 13/02) :**
+
+étudiant 1 : commencement du responsive du site
+
+étudiant 2 : continue le tri et les transformations de date des données des APIs livre 
+
+étudiant 3 : correction bug gestion des emprunts et des commandes
+
+étudiant 4 : continuation de la modification d'un article pour modifier toutes les tables
 
 
 
+**Semaine 20 (du 13/01 au 20/02) :**
+
+étudiant 1 : continuation du responsive + ajout de certains petits éléments sur le site
+
+étudiant 2 : envoie mail VideoFR pour avoir des renseignement sur la requete des détails des vidéos + ajout des données des APIs livre dans la bdd
+
+étudiant 3 : début de l'envoie de mail pour la gestion des commandes
+
+étudiant 4 : résolution de bug du CRUD article
+
+
+**Semaine 21 (du 20/01 au 27/02) :**
+
+étudiant 1 : terminer le responsive du site complet + début de correction de la page des statistiques
+
+étudiant 2 : commencement intéégration des APIs avec les crud des articles (pour la création d'un article ajout de différentes proposition dans les champs provement des données reçu par les API)
+
+étudiant 3 : coorection du carroussel des nouveauté et continue les envois de mails
+
+étudiant 4 : crud article complet + modification d'un article complet avec modification toutes les tables
+
+
+**Semaine 22 (du 27/01 au 06/03) :**
+
+étudiant 1 : ajout des avis en étoiles + correctioni éléments du site + commencement du rapport
+
+étudiant 2 : continue l'intégration des APIs avec le CRUD article
+
+étudiant 3 : gestion des mails lors des commandes
+
+étudiant 4 : debut de gestion de la session du panier
 
