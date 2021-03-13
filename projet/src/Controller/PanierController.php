@@ -17,24 +17,35 @@ use App\Repository\TypeActionRepository;
 use App\Repository\TypeEnregistrementRepository;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
+use Symfony\Flex\Options;
 
 class PanierController extends AbstractController
 {
     /**
      * @Route("/panier", name="panier")
      */
-    public function panier(PanierRepository $panierRepository, TypeEnregistrementRepository $typeEnregistrementRepository)
+    public function panier(PanierRepository $panierRepository,FavorisRepository $favorisRepository,TypeEnregistrementRepository $typeEnregistrementRepository)
     {
         $panierAchat = $panierRepository->findBy(['utilisateur' => $this->getUser(), 'typeEnregistrement' => $typeEnregistrementRepository->findBy(['libelle' => 'achat' ])]);
         $panierEmprunt = $panierRepository->findBy(['utilisateur' => $this->getUser(), 'typeEnregistrement' => $typeEnregistrementRepository->findBy(['libelle' => 'emprunt' ])]);
+        $favoris = $favorisRepository->findBy(['utilisateur' => $this->getUser()]);
+        $favorisUser = null;
+        if(isset($favoris)){
+            foreach ($favoris as $fav) {
+                $favorisUser[$fav->getId()] = $fav->getArticle()->getId();
+            }
+        }
+        else{
+            $favorisUser = null;
+        }
+
         $totalAchat = 0;
         foreach ($panierAchat as $article){
             if ($article->getTypeEnregistrement()->getLibelle() =="achat" and $article->getArticle()->getStatut()->getLibelle() != "vendu"){
@@ -45,16 +56,17 @@ class PanierController extends AbstractController
         return $this->render('users/profil/panier.html.twig', [
             'achat' => $panierAchat,
             'emprunt' => $panierEmprunt,
+            'favoris' => $favorisUser,
             'totalAchat' => $totalAchat,
             'totalPanier' => count($panierAchat) + count($panierEmprunt)
         ]);
     }
 
     /**
-     * @Route("/panier/add/{id}", name="add_article_panier")
+     * @Route("/{page}/panier/add/{id}", name="add_article_panier")
      */
     public function addArticlePanier(ArticleRepository $articleRepository, TypeEnregistrementRepository $typeEnregistrementRepository,
-                                     PanierRepository $panierRepository,StatutRepository $statutRepository, $id= 1)
+                                     PanierRepository $panierRepository,StatutRepository $statutRepository, $id= 1, $page, SessionInterface $session)
     {
         $user = $this->getUser();
         $article = $articleRepository->findOneBy(['id' => $id]);
@@ -78,9 +90,30 @@ class PanierController extends AbstractController
             $this->getDoctrine()->getManager()->persist($lignePanier);
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', "L'article \"" . $lignePanier->getArticle()->getTitre() . "\" a bien été ajouté de votre panier");
+            $this->addFlash('notif-panier',"+1");
         }
-        return $this->redirectToRoute('panier');
+        if($page == "list"){
+            $donnees = $session->get('donnees');
+            if(empty($donnees))
+                return $this->redirectToRoute('articles_show');
+            else {
+                if(!empty($donnees['categorie']) && !empty($donnees['genre'])){
+                    return $this->redirectToRoute('categories_id_genres_id_articles_show', ['idCategorie' => 1, 'idGenre'=>1]);
+                }
+                elseif(!empty($donnees['categorie'])){
+                    return $this->redirectToRoute('categories_id_articles_show', ['idCategorie' => 1]);
+                }else {
+                    return $this->redirectToRoute('articles_show');
+                }
+            }
+        }
+        if ($page == "detail") {
+            return $this->redirectToRoute('article_details', ['id' => $id]);
+        }
+
+        if ($page == "favoris") {
+            return $this->redirectToRoute('favoris');
+        }
     }
 
     /**
@@ -97,6 +130,8 @@ class PanierController extends AbstractController
         } else if ($statut == "reserve_achat") {
             $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendable']));
         }
+
+        $this->addFlash('notif-panier',"-1");
 
         $this->getDoctrine()->getManager()->persist($article);
         $this->getDoctrine()->getManager()->remove($lignePanier);
@@ -130,6 +165,10 @@ class PanierController extends AbstractController
             } else if ($statut == "reserve_achat") {
                 $article->setStatut($statutRepository->findOneBy(['libelle'=>'vendable']));
             }
+
+            $this->addFlash('notif-panier',"-1");
+            $this->addFlash('notif-favoris',"+1");
+
 
             $this->getDoctrine()->getManager()->persist($favoris);
             $this->getDoctrine()->getManager()->persist($article);
@@ -392,7 +431,7 @@ class PanierController extends AbstractController
     }
 
     /**
-     * Envoier un mail au client
+     * Envoyer un mail au client
      * @param MailerService $mailerService
      * @param $user
      * @param $categorie

@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Favoris;
 use App\Repository\ArticleRepository;
 use App\Repository\FavorisRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -68,7 +69,7 @@ class FavorisController extends AbstractController
         $this->getDoctrine()->getManager()->remove($fav);
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('notif',"-1");
+        $this->addFlash('notif-favoris',"-1");
 
         if($page == "list"){
             $donnees = $session->get('donnees');
@@ -102,7 +103,7 @@ class FavorisController extends AbstractController
         $this->getDoctrine()->getManager()->remove($fav);
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('notif',"-1");
+        $this->addFlash('notif-favoris',"-1");
 
         return $this->redirectToRoute('favoris');
     }
@@ -110,7 +111,7 @@ class FavorisController extends AbstractController
     /**
      * @Route("/{page}/favoris/add/{id}", name="add_article_favoris")
      */
-    public function addFavoris(SessionInterface $session, ArticleRepository $articleRepository, FavorisRepository  $favorisRepository,$id=1, $page){
+    public function addFavoris(PaginatorInterface $paginator, SessionInterface $session, ArticleRepository $articleRepository, FavorisRepository  $favorisRepository,$id=1, $page){
         $user = $this->getUser();
         $article = $articleRepository->find($id);
 
@@ -123,15 +124,15 @@ class FavorisController extends AbstractController
             $this->getDoctrine()->getManager()->persist($favoris);
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('notif',"+1");
+            $this->addFlash('notif-favoris',"+1");
 
             if($page == "list"){
                 $donnees = $session->get('donnees');
-                if(empty($donnees))
+                if(empty($donnees)) {
                     return $this->redirectToRoute('articles_show');
-                else {
+                }else {
                     if(!empty($donnees['categorie']) && !empty($donnees['genre'])){
-                        return $this->redirectToRoute('categories_id_genres_id_articles_show', ['idCategorie' => 1, 'idGenre'=>1]);
+                        return $this->redirectToRoute('categories_id_genres_id_articles_show', [ 'idCategorie' => 1, 'idGenre'=>1]);
                     }
                     elseif(!empty($donnees['categorie'])){
                         return $this->redirectToRoute('categories_id_articles_show', ['idCategorie' => 1]);

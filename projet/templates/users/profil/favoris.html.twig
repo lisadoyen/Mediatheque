@@ -76,7 +76,7 @@
                     </td>
                     <td>
                         {% if fav.article.statut.libelle == "vendable" or fav.article.statut.libelle == "empruntable" %}
-                            <a href="{{ path('add_article_panier',{id:fav.article.id}) }}" class="btn edit-btn btn-responsive-global">Ajouter au panier</a>
+                            <a href="{{ path('add_article_panier',{id:fav.article.id, page:"favoris"}) }}" class="btn edit-btn btn-responsive-global">Ajouter au panier</a>
                         {% endif %}
                         <a href="{{ path('article_details', {id: fav.article.id}) }}" class="btn edit-btn btn-responsive-global">Voir plus de détails</a>
                     </td>
