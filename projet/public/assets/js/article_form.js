@@ -54,7 +54,7 @@ function addFormToCollection($collectionHolderClass) {
 
 function addTagFormDeleteLink($tagForm) {
     var $removeFormButton = $('<div class="col-sm-1">\n' +
-        '                <button type="button" class="remove_item_link">x</button>\n' +
+        '                <button type="button" class="remove_item_link mt-lg-3 mt-sm-5">x</button>\n' +
         '            </div>');
     $tagForm.find('div.row').append($removeFormButton);
 

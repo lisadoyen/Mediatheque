@@ -138,6 +138,8 @@ class ArticleType extends AbstractType
                     'class' => 'form-maintenance-responsive'
                 ]
             ])
+            // TODO: system de tags (a changer dans le template/article/_form.html.twig)
+                /*
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,
                 'required' => false,
@@ -147,6 +149,7 @@ class ArticleType extends AbstractType
                     'class' => 'form-maintenance-responsive'
                 ]
             ])
+                */
             ->add('entites', CollectionType::class, [
                 'entry_type' => EntiteType::class,
                 'entry_options' => ['label' => false],
