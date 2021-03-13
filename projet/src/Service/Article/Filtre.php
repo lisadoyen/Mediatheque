@@ -46,12 +46,12 @@ class Filtre
             if($idCategorie != null) $data->categorie = $donnees['categories'];
         }
         if($bool == true)
-            return $ar->findSearch($data, $order, $type, $enregistrementRepository);
+            return $ar->findSearch($data, $order, $type,$enregistrementRepository);
         else
             return $donnees;
     }
 
-    function filtre(Request $request,$order, $type, $bool, GenreRepository $genreRepository,
+    function filtre(Request $request,$order, $type, $bool,  GenreRepository $genreRepository,
                     CategorieRepository $categorieRepo, SessionInterface $session,
                     ArticleRepository $ar, StatutRepository $statutRepository, TrancheAgeRepository $ageRepository,
                     RubriqueRepository $rubriqueRepository, EnregistrementRepository $enregistrementRepository){

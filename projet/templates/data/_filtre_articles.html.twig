@@ -3,6 +3,12 @@
         {% if nbArticles is defined and nbArticlesTotal is defined %}
             <span class="text-bold">{{ nbArticles }} </span> / {{ nbArticlesTotal }} articles
         {% endif %}
+       <br>
+        {% if (is_granted('ROLE_BENEVOLE')) or (is_granted('ROLE_ADMIN')) %}
+            {% if nbArticlesTotalSortie is defined %}
+                <span class="text-bold">{{ nbArticlesTotalSortie }} </span> articles sorties du site (vendu, donné, perdu)
+            {% endif %}
+        {% endif %}
     </div>
     <hr>
     <form action="{{ path('filter_clear') }}" method="post">
@@ -167,7 +173,7 @@
             </div>
             {% for statut in statuts %}
                 {% if statut.libelle == 'vendable'%}
-                        <input class="checkbox" type="checkbox" name="statuts[]" value="{{statut.id}}"{% if donnees.statuts[statut.id] is defined %} checked {% endif %}>
+                        <input class="checkbox" type="checkbox" name="statuts[]" value="{{statut.id}}" {% if donnees.statuts[statut.id] is defined %} checked {% endif %}>
                     {{ statut.libelle|capitalize }}
                     <br/>
                 {% endif %}

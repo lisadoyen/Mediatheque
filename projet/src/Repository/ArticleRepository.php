@@ -9,6 +9,8 @@ use App\Entity\Enregistrement;
 use App\Service\Article\Nouveaute;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Validator\Constraints\Date;
 
@@ -44,7 +46,26 @@ class ArticleRepository extends ServiceEntityRepository
             ->select('count(a.id)')
             ->join('a.statut', 's')
             ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte'  or s.libelle = 'reserve_emprunt' or s.libelle = 'reserve_achat'");
-        return $query->getQuery()->getResult();
+        try {
+            return $query->getQuery()->getSingleScalarResult();
+        } catch (NoResultException | NonUniqueResultException $e) {
+            return null;
+        }
+    }
+
+
+    public function findNbArticleTotalSortie()
+    {
+        $query = $this
+            ->createQueryBuilder('a')
+            ->select('count(a.id)')
+            ->join('a.statut', 's')
+            ->andWhere("s.libelle = 'vendu' or s.libelle = 'perdu' or s.libelle = 'donnee'");
+        try {
+            return $query->getQuery()->getSingleScalarResult();
+        } catch (NoResultException | NonUniqueResultException $e) {
+            return null;
+        }
     }
 
     /** requete permettant de trouver tous les articles vendables (pour accueil)
@@ -71,21 +92,23 @@ class ArticleRepository extends ServiceEntityRepository
 
     public function getSearchQuery(EnregistrementRepository $enregistrementRepository, $order,$type,SearchData $search): \Doctrine\ORM\QueryBuilder
     {
+
         if($type == null) // si pas de selection du type
             $type = "date"; // rangement par date d'acquisition par défault
         if($order == null) // si pas de selection de l'ordre
             $order = "DESC"; // rangement par décroissant par défault
 
-            $query = $this
-                ->createQueryBuilder('a') // a = article
-                ->join('a.genre', 'g')
-                ->join('a.categorie', 'c')
-                ->join('a.actions', 'ac')
-                ->join('a.statut', 's')
-                ->join('a.trancheAge', 'age')
-                ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte' or s.libelle = 'reserve_emprunt' or s.libelle = 'reserve_achat'")
-                ->groupBy("a.titre");
-                // selection des articles avec le statut vendable ou empruntable ou emprunté ou réservé soit achat soit emprunt
+        $query = $this
+            ->createQueryBuilder('a') // a = article
+            ->join('a.genre', 'g')
+            ->join('a.categorie', 'c')
+            ->join('a.actions', 'ac')
+            ->join('a.statut', 's')
+            ->join('a.trancheAge', 'age')
+            ->andWhere("s.libelle = 'vendable' or s.libelle = 'empruntable' or s.libelle = 'emprunte' 
+                or s.libelle = 'reserve_emprunt' or s.libelle = 'reserve_achat'")
+            ->groupBy("a.titre");
+
 
 
         if($type == "popularite") { // si le type (pour bouton trier par) est popularite

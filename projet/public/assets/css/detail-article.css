@@ -61,7 +61,6 @@ span.text-detail-size-nouveaute{
     background-color:#d9dbdb;
     color: black !important;
     font-family: 'Poppins', sans-serif;
-    cursor: pointer;
     transition: 0.4s;
 }
 
@@ -102,7 +101,6 @@ span.text-detail-size-nouveaute{
     background-color:#B0C4DE;
     color: black !important;
     font-family: 'Poppins', sans-serif;
-    cursor: pointer;
     transition: 0.4s;
 }
 
@@ -119,7 +117,6 @@ span.text-detail-size-nouveaute{
     background-color: #B0E0E6;
     color: black !important;
     font-family: 'Poppins', sans-serif;
-    cursor: pointer;
     transition: 0.4s;
 }
 
@@ -178,4 +175,10 @@ a:hover {
     margin: 0.5vh;
     width:85px;
     height: 75px;
+}
+
+
+.scrollbar {
+    height: 35em;
+    overflow: auto;
 }

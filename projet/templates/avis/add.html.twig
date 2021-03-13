@@ -1,7 +1,7 @@
 {% extends "layout.html.twig"  %}
 {% block body %}
     <div class="container">
-        <legend>Ajouter un commentaire</legend>
+        <span>Ajouter un commentaire</span>
         {{ form_start(form) }}
         <input type="hidden" name="token" value="{{ csrf_token('add_commentaire') }}">
         {{ form_row(form.texte) }}

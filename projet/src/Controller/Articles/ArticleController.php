@@ -58,82 +58,6 @@ class ArticleController extends AbstractController
 
     /**
      * @Route ("/articles/{idCategorie}/show", name="articles_idCategorie", methods={"GET", "POST"})
-     * @param $idCategorie
-     * @return Response
-     */
-    public function articles($order=null, $type=null, $idGenre=null,$idCategorie = null,$popularite=null, SessionInterface $session, ArticleRepository $ar,
-                            CategorieRepository $categorieRepo, GenreRepository $genreRepository, EnregistrementRepository $enregistrementRepository,
-                            ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
-                            Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository,
-                             RubriqueRepository $rubriqueRepository, PanierRepository $panierRepository, UserInterface $user)
-    {
-        $paniers = $panierRepository->findBy(['utilisateur'=>$this->getUser()]);
-        /* trouver les emprunts de l'utilisateur : la date du dernier emprunt pour chaque article */
-        $enregistrements = $enregistrementRepository->findDateEnregistrementByArticle($user->getId());
-        $enregistrementsIdDate = [];
-        foreach ($enregistrements as $enregistrement){
-            $enregistrementsIdDate[$enregistrement['id']] = $enregistrement['date'];
-        }
-        $panierUser = [];
-        foreach ($paniers as $panier){
-            array_push($panierUser, $panier->getArticle()->getId());
-        }
-        $nbArticlesTotal = $ar->findNbArticleTotal();
-        // Menu genre et/ou catégorie
-        if($idGenre != null || $idCategorie != null) {
-                $livres = $paginator->paginate(
-                    $filtre->filtreAvecCategorie_Genre($order, $type, $idGenre, $idCategorie, true, $genreRepository, $statutRepository, $categorieRepo, $session, $ar, $enregistrementRepository),
-                    $request->query->getInt('page', 1),
-                    30
-                );
-            $nbArticles = count($filtre->filtreAvecCategorie_Genre($order,$type, $idGenre, $idCategorie, true, $genreRepository, $statutRepository, $categorieRepo, $session, $ar, $enregistrementRepository));
-            $nouveaute = $new->findArticleNouveaute_AvecIdCategorie($categorieRepo, $actionsRepo,500,  $idCategorie);
-            return $this->render('articles/show_all_articles.html.twig', [
-                'articles' => $livres,
-                'statuts' => $statutRepository->findAll(),
-                'rubriques' => $rubriqueRepository->findAll(),
-                'genres' => $genreRepository->findAll(),
-                'categories' => $categorieRepo->findAll(),
-                'ages' =>$ageRepository ->findAll(),
-                'donnees' => $filtre->filtreAvecCategorie_Genre($order,$type,$idGenre,$idCategorie, false, $genreRepository, $statutRepository, $categorieRepo, $session, $ar, $enregistrementRepository),
-                'nouveaute' => $nouveaute,
-                'ordre' =>$order,
-                'type' =>$type,
-                'nbArticlesTotal'=> $nbArticlesTotal[0][1],
-                'nbArticles' => $nbArticles,
-                'panierUser' => $panierUser,
-                'enregistrements'=>$enregistrementsIdDate
-            ]);
-        }
-        // filtre
-        else {
-                $livres = $paginator->paginate(
-                    $filtre->filtre($request, $order, $type, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository, $rubriqueRepository, $enregistrementRepository),
-                    $request->query->getInt('page', 1),
-                    30
-                );
-            $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500);
-            $nbArticles = count($filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository,$rubriqueRepository, $enregistrementRepository));
-            return $this->render('articles/show_all_articles.html.twig', [
-                'articles' => $livres,
-                'statuts' => $statutRepository->findAll(),
-                'genres' => $genreRepository->findAll(),
-                'categories' => $categorieRepo->findAll(),
-                'rubriques' => $rubriqueRepository->findAll(),
-                'ages' =>$ageRepository ->findAll(),
-                'donnees' => $filtre->filtre($request,$order,$type, false,  $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository,$rubriqueRepository, $enregistrementRepository),
-                'nouveaute' => $nouveaute,
-                'ordre' =>$order,
-                'type' =>$type,
-                'nbArticlesTotal'=> $nbArticlesTotal[0][1],
-                'nbArticles' => $nbArticles,
-                'panierUser' => $panierUser,
-                'enregistrements'=>$enregistrementsIdDate
-            ]);
-        }
-    }
-
-    /**
      * @Route("/articles/show", name="articles_show", methods={"GET", "POST"})
      * @Route("/articles/{type}/{order}/show", name="articles_show_order", methods={"GET", "POST"})
      * @Route("/articles/categorie/{idCategorie}/genres/{idGenre}/show", name="categories_id_genres_id_articles_show", methods={"GET", "POST"})
@@ -155,79 +79,150 @@ class ArticleController extends AbstractController
      * @param RubriqueRepository $rubriqueRepository
      * @param EnregistrementRepository $enregistrementRepository
      * @param PanierRepository $panierRepository
+     * @param UserInterface $user
+     * @param AvisRepository $avisRepository
      * @return Response
      */
-    public function showAll($order=null, $type=null, $idGenre = null,$idCategorie = null, SessionInterface $session, ArticleRepository $ar,
-                            CategorieRepository $categorieRepo, GenreRepository $genreRepository,
+    public function showAll($order = null, $type = null, $idGenre = null, $idCategorie = null, SessionInterface $session,
+                            ArticleRepository $ar, CategorieRepository $categorieRepo, GenreRepository $genreRepository,
                             ActionRepository $actionsRepo, Filtre $filtre, StatutRepository $statutRepository,
-                            Request $request, PaginatorInterface $paginator, Nouveaute $new, TrancheAgeRepository $ageRepository, RubriqueRepository $rubriqueRepository,
-                            EnregistrementRepository $enregistrementRepository, PanierRepository $panierRepository, UserInterface $user, TypeEntiteRepository $typeEntiteRepository)
+                            Request $request, PaginatorInterface $paginator, Nouveaute $new,
+                            TrancheAgeRepository $ageRepository, RubriqueRepository $rubriqueRepository,
+                            EnregistrementRepository $enregistrementRepository, PanierRepository $panierRepository,
+                            UserInterface $user, AvisRepository $avisRepository)
     {
-        $nbArticlesTotal = $ar->findNbArticleTotal();
+        // Menu genre et/ou catégorie
+        if ($idGenre != null || $idCategorie != null) {
+            $livres = $paginator->paginate(
+                $filtre->filtreAvecCategorie_Genre($order, $type, $idGenre, $idCategorie, true, $genreRepository, $statutRepository, $categorieRepo, $session, $ar, $enregistrementRepository),
+                $request->query->getInt('page', 1),
+                30
+            );
+            return $this->render('articles/show_all_articles.html.twig', [
+                'articles' => $livres,
+                'statuts' => $statutRepository->findAll(),
+                'genres' => $genreRepository->findAll(),
+                'categories' => $categorieRepo->findAll(),
+                'rubriques' => $rubriqueRepository->findAll(),
+                'ages' => $ageRepository->findAll(),
+                'donnees' => $filtre->filtreAvecCategorie_Genre($order, $type, $idGenre, $idCategorie, false, $genreRepository, $statutRepository, $categorieRepo, $session, $ar, $enregistrementRepository),
+                'nouveaute' => $new->findArticleNouveaute_AvecIdCategorie($categorieRepo, $actionsRepo, 500, $idCategorie),
+                'ordre' => $order,
+                'type' => $type,
+                'moyenne' => $this->showMoyenne($livres, $avisRepository),
+                'nbArticlesTotal' => $ar->findNbArticleTotal(),
+                'nbArticlesTotalSortie' => $ar->findNbArticleTotalSortie(),
+                'nbArticles' => count($filtre->filtreAvecCategorie_Genre($order, $type, $idGenre, $idCategorie, true, $genreRepository, $statutRepository, $categorieRepo, $session, $ar, $enregistrementRepository)),
+                'panierUser' => $this->showIconePanier($panierRepository),
+                'premierEntite' => $this->showPremierEntite($livres),
+                'enregistrements' => $this->showDateDernierEmprunt($user, $enregistrementRepository)
+            ]);
+        } // filtre
+        else {
+            $livres = $paginator->paginate(
+                $filtre->filtre($request, $order, $type, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository, $rubriqueRepository, $enregistrementRepository),
+                $request->query->getInt('page', 1),
+                30
+            );
+            return $this->render('articles/show_all_articles.html.twig', [
+                'articles' => $livres,
+                'statuts' => $statutRepository->findAll(),
+                'genres' => $genreRepository->findAll(),
+                'categories' => $categorieRepo->findAll(),
+                'rubriques' => $rubriqueRepository->findAll(),
+                'ages' => $ageRepository->findAll(),
+                'donnees' => $filtre->filtre($request, $order, $type, false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository, $rubriqueRepository, $enregistrementRepository),
+                'nouveaute' => $new->findArticleNouveaute($categorieRepo, $actionsRepo, 500),
+                'ordre' => $order,
+                'type' => $type,
+                'moyenne' => $this->showMoyenne($livres, $avisRepository),
+                'nbArticlesTotal' => $ar->findNbArticleTotal(),
+                'nbArticlesTotalSortie' => $ar->findNbArticleTotalSortie(),
+                'nbArticles' => count($filtre->filtre($request, $order, $type, true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository, $rubriqueRepository, $enregistrementRepository)),
+                'panierUser' => $this->showIconePanier($panierRepository),
+                'premierEntite' => $this->showPremierEntite($livres),
+                'enregistrements' => $this->showDateDernierEmprunt($user, $enregistrementRepository)
+            ]);
+        }
+    }
+
+    /**
+     * Récupération et affichage de la moyenne pour chaque article
+     * @param $livres
+     * @param $avisRepository
+     * @return array
+     */
+    public function showMoyenne($livres, $avisRepository)
+    {
+        $moyenne = null;
+        foreach ($livres->getItems() as $items) { // pour tous les articles affichés
+            if ($avisRepository->avgAvisByArticle($items->getId()) != null) { // si la note n'est pas nul
+                $moyenne[$items->getId()] = $avisRepository->avgAvisByArticle($items->getId());
+                // récupération de la moyenne de toutes les notes pour chaque article
+            }
+        }
+        return $moyenne;
+    }
+
+    /**
+     * Affichage de l'icone kadis bleu si article dans mon panier actuellement
+     * @param $panierRepository
+     * @return mixed
+     */
+    public function showIconePanier($panierRepository)
+    {
+
+        $paniers = $panierRepository->findBy(['utilisateur' => $this->getUser()]); // récupere le panier de l'utilisateur
+        $panierUser = [];
+        foreach ($paniers as $panier) {
+            array_push($panierUser, $panier->getArticle()->getId()); // récupère l'id de l'article dans le panier
+        }
+        return $panierUser;
+    }
+
+    /**
+     * Récupération et affichage du premier Entite en fonction de la catégorie
+     * @param $livres
+     * @return array
+     */
+    public function showPremierEntite($livres)
+    {
+        $premierEntite = null;
+        foreach ($livres->getItems() as $items) { // pour chaque article
+            foreach ($items->getEntites() as $entite) { // pour chaque entité de l'article
+                if ($items->getCategorie()->getLibelle() == "livre") { // si la catégorie de l'article est livre
+                    if ($entite->getTypeEntite()->getLibelle() == "auteur") { // si il y a un auteur
+                        $premierEntite[$items->getId()]['prenom'] = $entite->getPrenom(); // on récupère le prénom
+                        $premierEntite[$items->getId()]["nom"] = $entite->getNom(); // on récupère le nom
+                        break;
+                    }
+                }
+                if ($items->getCategorie()->getLibelle() == "video") {
+                    if ($entite->getTypeEntite()->getLibelle() == "realisateur") {
+                        $premierEntite[$items->getId()]['prenom'] = $entite->getPrenom();
+                        $premierEntite[$items->getId()]["nom"] = $entite->getNom();
+                        break;
+                    }
+                }
+            }
+        }
+        return $premierEntite;
+    }
+
+    /**
+     * @param $user
+     * @param $enregistrementRepository
+     * @return array
+     */
+    public function showDateDernierEmprunt($user, $enregistrementRepository)
+    {
         /* trouver les emprunts de l'utilisateur : la date du dernier emprunt pour chaque article */
         $enregistrements = $enregistrementRepository->findDateEnregistrementByArticle($user->getId());
         $enregistrementsIdDate = [];
-        foreach ($enregistrements as $enregistrement){
+        foreach ($enregistrements as $enregistrement) {
             $enregistrementsIdDate[$enregistrement['id']] = $enregistrement['date'];
         }
-        $paniers = $panierRepository->findBy(['utilisateur'=>$this->getUser()]);
-        $panierUser = [];
-        foreach ($paniers as $panier){
-            array_push($panierUser, $panier->getArticle()->getId());
-        }
-
-        // Menu genre et/ou catégorie
-        if($idGenre != null || $idCategorie != null) {
-            $livres = $paginator->paginate(
-                $filtre->filtreAvecCategorie_Genre($order,$type, $idGenre, $idCategorie, true, $genreRepository, $statutRepository, $categorieRepo, $session, $ar, $enregistrementRepository),
-                $request->query->getInt('page', 1),
-                30
-            );
-            $nbArticles = count($filtre->filtreAvecCategorie_Genre($order,$type, $idGenre, $idCategorie, true, $genreRepository, $statutRepository, $categorieRepo, $session, $ar, $enregistrementRepository));
-            $nouveaute = $new->findArticleNouveaute_AvecIdCategorie($categorieRepo, $actionsRepo,500,  $idCategorie);
-            return $this->render('articles/show_all_articles.html.twig', [
-                'articles' => $livres,
-                'statuts' => $statutRepository->findAll(),
-                'genres' => $genreRepository->findAll(),
-                'categories' => $categorieRepo->findAll(),
-                'rubriques' => $rubriqueRepository->findAll(),
-                'ages' =>$ageRepository ->findAll(),
-                'donnees' => $filtre->filtreAvecCategorie_Genre($order,$type,$idGenre,$idCategorie, false, $genreRepository, $statutRepository, $categorieRepo, $session, $ar, $enregistrementRepository),
-                'nouveaute' => $nouveaute,
-                'ordre' =>$order,
-                'type' =>$type,
-                'nbArticlesTotal'=> $nbArticlesTotal[0][1],
-                'nbArticles' => $nbArticles,
-                'panierUser' =>$panierUser,
-                'enregistrements'=>$enregistrementsIdDate
-            ]);
-        }
-        // filtre
-        else {
-            $livres = $paginator->paginate(
-                $filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository,$rubriqueRepository, $enregistrementRepository),
-                $request->query->getInt('page', 1),
-                30
-            );
-            $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500);
-            $nbArticles = count($filtre->filtre($request, $order, $type,true, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository,$rubriqueRepository, $enregistrementRepository));
-            return $this->render('articles/show_all_articles.html.twig', [
-                'articles' => $livres,
-                'statuts' => $statutRepository->findAll(),
-                'genres' => $genreRepository->findAll(),
-                'categories' => $categorieRepo->findAll(),
-                'rubriques' => $rubriqueRepository->findAll(),
-                'ages' =>$ageRepository ->findAll(),
-                'donnees' => $filtre->filtre($request,$order,$type, false,  $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository,$rubriqueRepository, $enregistrementRepository),
-                'nouveaute' => $nouveaute,
-                'ordre' =>$order,
-                'type' =>$type,
-                'nbArticlesTotal'=> $nbArticlesTotal[0][1],
-                'nbArticles' => $nbArticles,
-                'panierUser' =>$panierUser,
-                'enregistrements'=>$enregistrementsIdDate
-            ]);
-        }
+        return $enregistrementsIdDate;
     }
 
     /**
@@ -236,18 +231,19 @@ class ArticleController extends AbstractController
      * @param null $token_secret
      * @param string $http_method
      */
-    function sign_request( $token_secret = null, $http_method = 'GET') {
+    function sign_request($token_secret = null, $http_method = 'GET')
+    {
 
 
         $base = str_replace('+', ' ', str_replace('%7E', '~', rawurlencode($http_method)));
-        $base.= '&';
-        $base.= str_replace('+', ' ', str_replace('%7E', '~', rawurlencode("http://api.music-story.com/oauth/request_token")));
-        $base.= '&';
-        $base.= str_replace('+', ' ', str_replace('%7E', '~', rawurlencode("oauth_consumer_key=bfc91e71e5dc3289b85bdee0c76c698e22cc3b5a")));
+        $base .= '&';
+        $base .= str_replace('+', ' ', str_replace('%7E', '~', rawurlencode("http://api.music-story.com/oauth/request_token")));
+        $base .= '&';
+        $base .= str_replace('+', ' ', str_replace('%7E', '~', rawurlencode("oauth_consumer_key=bfc91e71e5dc3289b85bdee0c76c698e22cc3b5a")));
 
         $hmac_key = str_replace('+', ' ', str_replace('%7E', '~', rawurlencode("8e0a650048d01bfa5f150ce6868903e8681c2687")));
-        $hmac_key.= '&';
-        $hmac_key.= str_replace('+', ' ', str_replace('%7E', '~', rawurlencode($token_secret)));
+        $hmac_key .= '&';
+        $hmac_key .= str_replace('+', ' ', str_replace('%7E', '~', rawurlencode($token_secret)));
 
         $oauth_signature = base64_encode(hash_hmac('sha1', $base, $hmac_key, true));
 
@@ -260,7 +256,8 @@ class ArticleController extends AbstractController
      * @param SessionInterface $session
      * @return Response
      */
-    public function clearFiltrer(SessionInterface $session){
+    public function clearFiltrer(SessionInterface $session)
+    {
         $session->set('donnees', null);
         return $this->redirectToRoute('articles_show');
     }
@@ -270,7 +267,8 @@ class ArticleController extends AbstractController
      * @return Response
      * @IsGranted("ROLE_BENEVOLE")
      */
-    public function getISBN(){
+    public function getISBN()
+    {
         return $this->render('articles/get_ISBN.html.twig');
     }
 
@@ -279,17 +277,18 @@ class ArticleController extends AbstractController
      * @return Response
      * @IsGranted("ROLE_BENEVOLE")
      */
-    public function addLivre(){
+    public function addLivre()
+    {
 
         $article = new Bibliotheque();
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             $data = $_POST;
             $article->setTitreDesignation($data['titre']);
             $article->setPhoto($data['image']);
         }
-        $form = $this->createForm(BibliothequeType::class,$article);
+        $form = $this->createForm(BibliothequeType::class, $article);
 
-        return $this->render('articles/add.html.twig',[
+        return $this->render('articles/add.html.twig', [
             'form' => $form->createView(),
             'data' => $data ?? null
         ]);
@@ -306,6 +305,8 @@ class ArticleController extends AbstractController
      * @param ActionRepository $actionRepository
      * @param int $id
      * @param Nouveaute $new
+     * @param PanierRepository $panierRepository
+     * @param EnregistrementRepository $enregistrementRepository
      * @return Response
      */
     public function livreDetails(UserInterface $user, Request $request,
@@ -313,16 +314,14 @@ class ArticleController extends AbstractController
                                  ArticleRepository $articleRepository,
                                  FavorisRepository $favorisRepository,
                                  CategorieRepository $categorieRepository,
-                                 ActionRepository $actionRepository, $id=1,
-                                Nouveaute $new, PanierRepository $panierRepository, EnregistrementRepository $enregistrementRepository): Response
+                                 ActionRepository $actionRepository, $id = 1,
+                                 Nouveaute $new, PanierRepository $panierRepository,
+                                 EnregistrementRepository $enregistrementRepository): Response
     {
-        $paniers = $panierRepository->findBy(['utilisateur'=>$this->getUser()]);
-        $panierUser = [];
-        foreach ($paniers as $panier){
-            array_push($panierUser, $panier->getArticle()->getId());
-        }
+        /* article */
         $livre = $articleRepository->findOneBy(['id' => $id]);
 
+        /* entite */
         $premierEntite = null;
         foreach ($livre->getEntites() as $entite){
             if($livre->getCategorie()->getLibelle() == "livre") {
@@ -335,28 +334,33 @@ class ArticleController extends AbstractController
             if($livre->getCategorie()->getLibelle() == "video") {
                 if ($entite->getTypeEntite()->getLibelle() == "realisateur") {
                     $premierEntite["prenom"] = $entite->getPrenom();
-                    $premierEntite["nom"] = $entite->getNom(); // pas de réalisateur => tous mis dans auteur => remettre dans bdd réalisateur
+                    $premierEntite["nom"] = $entite->getNom();
                     break;
                 }
             }
         }
 
-        $fav = $favorisRepository->findOneBy(['utilisateur'=>$this->getUser(), 'article'=>$livre]);
-        $nouveaute = $new->findArticleNouveaute_AvecIdCategorie($categorieRepository,$actionRepository,500, $livre->getCategorie()->getId());
+        /* nouveaute */
+        $nouveaute = $new->findArticleNouveaute_AvecIdCategorie($categorieRepository,$actionRepository,500,
+            $livre->getCategorie()->getId());
+
         $nouveau = null;
         foreach($nouveaute as $new){
             if($new['id'] == $livre->getId()){
                 $nouveau = $livre->getId();
             }
         }
-        $enregistrements = $enregistrementRepository->findDateEnregistrementByArticle($user->getId());
-        $enregistrementsIdDate = [];
-        foreach ($enregistrements as $enregistrement){
-            $enregistrementsIdDate[$enregistrement['id']] = $enregistrement['date'];
+
+        /* avis + moyenne */
+        $avis = $avisRepository->findBy(['article'=>$id], ['date' => 'DESC']);
+        if($avisRepository->avgAvisByArticle($id) != null) {
+            $moyenne = $avisRepository->avgAvisByArticle($id);
+        }
+        else{
+            $moyenne = null;
         }
 
-        $avis = $avisRepository->findBy(['article'=>$id]);
-
+        /* ajout avis + commentaire */
         $form = $this->createForm(AvisFormType::class, NULL, [
             'action' => '/article/'.$id,
             'method' => 'POST'
@@ -385,13 +389,14 @@ class ArticleController extends AbstractController
 
         return $this->render('articles/show_article_details.html.twig', [
             'article' => $livre,
-            'favoris' => $fav,
+            'favoris' => $favorisRepository->findOneBy(['utilisateur'=>$this->getUser(), 'article'=>$livre]),
             'nouveaute' => $nouveaute,
             'idNouveaute' => $nouveau,
             'avis' => $avis,
             'note'=> $note,
-            'panierUser' =>$panierUser,
-            'enregistrements'=>$enregistrementsIdDate,
+            'moyenne' => $moyenne,
+            'panierUser' =>$this->showIconePanier($panierRepository),
+            'enregistrements'=>$this->showDateDernierEmprunt($user, $enregistrementRepository),
             'premierEntite' =>$premierEntite,
             'form' => $form->createView()
         ]);

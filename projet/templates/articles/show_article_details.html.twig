@@ -113,7 +113,7 @@
                 </div>
                 <div class="row p-4">
                     <div class="row col-lg-4">
-                    {%  if article.statut.libelle == "vendable" %}
+                    {%  if article.statut.libelle == "vendable" or article.statut.libelle == "reserve_achat" %}
                         <div class="text-detail-size"><span class="text-orange">prix : </span><br>
                             <span style="color: red">{{ article.montantVente }}€</span></div>
                     {% endif %}
@@ -127,14 +127,14 @@
                             <a href="{{ path('add_article_panier',{id:article.id}) }}" class="style-button-article-achat-detail btn-responsive-detail">
                                 Acheter</a>
                         {% elseif article.statut.libelle == "emprunte" %}
-                            <a role="button" data-role="disabled" class="style-button-article-emprunte-detail btn-responsive-detail">
-                                Emprunté</a>
+                            <p class="style-button-article-emprunte-detail btn-responsive-detail">
+                                Emprunté</p>
                         {% elseif article.statut.libelle == "reserve_achat" %}
-                            <a role="button" data-role="disabled" class="style-button-article-reserve_achat-detail btn-responsive-detail">
-                                Réservé - achat</a>
+                            <p class="style-button-article-reserve_achat-detail btn-responsive-detail">
+                                Réservation en cours </p>
                         {% elseif article.statut.libelle == "reserve_emprunt" %}
-                            <a role="button" data-role="disabled" class="style-button-article-reserve_emprunt-detail btn-responsive-detail">
-                                Réservé - emprunt</a>
+                            <p  class="style-button-article-reserve_emprunt-detail btn-responsive-detail">
+                                Réservation en cours </p>
                         {% endif %}
                     </div>
                 </div>
@@ -142,7 +142,13 @@
         </div>
        <div class="row">
            <div class="col-lg-3">
-               <div class="text-detail-size"><span class="text-orange">moyenne : </span>nb étoile</div>
+               <div class="text-detail-size"><span class="text-orange">moyenne des avis : </span>
+                   {% if moyenne is defined and moyenne != null %}
+                        {{ moyenne |round(1, 'floor') }}/5
+                   {% else %}
+                        pas de moyenne
+                   {% endif %}
+               </div>
            </div>
            <div class="col-lg-7">
                <div class="row">
@@ -193,7 +199,7 @@
                    </div>
                    <div class="col-lg-6">
                        <div class="text-detail-size-subtitle p-2"><span class="text-bold"> Vidéo Youtube : </span></div>
-                       <div><img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class="img-detail-responsive vignette-responsive-no" ></div>
+                       <div><img src="{{asset('assets/images/noImage.jpg')}}" alt="pas d'image" class=" vignette-responsive-no" ></div>
                    </div>
                </div>
            </div>

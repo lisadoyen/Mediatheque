@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Avis;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,12 +23,24 @@ class AvisRepository extends ServiceEntityRepository
 
     public function sumNbCommentaire(){
         $qb = $this->createQueryBuilder('com');
-        $qb->select('count(com.id) as nbCom') // g = genre , s = statut
+        $qb->select('count(com.id) as nbCom')
             ->join('App:Article', 'a')
             ->where('com.article = a.id');
 
         return $qb->getQuery()->getResult();
+    }
 
+    public function avgAvisByArticle($id){
+        $qb = $this->createQueryBuilder('com');
+        $qb->select('avg(com.note) as moyenne')
+            ->join('com.article', 'a')
+            ->where("$id = a.id");
+
+        try {
+            return $qb->getQuery()->getSingleScalarResult();
+        } catch (NoResultException | NonUniqueResultException $e) {
+            return null;
+        }
     }
 
     // /**
