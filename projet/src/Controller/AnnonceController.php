@@ -40,20 +40,28 @@ class AnnonceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $date = new \DateTime();
-            $annonce->setDateCreation($date);
-            $annonce->setStaff($this->getUser());
 
-            $vignette = $form->get('vignette')->getData();
-            if ($vignette){
-                $photoName = $fileUploader->upload($vignette);
-                $annonce->setVignette($photoName);
+            if (!empty($form->get('contenu')->getData())) {
+                $annonce->setDateCreation(new \DateTime());
+                $annonce->setStaff($this->getUser());
+
+                $vignette = $form->get('vignette')->getData();
+                if ($vignette) {
+                    $photoName = $fileUploader->upload($vignette);
+                    $annonce->setVignette($photoName);
+                }
+
+                $entityManager->persist($annonce);
+                $entityManager->flush();
+                return $this->redirectToRoute('annonce_index');
             }
-
-            $entityManager->persist($annonce);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('annonce_index');
+            else {
+                $this->addFlash('danger', 'Le contenu de l\'annonce ne peut pas être vide.');
+                return $this->render('annonce/new.html.twig', [
+                    'annonce' => $annonce,
+                    'form' => $form->createView(),
+                ]);
+            }
         }
 
         return $this->render('annonce/new.html.twig', [
