@@ -175,7 +175,8 @@
                                     {{ pan.article.categorie.libelle }}
                                 </td>
                                 <td>
-                                    {{ pan.article.statut.libelle }}
+                                    {{ dump(pan.article) }}
+{#                                    {{ pan.article.statut.libelle }}#}
                                 </td>
                                 <td>
                                     {% if pan.typeEnregistrement.libelle == "achat" and pan.article.statut.libelle !="vendu" %}
