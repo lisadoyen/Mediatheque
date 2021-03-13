@@ -110,3 +110,65 @@
     /* modern browser */
     color:var(--placeholder);
 }
+
+.notif-fav{
+    position: absolute;
+    height: 2.5vh;
+    width: 2.5vh;
+    top: 5.5vh;
+    right: 28vh;
+    background-color: #dc3545;
+    border-radius: 50px;
+    color: white;
+    overflow: hidden;
+    padding: 0.2vh;
+    font-weight: bold;
+    font-size: 1.3vh;
+    text-align: center
+}
+
+.notif-panier{
+    position: absolute;
+    height: 2.5vh;
+    width: 2.5vh;
+    top: 5.5vh;
+    right: 33vh;
+    background-color: #dc3545;
+    border-radius: 50px;
+    color: white;overflow: hidden;
+    padding: 0.2vh;
+    font-weight: bold;
+    font-size: 1.3vh;
+    text-align: center;
+    z-index:1;
+}
+
+.transition{
+    opacity:0;
+    -moz-animation: anim 3s;
+    -webkit-animation: anim 3s;
+    -o-animation: anim 3s;
+    -ms-animation: anim 3s;
+    animation: anim 3s;
+}
+
+@-moz-keyframes anim {
+    100%  {opacity:0;}
+    0% {opacity:1;}
+}
+@-webkit-keyframes anim {
+    100%  {opacity:0;}
+    0% {opacity:1;}
+}
+@-o-keyframes anim {
+    100%  {opacity:0;}
+    0% {opacity:1;}
+}
+@-ms-keyframes anim {
+    100%  {opacity:0;}
+    0% {opacity:1;}
+}
+@keyframes anim {
+    100%  {opacity:0;}
+    0% {opacity:1;}
+}
