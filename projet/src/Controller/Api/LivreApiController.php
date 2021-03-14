@@ -7,8 +7,11 @@ namespace App\Controller\Api;
 use App\Entity\Action;
 use App\Entity\Article;
 use App\Entity\Entite;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\CategorieRepository;
 use App\Repository\EntiteRepository;
+use App\Repository\GenreRepository;
 use App\Repository\TypeActionRepository;
 use App\Repository\TypeEntiteRepository;
 use App\Repository\UserRepository;
@@ -16,6 +19,8 @@ use App\Service\Api\LivreApi;
 use Doctrine\ORM\EntityManagerInterface;
 use SimpleXMLElement;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,17 +32,138 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class LivreApiController extends AbstractController
 {
+
+
     /**
-     * @Route("/search/{isbn}", name="api_livre_search_isbn", methods={"GET","POST"})
-     * @param $isbn
+     * @Route("/search", name="api_livre_search_isbn", methods={"GET","POST"})
+     * @param Request $request
      * @param LivreApi $livreApi
      * @return Response
      */
-    public function getDataFromIsbn($isbn, LivreApi $livreApi): Response
+    public function searchISBN(Request $request, LivreApi $livreApi): Response
     {
-        $infos = $livreApi->getDataFromIsbn($isbn);
-        dd($infos);
-        return $this->redirectToRoute('annonce_index');
+        if($request->isMethod('post')){
+            $erreurs = [];
+            if(isset($_POST['isbn'])){
+                $isbn = $_POST['isbn'];
+                $erreurs = $this->erreurIsbn($isbn);
+
+                if(!empty($erreurs)){
+                    return $this->render('api/get_ISBN.html.twig',[
+                        'erreurs' => $erreurs
+                    ]);
+                }else{
+                     $datas = $livreApi->getDataFromIsbn($isbn);
+                     $isEmpty = true;
+                     foreach ($datas as $data){
+                         if(array($data)){
+                             foreach ($data as $donne){
+                                 if($donne != "") $isEmpty = false;
+                             }
+                         }
+                     }
+                     if($isEmpty){
+                         $erreurs['vide'] = "Aucune informations n'a été trouvé pour l'ISBN renseigné";
+                         return $this->render('api/get_ISBN.html.twig',[
+                             'erreurs' => $erreurs
+                         ]);
+                     }
+                     return $this->redirectToRoute('create_book_isbn',['isbn' => $isbn]);
+                }
+            }
+        }
+        //$infos = $livreApi->getDataFromIsbn($isbn);
+        //dd($infos);
+        return $this->render('api/get_ISBN.html.twig');
+    }
+
+    /**
+     * @Route("/create/{isbn}", name="create_book_isbn", methods={"GET","POST"})
+     * @param $isbn
+     * @param TypeEntiteRepository $typeEntiteRepository
+     * @param Request $request
+     * @param TypeActionRepository $typeActionRepository
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function createBookFromISBN($isbn,LivreApi $livreApi,GenreRepository $genreRepository,TypeEntiteRepository $typeEntiteRepository,CategorieRepository $categorieRepository,Request $request, TypeActionRepository $typeActionRepository, EntityManagerInterface $em): Response
+    {
+        if(isset($isbn)) {
+            $erreurs = $this->erreurIsbn($isbn);
+            if (!empty($erreurs)) {
+                return $this->render('api/get_ISBN.html.twig', [
+                    'erreurs' => $erreurs
+                ]);
+            }
+
+            $article = new Article();
+
+            // premier champ 'auteur'
+            $entite = new Entite();
+            $entite->setTypeEntite($typeEntiteRepository->findOneBy(['id' => 1]));
+            $article->addEntite($entite);
+
+            $datas = $livreApi->getDataFromIsbn($isbn);
+
+            $form = $this->createForm(ArticleType::class, $article);
+            $form->get('gencode')->setData($isbn);
+
+            $categorie = $categorieRepository->find(1);
+            $form->get('categorie')->setData($categorie);
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                // ajout des entites
+                foreach ($article->getEntites() as $entite) {
+                    $find = $this->exists($entite);
+                    // creer l'entite si elle n'existe pas
+                    if (!$find) $em->persist($entite);
+                    // ou remplace par l'entite existante
+                    else {
+                        $article->removeEntite($entite);
+                        $article->addEntite($find);
+                    }
+                }
+
+                // ajout de l'action creation
+                // type id 2 = creation
+                $creation = new Action();
+                $creation->setDate(new \DateTime());
+                $creation->setStaff($this->getUser());
+                $creation->setTypeAction($typeActionRepository->findOneBy(['id' => 2]));
+                $creation->setArticle($article);
+                // ajout de l'action obtention
+                // type id 1 = obtention
+                $obtention = new Action();
+                $obtention->setDate($form->get('dateObtention')->getData());
+                $obtention->setStaff($this->getUser());
+                $obtention->setTypeAction($typeActionRepository->findOneBy(['id' => 1]));
+                $obtention->setArticle($article);
+
+                $em->persist($article);
+                $em->persist($obtention);
+                $em->persist($creation);
+                $em->flush();
+
+            }
+            return $this->render('api/form_livre/new.html.twig', [
+                'isbn' => $isbn,
+                'article' => $article,
+                'form' => $form->createView(),
+                'datas' => $datas
+            ]);
+        }
+        return $this->redirectToRoute('index');
+    }
+
+    public function erreurIsbn($isbn){
+        $erreurs = [];
+        if($isbn == "") $erreurs['noValue'] = "Veuillez rentrez un ISBN";
+        if(strlen($isbn) < 10)  $erreurs['length'] = "Veuillez rentrez un ISBN d'au moins 10 chiffres";
+        if(strlen($isbn) > 13)  $erreurs['max'] = "Veuillez rentrez un ISBN d'au plus 13 chiffres";
+        if(!is_numeric($isbn)) $erreurs['numeric'] = "Un isbn ne doit contenir que des chifres";
+        return $erreurs;
     }
 
     /**
@@ -66,7 +192,7 @@ class LivreApiController extends AbstractController
 
             $author = "";
             foreach ($infos['auteurs'] as $auteur) {
-                if($auteur != ""){
+                if($auteur != "" && !is_array($auteur)){
                     $author = $auteur;
                     break;
                 }
@@ -74,12 +200,11 @@ class LivreApiController extends AbstractController
 
             $editor = "";
             foreach ($infos['editeurs'] as $editeur) {
-                if($editeur != ""){
+                if($editeur != "" && !is_array($editeur)){
                     $editor = $editeur;
                     break;
                 }
             }
-
             $date = "";
             foreach ($infos['publications'] as $publication) {
                 if($publication != ""){
@@ -103,34 +228,39 @@ class LivreApiController extends AbstractController
                     break;
                 }
             }
-
-            /** @var Entite $findEntite */
-            $findEntite = $entiteRepository->findOneBy(['nom' => $author]);
-            if($author != "" && !$findEntite){
-                $auteur = new Entite();
-                $auteur->setTypeEntite($typeAuteur);
-                $auteur->setNom($author);
-                $em->persist($auteur);
-                $em->flush();
-                $livre->addEntite($auteur);
-            }elseif ($findEntite){
-                $livre->addEntite($findEntite);
+            $findEntite = null;
+            if($author != "" && !is_object($author) && strlen($author) <= 50){
+                /** @var Entite $findEntite */
+                if (isset($author)) {
+                    $findEntite = $entiteRepository->findOneBy(['nom' => $author]);
+                }
+                if(!$findEntite){
+                    $auteur = new Entite();
+                    $auteur->setTypeEntite($typeAuteur);
+                    $auteur->setNom($author);
+                    $em->persist($auteur);
+                    $em->flush();
+                    $livre->addEntite($auteur);
+                }else{
+                    $livre->addEntite($findEntite);
+                }
             }
-            /** @var Entite $findEntite */
-            $findEntite = $entiteRepository->findOneBy(['nom' => $editor]);
-            if($editor != "" && !$findEntite){
-                $editeur = new Entite();
-                $editeur->setTypeEntite($typeEditeur);
-                $editeur->setNom($editor);
-                $em->persist($editeur);
-                $em->flush();
-                $livre->addEntite($editeur);
-            }
-            elseif ($findEntite){
-                $livre->addEntite($findEntite);
+            if($editor != "" && !is_object($editor) && strlen($editor) <= 50){
+                /** @var Entite $findEntite */
+                $findEntite = $entiteRepository->findOneBy(['nom' => $editor]);
+                if(!$findEntite){
+                    $editeur = new Entite();
+                    $editeur->setTypeEntite($typeEditeur);
+                    $editeur->setNom($editor);
+                    $em->persist($editeur);
+                    $em->flush();
+                    $livre->addEntite($editeur);
+                }else{
+                    $livre->addEntite($findEntite);
+                }
             }
             if($date != "") $livre->setDatePublication($date);
-            if($image != "") $livre->setVignette($image);
+            $livre->setVignette($image);
             if($description != "") $livre->setDescription($description);
 
             $action = new Action();

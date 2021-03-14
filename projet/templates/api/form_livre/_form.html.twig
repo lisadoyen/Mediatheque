@@ -1,0 +1,78 @@
+{# Permet de mettre le style de formulaire a toutes les entites ajoutées#}
+{% import _self as formMacros %}
+{% macro printEntiteSubForm(entite) %}
+    <div class="row">
+        <div class="col">
+            {{ form_row(entite.typeEntite, {'label': 'Type'}) }}
+        </div>
+        <div class="col">
+            {{ form_row(entite.nom) }}
+        </div>
+        <div class="col">
+            {{ form_row(entite.prenom) }}
+        </div>
+    </div>
+{% endmacro %}
+
+<h1>{{ isbn }}</h1>
+{# Formulaire #}
+{{ form_start(form, {'attr': {'id': 'form_api'}}) }}
+
+{{ form_row(form.gencode) }}
+
+{{ form_row(form.codeArticle) }}
+
+{{ form_row(form.categorie) }}
+
+<hr>
+<h2>Titre</h2>
+{% for titre in datas.titres %}
+    {% if titre != "" %}
+        <label>
+            <input type="radio" name="titre_radio" value="{{ titre }}">
+            {{ titre }}
+        </label>
+        <br>
+    {% endif %}
+{% endfor %}
+    <input type="radio" name="titre_radio" value="">
+    {{ form_widget(form.titre) }}
+<hr>
+
+{{ form_row(form.datePublication) }}
+
+{{ form_row(form.vignette) }}
+
+{{ form_row(form.description) }}
+
+{{ form_row(form.genre) }}
+
+{{ form_row(form.rubriques) }}
+
+{{ form_row(form.tags) }}
+
+{{ form_row(form.trancheAge) }}
+
+{{ form_label(form.entites) }}
+<div class="entites" data-prototype="{{ formMacros.printEntiteSubForm(form.entites.vars.prototype)|e('html_attr') }}">
+    {% for entite in form.entites %}
+        <div class="entite-subform">{{ formMacros.printEntiteSubForm(entite) }}</div>
+    {% endfor %}
+</div>
+<button type="button" class="add_item_link" data-collection-holder-class="entites">+</button>
+
+<br><hr>
+{{ form_row(form.statut) }}
+{{ form_row(form.montantObtention) }}
+{{ form_row(form.dateObtention) }}
+{{ form_row(form.montantCaution) }}
+{{ form_row(form.montantVente) }}
+{{ form_row(form.observation) }}
+{{ form_row(form.numerique) }}
+
+<button class="edit-btn" onload="changeGenre()">{{ button_label|default('Appliquer') }}</button>
+{{ form_end(form) }}
+
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/article_form.js') }}"></script>
+<script src="{{ asset('assets/js/article_form_api.js') }}"></script>
