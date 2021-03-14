@@ -53,7 +53,7 @@ use Symfony\Component\Validator\Constraints\Date;
 class StatistiquesController extends AbstractController
 {
     /**
-     * @Route("/admin/statistiques", name="admin_statistiques", methods={"GET"})
+     * @Route("/admin/statistiques", name="admin_statistiques", methods={"GET", "POST"})
      * @param Request $request
      * @param EnregistrementRepository $enregistrementRepository
      * @param StatutRepository $statutRepository
@@ -71,25 +71,13 @@ class StatistiquesController extends AbstractController
                                  CategorieRepository $categorieRepo, SessionInterface $session, ArticleRepository $ar,  Nouveaute $new, ActionRepository $actionsRepo, RubriqueRepository $rubriqueRepository)
     {
         $allArticles =  $enregistrementRepository->getNbEmpruntByArticle();
-        $articles = $paginator->paginate(
-            $allArticles,
-            $request->query->getInt('page', 1)
-        );
-        $nouveaute = $new->findArticleNouveaute($categorieRepo, $actionsRepo,500);
 
-        $order = 'ASC'; //TODO : à changer
-        $type = 'titre';
         return $this->render('statistiques/statistiques.html.twig', [
-            'articles'=>$articles,
-            'allArticles'=>$allArticles,
-            'donnees' => $filtre->filtre($request, $order,$type,false, $genreRepository, $categorieRepo, $session, $ar, $statutRepository, $ageRepository, $rubriqueRepository),
-            'genres' => $genreRepository->findAll(),
             'categories' => $categorieRepo->findAll(),
-            'statuts' => $statutRepository->findAll(),
-            'rubriques' => $rubriqueRepository->findAll(),
-            'ages' =>$ageRepository ->findAll(),
-            'nouveaute' => $nouveaute,
+            'genres' => $genreRepository->findAll(),
+            'articles'=>$filtre->filtreStatistique($request, true, $categorieRepo, $session, $ar, $genreRepository),
+            'donnees' => $filtre->filtreStatistique($request, false, $categorieRepo, $session, $ar, $genreRepository),
+            'allArticles'=>$allArticles,
         ]);
     }
-
 }

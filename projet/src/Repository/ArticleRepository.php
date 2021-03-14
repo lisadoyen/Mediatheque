@@ -4,8 +4,10 @@ namespace App\Repository;
 
 use App\Data\ArticleSearch;
 use App\Data\SearchData;
+use App\Data\StatistiqueSearch;
 use App\Entity\Article;
 use App\Entity\Enregistrement;
+use App\Form\StatistiqueSearchType;
 use App\Service\Article\Nouveaute;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Type;
@@ -197,6 +199,60 @@ class ArticleRepository extends ServiceEntityRepository
 
         // retourne la requete
         return $query;
+    }
+
+
+    public function findSearchStatistique(StatistiqueSearch $search){
+        if($this->getSearchQueryStatistique($search) != null) {
+            return $this->getSearchQueryStatistique($search)->getQuery()->getResult();
+        }else{
+            return null;
+        }
+    }
+
+
+    public function getSearchQueryStatistique(StatistiqueSearch $search): ?\Doctrine\ORM\QueryBuilder
+    {
+
+        $query = $this
+            ->createQueryBuilder('a') // a = article
+            ->join('App:TypeEnregistrement', 't')
+            ->join('a.categorie', 'c')
+            ->join('a.genre', 'g')
+            ->andWhere("t.libelle = 'emprunt'");
+
+        if(!empty($search)) {
+            // filtre pas categorie
+            if (!empty($search->categorie)) {
+                if (!empty($search->genre)) {
+                    $query = $query
+                        ->select('distinct count(c.libelle) as nbEmpruntByCategorie, c.libelle as categorie,
+                         count(g.libelle) as nbEmpruntByGenre, g.libelle as genre')
+                        ->andWhere('g.id IN (:genre)')
+                        ->andWhere('c.id IN (:categorie)')
+                        ->groupBy('c.libelle')
+                        ->addGroupBy('g.libelle')
+                        ->addOrderBy('nbEmpruntByGenre', 'DESC')
+                        ->addOrderBy('nbEmpruntByCategorie', 'DESC')
+                        ->setParameter('genre', $search->genre)
+                        ->setParameter('categorie', $search->categorie);
+
+                }
+                else{
+                    $query = $query
+                        ->select('distinct count(c.libelle) as nbEmpruntByCategorie, c.libelle as categorie')
+                        ->andWhere('c.id IN (:categorie)')
+                        ->groupBy('c.libelle')
+                        //->addOrderBy('nbEmpruntByCategorie', 'DESC')
+                        ->setParameter('categorie', $search->categorie);
+                }
+            }
+
+            return $query;
+
+        }else{
+           return null;
+        }
     }
 
     // /**

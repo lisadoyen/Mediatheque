@@ -2,6 +2,7 @@
 namespace App\Service\Article;
 
 use App\Data\SearchData;
+use App\Data\StatistiqueSearch;
 use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
@@ -163,6 +164,53 @@ class Filtre
         }
         if($bool == true)
             return $ar->findSearch($data, $order, $type, $enregistrementRepository);
+        else
+            return $donnees;
+    }
+
+
+    function filtreStatistique(Request $request, $bool,
+                    CategorieRepository $categorieRepo, SessionInterface $session,
+                    ArticleRepository $ar, GenreRepository $genreRepository){
+
+        $statistique = new StatistiqueSearch();
+        if ($request->getMethod() == 'POST') {
+            if(!empty($_POST['categories'])) {
+                $donnees['categories'] = $_POST['categories'];
+                $categories = [];
+                foreach ($donnees['categories'] as $id) {
+                    $categories[$id] = $categorieRepo->find($id);
+                    $statistique->categorie = $categories;
+                    $donnees['categories'] = $categories;
+                }
+            }
+            if(!empty($_POST['genres'])){
+                $donnees['genres'] = $_POST['genres'];
+                $genres = [];
+                foreach ($donnees['genres'] as $id) {
+                    $genres[$id] = $genreRepository->find($id);
+                    $statistique->genre = $genres;
+                    $donnees['genres'] = $genres;
+                }
+            }
+            if(isset($donnees))
+                $session->set('donnees', $donnees);
+            else
+                $donnees=null;
+        } else {
+            // on remplie le filtre avec la session
+            $donnees = $session->get('donnees');
+            if (!empty($donnees)) {
+                if (!empty($donnees['categories'])) {
+                    $statistique->categorie = $donnees['categories'];
+                }
+                if (!empty($donnees['genres'])) {
+                    $statistique->genre = $donnees['genres'];
+                }
+            }
+        }
+        if($bool == true)
+            return $ar->findSearchStatistique($statistique);
         else
             return $donnees;
     }
