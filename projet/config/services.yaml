@@ -34,3 +34,10 @@ services:
     App\Service\FileUploader:
         arguments:
             $targetDirectory: '%upload_directory%'
+
+    App\Security\SessionIdleListener:
+        bind:
+            $maxIdleTime: '%env(APP_SESSION_MAX_IDLE_TIME)%'
+            $session: '@session'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
