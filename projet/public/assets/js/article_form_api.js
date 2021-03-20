@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    var $categorie = $('#article_categorie');
+    var $categorie = $('#article_api_categorie');
     console.log($categorie);
     // ... retrieve the corresponding form.
     var $form = $('#form_api');
@@ -15,15 +15,15 @@ $( document ).ready(function() {
         data : data,
         success: function(html) {
             // Replace current genre field ...
-            $('#article_genre').replaceWith(
+            $('#article_api_genre').replaceWith(
                 // ... with the returned one from the AJAX response.
-                $(html).find('#article_genre')
+                $(html).find('#article_api_genre')
             );
             // Genre field now displays the appropriate genres.
             // Replace current genre field ...
-            $('#article_rubriques').replaceWith(
+            $('#article_api_rubriques').replaceWith(
                 // ... with the returned one from the AJAX response.
-                $(html).find('#article_rubriques')
+                $(html).find('#article_api_rubriques')
             );
             // Genre field now displays the appropriate genres.
         }
@@ -35,7 +35,7 @@ $( document ).ready(function() {
 
 // update genres et rubriques selon la categorie
 // ============================
-var $categorie = $('#article_categorie');
+var $categorie = $('#article_api_categorie');
 // When categorie gets selected ...
 $categorie.change(function() {
     // ... retrieve the corresponding form.
@@ -50,15 +50,15 @@ $categorie.change(function() {
         data : data,
         success: function(html) {
             // Replace current genre field ...
-            $('#article_genre').replaceWith(
+            $('#article_api_genre').replaceWith(
               // ... with the returned one from the AJAX response.
-              $(html).find('#article_genre')
+              $(html).find('#article_api_genre')
             );
             // Genre field now displays the appropriate genres.
             // Replace current genre field ...
-            $('#article_rubriques').replaceWith(
+            $('#article_api_rubriques').replaceWith(
               // ... with the returned one from the AJAX response.
-              $(html).find('#article_rubriques')
+              $(html).find('#article_api_rubriques')
             );
             // Genre field now displays the appropriate genres.
         }

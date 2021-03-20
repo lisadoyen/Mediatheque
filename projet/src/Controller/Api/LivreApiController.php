@@ -23,6 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -81,14 +82,18 @@ class LivreApiController extends AbstractController
     /**
      * @Route("/create/{isbn}", name="create_book_isbn", methods={"GET","POST"})
      * @param $isbn
+     * @param LivreApi $livreApi
+     * @param GenreRepository $genreRepository
      * @param TypeEntiteRepository $typeEntiteRepository
+     * @param CategorieRepository $categorieRepository
      * @param Request $request
      * @param TypeActionRepository $typeActionRepository
+     * @param UserInterface $user
      * @param EntityManagerInterface $em
      * @return Response
      */
     public function createBookFromISBN($isbn,LivreApi $livreApi,GenreRepository $genreRepository,TypeEntiteRepository $typeEntiteRepository,
-                                       CategorieRepository $categorieRepository,Request $request, TypeActionRepository $typeActionRepository,
+                                       CategorieRepository $categorieRepository,Request $request, TypeActionRepository $typeActionRepository, UserInterface $user,
                                        EntityManagerInterface $em): Response
     {
         if(isset($isbn)) {
@@ -135,16 +140,30 @@ class LivreApiController extends AbstractController
                 }
             }
 
-            $form = $this->createForm(ArticleType::class, $article);
+            $form = $this->createForm(ArticleApiType::class, $article);
             $form->get('gencode')->setData($isbn);
 
             $categorie = $categorieRepository->find(1);
             $form->get('categorie')->setData($categorie);
-
             $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
 
-                dd($_POST);
+            if(isset($_POST['titre_radio']) && strlen($_POST['titre_radio']) <= 3)
+                $erreurs['titre'] = "Le titre doit avoir au minimum 3 caractères !";
+            if(isset($_POST['date_radio']) && strlen($_POST['date_radio']) <= 0 )
+                $erreurs['dateRadio'] = "Veuillez sélectionnez une date";
+            if(isset($_POST['image_radio']) && strlen($_POST['image_radio']) <= 0 )
+                $erreurs['image'] = "Veuillez sélectionnez une image";
+
+
+            if ($form->isSubmitted() && $form->isValid() && empty($erreurs)) {
+
+
+                $article->setTitre($_POST['titre_radio']);
+
+                $article->setDatePublication(new \DateTime($_POST['date_radio']));
+
+                $article->setVignette($_POST['image_radio']);
+
 
                 // ajout des entites
                 foreach ($article->getEntites() as $entite) {
@@ -162,14 +181,14 @@ class LivreApiController extends AbstractController
                 // type id 2 = creation
                 $creation = new Action();
                 $creation->setDate(new \DateTime());
-                $creation->setStaff($this->getUser());
+                $creation->setStaff($user);
                 $creation->setTypeAction($typeActionRepository->findOneBy(['id' => 2]));
                 $creation->setArticle($article);
                 // ajout de l'action obtention
                 // type id 1 = obtention
                 $obtention = new Action();
                 $obtention->setDate($form->get('dateObtention')->getData());
-                $obtention->setStaff($this->getUser());
+                $obtention->setStaff($user);
                 $obtention->setTypeAction($typeActionRepository->findOneBy(['id' => 1]));
                 $obtention->setArticle($article);
 
@@ -177,13 +196,16 @@ class LivreApiController extends AbstractController
                 $em->persist($obtention);
                 $em->persist($creation);
                 $em->flush();
+                $this->addFlash('add_livre_isbn',"L'Article ". $article->getTitre() ." a bien été ajouté par ". $user->getUsername());
+                return $this->redirectToRoute('api_livre_search_isbn');
 
             }
             return $this->render('api/form_livre/new.html.twig', [
                 'isbn' => $isbn,
                 'article' => $article,
                 'form' => $form->createView(),
-                'datas' => $datas
+                'datas' => $datas,
+                'erreurs' => $erreurs
             ]);
         }
         return $this->redirectToRoute('index');
@@ -310,6 +332,16 @@ class LivreApiController extends AbstractController
 
         }
         return $this->redirectToRoute('annonce_index');
+    }
+
+    public function exists(Entite $entite): ?Entite
+    {
+        if (!empty($entite)) {
+            $entiteRepository = $this->getDoctrine()->getRepository(Entite::class);
+            $find = $entiteRepository->findOneBy(['nom' => $entite->getNom(), 'typeEntite' => $entite->getTypeEntite()]);
+            if($find) return $find;
+        }
+        return null;
     }
     
 }

@@ -16,17 +16,23 @@
 
 <h1>{{ isbn }}</h1>
 {# Formulaire #}
-{{ form_start(form, {'attr': {'id': 'form_api' , novalidate: 'novalidate'}}) }}
+{{ form_start(form, {'attr': {'id': 'form_api'}}) }}
 
 {{ form_row(form.gencode) }}
 
 {{ form_row(form.codeArticle) }}
 
+<div style="font-weight: bold; color: red;">
+    {% if erreurs.code is defined %}
+        {{ erreurs.code}}
+    {% endif %}
+</div>
+
 {{ form_row(form.categorie) }}
 
 <div class="form-group">
     <hr>
-    <h2><span style="color: red">*</span>Titre</h2>
+    <h5><span style="color: red">*</span>Titre</h5>
     {% for titre in datas.titres %}
         {% if titre != "" %}
             <input type="radio" name="titre_radio" value="{{ titre }}" required>
@@ -34,14 +40,19 @@
             <br>
         {% endif %}
     {% endfor %}
-    <input type="radio" name="titre_radio" id="otherRadioBtnTitre" value="" required>
+    <input type="radio" name="titre_radio" id="otherRadioBtnTitre" value="" required checked>
     {{ form_widget(form.titre)}}
+    <div style="font-weight: bold; color: red;">
+        {% if erreurs.titre is defined %}
+            {{ erreurs.titre }}
+        {% endif %}
+    </div>
     <hr>
 </div>
 
 <div class="form-group">
     <hr>
-    <h2><span style="color: red">*</span>Date de publication</h2>
+    <h5><span style="color: red">*</span>Date de publication</h5>
     {% for date in datas.publications %}
         {% if date is not empty %}
             <input type="radio" name="date_radio" value="{{ date | date("m/d/Y") }}" required>
@@ -49,15 +60,19 @@
             <br>
         {% endif %}
     {% endfor %}
-    <input type="radio" name="date_radio" id="otherRadioBtnDate" value="" required>
+    <input type="radio" name="date_radio" id="otherRadioBtnDate" value="" required checked>
     {{ form_widget(form.datePublication, { attr: {novalidate: 'novalidate'}})}}
-
+    <div style="font-weight: bold; color: red;">
+        {% if erreurs.dateRadio is defined %}
+            {{ erreurs.dateRadio }}
+        {% endif %}
+    </div>
     <hr>
 </div>
 
 <div class="form-group">
     <hr>
-    <h2><span style="color: red">*</span>Vignette</h2>
+    <h5><span style="color: red">*</span>Vignette</h5>
     {% for image in datas.images %}
         {% if image!= "" %}
             <input type="radio" name="image_radio" value="{{ image }}" required>
@@ -65,9 +80,14 @@
             <br>
         {% endif %}
     {% endfor %}
-    <input type="radio" name="image_radio" id="otherRadioBtnImage" value="" required>
+    <input type="radio" name="image_radio" id="otherRadioBtnImage" value="" required checked>
     {{ form_widget(form.vignette)}}
-    <div id="nowImg"></div>
+    <div id="nowImg" style="margin-top: 5vh"></div>
+    <div style="font-weight: bold; color: red;">
+        {% if erreurs.image is defined %}
+            {{ erreurs.image }}
+        {% endif %}
+    </div>
     <hr>
 </div>
 
@@ -104,28 +124,41 @@
 
 <script>
 
-    let divTitre = $('#article_titre');
-    let divDate = $("#article_datePublication");
-    let divVignette = $("#article_vignette");
+    let divTitre = $('#article_api_titre');
+    let divDate = $("#article_api_datePublication");
+    let divVignette = $("#article_api_vignette");
 
     divTitre.change(function() {
     let titre = divTitre.val();
     $('#otherRadioBtnTitre').val(titre);
     })
+
     divDate.on("focusout", function(e) {
       let date = divDate.val();
       $('#otherRadioBtnDate').val(date);
     });
+
     divVignette.change(function() {
 
 
         let div = document.getElementById('nowImg');
-
         let image = divVignette.val();
-        div.innerHTML = "<img src='"+image+"'/>";
+        div.innerHTML = "<img src='"+image+"' id='imgShown'/>";
         $('#otherRadioBtnImage').val(image);
 
+        let im = document.getElementById('imgShown'); // or select based on classes
+        im.onerror = function(){
+            div.innerHTML += "\n Attention l'image à l'air d'être non valide !";
+        };
 
+
+    });
+
+    $( document ).ready(function() {
+        let titre = divTitre.val();
+        $('#otherRadioBtnTitre').val(titre);
+        let date = divDate.val();
+        $('#otherRadioBtnDate').val(date);
     });
 
 
