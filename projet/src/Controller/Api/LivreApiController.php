@@ -7,6 +7,7 @@ namespace App\Controller\Api;
 use App\Entity\Action;
 use App\Entity\Article;
 use App\Entity\Entite;
+use App\Form\ArticleApiType;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
@@ -86,7 +87,9 @@ class LivreApiController extends AbstractController
      * @param EntityManagerInterface $em
      * @return Response
      */
-    public function createBookFromISBN($isbn,LivreApi $livreApi,GenreRepository $genreRepository,TypeEntiteRepository $typeEntiteRepository,CategorieRepository $categorieRepository,Request $request, TypeActionRepository $typeActionRepository, EntityManagerInterface $em): Response
+    public function createBookFromISBN($isbn,LivreApi $livreApi,GenreRepository $genreRepository,TypeEntiteRepository $typeEntiteRepository,
+                                       CategorieRepository $categorieRepository,Request $request, TypeActionRepository $typeActionRepository,
+                                       EntityManagerInterface $em): Response
     {
         if(isset($isbn)) {
             $erreurs = $this->erreurIsbn($isbn);
@@ -103,7 +106,34 @@ class LivreApiController extends AbstractController
             $entite->setTypeEntite($typeEntiteRepository->findOneBy(['id' => 1]));
             $article->addEntite($entite);
 
+            // data est un tableau à double entré
+            // titres
+            // auteurs
+            // editeurs
+            // publications
+            // images
             $datas = $livreApi->getDataFromIsbn($isbn);
+
+            $typeAuteur = $typeEntiteRepository->findOneBy(['libelle' => 'auteur']);
+            $typeEditeur = $typeEntiteRepository->findOneBy(['libelle' => 'editeur']);
+
+            foreach ($datas['auteurs'] as $auteur){
+                if($auteur != ""){
+                    $entite = new Entite();
+                    $entite->setTypeEntite($typeAuteur);
+                    $entite->setNom($auteur);
+                    $article->addEntite($entite);
+                }
+            }
+
+            foreach ($datas['editeurs'] as $editeur){
+                if($editeur != ""){
+                    $entite = new Entite();
+                    $entite->setNom($editeur);
+                    $entite->setTypeEntite($typeEditeur);
+                    $article->addEntite($entite);
+                }
+            }
 
             $form = $this->createForm(ArticleType::class, $article);
             $form->get('gencode')->setData($isbn);
@@ -113,6 +143,8 @@ class LivreApiController extends AbstractController
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+
+                dd($_POST);
 
                 // ajout des entites
                 foreach ($article->getEntites() as $entite) {

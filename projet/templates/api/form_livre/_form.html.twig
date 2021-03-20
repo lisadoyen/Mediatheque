@@ -16,7 +16,7 @@
 
 <h1>{{ isbn }}</h1>
 {# Formulaire #}
-{{ form_start(form, {'attr': {'id': 'form_api'}}) }}
+{{ form_start(form, {'attr': {'id': 'form_api' , novalidate: 'novalidate'}}) }}
 
 {{ form_row(form.gencode) }}
 
@@ -24,32 +24,60 @@
 
 {{ form_row(form.categorie) }}
 
-<hr>
-<h2>Titre</h2>
-{% for titre in datas.titres %}
-    {% if titre != "" %}
-        <label>
-            <input type="radio" name="titre_radio" value="{{ titre }}">
+<div class="form-group">
+    <hr>
+    <h2><span style="color: red">*</span>Titre</h2>
+    {% for titre in datas.titres %}
+        {% if titre != "" %}
+            <input type="radio" name="titre_radio" value="{{ titre }}" required>
             {{ titre }}
-        </label>
-        <br>
-    {% endif %}
-{% endfor %}
-    <input type="radio" name="titre_radio" value="">
-    {{ form_widget(form.titre) }}
-<hr>
+            <br>
+        {% endif %}
+    {% endfor %}
+    <input type="radio" name="titre_radio" id="otherRadioBtnTitre" value="" required>
+    {{ form_widget(form.titre)}}
+    <hr>
+</div>
 
-{{ form_row(form.datePublication) }}
+<div class="form-group">
+    <hr>
+    <h2><span style="color: red">*</span>Date de publication</h2>
+    {% for date in datas.publications %}
+        {% if date is not empty %}
+            <input type="radio" name="date_radio" value="{{ date | date("m/d/Y") }}" required>
+            {{ date | date("m/d/Y") }}
+            <br>
+        {% endif %}
+    {% endfor %}
+    <input type="radio" name="date_radio" id="otherRadioBtnDate" value="" required>
+    {{ form_widget(form.datePublication, { attr: {novalidate: 'novalidate'}})}}
 
-{{ form_row(form.vignette) }}
+    <hr>
+</div>
+
+<div class="form-group">
+    <hr>
+    <h2><span style="color: red">*</span>Vignette</h2>
+    {% for image in datas.images %}
+        {% if image!= "" %}
+            <input type="radio" name="image_radio" value="{{ image }}" required>
+            <img src="{{ image }}" alt="{{ image }}">
+            <br>
+        {% endif %}
+    {% endfor %}
+    <input type="radio" name="image_radio" id="otherRadioBtnImage" value="" required>
+    {{ form_widget(form.vignette)}}
+    <div id="nowImg"></div>
+    <hr>
+</div>
+
+
 
 {{ form_row(form.description) }}
 
 {{ form_row(form.genre) }}
 
 {{ form_row(form.rubriques) }}
-
-{{ form_row(form.tags) }}
 
 {{ form_row(form.trancheAge) }}
 
@@ -70,8 +98,39 @@
 {{ form_row(form.observation) }}
 {{ form_row(form.numerique) }}
 
-<button class="edit-btn" onload="changeGenre()">{{ button_label|default('Appliquer') }}</button>
+<button class="edit-btn"  onclick="">{{ button_label|default('Appliquer') }}</button>
 {{ form_end(form) }}
+
+
+<script>
+
+    let divTitre = $('#article_titre');
+    let divDate = $("#article_datePublication");
+    let divVignette = $("#article_vignette");
+
+    divTitre.change(function() {
+    let titre = divTitre.val();
+    $('#otherRadioBtnTitre').val(titre);
+    })
+    divDate.on("focusout", function(e) {
+      let date = divDate.val();
+      $('#otherRadioBtnDate').val(date);
+    });
+    divVignette.change(function() {
+
+
+        let div = document.getElementById('nowImg');
+
+        let image = divVignette.val();
+        div.innerHTML = "<img src='"+image+"'/>";
+        $('#otherRadioBtnImage').val(image);
+
+
+    });
+
+
+
+</script>
 
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/article_form.js') }}"></script>
