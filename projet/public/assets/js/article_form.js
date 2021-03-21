@@ -98,3 +98,18 @@ $categorie.change(function() {
     });
 });
 
+
+// vignette preview
+function vignettePreview() {
+    let img = document.getElementById("article_vignette_preview");
+    let vignette = document.getElementById('article_vignette');
+
+    if (img == null) { img = document.createElement("img"); }
+    img.src = vignette.value;
+    img.alt = "Preview de la vignette";
+    img.id = "article_vignette_preview";
+    img.width = 120;
+    img.height = 150;
+    img.title = "120x150px, visualisation à la taille dans le liste des articles"
+    vignette.parentElement.appendChild(img);
+}

@@ -56,7 +56,8 @@ class ArticleType extends AbstractType
             ->add('vignette', TextType::class, [
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-maintenance-responsive'
+                    'class' => 'form-maintenance-responsive',
+                    'onchange' => 'vignettePreview()'
                 ]
             ])
             ->add('datePublication', DateType::class, [
