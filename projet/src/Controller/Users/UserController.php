@@ -55,7 +55,6 @@ class UserController extends AbstractController
             } else {
                 $hash = $encoder->encodePassword($user, $user->getPassword());
                 $user->setpassword($hash);
-                $user->setRoles(["ROLE_ADHERENT"]);
                 $user->setDateCreation(new \DateTime());
                 $user->setDateModification(new \DateTime());
 

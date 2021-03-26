@@ -2,10 +2,15 @@
 
 namespace App\Form;
 
+use App\Entity\Entreprise;
+use App\Entity\Fonction;
 use App\Entity\User;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -48,6 +53,15 @@ class RegistrationType extends AbstractType
                     'class' => 'form-maintenance-responsive'
                 ],
             ))
+            ->add('Roles', ChoiceType::class, [
+                'required' => true,
+                'choices'  => [
+                    'Admin' => "ROLE_ADMIN",
+                    'Benevole' => "ROLE_BENEVOLE",
+                    'Adherent' => "ROLE_ADHERENT",
+                ],
+                'multiple' => true
+            ])
             ->add('email_recup', TextType::class, array(
                 'label' => 'Email de récupération',
                 'constraints' => [
@@ -202,12 +216,14 @@ class RegistrationType extends AbstractType
                     'class' => 'form-maintenance-responsive'
                 ],
             ))
-            ->add('entreprise', TextType::class, array(
+            ->add('entreprise', EntityType::class, array(
+                'class' => Entreprise::class,
                 'attr' => [
                     'class' => 'form-maintenance-responsive'
                 ],
             ))
-            ->add('fonction', TextType::class, array(
+            ->add('fonction', EntityType::class, array(
+                'class' => Fonction::class,
                 'attr' => [
                     'class' => 'form-maintenance-responsive'
                 ],
@@ -229,9 +245,7 @@ class RegistrationType extends AbstractType
                 'attr' => [
                     'class' => 'form-maintenance-responsive'
                 ],
-            ))
-        ;
-        ;
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
