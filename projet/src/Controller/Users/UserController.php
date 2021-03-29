@@ -57,6 +57,7 @@ class UserController extends AbstractController
                 $user->setpassword($hash);
                 $user->setDateCreation(new \DateTime());
                 $user->setDateModification(new \DateTime());
+                $user->setRoles($_POST["registration"]["Roles"]);
 
                 $manager->persist($user);
                 $manager->flush();

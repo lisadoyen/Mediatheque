@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Enregistrement;
 use App\Entity\Favoris;
 use App\Entity\Panier;
+use App\Entity\User;
 use App\Repository\ActionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
@@ -25,6 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class PanierController extends AbstractController
 {
@@ -273,19 +275,22 @@ class PanierController extends AbstractController
      * @param MailerService $mailerService
      * @param EnregistrementRepository $enregistrementRepository
      * @param CategorieRepository $categorieRepository
-     * @param $userRepository
+     * @param UserRepository $userRepository
+     * @param User $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function validerPanier(PanierRepository $panierRepository, StatutEnregistrementRepository  $statutEnregistrementRepository,
                                   StatutRepository $statutRepository, ActionRepository $actionRepository, TypeActionRepository $typeActionRepository,
                                   Request $request, MailerService $mailerService, EnregistrementRepository $enregistrementRepository,
-                                  CategorieRepository  $categorieRepository,UserRepository $userRepository)
+                                  CategorieRepository  $categorieRepository,UserRepository $userRepository, UserInterface $user)
     {
         if(!$this->isCsrfTokenValid('valider_panier', $request->get('token'))) {
             throw new  InvalidCsrfTokenException('Invalid CSRF token valider panier');
         }
-
-        $user = $this->getUser();
         $panier = $panierRepository->findBy(['utilisateur'=>$user]);
         $dateAjd = new \DateTime('now');
 
@@ -419,9 +424,7 @@ class PanierController extends AbstractController
             // Envoyer un mail au client
             $this->sendMail($mailerService, $user, $enregistrement, $totalAchat, $dateAjd);
             // Envoyer un mail à tous les bénévoles
-            foreach ($benevoles as $benevole){
-                $this->sendMail($mailerService, $benevole, $enregistrement, $totalAchat, $dateAjd);
-            }
+            $this->sendMailToAdmin($mailerService,$enregistrement,$totalAchat,$dateAjd);
 
         }
 
@@ -433,7 +436,7 @@ class PanierController extends AbstractController
     /**
      * Envoyer un mail au client
      * @param MailerService $mailerService
-     * @param $user
+     * @param User $user
      * @param $categorie
      * @param $enregistrement
      * @param $totalAchat
@@ -444,6 +447,7 @@ class PanierController extends AbstractController
      * @throws \Twig\Error\SyntaxError
      */
     private function sendMail(MailerService $mailerService, $user, $enregistrement, $totalAchat, $dateAjd){
+
         if ($enregistrement != null){
             $categorie = $enregistrement[0]->getArticle()->getCategorie()->getLibelle();
             if ($user->getEmailPro() == null and $user->getEmailPerso() == null){
@@ -451,7 +455,7 @@ class PanierController extends AbstractController
                     $categorie."",
                     "Commande du ".date('Y-m-d-H-i-s'),
                     "no-reply@mediathalesbrest.com",
-                    $user->getEmailRecup()."",
+                    $user->getEmailRecup(),
                     "users/profil/mail/commande_recap.html.twig",
                     ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
                 );
@@ -461,7 +465,7 @@ class PanierController extends AbstractController
                         $categorie."",
                         "Commande du ".date('Y-m-d-H-i-s'),
                         "no-reply@mediathalesbrest.com",
-                        $user->getEmailPro()."",
+                        $user->getEmailPro(),
                         "users/profil/mail/commande_recap.html.twig",
                         ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
                     );
@@ -471,12 +475,41 @@ class PanierController extends AbstractController
                         $categorie."",
                         "Commande du ".date('Y-m-d-H-i-s'),
                         "no-reply@mediathalesbrest.com",
-                        $user->getEmailPerso()."",
+                        $user->getEmailPerso(),
                         "users/profil/mail/commande_recap.html.twig",
                         ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
                     );
                 }
             }
+        }
+    }
+
+
+    /**
+     * Envoyer un mail au client
+     * @param MailerService $mailerService
+     * @param User $user
+     * @param $categorie
+     * @param $enregistrement
+     * @param $totalAchat
+     * @param $dateAjd
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    private function sendMailToAdmin(MailerService $mailerService, $enregistrement, $totalAchat, $dateAjd){
+
+        if ($enregistrement != null){
+            $categorie = $enregistrement[0]->getArticle()->getCategorie()->getLibelle();
+            $mailerService->send(
+                $categorie."",
+                "Commande du ".date('Y-m-d-H-i-s'),
+                "no-reply@mediathalesbrest.com",
+                "mediathequetest0@gmail.com",
+                "users/profil/mail/commande_recap.html.twig",
+                ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+            );
         }
     }
 }

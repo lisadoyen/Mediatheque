@@ -16,7 +16,7 @@ use function Sodium\add;
 
 /**
  * @Route("/genre")
- * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_BENEVOLE')")
+ * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_BENEVOLE') or is_granted('ROLE_ADHERENT')")
  */
 class GenreController extends AbstractController
 {

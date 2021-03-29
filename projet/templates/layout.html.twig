@@ -52,6 +52,11 @@
         {{ message }}
     </div>
 {% endfor %}
+{% for message in app.flashes('add_livre_isbn') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
 
 {% block body %}{% endblock %}
 
