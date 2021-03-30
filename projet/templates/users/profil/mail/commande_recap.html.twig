@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Confirmation de votre commande</title>
+    <title>{{ titre }}</title>
 </head>
 
 <body>
@@ -18,9 +18,10 @@
 
 </style>
 
-<h1>Confirmation de votre commande</h1>
+<h1>{{ titre }}</h1>
 
-<h2>Votre panier du {{ date | date('d/m/Y H:i') }}</h2>
+<h2>Panier du {{ date | date('d/m/Y H:i') }}</h2>
+<h2>{{ enregistrement[0].utilisateur.prenom }} {{ enregistrement[0].utilisateur.nom }}</h2>
 <table style="border: 1px solid black;border-collapse: collapse;width: 100%;">
     <thead>
     <tr>

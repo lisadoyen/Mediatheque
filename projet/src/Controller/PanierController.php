@@ -422,7 +422,7 @@ class PanierController extends AbstractController
         // Pour chaque catégorie
         foreach ($enregistrements as $enregistrement){
             // Envoyer un mail au client
-            $this->sendMail($mailerService, $user, $enregistrement, $totalAchat, $dateAjd);
+            $this->sendMail($mailerService, $user, $enregistrement, $totalAchat, $dateAjd,"Confirmation de votre commande");
             // Envoyer un mail à tous les bénévoles
             $this->sendMailToAdmin($mailerService,$enregistrement,$totalAchat,$dateAjd);
 
@@ -446,7 +446,7 @@ class PanierController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    private function sendMail(MailerService $mailerService, $user, $enregistrement, $totalAchat, $dateAjd){
+    private function sendMail(MailerService $mailerService, $user, $enregistrement, $totalAchat, $dateAjd, $titre){
 
         if ($enregistrement != null){
             $categorie = $enregistrement[0]->getArticle()->getCategorie()->getLibelle();
@@ -457,7 +457,7 @@ class PanierController extends AbstractController
                     "no-reply@mediathalesbrest.com",
                     $user->getEmailRecup(),
                     "users/profil/mail/commande_recap.html.twig",
-                    ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+                    ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd, 'titre'=>$titre]
                 );
             } else {
                 if ($user->getNotificationPro()){
@@ -467,7 +467,7 @@ class PanierController extends AbstractController
                         "no-reply@mediathalesbrest.com",
                         $user->getEmailPro(),
                         "users/profil/mail/commande_recap.html.twig",
-                        ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+                        ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd, 'titre'=>$titre]
                     );
                 }
                 if ($user->getNotificationPerso()){
@@ -477,7 +477,7 @@ class PanierController extends AbstractController
                         "no-reply@mediathalesbrest.com",
                         $user->getEmailPerso(),
                         "users/profil/mail/commande_recap.html.twig",
-                        ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+                        ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd, 'titre'=>$titre]
                     );
                 }
             }
@@ -508,7 +508,7 @@ class PanierController extends AbstractController
                 "no-reply@mediathalesbrest.com",
                 "mediathequetest0@gmail.com",
                 "users/profil/mail/commande_recap.html.twig",
-                ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd]
+                ['enregistrement' => $enregistrement,'total' => $totalAchat, 'date'=>$dateAjd, 'titre'=>"Nouvelle commande disponible"]
             );
         }
     }
