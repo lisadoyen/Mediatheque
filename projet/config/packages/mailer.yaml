@@ -1,7 +1,7 @@
 framework:
     mailer:
         transports:
-            main: '%env(MAILER_DSN)%'
+            main: '%env(MAILER_TEST)%'
             livre: '%env(MAILER_TEST)%'
             musique: '%env(MAILER_TEST)%'
             jeu: '%env(MAILER_TEST)%'
