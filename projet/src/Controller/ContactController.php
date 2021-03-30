@@ -28,7 +28,7 @@ class ContactController extends AbstractController
             $contenu = $data->contenu;
 
             $mailerService->send("main",
-                "Contact de ". $nom,
+                "Contact de ". $nom . " " . $prenom,
                 "no-reply@mediathalesbrest.com",
                 "mediathequetest0@gmail.com",
                 "contact/mail_contact.html.twig",

@@ -18,25 +18,21 @@ class ContactType extends AbstractType {
             ->add('nom', TextType::class, [
                 'label' => "Nom",
                 'required' => true,
-                'mapped' => false,
                 'attr' => ['class' => 'form-maintenance-responsive']
             ])
             ->add('prenom', TextType::class, [
                 'label' => "Prénom",
                 'required' => true,
-                'mapped' => false,
                 'attr' => ['class' => 'form-maintenance-responsive']
             ])
             ->add('email', EmailType::class, [
                 'label' => "Adresse e-mail",
                 'required' => true,
-                'mapped' => false,
                 'attr' => ['class' => 'form-maintenance-responsive']
             ])
             ->add('contenu', TextareaType::class, [
                 'label' => "Message",
                 'required' => true,
-                'mapped' => false,
                 'attr' => ['class' => 'form-maintenance-responsive']
             ])
         ;
