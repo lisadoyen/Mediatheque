@@ -1,6 +1,6 @@
 <nav class="main-menu">
-    <h1 id="main-title">Médiathèque</h1>
-    <a href="{{ path('accueil') }}" data-toggle="tooltip" data-placement="bottom" title="Accueil"><img src="{{asset('assets/images/logo/logo_site.png')}}" class="icon home" alt="Accueil"></a>
+    <a href="{{ path('accueil') }}" data-toggle="tooltip" data-placement="bottom" title="Accueil"><img src="{{asset('assets/images/logo/logo_site_accueil.png')}}" class="home" alt="Accueil"></a>
+    <img src="{{asset('assets/images/logo/logo_site_titre.png')}}" class="titre-nav" alt="Médiathèque">
     {% if app.request.pathInfo != '/accueil' %}
     <form action="{{ path('articles_show') }}" id="search" method="post" class="search-in-nav">
         {% include '_search_bar.html.twig' %}
