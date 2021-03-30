@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Data\Contact;
 use App\Form\ContactType;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,16 +16,16 @@ class ContactController extends AbstractController
      * @Route("/contact", name="contact", methods={"GET"})
      */
     public function search(Request $request, MailerService $mailerService) {
-        $data = new ContactType();
+        $data = new Contact();
         $form = $this->createForm(ContactType::class, $data);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $nom = $request->get('nom');
-            $prenom = $request->get('prenom');
-            $mail = $request->get('email');
-            $contenu = $request->get('contenu');
+            $nom = $data->nom;
+            $prenom = $data->prenom;
+            $mail = $data->email;
+            $contenu = $data->contenu;
 
             $mailerService->send("main",
                 "Contact de ". $nom,
